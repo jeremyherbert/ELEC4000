@@ -1,0 +1,7 @@
+.svn
+*.hex
+*.exe
+*.ihex
+*.out*
+*.swp
+CVS
