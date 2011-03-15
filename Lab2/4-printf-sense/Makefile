@@ -1,3 +1,4 @@
 COMPONENT=SenseAppC
 CFLAGS += -I$(TOSDIR)/lib/printf
+CFLAGS += -DCC2420_DEF_CHANNEL=14
 include $(MAKERULES)
