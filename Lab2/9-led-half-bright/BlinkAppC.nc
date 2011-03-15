@@ -44,7 +44,7 @@ implementation
 {
   components MainC, BlinkC, LedsC;
   components new TimerMilliC() as Timer0;
-  components new TimerMicroC() as Timer1;
+  components new TimerMilliC() as Timer1;
   components new TimerMilliC() as Timer2;
 
 

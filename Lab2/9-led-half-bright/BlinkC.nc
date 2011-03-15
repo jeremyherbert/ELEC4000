@@ -39,15 +39,15 @@
 module BlinkC @safe()
 {
   uses interface Timer<TMilli> as Timer0;
-  uses interface Timer<TMicro> as Timer1;
+  uses interface Timer<TMilli> as Timer1;
   uses interface Timer<TMilli> as Timer2;
   uses interface Leds;
   uses interface Boot;
 }
 implementation
 {
-  uint16_t duty_tick = 100;
-  uint16_t duty_max = 1000;
+  uint16_t duty_tick = 1;
+  uint16_t duty_max = 11;
   uint16_t duty_flag = 0;
 
   uint16_t counter = 0;
@@ -72,7 +72,7 @@ implementation
 
     counter++;
 
-    if (counter == 65535) {
+    if (counter == 255) {
         counter = 0;
         call Leds.led1On();
         call Timer1.startOneShot(500);

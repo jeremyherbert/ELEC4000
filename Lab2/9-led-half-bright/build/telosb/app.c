@@ -1219,15 +1219,20 @@ static void BlinkC__Timer1__fired(void );
 static void BlinkC__Timer2__fired(void );
 # 51 "/home/tinyos/local/src/tinyos-2.x/tos/interfaces/Init.nc"
 static error_t LedsP__Init__init(void );
-# 56 "/home/tinyos/local/src/tinyos-2.x/tos/interfaces/Leds.nc"
-static void LedsP__Leds__led0Toggle(void );
-#line 72
+# 61 "/home/tinyos/local/src/tinyos-2.x/tos/interfaces/Leds.nc"
+static void LedsP__Leds__led1On(void );
+
+
+
+
+
+
+
+
+
+
 static void LedsP__Leds__led1Toggle(void );
-#line 89
-static void LedsP__Leds__led2Toggle(void );
-# 44 "/home/tinyos/local/src/tinyos-2.x/tos/chips/msp430/pins/HplMsp430GeneralIO.nc"
-static void /*HplMsp430GeneralIOC.P54*/HplMsp430GeneralIOP__36__IO__toggle(void );
-#line 71
+# 71 "/home/tinyos/local/src/tinyos-2.x/tos/chips/msp430/pins/HplMsp430GeneralIO.nc"
 static void /*HplMsp430GeneralIOC.P54*/HplMsp430GeneralIOP__36__IO__makeOutput(void );
 #line 34
 static void /*HplMsp430GeneralIOC.P54*/HplMsp430GeneralIOP__36__IO__set(void );
@@ -1249,21 +1254,12 @@ static void /*HplMsp430GeneralIOC.P55*/HplMsp430GeneralIOP__37__IO__set(void );
 
 
 
-
-
-
-
-
-static void /*HplMsp430GeneralIOC.P56*/HplMsp430GeneralIOP__38__IO__toggle(void );
+static void /*HplMsp430GeneralIOC.P55*/HplMsp430GeneralIOP__37__IO__clr(void );
 #line 71
 static void /*HplMsp430GeneralIOC.P56*/HplMsp430GeneralIOP__38__IO__makeOutput(void );
 #line 34
 static void /*HplMsp430GeneralIOC.P56*/HplMsp430GeneralIOP__38__IO__set(void );
-# 31 "/home/tinyos/local/src/tinyos-2.x/tos/interfaces/GeneralIO.nc"
-static void /*PlatformLedsC.Led0Impl*/Msp430GpioC__0__GeneralIO__toggle(void );
-
-
-
+# 35 "/home/tinyos/local/src/tinyos-2.x/tos/interfaces/GeneralIO.nc"
 static void /*PlatformLedsC.Led0Impl*/Msp430GpioC__0__GeneralIO__makeOutput(void );
 #line 29
 static void /*PlatformLedsC.Led0Impl*/Msp430GpioC__0__GeneralIO__set(void );
@@ -1275,8 +1271,8 @@ static void /*PlatformLedsC.Led1Impl*/Msp430GpioC__1__GeneralIO__toggle(void );
 static void /*PlatformLedsC.Led1Impl*/Msp430GpioC__1__GeneralIO__makeOutput(void );
 #line 29
 static void /*PlatformLedsC.Led1Impl*/Msp430GpioC__1__GeneralIO__set(void );
+static void /*PlatformLedsC.Led1Impl*/Msp430GpioC__1__GeneralIO__clr(void );
 
-static void /*PlatformLedsC.Led2Impl*/Msp430GpioC__2__GeneralIO__toggle(void );
 
 
 
@@ -1349,12 +1345,12 @@ static void /*HilTimerMilliC.VirtualizeTimerC*/VirtualizeTimerC__0__TimerFrom__f
 #line 72
 static void /*HilTimerMilliC.VirtualizeTimerC*/VirtualizeTimerC__0__Timer__default__fired(
 # 37 "/home/tinyos/local/src/tinyos-2.x/tos/lib/timer/VirtualizeTimerC.nc"
-uint8_t arg_0x408c89f0);
-# 53 "/home/tinyos/local/src/tinyos-2.x/tos/lib/timer/Timer.nc"
-static void /*HilTimerMilliC.VirtualizeTimerC*/VirtualizeTimerC__0__Timer__startPeriodic(
+uint8_t arg_0x408c59f0);
+# 62 "/home/tinyos/local/src/tinyos-2.x/tos/lib/timer/Timer.nc"
+static void /*HilTimerMilliC.VirtualizeTimerC*/VirtualizeTimerC__0__Timer__startOneShot(
 # 37 "/home/tinyos/local/src/tinyos-2.x/tos/lib/timer/VirtualizeTimerC.nc"
-uint8_t arg_0x408c89f0, 
-# 53 "/home/tinyos/local/src/tinyos-2.x/tos/lib/timer/Timer.nc"
+uint8_t arg_0x408c59f0, 
+# 62 "/home/tinyos/local/src/tinyos-2.x/tos/lib/timer/Timer.nc"
 uint32_t dt);
 # 71 "/home/tinyos/local/src/tinyos-2.x/tos/lib/timer/Counter.nc"
 static void /*HilTimerMilliC.CounterToLocalTimeC*/CounterToLocalTimeC__0__Counter__overflow(void );
@@ -1981,20 +1977,30 @@ static error_t SchedulerBasicP__TaskBasic__postTask(uint8_t id);
 
 
 static inline void SchedulerBasicP__TaskBasic__default__runTask(uint8_t id);
-# 53 "/home/tinyos/local/src/tinyos-2.x/tos/lib/timer/Timer.nc"
-static void BlinkC__Timer0__startPeriodic(uint32_t dt);
-#line 53
-static void BlinkC__Timer1__startPeriodic(uint32_t dt);
-# 56 "/home/tinyos/local/src/tinyos-2.x/tos/interfaces/Leds.nc"
-static void BlinkC__Leds__led0Toggle(void );
-#line 72
+# 62 "/home/tinyos/local/src/tinyos-2.x/tos/lib/timer/Timer.nc"
+static void BlinkC__Timer1__startOneShot(uint32_t dt);
+# 61 "/home/tinyos/local/src/tinyos-2.x/tos/interfaces/Leds.nc"
+static void BlinkC__Leds__led1On(void );
+
+
+
+
+
+
+
+
+
+
 static void BlinkC__Leds__led1Toggle(void );
-#line 89
-static void BlinkC__Leds__led2Toggle(void );
-# 53 "/home/tinyos/local/src/tinyos-2.x/tos/lib/timer/Timer.nc"
-static void BlinkC__Timer2__startPeriodic(uint32_t dt);
 # 49 "BlinkC.nc"
+uint16_t BlinkC__duty_tick = 1;
+uint16_t BlinkC__duty_max = 11;
+uint16_t BlinkC__duty_flag = 0;
+
+uint16_t BlinkC__counter = 0;
+
 static inline void BlinkC__Boot__booted(void );
+
 
 
 
@@ -2008,17 +2014,9 @@ static inline void BlinkC__Timer0__fired(void );
 
 
 static inline void BlinkC__Timer1__fired(void );
-
-
-
-
-
+#line 92
 static inline void BlinkC__Timer2__fired(void );
-# 31 "/home/tinyos/local/src/tinyos-2.x/tos/interfaces/GeneralIO.nc"
-static void LedsP__Led0__toggle(void );
-
-
-
+# 35 "/home/tinyos/local/src/tinyos-2.x/tos/interfaces/GeneralIO.nc"
 static void LedsP__Led0__makeOutput(void );
 #line 29
 static void LedsP__Led0__set(void );
@@ -2030,8 +2028,8 @@ static void LedsP__Led1__toggle(void );
 static void LedsP__Led1__makeOutput(void );
 #line 29
 static void LedsP__Led1__set(void );
+static void LedsP__Led1__clr(void );
 
-static void LedsP__Led2__toggle(void );
 
 
 
@@ -2040,16 +2038,22 @@ static void LedsP__Led2__makeOutput(void );
 static void LedsP__Led2__set(void );
 # 45 "/home/tinyos/local/src/tinyos-2.x/tos/system/LedsP.nc"
 static inline error_t LedsP__Init__init(void );
-#line 73
-static inline void LedsP__Leds__led0Toggle(void );
-#line 88
+#line 78
+static inline void LedsP__Leds__led1On(void );
+
+
+
+
+
+
+
+
+
 static inline void LedsP__Leds__led1Toggle(void );
-#line 103
-static inline void LedsP__Leds__led2Toggle(void );
 # 45 "/home/tinyos/local/src/tinyos-2.x/tos/chips/msp430/pins/HplMsp430GeneralIOP.nc"
 static inline void /*HplMsp430GeneralIOC.P54*/HplMsp430GeneralIOP__36__IO__set(void );
 
-static inline void /*HplMsp430GeneralIOC.P54*/HplMsp430GeneralIOP__36__IO__toggle(void );
+
 
 
 
@@ -2057,7 +2061,7 @@ static inline void /*HplMsp430GeneralIOC.P54*/HplMsp430GeneralIOP__36__IO__toggl
 static inline void /*HplMsp430GeneralIOC.P54*/HplMsp430GeneralIOP__36__IO__makeOutput(void );
 #line 45
 static inline void /*HplMsp430GeneralIOC.P55*/HplMsp430GeneralIOP__37__IO__set(void );
-
+static inline void /*HplMsp430GeneralIOC.P55*/HplMsp430GeneralIOP__37__IO__clr(void );
 static inline void /*HplMsp430GeneralIOC.P55*/HplMsp430GeneralIOP__37__IO__toggle(void );
 
 
@@ -2067,22 +2071,20 @@ static inline void /*HplMsp430GeneralIOC.P55*/HplMsp430GeneralIOP__37__IO__makeO
 #line 45
 static inline void /*HplMsp430GeneralIOC.P56*/HplMsp430GeneralIOP__38__IO__set(void );
 
-static inline void /*HplMsp430GeneralIOC.P56*/HplMsp430GeneralIOP__38__IO__toggle(void );
+
 
 
 
 
 static inline void /*HplMsp430GeneralIOC.P56*/HplMsp430GeneralIOP__38__IO__makeOutput(void );
-# 44 "/home/tinyos/local/src/tinyos-2.x/tos/chips/msp430/pins/HplMsp430GeneralIO.nc"
-static void /*PlatformLedsC.Led0Impl*/Msp430GpioC__0__HplGeneralIO__toggle(void );
-#line 71
+# 71 "/home/tinyos/local/src/tinyos-2.x/tos/chips/msp430/pins/HplMsp430GeneralIO.nc"
 static void /*PlatformLedsC.Led0Impl*/Msp430GpioC__0__HplGeneralIO__makeOutput(void );
 #line 34
 static void /*PlatformLedsC.Led0Impl*/Msp430GpioC__0__HplGeneralIO__set(void );
 # 37 "/home/tinyos/local/src/tinyos-2.x/tos/chips/msp430/pins/Msp430GpioC.nc"
 static inline void /*PlatformLedsC.Led0Impl*/Msp430GpioC__0__GeneralIO__set(void );
 
-static inline void /*PlatformLedsC.Led0Impl*/Msp430GpioC__0__GeneralIO__toggle(void );
+
 
 
 
@@ -2093,24 +2095,27 @@ static void /*PlatformLedsC.Led1Impl*/Msp430GpioC__1__HplGeneralIO__toggle(void 
 static void /*PlatformLedsC.Led1Impl*/Msp430GpioC__1__HplGeneralIO__makeOutput(void );
 #line 34
 static void /*PlatformLedsC.Led1Impl*/Msp430GpioC__1__HplGeneralIO__set(void );
+
+
+
+
+static void /*PlatformLedsC.Led1Impl*/Msp430GpioC__1__HplGeneralIO__clr(void );
 # 37 "/home/tinyos/local/src/tinyos-2.x/tos/chips/msp430/pins/Msp430GpioC.nc"
 static inline void /*PlatformLedsC.Led1Impl*/Msp430GpioC__1__GeneralIO__set(void );
-
+static inline void /*PlatformLedsC.Led1Impl*/Msp430GpioC__1__GeneralIO__clr(void );
 static inline void /*PlatformLedsC.Led1Impl*/Msp430GpioC__1__GeneralIO__toggle(void );
 
 
 
 static inline void /*PlatformLedsC.Led1Impl*/Msp430GpioC__1__GeneralIO__makeOutput(void );
-# 44 "/home/tinyos/local/src/tinyos-2.x/tos/chips/msp430/pins/HplMsp430GeneralIO.nc"
-static void /*PlatformLedsC.Led2Impl*/Msp430GpioC__2__HplGeneralIO__toggle(void );
-#line 71
+# 71 "/home/tinyos/local/src/tinyos-2.x/tos/chips/msp430/pins/HplMsp430GeneralIO.nc"
 static void /*PlatformLedsC.Led2Impl*/Msp430GpioC__2__HplGeneralIO__makeOutput(void );
 #line 34
 static void /*PlatformLedsC.Led2Impl*/Msp430GpioC__2__HplGeneralIO__set(void );
 # 37 "/home/tinyos/local/src/tinyos-2.x/tos/chips/msp430/pins/Msp430GpioC.nc"
 static inline void /*PlatformLedsC.Led2Impl*/Msp430GpioC__2__GeneralIO__set(void );
 
-static inline void /*PlatformLedsC.Led2Impl*/Msp430GpioC__2__GeneralIO__toggle(void );
+
 
 
 
@@ -2322,7 +2327,7 @@ static void /*HilTimerMilliC.VirtualizeTimerC*/VirtualizeTimerC__0__TimerFrom__s
 
 static void /*HilTimerMilliC.VirtualizeTimerC*/VirtualizeTimerC__0__Timer__fired(
 # 37 "/home/tinyos/local/src/tinyos-2.x/tos/lib/timer/VirtualizeTimerC.nc"
-uint8_t arg_0x408c89f0);
+uint8_t arg_0x408c59f0);
 #line 60
 enum /*HilTimerMilliC.VirtualizeTimerC*/VirtualizeTimerC__0____nesc_unnamed4274 {
 #line 60
@@ -2369,16 +2374,8 @@ static inline void /*HilTimerMilliC.VirtualizeTimerC*/VirtualizeTimerC__0__Timer
 
 
 static inline void /*HilTimerMilliC.VirtualizeTimerC*/VirtualizeTimerC__0__startTimer(uint8_t num, uint32_t t0, uint32_t dt, bool isoneshot);
-
-
-
-
-
-
-
-
-
-static void /*HilTimerMilliC.VirtualizeTimerC*/VirtualizeTimerC__0__Timer__startPeriodic(uint8_t num, uint32_t dt);
+#line 148
+static void /*HilTimerMilliC.VirtualizeTimerC*/VirtualizeTimerC__0__Timer__startOneShot(uint8_t num, uint32_t dt);
 #line 193
 static inline void /*HilTimerMilliC.VirtualizeTimerC*/VirtualizeTimerC__0__Timer__default__fired(uint8_t num);
 # 47 "/home/tinyos/local/src/tinyos-2.x/tos/lib/timer/CounterToLocalTimeC.nc"
@@ -4335,64 +4332,18 @@ inline static void /*HilTimerMilliC.VirtualizeTimerC*/VirtualizeTimerC__0__Timer
 #line 67
 }
 #line 67
-# 47 "/home/tinyos/local/src/tinyos-2.x/tos/chips/msp430/pins/HplMsp430GeneralIOP.nc"
-static inline void /*HplMsp430GeneralIOC.P54*/HplMsp430GeneralIOP__36__IO__toggle(void )
-#line 47
-{
-#line 47
-  { __nesc_atomic_t __nesc_atomic = __nesc_atomic_start();
-#line 47
-    * (volatile uint8_t * )49U ^= 0x01 << 4;
-#line 47
-    __nesc_atomic_end(__nesc_atomic); }
-}
-
-# 44 "/home/tinyos/local/src/tinyos-2.x/tos/chips/msp430/pins/HplMsp430GeneralIO.nc"
-inline static void /*PlatformLedsC.Led0Impl*/Msp430GpioC__0__HplGeneralIO__toggle(void ){
-#line 44
-  /*HplMsp430GeneralIOC.P54*/HplMsp430GeneralIOP__36__IO__toggle();
-#line 44
-}
-#line 44
-# 39 "/home/tinyos/local/src/tinyos-2.x/tos/chips/msp430/pins/Msp430GpioC.nc"
-static inline void /*PlatformLedsC.Led0Impl*/Msp430GpioC__0__GeneralIO__toggle(void )
-#line 39
-{
-#line 39
-  /*PlatformLedsC.Led0Impl*/Msp430GpioC__0__HplGeneralIO__toggle();
-}
-
-# 31 "/home/tinyos/local/src/tinyos-2.x/tos/interfaces/GeneralIO.nc"
-inline static void LedsP__Led0__toggle(void ){
-#line 31
-  /*PlatformLedsC.Led0Impl*/Msp430GpioC__0__GeneralIO__toggle();
-#line 31
-}
-#line 31
-# 73 "/home/tinyos/local/src/tinyos-2.x/tos/system/LedsP.nc"
-static inline void LedsP__Leds__led0Toggle(void )
-#line 73
-{
-  LedsP__Led0__toggle();
-  ;
-#line 75
-  ;
-}
-
-# 56 "/home/tinyos/local/src/tinyos-2.x/tos/interfaces/Leds.nc"
-inline static void BlinkC__Leds__led0Toggle(void ){
-#line 56
-  LedsP__Leds__led0Toggle();
-#line 56
-}
-#line 56
-# 56 "BlinkC.nc"
+# 63 "BlinkC.nc"
 static inline void BlinkC__Timer0__fired(void )
 {
-  ;
-  BlinkC__Leds__led0Toggle();
 }
 
+# 62 "/home/tinyos/local/src/tinyos-2.x/tos/lib/timer/Timer.nc"
+inline static void BlinkC__Timer1__startOneShot(uint32_t dt){
+#line 62
+  /*HilTimerMilliC.VirtualizeTimerC*/VirtualizeTimerC__0__Timer__startOneShot(1U, dt);
+#line 62
+}
+#line 62
 # 47 "/home/tinyos/local/src/tinyos-2.x/tos/chips/msp430/pins/HplMsp430GeneralIOP.nc"
 static inline void /*HplMsp430GeneralIOC.P55*/HplMsp430GeneralIOP__37__IO__toggle(void )
 #line 47
@@ -4444,69 +4395,89 @@ inline static void BlinkC__Leds__led1Toggle(void ){
 #line 72
 }
 #line 72
-# 62 "BlinkC.nc"
-static inline void BlinkC__Timer1__fired(void )
+# 46 "/home/tinyos/local/src/tinyos-2.x/tos/chips/msp430/pins/HplMsp430GeneralIOP.nc"
+static inline void /*HplMsp430GeneralIOC.P55*/HplMsp430GeneralIOP__37__IO__clr(void )
+#line 46
 {
-  ;
-  BlinkC__Leds__led1Toggle();
-}
-
-# 47 "/home/tinyos/local/src/tinyos-2.x/tos/chips/msp430/pins/HplMsp430GeneralIOP.nc"
-static inline void /*HplMsp430GeneralIOC.P56*/HplMsp430GeneralIOP__38__IO__toggle(void )
-#line 47
-{
-#line 47
+#line 46
   { __nesc_atomic_t __nesc_atomic = __nesc_atomic_start();
-#line 47
-    * (volatile uint8_t * )49U ^= 0x01 << 6;
-#line 47
+#line 46
+    * (volatile uint8_t * )49U &= ~(0x01 << 5);
+#line 46
     __nesc_atomic_end(__nesc_atomic); }
 }
 
-# 44 "/home/tinyos/local/src/tinyos-2.x/tos/chips/msp430/pins/HplMsp430GeneralIO.nc"
-inline static void /*PlatformLedsC.Led2Impl*/Msp430GpioC__2__HplGeneralIO__toggle(void ){
-#line 44
-  /*HplMsp430GeneralIOC.P56*/HplMsp430GeneralIOP__38__IO__toggle();
-#line 44
+# 39 "/home/tinyos/local/src/tinyos-2.x/tos/chips/msp430/pins/HplMsp430GeneralIO.nc"
+inline static void /*PlatformLedsC.Led1Impl*/Msp430GpioC__1__HplGeneralIO__clr(void ){
+#line 39
+  /*HplMsp430GeneralIOC.P55*/HplMsp430GeneralIOP__37__IO__clr();
+#line 39
 }
-#line 44
-# 39 "/home/tinyos/local/src/tinyos-2.x/tos/chips/msp430/pins/Msp430GpioC.nc"
-static inline void /*PlatformLedsC.Led2Impl*/Msp430GpioC__2__GeneralIO__toggle(void )
 #line 39
+# 38 "/home/tinyos/local/src/tinyos-2.x/tos/chips/msp430/pins/Msp430GpioC.nc"
+static inline void /*PlatformLedsC.Led1Impl*/Msp430GpioC__1__GeneralIO__clr(void )
+#line 38
 {
-#line 39
-  /*PlatformLedsC.Led2Impl*/Msp430GpioC__2__HplGeneralIO__toggle();
+#line 38
+  /*PlatformLedsC.Led1Impl*/Msp430GpioC__1__HplGeneralIO__clr();
 }
 
-# 31 "/home/tinyos/local/src/tinyos-2.x/tos/interfaces/GeneralIO.nc"
-inline static void LedsP__Led2__toggle(void ){
-#line 31
-  /*PlatformLedsC.Led2Impl*/Msp430GpioC__2__GeneralIO__toggle();
-#line 31
+# 30 "/home/tinyos/local/src/tinyos-2.x/tos/interfaces/GeneralIO.nc"
+inline static void LedsP__Led1__clr(void ){
+#line 30
+  /*PlatformLedsC.Led1Impl*/Msp430GpioC__1__GeneralIO__clr();
+#line 30
 }
-#line 31
-# 103 "/home/tinyos/local/src/tinyos-2.x/tos/system/LedsP.nc"
-static inline void LedsP__Leds__led2Toggle(void )
-#line 103
+#line 30
+# 78 "/home/tinyos/local/src/tinyos-2.x/tos/system/LedsP.nc"
+static inline void LedsP__Leds__led1On(void )
+#line 78
 {
-  LedsP__Led2__toggle();
+  LedsP__Led1__clr();
   ;
-#line 105
+#line 80
   ;
 }
 
-# 89 "/home/tinyos/local/src/tinyos-2.x/tos/interfaces/Leds.nc"
-inline static void BlinkC__Leds__led2Toggle(void ){
-#line 89
-  LedsP__Leds__led2Toggle();
-#line 89
+# 61 "/home/tinyos/local/src/tinyos-2.x/tos/interfaces/Leds.nc"
+inline static void BlinkC__Leds__led1On(void ){
+#line 61
+  LedsP__Leds__led1On();
+#line 61
 }
-#line 89
-# 68 "BlinkC.nc"
+#line 61
+# 69 "BlinkC.nc"
+static inline void BlinkC__Timer1__fired(void )
+{
+
+
+  BlinkC__counter++;
+
+  if (BlinkC__counter == 255) {
+      BlinkC__counter = 0;
+      BlinkC__Leds__led1On();
+      BlinkC__Timer1__startOneShot(500);
+    }
+  else 
+#line 79
+    {
+      BlinkC__Leds__led1Toggle();
+      if (BlinkC__duty_flag) {
+          BlinkC__Timer1__startOneShot(BlinkC__duty_tick);
+          BlinkC__duty_tick = 0;
+        }
+      else 
+#line 84
+        {
+          BlinkC__Timer1__startOneShot(BlinkC__duty_max);
+          BlinkC__duty_tick = 1;
+        }
+    }
+}
+
+
 static inline void BlinkC__Timer2__fired(void )
 {
-  ;
-  BlinkC__Leds__led2Toggle();
 }
 
 # 193 "/home/tinyos/local/src/tinyos-2.x/tos/lib/timer/VirtualizeTimerC.nc"
@@ -4515,9 +4486,9 @@ static inline void /*HilTimerMilliC.VirtualizeTimerC*/VirtualizeTimerC__0__Timer
 }
 
 # 72 "/home/tinyos/local/src/tinyos-2.x/tos/lib/timer/Timer.nc"
-inline static void /*HilTimerMilliC.VirtualizeTimerC*/VirtualizeTimerC__0__Timer__fired(uint8_t arg_0x408c89f0){
+inline static void /*HilTimerMilliC.VirtualizeTimerC*/VirtualizeTimerC__0__Timer__fired(uint8_t arg_0x408c59f0){
 #line 72
-  switch (arg_0x408c89f0) {
+  switch (arg_0x408c59f0) {
 #line 72
     case 0U:
 #line 72
@@ -4539,7 +4510,7 @@ inline static void /*HilTimerMilliC.VirtualizeTimerC*/VirtualizeTimerC__0__Timer
 #line 72
     default:
 #line 72
-      /*HilTimerMilliC.VirtualizeTimerC*/VirtualizeTimerC__0__Timer__default__fired(arg_0x408c89f0);
+      /*HilTimerMilliC.VirtualizeTimerC*/VirtualizeTimerC__0__Timer__default__fired(arg_0x408c59f0);
 #line 72
       break;
 #line 72
@@ -4547,6 +4518,34 @@ inline static void /*HilTimerMilliC.VirtualizeTimerC*/VirtualizeTimerC__0__Timer
 #line 72
 }
 #line 72
+# 56 "/home/tinyos/local/src/tinyos-2.x/tos/interfaces/TaskBasic.nc"
+inline static error_t /*HilTimerMilliC.VirtualizeTimerC*/VirtualizeTimerC__0__updateFromTimer__postTask(void ){
+#line 56
+  unsigned char result;
+#line 56
+
+#line 56
+  result = SchedulerBasicP__TaskBasic__postTask(/*HilTimerMilliC.VirtualizeTimerC*/VirtualizeTimerC__0__updateFromTimer);
+#line 56
+
+#line 56
+  return result;
+#line 56
+}
+#line 56
+# 133 "/home/tinyos/local/src/tinyos-2.x/tos/lib/timer/VirtualizeTimerC.nc"
+static inline void /*HilTimerMilliC.VirtualizeTimerC*/VirtualizeTimerC__0__startTimer(uint8_t num, uint32_t t0, uint32_t dt, bool isoneshot)
+{
+  /*HilTimerMilliC.VirtualizeTimerC*/VirtualizeTimerC__0__Timer_t *timer = &/*HilTimerMilliC.VirtualizeTimerC*/VirtualizeTimerC__0__m_timers[num];
+
+#line 136
+  timer->t0 = t0;
+  timer->dt = dt;
+  timer->isoneshot = isoneshot;
+  timer->isrunning = TRUE;
+  /*HilTimerMilliC.VirtualizeTimerC*/VirtualizeTimerC__0__updateFromTimer__postTask();
+}
+
 # 92 "/home/tinyos/local/src/tinyos-2.x/tos/lib/timer/Alarm.nc"
 inline static void /*HilTimerMilliC.AlarmToTimerC*/AlarmToTimerC__0__Alarm__startAt(/*HilTimerMilliC.AlarmToTimerC*/AlarmToTimerC__0__Alarm__size_type t0, /*HilTimerMilliC.AlarmToTimerC*/AlarmToTimerC__0__Alarm__size_type dt){
 #line 92
@@ -4749,31 +4748,11 @@ inline static error_t RealMainP__SoftwareInit__init(void ){
 #line 51
 }
 #line 51
-# 53 "/home/tinyos/local/src/tinyos-2.x/tos/lib/timer/Timer.nc"
-inline static void BlinkC__Timer2__startPeriodic(uint32_t dt){
-#line 53
-  /*HilTimerMilliC.VirtualizeTimerC*/VirtualizeTimerC__0__Timer__startPeriodic(2U, dt);
-#line 53
-}
-#line 53
-inline static void BlinkC__Timer1__startPeriodic(uint32_t dt){
-#line 53
-  /*HilTimerMilliC.VirtualizeTimerC*/VirtualizeTimerC__0__Timer__startPeriodic(1U, dt);
-#line 53
-}
-#line 53
-inline static void BlinkC__Timer0__startPeriodic(uint32_t dt){
-#line 53
-  /*HilTimerMilliC.VirtualizeTimerC*/VirtualizeTimerC__0__Timer__startPeriodic(0U, dt);
-#line 53
-}
-#line 53
-# 49 "BlinkC.nc"
+# 55 "BlinkC.nc"
 static inline void BlinkC__Boot__booted(void )
 {
-  BlinkC__Timer0__startPeriodic(250);
-  BlinkC__Timer1__startPeriodic(500);
-  BlinkC__Timer2__startPeriodic(1000);
+
+  BlinkC__Timer1__startOneShot(BlinkC__duty_tick);
 }
 
 # 49 "/home/tinyos/local/src/tinyos-2.x/tos/interfaces/Boot.nc"
@@ -4783,34 +4762,6 @@ inline static void RealMainP__Boot__booted(void ){
 #line 49
 }
 #line 49
-# 56 "/home/tinyos/local/src/tinyos-2.x/tos/interfaces/TaskBasic.nc"
-inline static error_t /*HilTimerMilliC.VirtualizeTimerC*/VirtualizeTimerC__0__updateFromTimer__postTask(void ){
-#line 56
-  unsigned char result;
-#line 56
-
-#line 56
-  result = SchedulerBasicP__TaskBasic__postTask(/*HilTimerMilliC.VirtualizeTimerC*/VirtualizeTimerC__0__updateFromTimer);
-#line 56
-
-#line 56
-  return result;
-#line 56
-}
-#line 56
-# 133 "/home/tinyos/local/src/tinyos-2.x/tos/lib/timer/VirtualizeTimerC.nc"
-static inline void /*HilTimerMilliC.VirtualizeTimerC*/VirtualizeTimerC__0__startTimer(uint8_t num, uint32_t t0, uint32_t dt, bool isoneshot)
-{
-  /*HilTimerMilliC.VirtualizeTimerC*/VirtualizeTimerC__0__Timer_t *timer = &/*HilTimerMilliC.VirtualizeTimerC*/VirtualizeTimerC__0__m_timers[num];
-
-#line 136
-  timer->t0 = t0;
-  timer->dt = dt;
-  timer->isoneshot = isoneshot;
-  timer->isrunning = TRUE;
-  /*HilTimerMilliC.VirtualizeTimerC*/VirtualizeTimerC__0__updateFromTimer__postTask();
-}
-
 # 164 "/home/tinyos/local/src/tinyos-2.x/tos/system/SchedulerBasicP.nc"
 static inline void SchedulerBasicP__TaskBasic__default__runTask(uint8_t id)
 {
@@ -5499,6 +5450,12 @@ static void /*HilTimerMilliC.VirtualizeTimerC*/VirtualizeTimerC__0__fireTimers(u
   /*HilTimerMilliC.VirtualizeTimerC*/VirtualizeTimerC__0__updateFromTimer__postTask();
 }
 
+#line 148
+static void /*HilTimerMilliC.VirtualizeTimerC*/VirtualizeTimerC__0__Timer__startOneShot(uint8_t num, uint32_t dt)
+{
+  /*HilTimerMilliC.VirtualizeTimerC*/VirtualizeTimerC__0__startTimer(num, /*HilTimerMilliC.VirtualizeTimerC*/VirtualizeTimerC__0__TimerFrom__getNow(), dt, TRUE);
+}
+
 # 136 "/home/tinyos/local/src/tinyos-2.x/tos/lib/timer/TransformAlarmC.nc"
 static void /*HilTimerMilliC.AlarmMilli32C.Transform*/TransformAlarmC__0__Alarm__startAt(/*HilTimerMilliC.AlarmMilli32C.Transform*/TransformAlarmC__0__to_size_type t0, /*HilTimerMilliC.AlarmMilli32C.Transform*/TransformAlarmC__0__to_size_type dt)
 {
@@ -5520,11 +5477,5 @@ static void /*HilTimerMilliC.AlarmToTimerC*/AlarmToTimerC__0__fired__runTask(voi
     }
 #line 67
   /*HilTimerMilliC.AlarmToTimerC*/AlarmToTimerC__0__Timer__fired();
-}
-
-# 143 "/home/tinyos/local/src/tinyos-2.x/tos/lib/timer/VirtualizeTimerC.nc"
-static void /*HilTimerMilliC.VirtualizeTimerC*/VirtualizeTimerC__0__Timer__startPeriodic(uint8_t num, uint32_t dt)
-{
-  /*HilTimerMilliC.VirtualizeTimerC*/VirtualizeTimerC__0__startTimer(num, /*HilTimerMilliC.VirtualizeTimerC*/VirtualizeTimerC__0__TimerFrom__getNow(), dt, FALSE);
 }
 
