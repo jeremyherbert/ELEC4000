@@ -39,14 +39,18 @@
 module BlinkC @safe()
 {
   uses interface Timer<TMilli> as Timer0;
-  uses interface Timer<TMilli> as Timer1;
+  uses interface Timer<TMicro> as Timer1;
   uses interface Timer<TMilli> as Timer2;
   uses interface Leds;
   uses interface Boot;
 }
 implementation
 {
-  uint8_t duty_tick = 128;
+  uint16_t duty_tick = 100;
+  uint16_t duty_max = 1000;
+  uint16_t duty_flag = 0;
+
+  uint16_t counter = 0;
 
   event void Boot.booted()
   {
@@ -65,9 +69,24 @@ implementation
   event void Timer1.fired()
   {
     //dbg("BlinkC", "Timer 1 fired @ %s \n", sim_time_string());
-    call Leds.led1Toggle();
-    duty_tick ^= 0xFF;
-    call Timer1.startOneShot(duty_tick);
+
+    counter++;
+
+    if (counter == 65535) {
+        counter = 0;
+        call Leds.led1On();
+        call Timer1.startOneShot(500);
+    } else {
+        call Leds.led1Toggle();
+        if (duty_flag) {
+            call Timer1.startOneShot(duty_tick);
+            duty_tick = 0;
+        } else {
+            call Timer1.startOneShot(duty_max);
+            duty_tick = 1;
+        }
+
+    }
   }
   
   event void Timer2.fired()
