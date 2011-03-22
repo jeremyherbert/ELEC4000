@@ -6858,11 +6858,13 @@ static inline void PacketParrotP__Boot__booted(void );
 
 
 static void PacketParrotP__Notify__notify(button_state_t state);
-#line 110
+#line 93
+static inline void PacketParrotP__LogRead__seekDone(error_t err);
+#line 117
 static inline void PacketParrotP__LogRead__readDone(void *buf, storage_len_t len, error_t err);
-#line 142
+#line 149
 static inline void PacketParrotP__Timer0__fired(void );
-#line 160
+#line 167
 static inline void PacketParrotP__Timer1__fired(void );
 
 
@@ -6880,14 +6882,14 @@ static inline void PacketParrotP__Sensor2__readDone(error_t result, uint16_t dat
 
 
 static inline void PacketParrotP__LogWrite__eraseDone(error_t err);
-#line 200
+#line 207
 static inline void PacketParrotP__LogWrite__appendDone(void *buf, storage_len_t len, 
 bool recordsLost, error_t err);
 
 
 
 
-static inline void PacketParrotP__LogRead__seekDone(error_t err);
+
 
 
 static inline void PacketParrotP__LogWrite__syncDone(error_t err);
@@ -12556,506 +12558,6 @@ inline static error_t Stm25pLogP__ClientResource__request(uint8_t arg_0x40bc1708
 #line 78
 }
 #line 78
-# 53 "/home/tinyos/local/src/tinyos-2.x/tos/system/QueueC.nc"
-static inline bool /*PrintfC.QueueC*/QueueC__0__Queue__empty(void )
-#line 53
-{
-  return /*PrintfC.QueueC*/QueueC__0__size == 0;
-}
-
-# 50 "/home/tinyos/local/src/tinyos-2.x/tos/interfaces/Queue.nc"
-inline static bool PrintfP__Queue__empty(void ){
-#line 50
-  unsigned char result;
-#line 50
-
-#line 50
-  result = /*PrintfC.QueueC*/QueueC__0__Queue__empty();
-#line 50
-
-#line 50
-  return result;
-#line 50
-}
-#line 50
-# 115 "/home/tinyos/local/src/tinyos-2.x/tos/interfaces/Packet.nc"
-inline static void * PrintfP__Packet__getPayload(message_t * msg, uint8_t len){
-#line 115
-  void *result;
-#line 115
-
-#line 115
-  result = /*SerialActiveMessageC.AM*/SerialActiveMessageP__0__Packet__getPayload(msg, len);
-#line 115
-
-#line 115
-  return result;
-#line 115
-}
-#line 115
-# 120 "/home/tinyos/local/src/tinyos-2.x/tos/lib/serial/SerialActiveMessageP.nc"
-static inline uint8_t /*SerialActiveMessageC.AM*/SerialActiveMessageP__0__Packet__maxPayloadLength(void )
-#line 120
-{
-  return 28;
-}
-
-# 57 "/home/tinyos/local/src/tinyos-2.x/tos/system/QueueC.nc"
-static inline uint8_t /*PrintfC.QueueC*/QueueC__0__Queue__size(void )
-#line 57
-{
-  return /*PrintfC.QueueC*/QueueC__0__size;
-}
-
-# 58 "/home/tinyos/local/src/tinyos-2.x/tos/interfaces/Queue.nc"
-inline static uint8_t PrintfP__Queue__size(void ){
-#line 58
-  unsigned char result;
-#line 58
-
-#line 58
-  result = /*PrintfC.QueueC*/QueueC__0__Queue__size();
-#line 58
-
-#line 58
-  return result;
-#line 58
-}
-#line 58
-# 69 "/home/tinyos/local/src/tinyos-2.x/tos/system/QueueC.nc"
-static inline void /*PrintfC.QueueC*/QueueC__0__printQueue(void )
-#line 69
-{
-}
-
-#line 65
-static inline /*PrintfC.QueueC*/QueueC__0__queue_t /*PrintfC.QueueC*/QueueC__0__Queue__head(void )
-#line 65
-{
-  return /*PrintfC.QueueC*/QueueC__0__queue[/*PrintfC.QueueC*/QueueC__0__head];
-}
-
-#line 85
-static inline /*PrintfC.QueueC*/QueueC__0__queue_t /*PrintfC.QueueC*/QueueC__0__Queue__dequeue(void )
-#line 85
-{
-  /*PrintfC.QueueC*/QueueC__0__queue_t t = /*PrintfC.QueueC*/QueueC__0__Queue__head();
-
-#line 87
-  ;
-  if (!/*PrintfC.QueueC*/QueueC__0__Queue__empty()) {
-      /*PrintfC.QueueC*/QueueC__0__head++;
-      if (/*PrintfC.QueueC*/QueueC__0__head == 250) {
-#line 90
-        /*PrintfC.QueueC*/QueueC__0__head = 0;
-        }
-#line 91
-      /*PrintfC.QueueC*/QueueC__0__size--;
-      /*PrintfC.QueueC*/QueueC__0__printQueue();
-    }
-  return t;
-}
-
-# 81 "/home/tinyos/local/src/tinyos-2.x/tos/interfaces/Queue.nc"
-inline static PrintfP__Queue__t  PrintfP__Queue__dequeue(void ){
-#line 81
-  unsigned char result;
-#line 81
-
-#line 81
-  result = /*PrintfC.QueueC*/QueueC__0__Queue__dequeue();
-#line 81
-
-#line 81
-  return result;
-#line 81
-}
-#line 81
-# 269 "/usr/lib/ncc/nesc_nx.h"
-static __inline  uint16_t __nesc_hton_uint16(void * target, uint16_t value)
-#line 269
-{
-  uint8_t *base = target;
-
-#line 271
-  base[1] = value;
-  base[0] = value >> 8;
-  return value;
-}
-
-# 49 "/home/tinyos/local/src/tinyos-2.x/tos/lib/serial/SerialActiveMessageP.nc"
-static inline serial_header_t * /*SerialActiveMessageC.AM*/SerialActiveMessageP__0__getHeader(message_t * msg)
-#line 49
-{
-  return (serial_header_t * )((uint8_t *)msg + (size_t )& ((message_t *)0)->data - sizeof(serial_header_t ));
-}
-
-#line 147
-static inline void /*SerialActiveMessageC.AM*/SerialActiveMessageP__0__AMPacket__setDestination(message_t *amsg, am_addr_t addr)
-#line 147
-{
-  serial_header_t *header = /*SerialActiveMessageC.AM*/SerialActiveMessageP__0__getHeader(amsg);
-
-#line 149
-  __nesc_hton_uint16(header->dest.data, addr);
-}
-
-# 92 "/home/tinyos/local/src/tinyos-2.x/tos/interfaces/AMPacket.nc"
-inline static void /*PrintfC.SerialAMSenderC.AMQueueEntryP*/AMQueueEntryP__0__AMPacket__setDestination(message_t * amsg, am_addr_t addr){
-#line 92
-  /*SerialActiveMessageC.AM*/SerialActiveMessageP__0__AMPacket__setDestination(amsg, addr);
-#line 92
-}
-#line 92
-# 240 "/usr/lib/ncc/nesc_nx.h"
-static __inline  uint8_t __nesc_hton_uint8(void * target, uint8_t value)
-#line 240
-{
-  uint8_t *base = target;
-
-#line 242
-  base[0] = value;
-  return value;
-}
-
-# 166 "/home/tinyos/local/src/tinyos-2.x/tos/lib/serial/SerialActiveMessageP.nc"
-static inline void /*SerialActiveMessageC.AM*/SerialActiveMessageP__0__AMPacket__setType(message_t *amsg, am_id_t type)
-#line 166
-{
-  serial_header_t *header = /*SerialActiveMessageC.AM*/SerialActiveMessageP__0__getHeader(amsg);
-
-#line 168
-  __nesc_hton_uint8(header->type.data, type);
-}
-
-# 151 "/home/tinyos/local/src/tinyos-2.x/tos/interfaces/AMPacket.nc"
-inline static void /*PrintfC.SerialAMSenderC.AMQueueEntryP*/AMQueueEntryP__0__AMPacket__setType(message_t * amsg, am_id_t t){
-#line 151
-  /*SerialActiveMessageC.AM*/SerialActiveMessageP__0__AMPacket__setType(amsg, t);
-#line 151
-}
-#line 151
-# 69 "/home/tinyos/local/src/tinyos-2.x/tos/interfaces/AMSend.nc"
-inline static error_t /*SerialAMQueueP.AMQueueImplP*/AMQueueImplP__0__AMSend__send(am_id_t arg_0x40b1d908, am_addr_t addr, message_t * msg, uint8_t len){
-#line 69
-  unsigned char result;
-#line 69
-
-#line 69
-  result = /*SerialActiveMessageC.AM*/SerialActiveMessageP__0__AMSend__send(arg_0x40b1d908, addr, msg, len);
-#line 69
-
-#line 69
-  return result;
-#line 69
-}
-#line 69
-# 67 "/home/tinyos/local/src/tinyos-2.x/tos/interfaces/AMPacket.nc"
-inline static am_addr_t /*SerialAMQueueP.AMQueueImplP*/AMQueueImplP__0__AMPacket__destination(message_t * amsg){
-#line 67
-  unsigned int result;
-#line 67
-
-#line 67
-  result = /*SerialActiveMessageC.AM*/SerialActiveMessageP__0__AMPacket__destination(amsg);
-#line 67
-
-#line 67
-  return result;
-#line 67
-}
-#line 67
-#line 136
-inline static am_id_t /*SerialAMQueueP.AMQueueImplP*/AMQueueImplP__0__AMPacket__type(message_t * amsg){
-#line 136
-  unsigned char result;
-#line 136
-
-#line 136
-  result = /*SerialActiveMessageC.AM*/SerialActiveMessageP__0__AMPacket__type(amsg);
-#line 136
-
-#line 136
-  return result;
-#line 136
-}
-#line 136
-# 116 "/home/tinyos/local/src/tinyos-2.x/tos/lib/serial/SerialActiveMessageP.nc"
-static inline void /*SerialActiveMessageC.AM*/SerialActiveMessageP__0__Packet__setPayloadLength(message_t *msg, uint8_t len)
-#line 116
-{
-  __nesc_hton_uint8(/*SerialActiveMessageC.AM*/SerialActiveMessageP__0__getHeader(msg)->length.data, len);
-}
-
-# 83 "/home/tinyos/local/src/tinyos-2.x/tos/interfaces/Packet.nc"
-inline static void /*SerialAMQueueP.AMQueueImplP*/AMQueueImplP__0__Packet__setPayloadLength(message_t * msg, uint8_t len){
-#line 83
-  /*SerialActiveMessageC.AM*/SerialActiveMessageP__0__Packet__setPayloadLength(msg, len);
-#line 83
-}
-#line 83
-# 82 "/home/tinyos/local/src/tinyos-2.x/tos/system/AMQueueImplP.nc"
-static inline error_t /*SerialAMQueueP.AMQueueImplP*/AMQueueImplP__0__Send__send(uint8_t clientId, message_t *msg, 
-uint8_t len)
-#line 83
-{
-  if (clientId >= 1) {
-      return FAIL;
-    }
-  if (/*SerialAMQueueP.AMQueueImplP*/AMQueueImplP__0__queue[clientId].msg != (void *)0) {
-      return EBUSY;
-    }
-  ;
-
-  /*SerialAMQueueP.AMQueueImplP*/AMQueueImplP__0__queue[clientId].msg = msg;
-  /*SerialAMQueueP.AMQueueImplP*/AMQueueImplP__0__Packet__setPayloadLength(msg, len);
-
-  if (/*SerialAMQueueP.AMQueueImplP*/AMQueueImplP__0__current >= 1) {
-      error_t err;
-      am_id_t amId = /*SerialAMQueueP.AMQueueImplP*/AMQueueImplP__0__AMPacket__type(msg);
-      am_addr_t dest = /*SerialAMQueueP.AMQueueImplP*/AMQueueImplP__0__AMPacket__destination(msg);
-
-      ;
-      /*SerialAMQueueP.AMQueueImplP*/AMQueueImplP__0__current = clientId;
-
-      err = /*SerialAMQueueP.AMQueueImplP*/AMQueueImplP__0__AMSend__send(amId, dest, msg, len);
-      if (err != SUCCESS) {
-          ;
-          /*SerialAMQueueP.AMQueueImplP*/AMQueueImplP__0__current = 1;
-          /*SerialAMQueueP.AMQueueImplP*/AMQueueImplP__0__queue[clientId].msg = (void *)0;
-        }
-
-      return err;
-    }
-  else {
-      ;
-    }
-  return SUCCESS;
-}
-
-# 64 "/home/tinyos/local/src/tinyos-2.x/tos/interfaces/Send.nc"
-inline static error_t /*PrintfC.SerialAMSenderC.AMQueueEntryP*/AMQueueEntryP__0__Send__send(message_t * msg, uint8_t len){
-#line 64
-  unsigned char result;
-#line 64
-
-#line 64
-  result = /*SerialAMQueueP.AMQueueImplP*/AMQueueImplP__0__Send__send(0U, msg, len);
-#line 64
-
-#line 64
-  return result;
-#line 64
-}
-#line 64
-# 522 "/home/tinyos/local/src/tinyos-2.x/tos/lib/serial/SerialP.nc"
-static inline error_t SerialP__SendBytePacket__startSend(uint8_t b)
-#line 522
-{
-  bool not_busy = FALSE;
-
-#line 524
-  { __nesc_atomic_t __nesc_atomic = __nesc_atomic_start();
-#line 524
-    {
-      if (SerialP__txBuf[SerialP__TX_DATA_INDEX].state == SerialP__BUFFER_AVAILABLE) {
-          SerialP__txBuf[SerialP__TX_DATA_INDEX].state = SerialP__BUFFER_FILLING;
-          SerialP__txBuf[SerialP__TX_DATA_INDEX].buf = b;
-          not_busy = TRUE;
-        }
-    }
-#line 530
-    __nesc_atomic_end(__nesc_atomic); }
-  if (not_busy) {
-      SerialP__MaybeScheduleTx();
-      return SUCCESS;
-    }
-  return EBUSY;
-}
-
-# 51 "/home/tinyos/local/src/tinyos-2.x/tos/lib/serial/SendBytePacket.nc"
-inline static error_t /*SerialDispatcherC.SerialDispatcherP*/SerialDispatcherP__0__SendBytePacket__startSend(uint8_t first_byte){
-#line 51
-  unsigned char result;
-#line 51
-
-#line 51
-  result = SerialP__SendBytePacket__startSend(first_byte);
-#line 51
-
-#line 51
-  return result;
-#line 51
-}
-#line 51
-# 43 "/home/tinyos/local/src/tinyos-2.x/tos/lib/serial/SerialPacketInfoActiveMessageP.nc"
-static inline uint8_t SerialPacketInfoActiveMessageP__Info__dataLinkLength(message_t *msg, uint8_t upperLen)
-#line 43
-{
-  return upperLen + sizeof(serial_header_t );
-}
-
-# 350 "/home/tinyos/local/src/tinyos-2.x/tos/lib/serial/SerialDispatcherP.nc"
-static inline uint8_t /*SerialDispatcherC.SerialDispatcherP*/SerialDispatcherP__0__PacketInfo__default__dataLinkLength(uart_id_t id, message_t *msg, 
-uint8_t upperLen)
-#line 351
-{
-  return 0;
-}
-
-# 23 "/home/tinyos/local/src/tinyos-2.x/tos/lib/serial/SerialPacketInfo.nc"
-inline static uint8_t /*SerialDispatcherC.SerialDispatcherP*/SerialDispatcherP__0__PacketInfo__dataLinkLength(uart_id_t arg_0x407dbcf0, message_t *msg, uint8_t upperLen){
-#line 23
-  unsigned char result;
-#line 23
-
-#line 23
-  switch (arg_0x407dbcf0) {
-#line 23
-    case TOS_SERIAL_ACTIVE_MESSAGE_ID:
-#line 23
-      result = SerialPacketInfoActiveMessageP__Info__dataLinkLength(msg, upperLen);
-#line 23
-      break;
-#line 23
-    default:
-#line 23
-      result = /*SerialDispatcherC.SerialDispatcherP*/SerialDispatcherP__0__PacketInfo__default__dataLinkLength(arg_0x407dbcf0, msg, upperLen);
-#line 23
-      break;
-#line 23
-    }
-#line 23
-
-#line 23
-  return result;
-#line 23
-}
-#line 23
-# 40 "/home/tinyos/local/src/tinyos-2.x/tos/lib/serial/SerialPacketInfoActiveMessageP.nc"
-static inline uint8_t SerialPacketInfoActiveMessageP__Info__offset(void )
-#line 40
-{
-  return (uint8_t )(sizeof(message_header_t ) - sizeof(serial_header_t ));
-}
-
-# 347 "/home/tinyos/local/src/tinyos-2.x/tos/lib/serial/SerialDispatcherP.nc"
-static inline uint8_t /*SerialDispatcherC.SerialDispatcherP*/SerialDispatcherP__0__PacketInfo__default__offset(uart_id_t id)
-#line 347
-{
-  return 0;
-}
-
-# 15 "/home/tinyos/local/src/tinyos-2.x/tos/lib/serial/SerialPacketInfo.nc"
-inline static uint8_t /*SerialDispatcherC.SerialDispatcherP*/SerialDispatcherP__0__PacketInfo__offset(uart_id_t arg_0x407dbcf0){
-#line 15
-  unsigned char result;
-#line 15
-
-#line 15
-  switch (arg_0x407dbcf0) {
-#line 15
-    case TOS_SERIAL_ACTIVE_MESSAGE_ID:
-#line 15
-      result = SerialPacketInfoActiveMessageP__Info__offset();
-#line 15
-      break;
-#line 15
-    default:
-#line 15
-      result = /*SerialDispatcherC.SerialDispatcherP*/SerialDispatcherP__0__PacketInfo__default__offset(arg_0x407dbcf0);
-#line 15
-      break;
-#line 15
-    }
-#line 15
-
-#line 15
-  return result;
-#line 15
-}
-#line 15
-# 100 "/home/tinyos/local/src/tinyos-2.x/tos/lib/serial/SerialDispatcherP.nc"
-static inline error_t /*SerialDispatcherC.SerialDispatcherP*/SerialDispatcherP__0__Send__send(uint8_t id, message_t *msg, uint8_t len)
-#line 100
-{
-  if (/*SerialDispatcherC.SerialDispatcherP*/SerialDispatcherP__0__sendState != /*SerialDispatcherC.SerialDispatcherP*/SerialDispatcherP__0__SEND_STATE_IDLE) {
-      return EBUSY;
-    }
-
-  { __nesc_atomic_t __nesc_atomic = __nesc_atomic_start();
-#line 105
-    {
-      /*SerialDispatcherC.SerialDispatcherP*/SerialDispatcherP__0__sendIndex = /*SerialDispatcherC.SerialDispatcherP*/SerialDispatcherP__0__PacketInfo__offset(id);
-      if (/*SerialDispatcherC.SerialDispatcherP*/SerialDispatcherP__0__sendIndex > sizeof(message_header_t )) {
-          {
-            unsigned char __nesc_temp = 
-#line 108
-            ESIZE;
-
-            {
-#line 108
-              __nesc_atomic_end(__nesc_atomic); 
-#line 108
-              return __nesc_temp;
-            }
-          }
-        }
-#line 111
-      /*SerialDispatcherC.SerialDispatcherP*/SerialDispatcherP__0__sendError = SUCCESS;
-      /*SerialDispatcherC.SerialDispatcherP*/SerialDispatcherP__0__sendBuffer = (uint8_t *)msg;
-      /*SerialDispatcherC.SerialDispatcherP*/SerialDispatcherP__0__sendState = /*SerialDispatcherC.SerialDispatcherP*/SerialDispatcherP__0__SEND_STATE_DATA;
-      /*SerialDispatcherC.SerialDispatcherP*/SerialDispatcherP__0__sendId = id;
-      /*SerialDispatcherC.SerialDispatcherP*/SerialDispatcherP__0__sendCancelled = FALSE;
-
-
-
-
-
-
-      /*SerialDispatcherC.SerialDispatcherP*/SerialDispatcherP__0__sendLen = /*SerialDispatcherC.SerialDispatcherP*/SerialDispatcherP__0__PacketInfo__dataLinkLength(id, msg, len) + /*SerialDispatcherC.SerialDispatcherP*/SerialDispatcherP__0__sendIndex;
-    }
-#line 123
-    __nesc_atomic_end(__nesc_atomic); }
-  if (/*SerialDispatcherC.SerialDispatcherP*/SerialDispatcherP__0__SendBytePacket__startSend(id) == SUCCESS) {
-      return SUCCESS;
-    }
-  else {
-      /*SerialDispatcherC.SerialDispatcherP*/SerialDispatcherP__0__sendState = /*SerialDispatcherC.SerialDispatcherP*/SerialDispatcherP__0__SEND_STATE_IDLE;
-      return FAIL;
-    }
-}
-
-# 64 "/home/tinyos/local/src/tinyos-2.x/tos/interfaces/Send.nc"
-inline static error_t /*SerialActiveMessageC.AM*/SerialActiveMessageP__0__SubSend__send(message_t * msg, uint8_t len){
-#line 64
-  unsigned char result;
-#line 64
-
-#line 64
-  result = /*SerialDispatcherC.SerialDispatcherP*/SerialDispatcherP__0__Send__send(TOS_SERIAL_ACTIVE_MESSAGE_ID, msg, len);
-#line 64
-
-#line 64
-  return result;
-#line 64
-}
-#line 64
-# 56 "/home/tinyos/local/src/tinyos-2.x/tos/interfaces/TaskBasic.nc"
-inline static error_t SerialP__RunTx__postTask(void ){
-#line 56
-  unsigned char result;
-#line 56
-
-#line 56
-  result = SchedulerBasicP__TaskBasic__postTask(SerialP__RunTx);
-#line 56
-
-#line 56
-  return result;
-#line 56
-}
-#line 56
 # 253 "/home/tinyos/local/src/tinyos-2.x/tos/chips/msp430/pins/HplMsp430InterruptP.nc"
 static inline void HplMsp430InterruptP__Port27__edge(bool l2h)
 #line 253
@@ -14727,20 +14229,20 @@ inline static error_t Msp430RefVoltArbiterImplP__RefVolt_2_5V__start(void ){
 #line 83
 }
 #line 83
-# 165 "PacketParrotP.nc"
+# 172 "PacketParrotP.nc"
 static inline void PacketParrotP__Sensor1__readDone(error_t result, uint16_t data)
 {
   if (result == SUCCESS) {
-#line 167
+#line 174
     PacketParrotP__sense1 = data;
     }
 }
 
-#line 170
+#line 177
 static inline void PacketParrotP__Sensor2__readDone(error_t result, uint16_t data)
 {
   if (result == SUCCESS) {
-#line 172
+#line 179
     PacketParrotP__sense2 = data;
     }
 }
@@ -16440,9 +15942,9 @@ inline static void PacketParrotP__Leds__led1On(void ){
 #line 61
 }
 #line 61
-# 110 "PacketParrotP.nc"
+# 117 "PacketParrotP.nc"
 static inline void PacketParrotP__LogRead__readDone(void *buf, storage_len_t len, error_t err)
-#line 110
+#line 117
 {
   printf("read done!\n");
   if (len == sizeof(PacketParrotP__logentry_t ) && buf == &PacketParrotP__m_entry) {
@@ -16487,10 +15989,517 @@ inline static void Stm25pLogP__Read__readDone(uint8_t arg_0x40bc5cc8, void * buf
 #line 75
 }
 #line 75
-# 206 "PacketParrotP.nc"
-static inline void PacketParrotP__LogRead__seekDone(error_t err)
-#line 206
+# 53 "/home/tinyos/local/src/tinyos-2.x/tos/system/QueueC.nc"
+static inline bool /*PrintfC.QueueC*/QueueC__0__Queue__empty(void )
+#line 53
 {
+  return /*PrintfC.QueueC*/QueueC__0__size == 0;
+}
+
+# 50 "/home/tinyos/local/src/tinyos-2.x/tos/interfaces/Queue.nc"
+inline static bool PrintfP__Queue__empty(void ){
+#line 50
+  unsigned char result;
+#line 50
+
+#line 50
+  result = /*PrintfC.QueueC*/QueueC__0__Queue__empty();
+#line 50
+
+#line 50
+  return result;
+#line 50
+}
+#line 50
+# 115 "/home/tinyos/local/src/tinyos-2.x/tos/interfaces/Packet.nc"
+inline static void * PrintfP__Packet__getPayload(message_t * msg, uint8_t len){
+#line 115
+  void *result;
+#line 115
+
+#line 115
+  result = /*SerialActiveMessageC.AM*/SerialActiveMessageP__0__Packet__getPayload(msg, len);
+#line 115
+
+#line 115
+  return result;
+#line 115
+}
+#line 115
+# 120 "/home/tinyos/local/src/tinyos-2.x/tos/lib/serial/SerialActiveMessageP.nc"
+static inline uint8_t /*SerialActiveMessageC.AM*/SerialActiveMessageP__0__Packet__maxPayloadLength(void )
+#line 120
+{
+  return 28;
+}
+
+# 57 "/home/tinyos/local/src/tinyos-2.x/tos/system/QueueC.nc"
+static inline uint8_t /*PrintfC.QueueC*/QueueC__0__Queue__size(void )
+#line 57
+{
+  return /*PrintfC.QueueC*/QueueC__0__size;
+}
+
+# 58 "/home/tinyos/local/src/tinyos-2.x/tos/interfaces/Queue.nc"
+inline static uint8_t PrintfP__Queue__size(void ){
+#line 58
+  unsigned char result;
+#line 58
+
+#line 58
+  result = /*PrintfC.QueueC*/QueueC__0__Queue__size();
+#line 58
+
+#line 58
+  return result;
+#line 58
+}
+#line 58
+# 69 "/home/tinyos/local/src/tinyos-2.x/tos/system/QueueC.nc"
+static inline void /*PrintfC.QueueC*/QueueC__0__printQueue(void )
+#line 69
+{
+}
+
+#line 65
+static inline /*PrintfC.QueueC*/QueueC__0__queue_t /*PrintfC.QueueC*/QueueC__0__Queue__head(void )
+#line 65
+{
+  return /*PrintfC.QueueC*/QueueC__0__queue[/*PrintfC.QueueC*/QueueC__0__head];
+}
+
+#line 85
+static inline /*PrintfC.QueueC*/QueueC__0__queue_t /*PrintfC.QueueC*/QueueC__0__Queue__dequeue(void )
+#line 85
+{
+  /*PrintfC.QueueC*/QueueC__0__queue_t t = /*PrintfC.QueueC*/QueueC__0__Queue__head();
+
+#line 87
+  ;
+  if (!/*PrintfC.QueueC*/QueueC__0__Queue__empty()) {
+      /*PrintfC.QueueC*/QueueC__0__head++;
+      if (/*PrintfC.QueueC*/QueueC__0__head == 250) {
+#line 90
+        /*PrintfC.QueueC*/QueueC__0__head = 0;
+        }
+#line 91
+      /*PrintfC.QueueC*/QueueC__0__size--;
+      /*PrintfC.QueueC*/QueueC__0__printQueue();
+    }
+  return t;
+}
+
+# 81 "/home/tinyos/local/src/tinyos-2.x/tos/interfaces/Queue.nc"
+inline static PrintfP__Queue__t  PrintfP__Queue__dequeue(void ){
+#line 81
+  unsigned char result;
+#line 81
+
+#line 81
+  result = /*PrintfC.QueueC*/QueueC__0__Queue__dequeue();
+#line 81
+
+#line 81
+  return result;
+#line 81
+}
+#line 81
+# 269 "/usr/lib/ncc/nesc_nx.h"
+static __inline  uint16_t __nesc_hton_uint16(void * target, uint16_t value)
+#line 269
+{
+  uint8_t *base = target;
+
+#line 271
+  base[1] = value;
+  base[0] = value >> 8;
+  return value;
+}
+
+# 49 "/home/tinyos/local/src/tinyos-2.x/tos/lib/serial/SerialActiveMessageP.nc"
+static inline serial_header_t * /*SerialActiveMessageC.AM*/SerialActiveMessageP__0__getHeader(message_t * msg)
+#line 49
+{
+  return (serial_header_t * )((uint8_t *)msg + (size_t )& ((message_t *)0)->data - sizeof(serial_header_t ));
+}
+
+#line 147
+static inline void /*SerialActiveMessageC.AM*/SerialActiveMessageP__0__AMPacket__setDestination(message_t *amsg, am_addr_t addr)
+#line 147
+{
+  serial_header_t *header = /*SerialActiveMessageC.AM*/SerialActiveMessageP__0__getHeader(amsg);
+
+#line 149
+  __nesc_hton_uint16(header->dest.data, addr);
+}
+
+# 92 "/home/tinyos/local/src/tinyos-2.x/tos/interfaces/AMPacket.nc"
+inline static void /*PrintfC.SerialAMSenderC.AMQueueEntryP*/AMQueueEntryP__0__AMPacket__setDestination(message_t * amsg, am_addr_t addr){
+#line 92
+  /*SerialActiveMessageC.AM*/SerialActiveMessageP__0__AMPacket__setDestination(amsg, addr);
+#line 92
+}
+#line 92
+# 240 "/usr/lib/ncc/nesc_nx.h"
+static __inline  uint8_t __nesc_hton_uint8(void * target, uint8_t value)
+#line 240
+{
+  uint8_t *base = target;
+
+#line 242
+  base[0] = value;
+  return value;
+}
+
+# 166 "/home/tinyos/local/src/tinyos-2.x/tos/lib/serial/SerialActiveMessageP.nc"
+static inline void /*SerialActiveMessageC.AM*/SerialActiveMessageP__0__AMPacket__setType(message_t *amsg, am_id_t type)
+#line 166
+{
+  serial_header_t *header = /*SerialActiveMessageC.AM*/SerialActiveMessageP__0__getHeader(amsg);
+
+#line 168
+  __nesc_hton_uint8(header->type.data, type);
+}
+
+# 151 "/home/tinyos/local/src/tinyos-2.x/tos/interfaces/AMPacket.nc"
+inline static void /*PrintfC.SerialAMSenderC.AMQueueEntryP*/AMQueueEntryP__0__AMPacket__setType(message_t * amsg, am_id_t t){
+#line 151
+  /*SerialActiveMessageC.AM*/SerialActiveMessageP__0__AMPacket__setType(amsg, t);
+#line 151
+}
+#line 151
+# 69 "/home/tinyos/local/src/tinyos-2.x/tos/interfaces/AMSend.nc"
+inline static error_t /*SerialAMQueueP.AMQueueImplP*/AMQueueImplP__0__AMSend__send(am_id_t arg_0x40b1d908, am_addr_t addr, message_t * msg, uint8_t len){
+#line 69
+  unsigned char result;
+#line 69
+
+#line 69
+  result = /*SerialActiveMessageC.AM*/SerialActiveMessageP__0__AMSend__send(arg_0x40b1d908, addr, msg, len);
+#line 69
+
+#line 69
+  return result;
+#line 69
+}
+#line 69
+# 67 "/home/tinyos/local/src/tinyos-2.x/tos/interfaces/AMPacket.nc"
+inline static am_addr_t /*SerialAMQueueP.AMQueueImplP*/AMQueueImplP__0__AMPacket__destination(message_t * amsg){
+#line 67
+  unsigned int result;
+#line 67
+
+#line 67
+  result = /*SerialActiveMessageC.AM*/SerialActiveMessageP__0__AMPacket__destination(amsg);
+#line 67
+
+#line 67
+  return result;
+#line 67
+}
+#line 67
+#line 136
+inline static am_id_t /*SerialAMQueueP.AMQueueImplP*/AMQueueImplP__0__AMPacket__type(message_t * amsg){
+#line 136
+  unsigned char result;
+#line 136
+
+#line 136
+  result = /*SerialActiveMessageC.AM*/SerialActiveMessageP__0__AMPacket__type(amsg);
+#line 136
+
+#line 136
+  return result;
+#line 136
+}
+#line 136
+# 116 "/home/tinyos/local/src/tinyos-2.x/tos/lib/serial/SerialActiveMessageP.nc"
+static inline void /*SerialActiveMessageC.AM*/SerialActiveMessageP__0__Packet__setPayloadLength(message_t *msg, uint8_t len)
+#line 116
+{
+  __nesc_hton_uint8(/*SerialActiveMessageC.AM*/SerialActiveMessageP__0__getHeader(msg)->length.data, len);
+}
+
+# 83 "/home/tinyos/local/src/tinyos-2.x/tos/interfaces/Packet.nc"
+inline static void /*SerialAMQueueP.AMQueueImplP*/AMQueueImplP__0__Packet__setPayloadLength(message_t * msg, uint8_t len){
+#line 83
+  /*SerialActiveMessageC.AM*/SerialActiveMessageP__0__Packet__setPayloadLength(msg, len);
+#line 83
+}
+#line 83
+# 82 "/home/tinyos/local/src/tinyos-2.x/tos/system/AMQueueImplP.nc"
+static inline error_t /*SerialAMQueueP.AMQueueImplP*/AMQueueImplP__0__Send__send(uint8_t clientId, message_t *msg, 
+uint8_t len)
+#line 83
+{
+  if (clientId >= 1) {
+      return FAIL;
+    }
+  if (/*SerialAMQueueP.AMQueueImplP*/AMQueueImplP__0__queue[clientId].msg != (void *)0) {
+      return EBUSY;
+    }
+  ;
+
+  /*SerialAMQueueP.AMQueueImplP*/AMQueueImplP__0__queue[clientId].msg = msg;
+  /*SerialAMQueueP.AMQueueImplP*/AMQueueImplP__0__Packet__setPayloadLength(msg, len);
+
+  if (/*SerialAMQueueP.AMQueueImplP*/AMQueueImplP__0__current >= 1) {
+      error_t err;
+      am_id_t amId = /*SerialAMQueueP.AMQueueImplP*/AMQueueImplP__0__AMPacket__type(msg);
+      am_addr_t dest = /*SerialAMQueueP.AMQueueImplP*/AMQueueImplP__0__AMPacket__destination(msg);
+
+      ;
+      /*SerialAMQueueP.AMQueueImplP*/AMQueueImplP__0__current = clientId;
+
+      err = /*SerialAMQueueP.AMQueueImplP*/AMQueueImplP__0__AMSend__send(amId, dest, msg, len);
+      if (err != SUCCESS) {
+          ;
+          /*SerialAMQueueP.AMQueueImplP*/AMQueueImplP__0__current = 1;
+          /*SerialAMQueueP.AMQueueImplP*/AMQueueImplP__0__queue[clientId].msg = (void *)0;
+        }
+
+      return err;
+    }
+  else {
+      ;
+    }
+  return SUCCESS;
+}
+
+# 64 "/home/tinyos/local/src/tinyos-2.x/tos/interfaces/Send.nc"
+inline static error_t /*PrintfC.SerialAMSenderC.AMQueueEntryP*/AMQueueEntryP__0__Send__send(message_t * msg, uint8_t len){
+#line 64
+  unsigned char result;
+#line 64
+
+#line 64
+  result = /*SerialAMQueueP.AMQueueImplP*/AMQueueImplP__0__Send__send(0U, msg, len);
+#line 64
+
+#line 64
+  return result;
+#line 64
+}
+#line 64
+# 522 "/home/tinyos/local/src/tinyos-2.x/tos/lib/serial/SerialP.nc"
+static inline error_t SerialP__SendBytePacket__startSend(uint8_t b)
+#line 522
+{
+  bool not_busy = FALSE;
+
+#line 524
+  { __nesc_atomic_t __nesc_atomic = __nesc_atomic_start();
+#line 524
+    {
+      if (SerialP__txBuf[SerialP__TX_DATA_INDEX].state == SerialP__BUFFER_AVAILABLE) {
+          SerialP__txBuf[SerialP__TX_DATA_INDEX].state = SerialP__BUFFER_FILLING;
+          SerialP__txBuf[SerialP__TX_DATA_INDEX].buf = b;
+          not_busy = TRUE;
+        }
+    }
+#line 530
+    __nesc_atomic_end(__nesc_atomic); }
+  if (not_busy) {
+      SerialP__MaybeScheduleTx();
+      return SUCCESS;
+    }
+  return EBUSY;
+}
+
+# 51 "/home/tinyos/local/src/tinyos-2.x/tos/lib/serial/SendBytePacket.nc"
+inline static error_t /*SerialDispatcherC.SerialDispatcherP*/SerialDispatcherP__0__SendBytePacket__startSend(uint8_t first_byte){
+#line 51
+  unsigned char result;
+#line 51
+
+#line 51
+  result = SerialP__SendBytePacket__startSend(first_byte);
+#line 51
+
+#line 51
+  return result;
+#line 51
+}
+#line 51
+# 43 "/home/tinyos/local/src/tinyos-2.x/tos/lib/serial/SerialPacketInfoActiveMessageP.nc"
+static inline uint8_t SerialPacketInfoActiveMessageP__Info__dataLinkLength(message_t *msg, uint8_t upperLen)
+#line 43
+{
+  return upperLen + sizeof(serial_header_t );
+}
+
+# 350 "/home/tinyos/local/src/tinyos-2.x/tos/lib/serial/SerialDispatcherP.nc"
+static inline uint8_t /*SerialDispatcherC.SerialDispatcherP*/SerialDispatcherP__0__PacketInfo__default__dataLinkLength(uart_id_t id, message_t *msg, 
+uint8_t upperLen)
+#line 351
+{
+  return 0;
+}
+
+# 23 "/home/tinyos/local/src/tinyos-2.x/tos/lib/serial/SerialPacketInfo.nc"
+inline static uint8_t /*SerialDispatcherC.SerialDispatcherP*/SerialDispatcherP__0__PacketInfo__dataLinkLength(uart_id_t arg_0x407dbcf0, message_t *msg, uint8_t upperLen){
+#line 23
+  unsigned char result;
+#line 23
+
+#line 23
+  switch (arg_0x407dbcf0) {
+#line 23
+    case TOS_SERIAL_ACTIVE_MESSAGE_ID:
+#line 23
+      result = SerialPacketInfoActiveMessageP__Info__dataLinkLength(msg, upperLen);
+#line 23
+      break;
+#line 23
+    default:
+#line 23
+      result = /*SerialDispatcherC.SerialDispatcherP*/SerialDispatcherP__0__PacketInfo__default__dataLinkLength(arg_0x407dbcf0, msg, upperLen);
+#line 23
+      break;
+#line 23
+    }
+#line 23
+
+#line 23
+  return result;
+#line 23
+}
+#line 23
+# 40 "/home/tinyos/local/src/tinyos-2.x/tos/lib/serial/SerialPacketInfoActiveMessageP.nc"
+static inline uint8_t SerialPacketInfoActiveMessageP__Info__offset(void )
+#line 40
+{
+  return (uint8_t )(sizeof(message_header_t ) - sizeof(serial_header_t ));
+}
+
+# 347 "/home/tinyos/local/src/tinyos-2.x/tos/lib/serial/SerialDispatcherP.nc"
+static inline uint8_t /*SerialDispatcherC.SerialDispatcherP*/SerialDispatcherP__0__PacketInfo__default__offset(uart_id_t id)
+#line 347
+{
+  return 0;
+}
+
+# 15 "/home/tinyos/local/src/tinyos-2.x/tos/lib/serial/SerialPacketInfo.nc"
+inline static uint8_t /*SerialDispatcherC.SerialDispatcherP*/SerialDispatcherP__0__PacketInfo__offset(uart_id_t arg_0x407dbcf0){
+#line 15
+  unsigned char result;
+#line 15
+
+#line 15
+  switch (arg_0x407dbcf0) {
+#line 15
+    case TOS_SERIAL_ACTIVE_MESSAGE_ID:
+#line 15
+      result = SerialPacketInfoActiveMessageP__Info__offset();
+#line 15
+      break;
+#line 15
+    default:
+#line 15
+      result = /*SerialDispatcherC.SerialDispatcherP*/SerialDispatcherP__0__PacketInfo__default__offset(arg_0x407dbcf0);
+#line 15
+      break;
+#line 15
+    }
+#line 15
+
+#line 15
+  return result;
+#line 15
+}
+#line 15
+# 100 "/home/tinyos/local/src/tinyos-2.x/tos/lib/serial/SerialDispatcherP.nc"
+static inline error_t /*SerialDispatcherC.SerialDispatcherP*/SerialDispatcherP__0__Send__send(uint8_t id, message_t *msg, uint8_t len)
+#line 100
+{
+  if (/*SerialDispatcherC.SerialDispatcherP*/SerialDispatcherP__0__sendState != /*SerialDispatcherC.SerialDispatcherP*/SerialDispatcherP__0__SEND_STATE_IDLE) {
+      return EBUSY;
+    }
+
+  { __nesc_atomic_t __nesc_atomic = __nesc_atomic_start();
+#line 105
+    {
+      /*SerialDispatcherC.SerialDispatcherP*/SerialDispatcherP__0__sendIndex = /*SerialDispatcherC.SerialDispatcherP*/SerialDispatcherP__0__PacketInfo__offset(id);
+      if (/*SerialDispatcherC.SerialDispatcherP*/SerialDispatcherP__0__sendIndex > sizeof(message_header_t )) {
+          {
+            unsigned char __nesc_temp = 
+#line 108
+            ESIZE;
+
+            {
+#line 108
+              __nesc_atomic_end(__nesc_atomic); 
+#line 108
+              return __nesc_temp;
+            }
+          }
+        }
+#line 111
+      /*SerialDispatcherC.SerialDispatcherP*/SerialDispatcherP__0__sendError = SUCCESS;
+      /*SerialDispatcherC.SerialDispatcherP*/SerialDispatcherP__0__sendBuffer = (uint8_t *)msg;
+      /*SerialDispatcherC.SerialDispatcherP*/SerialDispatcherP__0__sendState = /*SerialDispatcherC.SerialDispatcherP*/SerialDispatcherP__0__SEND_STATE_DATA;
+      /*SerialDispatcherC.SerialDispatcherP*/SerialDispatcherP__0__sendId = id;
+      /*SerialDispatcherC.SerialDispatcherP*/SerialDispatcherP__0__sendCancelled = FALSE;
+
+
+
+
+
+
+      /*SerialDispatcherC.SerialDispatcherP*/SerialDispatcherP__0__sendLen = /*SerialDispatcherC.SerialDispatcherP*/SerialDispatcherP__0__PacketInfo__dataLinkLength(id, msg, len) + /*SerialDispatcherC.SerialDispatcherP*/SerialDispatcherP__0__sendIndex;
+    }
+#line 123
+    __nesc_atomic_end(__nesc_atomic); }
+  if (/*SerialDispatcherC.SerialDispatcherP*/SerialDispatcherP__0__SendBytePacket__startSend(id) == SUCCESS) {
+      return SUCCESS;
+    }
+  else {
+      /*SerialDispatcherC.SerialDispatcherP*/SerialDispatcherP__0__sendState = /*SerialDispatcherC.SerialDispatcherP*/SerialDispatcherP__0__SEND_STATE_IDLE;
+      return FAIL;
+    }
+}
+
+# 64 "/home/tinyos/local/src/tinyos-2.x/tos/interfaces/Send.nc"
+inline static error_t /*SerialActiveMessageC.AM*/SerialActiveMessageP__0__SubSend__send(message_t * msg, uint8_t len){
+#line 64
+  unsigned char result;
+#line 64
+
+#line 64
+  result = /*SerialDispatcherC.SerialDispatcherP*/SerialDispatcherP__0__Send__send(TOS_SERIAL_ACTIVE_MESSAGE_ID, msg, len);
+#line 64
+
+#line 64
+  return result;
+#line 64
+}
+#line 64
+# 56 "/home/tinyos/local/src/tinyos-2.x/tos/interfaces/TaskBasic.nc"
+inline static error_t SerialP__RunTx__postTask(void ){
+#line 56
+  unsigned char result;
+#line 56
+
+#line 56
+  result = SchedulerBasicP__TaskBasic__postTask(SerialP__RunTx);
+#line 56
+
+#line 56
+  return result;
+#line 56
+}
+#line 56
+# 93 "PacketParrotP.nc"
+static inline void PacketParrotP__LogRead__seekDone(error_t err)
+#line 93
+{
+  printf("wooo");
+  if (PacketParrotP__LogRead__read(&PacketParrotP__m_entry, sizeof(PacketParrotP__logentry_t )) != SUCCESS) {
+      printf("error");
+      printfflush();
+    }
+#line 98
+  ;
 }
 
 # 517 "/home/tinyos/local/src/tinyos-2.x/tos/chips/stm25p/Stm25pLogP.nc"
@@ -16537,9 +16546,9 @@ inline static void PacketParrotP__Leds__led0Off(void ){
 #line 50
 }
 #line 50
-# 176 "PacketParrotP.nc"
+# 183 "PacketParrotP.nc"
 static inline void PacketParrotP__LogWrite__eraseDone(error_t err)
-#line 176
+#line 183
 {
   if (err == SUCCESS) {
       PacketParrotP__m_busy = FALSE;
@@ -16594,10 +16603,10 @@ inline static void PacketParrotP__Leds__led2Off(void ){
 #line 83
 }
 #line 83
-# 200 "PacketParrotP.nc"
+# 207 "PacketParrotP.nc"
 static inline void PacketParrotP__LogWrite__appendDone(void *buf, storage_len_t len, 
 bool recordsLost, error_t err)
-#line 201
+#line 208
 {
   PacketParrotP__m_busy = FALSE;
   PacketParrotP__Leds__led2Off();
@@ -16630,9 +16639,9 @@ inline static void Stm25pLogP__Write__appendDone(uint8_t arg_0x40bc4870, void * 
 #line 68
 }
 #line 68
-# 209 "PacketParrotP.nc"
+# 216 "PacketParrotP.nc"
 static inline void PacketParrotP__LogWrite__syncDone(error_t err)
-#line 209
+#line 216
 {
 }
 
@@ -17431,9 +17440,9 @@ inline static void PacketParrotP__Leds__led2On(void ){
 #line 78
 }
 #line 78
-# 142 "PacketParrotP.nc"
+# 149 "PacketParrotP.nc"
 static inline void PacketParrotP__Timer0__fired(void )
-#line 142
+#line 149
 {
 
   PacketParrotP__Leds__led2On();
@@ -17530,9 +17539,9 @@ inline static error_t PacketParrotP__Sensor1__read(void ){
 #line 55
 }
 #line 55
-# 160 "PacketParrotP.nc"
+# 167 "PacketParrotP.nc"
 static inline void PacketParrotP__Timer1__fired(void )
-#line 160
+#line 167
 {
   PacketParrotP__Sensor1__read();
   PacketParrotP__Sensor2__read();
@@ -23646,14 +23655,12 @@ static void PacketParrotP__Notify__notify(button_state_t state)
 {
   if (state == BUTTON_PRESSED) {
       PacketParrotP__LogRead__seek(0);
-      printf("wooo");
-      if (PacketParrotP__LogRead__read(&PacketParrotP__m_entry, sizeof(PacketParrotP__logentry_t )) != SUCCESS) {
-          printf("error");
-          printfflush();
-        }
-#line 87
-      ;
     }
+
+
+
+
+
 
   PacketParrotP__seq = 0;
 }
@@ -23670,162 +23677,6 @@ static error_t Stm25pLogP__newRequest(uint8_t client)
   Stm25pLogP__m_log_state[client] = Stm25pLogP__m_req;
 
   return SUCCESS;
-}
-
-#line 118
-static error_t Stm25pLogP__Read__read(uint8_t id, void *buf, storage_len_t len)
-#line 118
-{
-
-  Stm25pLogP__m_req.req = Stm25pLogP__S_READ;
-  Stm25pLogP__m_req.buf = buf;
-  Stm25pLogP__m_req.len = len;
-  Stm25pLogP__m_len = len;
-  return Stm25pLogP__newRequest(id);
-}
-
-# 143 "/home/tinyos/local/src/tinyos-2.x/tos/lib/printf/PrintfP.nc"
-  int printfflush(void )
-#line 143
-{
-  { __nesc_atomic_t __nesc_atomic = __nesc_atomic_start();
-#line 144
-    {
-      if (PrintfP__state == PrintfP__S_FLUSHING) 
-        {
-          int __nesc_temp = 
-#line 146
-          SUCCESS;
-
-          {
-#line 146
-            __nesc_atomic_end(__nesc_atomic); 
-#line 146
-            return __nesc_temp;
-          }
-        }
-#line 147
-      if (PrintfP__Queue__empty()) 
-        {
-          int __nesc_temp = 
-#line 148
-          FAIL;
-
-          {
-#line 148
-            __nesc_atomic_end(__nesc_atomic); 
-#line 148
-            return __nesc_temp;
-          }
-        }
-#line 149
-      PrintfP__state = PrintfP__S_FLUSHING;
-    }
-#line 150
-    __nesc_atomic_end(__nesc_atomic); }
-  PrintfP__sendNext();
-  return SUCCESS;
-}
-
-#line 132
-static void PrintfP__sendNext(void )
-#line 132
-{
-  int i;
-  printf_msg_t *m = (printf_msg_t *)PrintfP__Packet__getPayload(&PrintfP__printfMsg, sizeof(printf_msg_t ));
-  uint16_t length_to_send = PrintfP__Queue__size() < sizeof(printf_msg_t ) ? PrintfP__Queue__size() : sizeof(printf_msg_t );
-
-#line 136
-  memset(m->buffer, 0, sizeof(printf_msg_t ));
-  for (i = 0; i < length_to_send; i++) 
-    __nesc_hton_uint8(m->buffer[i].data, PrintfP__Queue__dequeue());
-  if (PrintfP__AMSend__send(AM_BROADCAST_ADDR, &PrintfP__printfMsg, sizeof(printf_msg_t )) != SUCCESS) {
-    PrintfP__retrySend__postTask();
-    }
-}
-
-# 124 "/home/tinyos/local/src/tinyos-2.x/tos/lib/serial/SerialActiveMessageP.nc"
-static void */*SerialActiveMessageC.AM*/SerialActiveMessageP__0__Packet__getPayload(message_t *msg, uint8_t len)
-#line 124
-{
-  if (len > /*SerialActiveMessageC.AM*/SerialActiveMessageP__0__Packet__maxPayloadLength()) {
-      return (void *)0;
-    }
-  else {
-      return (void * )msg->data;
-    }
-}
-
-# 45 "/home/tinyos/local/src/tinyos-2.x/tos/system/AMQueueEntryP.nc"
-static error_t /*PrintfC.SerialAMSenderC.AMQueueEntryP*/AMQueueEntryP__0__AMSend__send(am_addr_t dest, 
-message_t *msg, 
-uint8_t len)
-#line 47
-{
-  /*PrintfC.SerialAMSenderC.AMQueueEntryP*/AMQueueEntryP__0__AMPacket__setDestination(msg, dest);
-  /*PrintfC.SerialAMSenderC.AMQueueEntryP*/AMQueueEntryP__0__AMPacket__setType(msg, 100);
-  return /*PrintfC.SerialAMSenderC.AMQueueEntryP*/AMQueueEntryP__0__Send__send(msg, len);
-}
-
-# 161 "/home/tinyos/local/src/tinyos-2.x/tos/lib/serial/SerialActiveMessageP.nc"
-static am_id_t /*SerialActiveMessageC.AM*/SerialActiveMessageP__0__AMPacket__type(message_t *amsg)
-#line 161
-{
-  serial_header_t *header = /*SerialActiveMessageC.AM*/SerialActiveMessageP__0__getHeader(amsg);
-
-#line 163
-  return __nesc_ntoh_uint8(header->type.data);
-}
-
-#line 137
-static am_addr_t /*SerialActiveMessageC.AM*/SerialActiveMessageP__0__AMPacket__destination(message_t *amsg)
-#line 137
-{
-  serial_header_t *header = /*SerialActiveMessageC.AM*/SerialActiveMessageP__0__getHeader(amsg);
-
-#line 139
-  return __nesc_ntoh_uint16(header->dest.data);
-}
-
-#line 57
-static error_t /*SerialActiveMessageC.AM*/SerialActiveMessageP__0__AMSend__send(am_id_t id, am_addr_t dest, 
-message_t *msg, 
-uint8_t len)
-#line 59
-{
-  serial_header_t *header = /*SerialActiveMessageC.AM*/SerialActiveMessageP__0__getHeader(msg);
-
-  if (len > /*SerialActiveMessageC.AM*/SerialActiveMessageP__0__Packet__maxPayloadLength()) {
-      return ESIZE;
-    }
-
-  __nesc_hton_uint16(header->dest.data, dest);
-
-
-
-
-
-  __nesc_hton_uint8(header->type.data, id);
-  __nesc_hton_uint8(header->length.data, len);
-
-  return /*SerialActiveMessageC.AM*/SerialActiveMessageP__0__SubSend__send(msg, len);
-}
-
-# 502 "/home/tinyos/local/src/tinyos-2.x/tos/lib/serial/SerialP.nc"
-static void SerialP__MaybeScheduleTx(void )
-#line 502
-{
-  { __nesc_atomic_t __nesc_atomic = __nesc_atomic_start();
-#line 503
-    {
-      if (SerialP__txPending == 0) {
-          if (SerialP__RunTx__postTask() == SUCCESS) {
-              SerialP__txPending = 1;
-            }
-        }
-    }
-#line 509
-    __nesc_atomic_end(__nesc_atomic); }
 }
 
 # 41 "/home/tinyos/local/src/tinyos-2.x/tos/chips/msp430/pins/Msp430InterruptC.nc"
@@ -24906,6 +24757,162 @@ static void Stm25pLogP__signalDone(uint8_t id, error_t error)
         Stm25pLogP__Write__syncDone(id, error);
       break;
     }
+}
+
+# 143 "/home/tinyos/local/src/tinyos-2.x/tos/lib/printf/PrintfP.nc"
+  int printfflush(void )
+#line 143
+{
+  { __nesc_atomic_t __nesc_atomic = __nesc_atomic_start();
+#line 144
+    {
+      if (PrintfP__state == PrintfP__S_FLUSHING) 
+        {
+          int __nesc_temp = 
+#line 146
+          SUCCESS;
+
+          {
+#line 146
+            __nesc_atomic_end(__nesc_atomic); 
+#line 146
+            return __nesc_temp;
+          }
+        }
+#line 147
+      if (PrintfP__Queue__empty()) 
+        {
+          int __nesc_temp = 
+#line 148
+          FAIL;
+
+          {
+#line 148
+            __nesc_atomic_end(__nesc_atomic); 
+#line 148
+            return __nesc_temp;
+          }
+        }
+#line 149
+      PrintfP__state = PrintfP__S_FLUSHING;
+    }
+#line 150
+    __nesc_atomic_end(__nesc_atomic); }
+  PrintfP__sendNext();
+  return SUCCESS;
+}
+
+#line 132
+static void PrintfP__sendNext(void )
+#line 132
+{
+  int i;
+  printf_msg_t *m = (printf_msg_t *)PrintfP__Packet__getPayload(&PrintfP__printfMsg, sizeof(printf_msg_t ));
+  uint16_t length_to_send = PrintfP__Queue__size() < sizeof(printf_msg_t ) ? PrintfP__Queue__size() : sizeof(printf_msg_t );
+
+#line 136
+  memset(m->buffer, 0, sizeof(printf_msg_t ));
+  for (i = 0; i < length_to_send; i++) 
+    __nesc_hton_uint8(m->buffer[i].data, PrintfP__Queue__dequeue());
+  if (PrintfP__AMSend__send(AM_BROADCAST_ADDR, &PrintfP__printfMsg, sizeof(printf_msg_t )) != SUCCESS) {
+    PrintfP__retrySend__postTask();
+    }
+}
+
+# 124 "/home/tinyos/local/src/tinyos-2.x/tos/lib/serial/SerialActiveMessageP.nc"
+static void */*SerialActiveMessageC.AM*/SerialActiveMessageP__0__Packet__getPayload(message_t *msg, uint8_t len)
+#line 124
+{
+  if (len > /*SerialActiveMessageC.AM*/SerialActiveMessageP__0__Packet__maxPayloadLength()) {
+      return (void *)0;
+    }
+  else {
+      return (void * )msg->data;
+    }
+}
+
+# 45 "/home/tinyos/local/src/tinyos-2.x/tos/system/AMQueueEntryP.nc"
+static error_t /*PrintfC.SerialAMSenderC.AMQueueEntryP*/AMQueueEntryP__0__AMSend__send(am_addr_t dest, 
+message_t *msg, 
+uint8_t len)
+#line 47
+{
+  /*PrintfC.SerialAMSenderC.AMQueueEntryP*/AMQueueEntryP__0__AMPacket__setDestination(msg, dest);
+  /*PrintfC.SerialAMSenderC.AMQueueEntryP*/AMQueueEntryP__0__AMPacket__setType(msg, 100);
+  return /*PrintfC.SerialAMSenderC.AMQueueEntryP*/AMQueueEntryP__0__Send__send(msg, len);
+}
+
+# 161 "/home/tinyos/local/src/tinyos-2.x/tos/lib/serial/SerialActiveMessageP.nc"
+static am_id_t /*SerialActiveMessageC.AM*/SerialActiveMessageP__0__AMPacket__type(message_t *amsg)
+#line 161
+{
+  serial_header_t *header = /*SerialActiveMessageC.AM*/SerialActiveMessageP__0__getHeader(amsg);
+
+#line 163
+  return __nesc_ntoh_uint8(header->type.data);
+}
+
+#line 137
+static am_addr_t /*SerialActiveMessageC.AM*/SerialActiveMessageP__0__AMPacket__destination(message_t *amsg)
+#line 137
+{
+  serial_header_t *header = /*SerialActiveMessageC.AM*/SerialActiveMessageP__0__getHeader(amsg);
+
+#line 139
+  return __nesc_ntoh_uint16(header->dest.data);
+}
+
+#line 57
+static error_t /*SerialActiveMessageC.AM*/SerialActiveMessageP__0__AMSend__send(am_id_t id, am_addr_t dest, 
+message_t *msg, 
+uint8_t len)
+#line 59
+{
+  serial_header_t *header = /*SerialActiveMessageC.AM*/SerialActiveMessageP__0__getHeader(msg);
+
+  if (len > /*SerialActiveMessageC.AM*/SerialActiveMessageP__0__Packet__maxPayloadLength()) {
+      return ESIZE;
+    }
+
+  __nesc_hton_uint16(header->dest.data, dest);
+
+
+
+
+
+  __nesc_hton_uint8(header->type.data, id);
+  __nesc_hton_uint8(header->length.data, len);
+
+  return /*SerialActiveMessageC.AM*/SerialActiveMessageP__0__SubSend__send(msg, len);
+}
+
+# 502 "/home/tinyos/local/src/tinyos-2.x/tos/lib/serial/SerialP.nc"
+static void SerialP__MaybeScheduleTx(void )
+#line 502
+{
+  { __nesc_atomic_t __nesc_atomic = __nesc_atomic_start();
+#line 503
+    {
+      if (SerialP__txPending == 0) {
+          if (SerialP__RunTx__postTask() == SUCCESS) {
+              SerialP__txPending = 1;
+            }
+        }
+    }
+#line 509
+    __nesc_atomic_end(__nesc_atomic); }
+}
+
+# 118 "/home/tinyos/local/src/tinyos-2.x/tos/chips/stm25p/Stm25pLogP.nc"
+static error_t Stm25pLogP__Read__read(uint8_t id, void *buf, storage_len_t len)
+#line 118
+{
+
+  Stm25pLogP__m_req.req = Stm25pLogP__S_READ;
+  Stm25pLogP__m_req.buf = buf;
+  Stm25pLogP__m_req.len = len;
+  Stm25pLogP__m_len = len;
+  return Stm25pLogP__newRequest(id);
 }
 
 #line 207

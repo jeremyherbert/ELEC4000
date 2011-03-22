@@ -1,11 +1,11 @@
 <tos_image>
   <ident>
-    <uidhash>06A892FDL</uidhash>
+    <uidhash>F0EFB9CBL</uidhash>
     <hostname>lenny</hostname>
     <username>tinyos</username>
     <appname>PacketParrotC</appname>
     <userhash>4CEE8E6FL</userhash>
-    <timestamp>4D7EEC8FL</timestamp>
+    <timestamp>4D7F32FAL</timestamp>
     <deluge_support>no</deluge_support>
     <platform>telosb</platform>
   </ident>

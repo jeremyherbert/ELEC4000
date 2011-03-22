@@ -80,16 +80,23 @@ implementation {
   event void Notify.notify (button_state_t state) {
     if ( state == BUTTON_PRESSED) {
       call LogRead.seek(0);
-    printf("wooo");
-      if (call LogRead.read(&m_entry, sizeof(logentry_t)) != SUCCESS) {
-        printf("error");
-        printfflush();
-      };
+    //printf("wooo");
+    //  if (call LogRead.read(&m_entry, sizeof(logentry_t)) != SUCCESS) {
+    //    printf("error");
+    //    printfflush();
+     // };
       //call AMControl.start();
     }
     seq = 0;
   }
 
+  event void LogRead.seekDone(error_t err) {
+    printf("wooo");
+    if (call LogRead.read(&m_entry, sizeof(logentry_t)) != SUCCESS) {
+        printf("error");
+        printfflush();
+    };
+  }
 
   /*event void AMControl.startDone(error_t err) {
     if (err == SUCCESS) {
@@ -203,8 +210,8 @@ ll Leds.led2On();
     call Leds.led2Off();
   }
 
-  event void LogRead.seekDone(error_t err) {
-  }
+//  event void LogRead.seekDone(error_t err) {
+//  }
 
   event void LogWrite.syncDone(error_t err) {
   }
