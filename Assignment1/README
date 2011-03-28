@@ -1,0 +1,63 @@
+ok, so
+
+atm, have it set up so each sender node sends a packet every set amount of time over 
+the AM Channel. The interceptor node takes each message, strips out the rssi, the 
+sequence number, and the node ID, and then sends this data over the UDP channel.
+
+********Sender Node*************
+to compile the sensor nodes, use the following command
+
+make telosb install,33 bsl,/dev/ttyUSB0
+make telosb install,77 bsl,/dev/ttyUSB1
+
+Note: for testing and leetnes spurposes, you can use 33 for one node, and any other number
+for the second node.
+
+A node running 33 will blink red every time it sends a packet. Any other node will blink green.
+
+To increase the packet send speed, modify the applicationdefinitions.h header file. (Not sure what the fastest reliable speed is, considering that the interceptor node will be taking in packets from both sources and sending each one on the the UPD.) havnt tested, currently 250 ms.
+
+Message struct is defined in RssiMessage.h
+
+
+******** interceptor Node ************
+to compile the sensor node, use the following command
+make telosb blip install bsl,/dev/ttyUSB2
+
+Note: as it stands, if a sender nodes ID is set to 33, the interceptor will blink red every time it recieves a packet, otherwise it will blink green.
+
+If the interceptor receivs an incorrect or curropted packet, it will blink blue.
+
+******** Current implementation *********
+Now, for the interceptor implementation
+
+What it does is every time it recieves a packet, it strait away strips everything it needs and sends that packet on. Another way of doing this would be to have a timer in the interceptor, and then transfer each interval.
+this could be used to make movng averages or any computation on data before sending.
+
+Also, what could be added would be semaphore type thing, so that all messages received while in the middle of sending a message would be ignored, or stored to send later. Sending later could lead to congestion, and if there is lots of backed up messages increasing, then the system would be unable to react to new changes. Ignoring messages in this would probably be better. This is only for the case where the interceptor is receiving messages faster than it can process them, at 250ms for each sensor node, this has not occured.
+
+interceptor node uses port 7001 for UDP connection
+
+
+********** basestation *****************
+Install IPBasestation onto the 4th node and set up the edge router
+
+
+********** how to test *******************
+run
+nc6 -u fec0::1 7001
+
+Now the interceptor node doesnt know the route address to the basestation, so you have to press enter, or type any character from the nc session, and then you should start to see the data coming through.
+
+
+*********** What still needs to be done ***********
+
+There is still some random errors converting and concatinating strings to send over the UDP. 
+Check send_UPD_Message for the current implementation. These occure due to string lengths and 
+such, C is pretty gay.
+
+test sending speeds to increase reaction time, without creating conjestion errors
+
+taking the output and making it look pretty.
+
+

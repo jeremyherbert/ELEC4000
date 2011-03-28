@@ -1,0 +1,13 @@
+#include <6lowpan.h>
+#include "RssiDemoMessages.h"
+#include "message.h"
+
+
+configuration RSSI_AssP {
+
+} implementation {
+  components MainC, LedsC;
+  components UDPEchoP;
+
+  RSSI_AssP.Boot -> MainC;
+  RSSI_AssP.Leds -> LedsC;

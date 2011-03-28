@@ -1,0 +1,43 @@
+#include <6lowpan.h>
+#include "RssiDemoMessages.h"
+#include "message.h"
+#include <Timer.h>
+#include "BlinkToRadio.h"
+
+
+configuration RSSI_ForwarderC {
+
+} implementation {
+  components MainC, LedsC;
+  components RSSI_AssP as App;
+
+  App.Boot -> MainC;
+  App.Leds -> LedsC;
+
+  components new TimerMilliC();
+
+  components new UdpSocketC() as Status;
+
+  RApp.Status -> Status;
+
+  App.StatusTimer -> TimerMilliC;
+
+  components UdpC;
+ 
+  components UDPShellC;
+
+
+	components ActiveMessageC;
+	components new AMSenderC(AM_BLINKTORADIO);
+	components new AMReceiverC(AM_BLINKTORADIO);
+
+	App.Boot -> MainC;
+	App.Leds -> LedsC;
+	App.Timer0 -> Timer0;
+	App.Packet -> AMSenderC;
+	App.AMPacket -> AMSenderC;
+  	App.AMSend -> AMSenderC;
+	App.AMControl -> ActiveMessageC;
+	App.Receive -> AMReceiverC;
+
+}

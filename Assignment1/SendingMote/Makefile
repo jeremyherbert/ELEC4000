@@ -1,0 +1,4 @@
+COMPONENT=SendingMoteAppC
+CFLAGS += -DCC2420_DEF_CHANNEL=17
+
+include $(MAKERULES)
