@@ -3,6 +3,7 @@
 #include <IPDispatch.h>
 #include <lib6lowpan.h>
 #include <ip.h>
+#include <string.h>
 
 #include "UDPReport.h"
 #include "PrintfUART.h"
@@ -96,6 +97,28 @@ event void RadioControl.startDone(error_t e) {}
 
 */
 void send_UPD_Message(RssiMsg* rssiMsg, uint16_t rssibase){
+        char temp[10] = "";
+        char message[100] = "";
+
+        strcat(message, "---------------\r\nNode ID: ");
+        itoa(rssiMsg->NODE_ID, temp, 10);
+        strcat(message, temp);
+        
+        temp[0] = '\0';
+        strcat(message, "\r\nSeq num: ");
+        itoa(rssiMsg->seq_num, temp, 10);
+        strcat(message, temp);
+
+        temp[0] = '\0';
+        strcat(message, "\r\nSig: ");
+        itoa(rssibase, temp, 10);
+        strcat(message, temp);
+
+        strcat(message, "\r\n");
+        
+        call Status.sendto(&route_dest, &message, strlen(message));
+
+/*
 	char header[18] = "---------------\r\n";	
 	char n_mess[10] = "Node ID :";
 	char nodeid[3];	
@@ -135,8 +158,7 @@ void send_UPD_Message(RssiMsg* rssiMsg, uint16_t rssibase){
 	call Status.sendto(&route_dest, test1, sizeof(test1));
 	call Status.sendto(&route_dest, test2, sizeof(test2));
 	call Status.sendto(&route_dest, test3, sizeof(test3));
-
-
+*/
 }
 
 
