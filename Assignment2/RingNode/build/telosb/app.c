@@ -935,29 +935,32 @@ static inline void TOSH_MAKE_FLASH_CS_OUTPUT()  ;
 static inline void TOSH_SET_FLASH_HOLD_PIN()  ;
 #line 89
 static inline void TOSH_MAKE_FLASH_HOLD_OUTPUT()  ;
-# 7 "Fireworks.h"
-#line 4
-typedef nx_struct fireworks_update_msg {
-  nx_uint16_t id;
-  nx_uint16_t node_count;
-} __attribute__((packed)) fireworks_update_msg;
-
-
-
-#line 9
-typedef nx_struct fireworks_node_msg {
-  nx_uint16_t real_node_id;
-} __attribute__((packed)) fireworks_node_msg;
-
-
-
+# 4 "Fireworks.h"
 enum __nesc_unnamed4260 {
-  AM_FIREWORKS_MSG = 33
+  AM_FIREWORKS_MSG = 10
 };
 
 enum __nesc_unnamed4261 {
   LED_PERIOD = 1000
 };
+
+
+
+
+
+#line 12
+typedef nx_struct fireworks_update_msg {
+  nx_uint16_t id;
+  nx_uint16_t node_count;
+  nx_uint16_t local_id;
+} __attribute__((packed)) fireworks_update_msg;
+
+
+
+#line 18
+typedef nx_struct fireworks_node_msg {
+  nx_uint16_t real_node_id;
+} __attribute__((packed)) fireworks_node_msg;
 # 29 "/home/tinyos/local/src/tinyos-2.x/tos/lib/timer/Timer.h"
 typedef struct __nesc_unnamed4262 {
 #line 29
@@ -2680,25 +2683,10 @@ static void /*HplMsp430GeneralIOC.P54*/HplMsp430GeneralIOP__36__IO__set(void );
 
 
 static void /*HplMsp430GeneralIOC.P54*/HplMsp430GeneralIOP__36__IO__clr(void );
-
-
-
-
-static void /*HplMsp430GeneralIOC.P55*/HplMsp430GeneralIOP__37__IO__toggle(void );
 #line 71
 static void /*HplMsp430GeneralIOC.P55*/HplMsp430GeneralIOP__37__IO__makeOutput(void );
 #line 34
 static void /*HplMsp430GeneralIOC.P55*/HplMsp430GeneralIOP__37__IO__set(void );
-
-
-
-
-
-
-
-
-
-static void /*HplMsp430GeneralIOC.P56*/HplMsp430GeneralIOP__38__IO__toggle(void );
 #line 71
 static void /*HplMsp430GeneralIOC.P56*/HplMsp430GeneralIOP__38__IO__makeOutput(void );
 #line 34
@@ -3103,10 +3091,6 @@ static void HplMsp430Usart0P__Usart__disableSpi(void );
 static error_t LedsP__Init__init(void );
 # 50 "/home/tinyos/local/src/tinyos-2.x/tos/interfaces/Leds.nc"
 static void LedsP__Leds__led0Off(void );
-#line 72
-static void LedsP__Leds__led1Toggle(void );
-#line 89
-static void LedsP__Leds__led2Toggle(void );
 #line 45
 static void LedsP__Leds__led0On(void );
 # 35 "/home/tinyos/local/src/tinyos-2.x/tos/interfaces/GeneralIO.nc"
@@ -3114,7 +3098,7 @@ static void /*PlatformLedsC.Led0Impl*/Msp430GpioC__7__GeneralIO__makeOutput(void
 #line 29
 static void /*PlatformLedsC.Led0Impl*/Msp430GpioC__7__GeneralIO__set(void );
 static void /*PlatformLedsC.Led0Impl*/Msp430GpioC__7__GeneralIO__clr(void );
-static void /*PlatformLedsC.Led1Impl*/Msp430GpioC__8__GeneralIO__toggle(void );
+
 
 
 
@@ -3122,7 +3106,7 @@ static void /*PlatformLedsC.Led1Impl*/Msp430GpioC__8__GeneralIO__makeOutput(void
 #line 29
 static void /*PlatformLedsC.Led1Impl*/Msp430GpioC__8__GeneralIO__set(void );
 
-static void /*PlatformLedsC.Led2Impl*/Msp430GpioC__9__GeneralIO__toggle(void );
+
 
 
 
@@ -3673,7 +3657,7 @@ message_t * msg);
 # 59 "/home/tinyos/local/src/tinyos-2.x/tos/interfaces/SendNotifier.nc"
 static void CC2420ActiveMessageP__SendNotifier__default__aboutToSend(
 # 44 "/home/tinyos/local/src/tinyos-2.x/tos/chips/cc2420/CC2420ActiveMessageP.nc"
-am_id_t arg_0x41040e20, 
+am_id_t arg_0x4103fe20, 
 # 59 "/home/tinyos/local/src/tinyos-2.x/tos/interfaces/SendNotifier.nc"
 am_addr_t dest, 
 #line 57
@@ -5628,7 +5612,7 @@ static inline void /*HplMsp430GeneralIOC.P54*/HplMsp430GeneralIOP__36__IO__makeO
 #line 45
 static inline void /*HplMsp430GeneralIOC.P55*/HplMsp430GeneralIOP__37__IO__set(void );
 
-static void /*HplMsp430GeneralIOC.P55*/HplMsp430GeneralIOP__37__IO__toggle(void );
+
 
 
 
@@ -5637,7 +5621,7 @@ static inline void /*HplMsp430GeneralIOC.P55*/HplMsp430GeneralIOP__37__IO__makeO
 #line 45
 static inline void /*HplMsp430GeneralIOC.P56*/HplMsp430GeneralIOP__38__IO__set(void );
 
-static inline void /*HplMsp430GeneralIOC.P56*/HplMsp430GeneralIOP__38__IO__toggle(void );
+
 
 
 
@@ -6403,7 +6387,7 @@ static void LedsP__Led0__makeOutput(void );
 #line 29
 static void LedsP__Led0__set(void );
 static void LedsP__Led0__clr(void );
-static void LedsP__Led1__toggle(void );
+
 
 
 
@@ -6411,7 +6395,7 @@ static void LedsP__Led1__makeOutput(void );
 #line 29
 static void LedsP__Led1__set(void );
 
-static void LedsP__Led2__toggle(void );
+
 
 
 
@@ -6427,10 +6411,6 @@ static inline void LedsP__Leds__led0On(void );
 
 
 static inline void LedsP__Leds__led0Off(void );
-#line 88
-static inline void LedsP__Leds__led1Toggle(void );
-#line 103
-static inline void LedsP__Leds__led2Toggle(void );
 # 71 "/home/tinyos/local/src/tinyos-2.x/tos/chips/msp430/pins/HplMsp430GeneralIO.nc"
 static void /*PlatformLedsC.Led0Impl*/Msp430GpioC__7__HplGeneralIO__makeOutput(void );
 #line 34
@@ -6448,30 +6428,26 @@ static inline void /*PlatformLedsC.Led0Impl*/Msp430GpioC__7__GeneralIO__clr(void
 
 
 static inline void /*PlatformLedsC.Led0Impl*/Msp430GpioC__7__GeneralIO__makeOutput(void );
-# 44 "/home/tinyos/local/src/tinyos-2.x/tos/chips/msp430/pins/HplMsp430GeneralIO.nc"
-static void /*PlatformLedsC.Led1Impl*/Msp430GpioC__8__HplGeneralIO__toggle(void );
-#line 71
+# 71 "/home/tinyos/local/src/tinyos-2.x/tos/chips/msp430/pins/HplMsp430GeneralIO.nc"
 static void /*PlatformLedsC.Led1Impl*/Msp430GpioC__8__HplGeneralIO__makeOutput(void );
 #line 34
 static void /*PlatformLedsC.Led1Impl*/Msp430GpioC__8__HplGeneralIO__set(void );
 # 37 "/home/tinyos/local/src/tinyos-2.x/tos/chips/msp430/pins/Msp430GpioC.nc"
 static inline void /*PlatformLedsC.Led1Impl*/Msp430GpioC__8__GeneralIO__set(void );
 
-static inline void /*PlatformLedsC.Led1Impl*/Msp430GpioC__8__GeneralIO__toggle(void );
+
 
 
 
 static inline void /*PlatformLedsC.Led1Impl*/Msp430GpioC__8__GeneralIO__makeOutput(void );
-# 44 "/home/tinyos/local/src/tinyos-2.x/tos/chips/msp430/pins/HplMsp430GeneralIO.nc"
-static void /*PlatformLedsC.Led2Impl*/Msp430GpioC__9__HplGeneralIO__toggle(void );
-#line 71
+# 71 "/home/tinyos/local/src/tinyos-2.x/tos/chips/msp430/pins/HplMsp430GeneralIO.nc"
 static void /*PlatformLedsC.Led2Impl*/Msp430GpioC__9__HplGeneralIO__makeOutput(void );
 #line 34
 static void /*PlatformLedsC.Led2Impl*/Msp430GpioC__9__HplGeneralIO__set(void );
 # 37 "/home/tinyos/local/src/tinyos-2.x/tos/chips/msp430/pins/Msp430GpioC.nc"
 static inline void /*PlatformLedsC.Led2Impl*/Msp430GpioC__9__GeneralIO__set(void );
 
-static inline void /*PlatformLedsC.Led2Impl*/Msp430GpioC__9__GeneralIO__toggle(void );
+
 
 
 
@@ -7876,7 +7852,7 @@ message_t * msg);
 # 59 "/home/tinyos/local/src/tinyos-2.x/tos/interfaces/SendNotifier.nc"
 static void CC2420ActiveMessageP__SendNotifier__aboutToSend(
 # 44 "/home/tinyos/local/src/tinyos-2.x/tos/chips/cc2420/CC2420ActiveMessageP.nc"
-am_id_t arg_0x41040e20, 
+am_id_t arg_0x4103fe20, 
 # 59 "/home/tinyos/local/src/tinyos-2.x/tos/interfaces/SendNotifier.nc"
 am_addr_t dest, 
 #line 57
@@ -8315,13 +8291,9 @@ static error_t FireworksC__RadioControl__start(void );
 static void FireworksC__LedTimer__startOneShot(uint32_t dt);
 # 50 "/home/tinyos/local/src/tinyos-2.x/tos/interfaces/Leds.nc"
 static void FireworksC__Leds__led0Off(void );
-#line 72
-static void FireworksC__Leds__led1Toggle(void );
-#line 89
-static void FireworksC__Leds__led2Toggle(void );
 #line 45
 static void FireworksC__Leds__led0On(void );
-# 24 "FireworksC.nc"
+# 25 "FireworksC.nc"
 message_t FireworksC__msg;
 bool FireworksC__locked = FALSE;
 uint16_t FireworksC__LOCAL_ID;
@@ -8332,36 +8304,26 @@ uint16_t FireworksC__nodeList[100];
 bool FireworksC__running = FALSE;
 
 
+
 static void FireworksC__liveNode(void );
-#line 46
+#line 49
 static inline void FireworksC__Boot__booted(void );
-#line 66
+#line 84
+static void FireworksC__updateNodes(uint16_t realID, uint16_t local_id);
+#line 101
 static inline uint32_t FireworksC__getNextOnTime(uint32_t currTime);
-
-
-
-
-
+#line 114
 static void FireworksC__LedTimer__fired(void );
-#line 99
-static inline void FireworksC__updateNodes(uint16_t realID);
-
-
-
-
-
-
-
-
-
-
+#line 155
 static inline void FireworksC__baseUpdate(message_t *msgPtr, void *payload, uint8_t len);
-#line 127
+#line 179
 static inline void FireworksC__nodeUpdate(message_t *msgPtr, void *payload, uint8_t len);
-#line 150
+#line 211
 static inline message_t *FireworksC__Receive__receive(message_t *msgPtr, void *payload, uint8_t len);
-#line 166
+#line 224
 static inline void FireworksC__AMSend__sendDone(message_t *ptr, error_t success);
+
+
 
 
 
@@ -13162,9 +13124,9 @@ static inline void CC2420ActiveMessageP__SendNotifier__default__aboutToSend(am_i
 }
 
 # 59 "/home/tinyos/local/src/tinyos-2.x/tos/interfaces/SendNotifier.nc"
-inline static void CC2420ActiveMessageP__SendNotifier__aboutToSend(am_id_t arg_0x41040e20, am_addr_t dest, message_t * msg){
+inline static void CC2420ActiveMessageP__SendNotifier__aboutToSend(am_id_t arg_0x4103fe20, am_addr_t dest, message_t * msg){
 #line 59
-    CC2420ActiveMessageP__SendNotifier__default__aboutToSend(arg_0x41040e20, dest, msg);
+    CC2420ActiveMessageP__SendNotifier__default__aboutToSend(arg_0x4103fe20, dest, msg);
 #line 59
 }
 #line 59
@@ -14272,6 +14234,21 @@ inline static error_t /*HilTimerMilliC.VirtualizeTimerC*/VirtualizeTimerC__0__up
 #line 56
 }
 #line 56
+# 69 "/home/tinyos/local/src/tinyos-2.x/tos/interfaces/AMSend.nc"
+inline static error_t FireworksC__AMSend__send(am_addr_t addr, message_t * msg, uint8_t len){
+#line 69
+  unsigned char result;
+#line 69
+
+#line 69
+  result = CC2420ActiveMessageP__AMSend__send(AM_FIREWORKS_MSG, addr, msg, len);
+#line 69
+
+#line 69
+  return result;
+#line 69
+}
+#line 69
 # 53 "/home/tinyos/local/src/tinyos-2.x/tos/lib/timer/Counter.nc"
 inline static /*HilTimerMilliC.CounterToLocalTimeC*/CounterToLocalTimeC__1__Counter__size_type /*HilTimerMilliC.CounterToLocalTimeC*/CounterToLocalTimeC__1__Counter__get(void ){
 #line 53
@@ -14351,14 +14328,21 @@ inline static error_t FireworksC__GlobalTime__getGlobalTime(uint32_t *time){
 #line 38
 }
 #line 38
-# 66 "FireworksC.nc"
+# 101 "FireworksC.nc"
 static inline uint32_t FireworksC__getNextOnTime(uint32_t currTime)
-#line 66
+#line 101
 {
   uint32_t lapTime = currTime % (LED_PERIOD * FireworksC__NODE_COUNT);
 
-#line 68
-  return LED_PERIOD * FireworksC__NODE_COUNT - lapTime + LED_PERIOD * FireworksC__LOCAL_ID;
+#line 103
+  if (lapTime > LED_PERIOD) {
+      return LED_PERIOD * FireworksC__NODE_COUNT - lapTime + LED_PERIOD * FireworksC__LOCAL_ID;
+    }
+  else 
+#line 105
+    {
+      return LED_PERIOD * FireworksC__LOCAL_ID;
+    }
 }
 
 # 128 "/home/tinyos/local/src/tinyos-2.x/tos/lib/timer/VirtualizeTimerC.nc"
@@ -14647,25 +14631,28 @@ inline static bool FireworksC__PacketTimeStamp__isValid(message_t * msg){
 #line 38
 }
 #line 38
-# 127 "FireworksC.nc"
+# 179 "FireworksC.nc"
 static inline void FireworksC__nodeUpdate(message_t *msgPtr, void *payload, uint8_t len)
-#line 127
+#line 179
 {
 
   uint32_t rxTimestamp;
   uint16_t to_id;
+  fireworks_update_msg *fum;
 
-#line 131
-  if (!FireworksC__locked && FireworksC__PacketTimeStamp__isValid(msgPtr)) {
-      fireworks_update_msg *fum = (fireworks_update_msg *)FireworksC__Packet__getPayload(msgPtr, 
+  if (FireworksC__PacketTimeStamp__isValid(msgPtr)) {
+
+      fum = (fireworks_update_msg *)FireworksC__Packet__getPayload(msgPtr, 
       sizeof(fireworks_update_msg ));
 
-#line 134
       to_id = __nesc_ntoh_uint16(fum->id.data);
       if (to_id == TOS_NODE_ID) {
-          FireworksC__LOCAL_ID = __nesc_ntoh_uint16(fum->node_count.data);
+          FireworksC__LOCAL_ID = __nesc_ntoh_uint16(fum->local_id.data);
         }
       FireworksC__NODE_COUNT = __nesc_ntoh_uint16(fum->node_count.data);
+
+
+
 
 
       rxTimestamp = FireworksC__PacketTimeStamp__timestamp(msgPtr);
@@ -14675,160 +14662,48 @@ static inline void FireworksC__nodeUpdate(message_t *msgPtr, void *payload, uint
     }
 }
 
-# 44 "/home/tinyos/local/src/tinyos-2.x/tos/chips/msp430/pins/HplMsp430GeneralIO.nc"
-inline static void /*PlatformLedsC.Led1Impl*/Msp430GpioC__8__HplGeneralIO__toggle(void ){
-#line 44
-  /*HplMsp430GeneralIOC.P55*/HplMsp430GeneralIOP__37__IO__toggle();
-#line 44
-}
-#line 44
-# 39 "/home/tinyos/local/src/tinyos-2.x/tos/chips/msp430/pins/Msp430GpioC.nc"
-static inline void /*PlatformLedsC.Led1Impl*/Msp430GpioC__8__GeneralIO__toggle(void )
-#line 39
-{
-#line 39
-  /*PlatformLedsC.Led1Impl*/Msp430GpioC__8__HplGeneralIO__toggle();
-}
-
-# 31 "/home/tinyos/local/src/tinyos-2.x/tos/interfaces/GeneralIO.nc"
-inline static void LedsP__Led1__toggle(void ){
-#line 31
-  /*PlatformLedsC.Led1Impl*/Msp430GpioC__8__GeneralIO__toggle();
-#line 31
-}
-#line 31
-# 88 "/home/tinyos/local/src/tinyos-2.x/tos/system/LedsP.nc"
-static inline void LedsP__Leds__led1Toggle(void )
-#line 88
-{
-  LedsP__Led1__toggle();
-  ;
-#line 90
-  ;
-}
-
-# 72 "/home/tinyos/local/src/tinyos-2.x/tos/interfaces/Leds.nc"
-inline static void FireworksC__Leds__led1Toggle(void ){
-#line 72
-  LedsP__Leds__led1Toggle();
-#line 72
-}
-#line 72
-# 69 "/home/tinyos/local/src/tinyos-2.x/tos/interfaces/AMSend.nc"
-inline static error_t FireworksC__AMSend__send(am_addr_t addr, message_t * msg, uint8_t len){
-#line 69
-  unsigned char result;
-#line 69
-
-#line 69
-  result = CC2420ActiveMessageP__AMSend__send(AM_FIREWORKS_MSG + 1, addr, msg, len);
-#line 69
-
-#line 69
-  return result;
-#line 69
-}
-#line 69
-# 99 "FireworksC.nc"
-static inline void FireworksC__updateNodes(uint16_t realID)
-#line 99
-{
-  fireworks_update_msg *fum = (fireworks_update_msg *)FireworksC__Packet__getPayload(&FireworksC__msg, 
-  sizeof(fireworks_update_msg ));
-
-  __nesc_hton_uint16(fum->id.data, realID);
-  __nesc_hton_uint16(fum->node_count.data, FireworksC__NODE_COUNT);
-
-  FireworksC__AMSend__send(AM_FIREWORKS_MSG, &FireworksC__msg, sizeof(fireworks_update_msg ));
-}
-
-
+#line 155
 static inline void FireworksC__baseUpdate(message_t *msgPtr, void *payload, uint8_t len)
-#line 110
+#line 155
 {
+
 
   fireworks_node_msg *fnm = (fireworks_node_msg *)payload;
   uint16_t realID = __nesc_ntoh_uint16(fnm->real_node_id.data);
 
   if (FireworksC__nodeList[realID] == 0) {
       FireworksC__nodeList[realID] = FireworksC__NODE_COUNT;
-      FireworksC__updateNodes(realID);
       FireworksC__NODE_COUNT++;
     }
+
+
+
+  FireworksC__updateNodes(realID, FireworksC__nodeList[realID]);
 
   if (FireworksC__NODE_COUNT > 1) {
       FireworksC__running = TRUE;
     }
 }
 
-# 47 "/home/tinyos/local/src/tinyos-2.x/tos/chips/msp430/pins/HplMsp430GeneralIOP.nc"
-static inline void /*HplMsp430GeneralIOC.P56*/HplMsp430GeneralIOP__38__IO__toggle(void )
-#line 47
-{
-#line 47
-  { __nesc_atomic_t __nesc_atomic = __nesc_atomic_start();
-#line 47
-    * (volatile uint8_t * )49U ^= 0x01 << 6;
-#line 47
-    __nesc_atomic_end(__nesc_atomic); }
-}
-
-# 44 "/home/tinyos/local/src/tinyos-2.x/tos/chips/msp430/pins/HplMsp430GeneralIO.nc"
-inline static void /*PlatformLedsC.Led2Impl*/Msp430GpioC__9__HplGeneralIO__toggle(void ){
-#line 44
-  /*HplMsp430GeneralIOC.P56*/HplMsp430GeneralIOP__38__IO__toggle();
-#line 44
-}
-#line 44
-# 39 "/home/tinyos/local/src/tinyos-2.x/tos/chips/msp430/pins/Msp430GpioC.nc"
-static inline void /*PlatformLedsC.Led2Impl*/Msp430GpioC__9__GeneralIO__toggle(void )
-#line 39
-{
-#line 39
-  /*PlatformLedsC.Led2Impl*/Msp430GpioC__9__HplGeneralIO__toggle();
-}
-
-# 31 "/home/tinyos/local/src/tinyos-2.x/tos/interfaces/GeneralIO.nc"
-inline static void LedsP__Led2__toggle(void ){
-#line 31
-  /*PlatformLedsC.Led2Impl*/Msp430GpioC__9__GeneralIO__toggle();
-#line 31
-}
-#line 31
-# 103 "/home/tinyos/local/src/tinyos-2.x/tos/system/LedsP.nc"
-static inline void LedsP__Leds__led2Toggle(void )
-#line 103
-{
-  LedsP__Led2__toggle();
-  ;
-#line 105
-  ;
-}
-
-# 89 "/home/tinyos/local/src/tinyos-2.x/tos/interfaces/Leds.nc"
-inline static void FireworksC__Leds__led2Toggle(void ){
-#line 89
-  LedsP__Leds__led2Toggle();
-#line 89
-}
-#line 89
-# 150 "FireworksC.nc"
+#line 211
 static inline message_t *FireworksC__Receive__receive(message_t *msgPtr, void *payload, uint8_t len)
 {
-  FireworksC__Leds__led2Toggle();
 
   if (FireworksC__isBaseNode == TRUE) {
-      FireworksC__Leds__led1Toggle();
-      FireworksC__baseUpdate(msgPtr, payload, len);
+      if (len == sizeof(fireworks_node_msg )) {
+#line 215
+        FireworksC__baseUpdate(msgPtr, payload, len);
+        }
     }
   else 
-#line 157
+#line 216
     {
-      FireworksC__Leds__led1Toggle();
-      FireworksC__nodeUpdate(msgPtr, payload, len);
+
+      if (len == sizeof(fireworks_update_msg )) {
+#line 218
+        FireworksC__nodeUpdate(msgPtr, payload, len);
+        }
     }
-
-
   return msgPtr;
 }
 
@@ -17128,11 +17003,12 @@ inline static void CC2420TinyosNetworkP__BareSend__sendDone(message_t * msg, err
 #line 89
 }
 #line 89
-# 166 "FireworksC.nc"
+# 224 "FireworksC.nc"
 static inline void FireworksC__AMSend__sendDone(message_t *ptr, error_t success)
-#line 166
+#line 224
 {
-#line 166
+  FireworksC__locked = FALSE;
+
   return;
 }
 
@@ -17143,7 +17019,7 @@ inline static void CC2420ActiveMessageP__AMSend__sendDone(am_id_t arg_0x410423f8
 #line 99
   switch (arg_0x410423f8) {
 #line 99
-    case AM_FIREWORKS_MSG + 1:
+    case AM_FIREWORKS_MSG:
 #line 99
       FireworksC__AMSend__sendDone(msg, error);
 #line 99
@@ -17499,9 +17375,9 @@ static inline void /*TimeSyncC.TimeSyncP*/TimeSyncP__0__RadioControl__stopDone(e
 {
 }
 
-# 178 "FireworksC.nc"
+# 238 "FireworksC.nc"
 static inline void FireworksC__RadioControl__stopDone(error_t error)
-#line 178
+#line 238
 {
 }
 
@@ -17543,14 +17419,14 @@ inline static error_t FireworksC__RadioControl__start(void ){
 #line 83
 }
 #line 83
-# 171 "FireworksC.nc"
+# 231 "FireworksC.nc"
 static inline void FireworksC__RadioControl__startDone(error_t err)
-#line 171
+#line 231
 {
   if (err == SUCCESS) {
     }
   else 
-#line 173
+#line 233
     {
       FireworksC__RadioControl__start();
     }
@@ -19011,16 +18887,18 @@ inline static void FireworksC__Leds__led0Off(void ){
 #line 50
 }
 #line 50
-# 46 "FireworksC.nc"
+# 49 "FireworksC.nc"
 static inline void FireworksC__Boot__booted(void )
-#line 46
+#line 49
 {
   uint16_t i;
 
-#line 48
   FireworksC__RadioControl__start();
 
+
   FireworksC__Leds__led0Off();
+
+
   if (TOS_NODE_ID == 0) {
       FireworksC__isBaseNode = TRUE;
       FireworksC__LOCAL_ID = 0;
@@ -19028,12 +18906,14 @@ static inline void FireworksC__Boot__booted(void )
       for (i = 0; i < 100; i++) {
           FireworksC__nodeList[i] = 0;
         }
-      FireworksC__LedTimer__fired();
     }
   else {
+
       FireworksC__liveNode();
-      FireworksC__LedTimer__fired();
     }
+
+
+  FireworksC__LedTimer__fired();
 }
 
 # 41 "/home/tinyos/local/src/tinyos-2.x/tos/interfaces/Random.nc"
@@ -21511,13 +21391,16 @@ static void /*HilTimerMilliC.VirtualizeTimerC*/VirtualizeTimerC__0__fireTimers(u
   /*HilTimerMilliC.VirtualizeTimerC*/VirtualizeTimerC__0__updateFromTimer__postTask();
 }
 
-# 72 "FireworksC.nc"
+# 114 "FireworksC.nc"
 static void FireworksC__LedTimer__fired(void )
-#line 72
+#line 114
 {
   uint32_t currGlobTime;
 
-#line 74
+
+
+
+
   if (FireworksC__ledOn == FALSE) {
       FireworksC__Leds__led0On();
       FireworksC__ledOn = TRUE;
@@ -21526,7 +21409,14 @@ static void FireworksC__LedTimer__fired(void )
   else {
 
       FireworksC__Leds__led0Off();
-      FireworksC__liveNode();
+      if (FireworksC__isBaseNode == FALSE) {
+          FireworksC__liveNode();
+        }
+      else 
+#line 131
+        {
+          FireworksC__updateNodes(0, 0);
+        }
       currGlobTime = FireworksC__GlobalTime__getLocalTime();
       FireworksC__GlobalTime__getGlobalTime(&currGlobTime);
       FireworksC__ledOn = FALSE;
@@ -21553,17 +21443,18 @@ static void /*HilTimerMilliC.VirtualizeTimerC*/VirtualizeTimerC__0__startTimer(u
   /*HilTimerMilliC.VirtualizeTimerC*/VirtualizeTimerC__0__updateFromTimer__postTask();
 }
 
-# 34 "FireworksC.nc"
+# 36 "FireworksC.nc"
 static void FireworksC__liveNode(void )
-#line 34
+#line 36
 {
-  fireworks_node_msg *fnm = (fireworks_node_msg *)FireworksC__Packet__getPayload(&FireworksC__msg, 
-  sizeof(fireworks_node_msg ));
+  fireworks_node_msg *fnm = (fireworks_node_msg *)FireworksC__Packet__getPayload(&FireworksC__msg, sizeof(fireworks_node_msg ));
 
   __nesc_hton_uint16(fnm->real_node_id.data, TOS_NODE_ID);
 
 
-  FireworksC__AMSend__send(AM_FIREWORKS_MSG, &FireworksC__msg, sizeof(fireworks_node_msg )) == SUCCESS;
+  if (FireworksC__AMSend__send(AM_BROADCAST_ADDR, &FireworksC__msg, sizeof(fireworks_node_msg )) == SUCCESS) {
+      FireworksC__locked = TRUE;
+    }
 }
 
 # 86 "/home/tinyos/local/src/tinyos-2.x/tos/chips/cc2420/lowpan/CC2420TinyosNetworkP.nc"
@@ -21577,6 +21468,23 @@ static void *CC2420TinyosNetworkP__ActiveSend__getPayload(message_t *msg, uint8_
 #line 89
     {
       return (void *)0;
+    }
+}
+
+# 84 "FireworksC.nc"
+static void FireworksC__updateNodes(uint16_t realID, uint16_t local_id)
+#line 84
+{
+
+  fireworks_update_msg *fum = (fireworks_update_msg *)FireworksC__Packet__getPayload(&FireworksC__msg, 
+  sizeof(fireworks_update_msg ));
+
+  __nesc_hton_uint16(fum->id.data, realID);
+  __nesc_hton_uint16(fum->node_count.data, FireworksC__NODE_COUNT);
+  __nesc_hton_uint16(fum->local_id.data, local_id);
+
+  if (FireworksC__AMSend__send(AM_BROADCAST_ADDR, &FireworksC__msg, sizeof(fireworks_update_msg )) == SUCCESS) {
+      FireworksC__locked = TRUE;
     }
 }
 
@@ -21658,18 +21566,6 @@ static uint32_t CC2420PacketP__PacketTimeStampMilli__timestamp(message_t *msg)
 #line 161
   offset /= 28.1;
   return CC2420PacketP__LocalTimeMilli__get() - offset;
-}
-
-# 47 "/home/tinyos/local/src/tinyos-2.x/tos/chips/msp430/pins/HplMsp430GeneralIOP.nc"
-static void /*HplMsp430GeneralIOC.P55*/HplMsp430GeneralIOP__37__IO__toggle(void )
-#line 47
-{
-#line 47
-  { __nesc_atomic_t __nesc_atomic = __nesc_atomic_start();
-#line 47
-    * (volatile uint8_t * )49U ^= 0x01 << 5;
-#line 47
-    __nesc_atomic_end(__nesc_atomic); }
 }
 
 # 764 "/home/tinyos/local/src/tinyos-2.x/tos/chips/cc2420/receive/CC2420ReceiveP.nc"

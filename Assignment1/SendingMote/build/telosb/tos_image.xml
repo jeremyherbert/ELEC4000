@@ -1,11 +1,11 @@
 <tos_image>
   <ident>
-    <uidhash>CD47DFB3L</uidhash>
+    <uidhash>6EBB56D4L</uidhash>
     <hostname>lenny</hostname>
     <username>tinyos</username>
     <appname>SendingMoteAppC</appname>
     <userhash>4CEE8E6FL</userhash>
-    <timestamp>4D8DA5BFL</timestamp>
+    <timestamp>4D988135L</timestamp>
     <deluge_support>no</deluge_support>
     <platform>telosb</platform>
   </ident>
