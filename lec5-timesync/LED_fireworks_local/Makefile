@@ -1,0 +1,6 @@
+COMPONENT=LED_fireworksAppC
+
+PFLAGS += -DTIMESYNC_RATE=3
+PFLAGS += -I$(TOSDIR)/lib/ftsp 
+
+include $(MAKERULES)

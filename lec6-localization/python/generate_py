@@ -1,0 +1,1 @@
+mig python -target=telosb -python-classname=ReportMatrixMsg ../RssiDemoMessages.h ReportMatrixMsg -o ReportMatrixMsg.py
