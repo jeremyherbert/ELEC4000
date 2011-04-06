@@ -11461,7 +11461,7 @@ const char *UDPShellP__ping_fmt = " icmp_seq=%i ttl=%i time=%i ms\n";
 const char *UDPShellP__ping_summary = "%i packets transmitted, %i received\n";
 char *UDPShellP__ident_string = "\t[app: "
 "TCPEchoC""]\n\t[user: ""tinyos""]\n\t[host: ""lenny"
-"]\n\t[time: ""0x4d8854e7L""]\n";
+"]\n\t[time: ""0x4d9bbac5L""]\n";
 
 
 static inline void UDPShellP__action_help(int argc, char **argv);
@@ -27040,7 +27040,7 @@ static inline error_t CC2420ControlP__Init__init(void )
   CC2420ControlP__m_short_addr = CC2420ControlP__ActiveMessageAddress__amAddress();
   CC2420ControlP__m_pan = CC2420ControlP__ActiveMessageAddress__amGroup();
   CC2420ControlP__m_tx_power = 31;
-  CC2420ControlP__m_channel = 14;
+  CC2420ControlP__m_channel = 17;
 
 
 

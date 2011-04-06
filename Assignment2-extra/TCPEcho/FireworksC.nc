@@ -1,6 +1,5 @@
 #include "Fireworks.h"
 
-
 module FireworksC
 {
     uses
@@ -10,7 +9,7 @@ module FireworksC
         interface Receive;
         interface AMSend;
         interface Packet;
-		interface AMPacket;
+				interface AMPacket;
         interface Leds;
         interface PacketTimeStamp<TMilli,uint32_t>;
         interface Boot;
@@ -30,16 +29,17 @@ implementation
 	bool isBaseNode= FALSE;
 	uint16_t nodeList[100];
 	bool running = FALSE;
+	uint8_t curpattern = 0;
 
 
 	// Funciton for regular nodes, tells basenode that this node is alive, and sends its real noe id
-	void liveNode(){
+	void liveNode(uint8_t addr){
 		fireworks_node_msg * fnm = (fireworks_node_msg*)(call Packet.getPayload(&msg, sizeof (fireworks_node_msg)));
 
 		fnm->real_node_id = TOS_NODE_ID;
 
 		//THIS SUCCEEDS
-		if( call AMSend.send(AM_BROADCAST_ADDR, &msg, sizeof(fireworks_node_msg)) == SUCCESS){
+		if( call AMSend.send(addr, &msg, sizeof(fireworks_node_msg)) == SUCCESS){
 			locked = TRUE;
 		}
 	}
@@ -48,12 +48,14 @@ implementation
 
     event void Boot.booted() {
 		uint16_t i;        
+		pattern = 0;
+		curpattern = 0;
 
 		call RadioControl.start();
 		//call AMControl.start();
 		
 		call Leds.led0Off();
-		call Leds.led1On();
+		
 
 		//If this is the base node (real node id0, set up)		
 		if(TOS_NODE_ID == 0){
@@ -66,7 +68,7 @@ implementation
 			
 		} else {
 		//Otherwise signal to the basenode that this node alive
-			liveNode();
+			liveNode(AM_BROADCAST_ADDR);
 			
 		}
 
@@ -100,12 +102,25 @@ implementation
 
 	//Calculate the next time that this node should blink
 	uint32_t getNextOnTime(uint32_t currTime){
-		uint32_t lapTime = currTime % (LED_PERIOD * NODE_COUNT);	
-		if(lapTime > LED_PERIOD){
-			return ((LED_PERIOD * NODE_COUNT) - lapTime + (LED_PERIOD * LOCAL_ID));
+		if (pattern == 0) {
+			uint32_t lapTime = currTime % (LED_PERIOD * NODE_COUNT);	
+			if(lapTime > LED_PERIOD){
+				return ((LED_PERIOD * NODE_COUNT) - lapTime + (LED_PERIOD * LOCAL_ID));
+			} else {
+				return (LED_PERIOD * LOCAL_ID);
+			}
 		} else {
-			return (LED_PERIOD * LOCAL_ID);
+			return LED_PERIOD;
+			if (LOCAL_ID % 2) {
+				return LED_PERIOD;
+			} else {
+				return 2*LED_PERIOD;
+			}
 		}
+	}
+	
+	void setPattern(uint8_t p) {
+		pattern = p;
 	}
 
 
@@ -128,7 +143,7 @@ implementation
 			//Turn led off, call basenode to say im still alive, calculate next on time
 			call Leds.led0Off();
 			if(isBaseNode == FALSE){
-				liveNode();			
+				liveNode(AM_BROADCAST_ADDR);			
 			} else {
 				updateNodes(0, 0);
 			}
@@ -136,10 +151,12 @@ implementation
 			call GlobalTime.getGlobalTime(&currGlobTime);
 			ledOn = FALSE;
 			call LedTimer.startOneShot(getNextOnTime(currGlobTime));
-			
-
-
-
+		}
+		
+		if (curpattern != pattern) {
+			curpattern = pattern;
+			if (pattern == 0) liveNode(PATTERN_0_ADDR);
+			if (pattern == 1) liveNode(PATTERN_1_ADDR);
 		}
 
 	}
@@ -191,7 +208,11 @@ void baseUpdate(	message_t* msgPtr, void* payload, uint8_t len ){
 			to_id = fum->id;
 			if(to_id == TOS_NODE_ID){
 				LOCAL_ID = fum->local_id;
-			}			
+			}	else if (to_id == PATTERN_0_ADDR) {
+				pattern = 0;
+			} else if (to_id == PATTERN_1_ADDR) {
+				pattern = 1;
+			}
 			NODE_COUNT = fum->node_count;
 		
 			//if(NODE_COUNT > 1) {
