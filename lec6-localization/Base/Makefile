@@ -1,5 +1,6 @@
 COMPONENT=RssiBaseAppC
 CFLAGS += -I.. 
 CFLAGS += -DPRINTF -I$(TOSDIR)/lib/printf
+ CFLAGS += -DCC2420_DEF_CHANNEL=17
 
 include $(MAKERULES)
