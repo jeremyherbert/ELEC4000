@@ -39,7 +39,7 @@ implementation {
   };
 
    //sampling frequency in binary milliseconds
-  #define SAMPLING_FREQUENCY 15
+  //#define SAMPLING_FREQUENCY 15
 
   //#define THRESHOLD 300
   uint8_t sampling = 0;
