@@ -1,0 +1,21 @@
+#ifndef ECGHEADER_H__
+#define ECGHEADER_H__
+
+enum {
+  AM_ECGMSG = 10
+};
+
+typedef nx_struct ECGMsg{
+  nx_int8_t NODE_ID;
+  nx_int8_t D1;
+  nx_int8_t D2;
+  nx_int8_t D3;
+  nx_int8_t D4;
+  nx_int8_t D5;
+  nx_int8_t D6;
+  nx_int8_t D7;
+  nx_int8_t TIME;
+  
+} ECGMsg;
+
+#endif //RSSIDEMOMESSAGES_H__
