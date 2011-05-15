@@ -1,5 +1,6 @@
 #include "ECGHeader.h"
 #include <Timer.h>
+#include "StorageVolumes.h"
 
 configuration patientAppC {
 } implementation {
@@ -21,6 +22,14 @@ configuration patientAppC {
   App.ECGMsgSend -> ECGMsgSender;
   App.RadioControl -> ActiveMessageC;
 
+
+  components new LogStorageC(VOLUME_LOGTEST, TRUE);
+  App.LogRead -> LogStorageC;
+  App.LogWrite -> LogStorageC;
+
+
+  components UserButtonC;  
+  App.Notify -> UserButtonC;
 
 	
   components TimeSyncC;
