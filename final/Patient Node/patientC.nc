@@ -67,20 +67,19 @@ module patientC {
 
   //Send message (this will currently loop, sending one message for each peice of data stored
   // Innefecient, need to ask about sending large messages
-  void sendMessage(ECG_DATA * buf){
-	printf("SENDING ECG PACKET\n");
-	printfflush();
-	
-	ECG_PACKET * m_packet = (ECG_PACKET*)(call Packet.getPayload(&msg, sizeof (ECG_PACKET)));
+  void sendMessage(void * buf){
+
+	ECG_DATA *ECGData = (ECG_PACKET*) buf;
+	ECG_PACKET *m_packet = (ECG_PACKET*)(call Packet.getPayload(&msg, sizeof (ECG_PACKET)));
 		m_packet->NODE_ID = ID;
-		m_packet->D1 = buf->D1;
- 		m_packet->D2 = buf->D2;
- 		m_packet->D3 = buf->D3;
- 		m_packet->D4 = buf->D4;
- 		m_packet->D5 = buf->D5;
- 		m_packet->D6 = buf->D6;
- 		m_packet->D7 = buf->D7;
- 		m_packet->TIME = buf->TIME;
+		m_packet->D1 = ECGData->D1;
+ 		m_packet->D2 = ECGData->D2;
+ 		m_packet->D3 = ECGData->D3;
+ 		m_packet->D4 = ECGData->D4;
+ 		m_packet->D5 = ECGData->D5;
+ 		m_packet->D6 = ECGData->D6;
+ 		m_packet->D7 = ECGData->D7;
+ 		m_packet->TIME = ECGData->TIME;
 	
 	printf("SENDING ECG PACKET\n");
 	printfflush();
@@ -94,20 +93,11 @@ module patientC {
     printf("read done!\n");
     if ( (len == sizeof(ECG_DATA)) && (buf == &m_entry) ) {
        //call Send.send(&m_entry.msg, m_entry.len);
-      /*printf("%i %i %i %i %i %i %i %d ", 		
-		m_entry.D1 , 
- 		m_entry.D2 ,
- 		m_entry.D3 ,
- 		m_entry.D4 ,
- 		m_entry.D5 ,
- 		m_entry.D6 ,
- 		m_entry.D7 ,
- 		m_entry.TIME);
-      printfflush();*/
+
 	
       /* CHANGE THIS TO SEND MESSAGE VIA RADIIO */
-
-      sendMessage(m_entry);
+      
+      sendMessage(buf);
       
       call Leds.led1On();
       call LogRead.read(&m_entry, sizeof(ECG_DATA));

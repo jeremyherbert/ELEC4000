@@ -3316,63 +3316,63 @@ static void AdcSimpleC__Timer__fired(void );
 # 55 "/home/tinyos/local/src/tinyos-2.x/tos/interfaces/Read.nc"
 static error_t AdcP__Read__read(
 # 38 "/home/tinyos/local/src/tinyos-2.x/tos/chips/msp430/adc12/AdcP.nc"
-uint8_t arg_0x40bc25c8);
+uint8_t arg_0x40bc2170);
 # 63 "/home/tinyos/local/src/tinyos-2.x/tos/interfaces/Read.nc"
 static void AdcP__Read__default__readDone(
 # 38 "/home/tinyos/local/src/tinyos-2.x/tos/chips/msp430/adc12/AdcP.nc"
-uint8_t arg_0x40bc25c8, 
+uint8_t arg_0x40bc2170, 
 # 63 "/home/tinyos/local/src/tinyos-2.x/tos/interfaces/Read.nc"
 error_t result, AdcP__Read__val_t val);
 # 66 "/home/tinyos/local/src/tinyos-2.x/tos/interfaces/ReadNow.nc"
 static void AdcP__ReadNow__default__readDone(
 # 39 "/home/tinyos/local/src/tinyos-2.x/tos/chips/msp430/adc12/AdcP.nc"
-uint8_t arg_0x40bbeb08, 
+uint8_t arg_0x40bbe620, 
 # 66 "/home/tinyos/local/src/tinyos-2.x/tos/interfaces/ReadNow.nc"
 error_t result, AdcP__ReadNow__val_t val);
 # 58 "/home/tinyos/local/src/tinyos-2.x/tos/interfaces/AdcConfigure.nc"
 static AdcP__Config__adc_config_t AdcP__Config__default__getConfiguration(
 # 48 "/home/tinyos/local/src/tinyos-2.x/tos/chips/msp430/adc12/AdcP.nc"
-uint8_t arg_0x40bbcdf0);
+uint8_t arg_0x40bbc8e8);
 # 189 "/home/tinyos/local/src/tinyos-2.x/tos/chips/msp430/adc12/Msp430Adc12SingleChannel.nc"
 static error_t AdcP__SingleChannel__default__getData(
 # 49 "/home/tinyos/local/src/tinyos-2.x/tos/chips/msp430/adc12/AdcP.nc"
-uint8_t arg_0x40bd9e40);
+uint8_t arg_0x40bd9d18);
 # 84 "/home/tinyos/local/src/tinyos-2.x/tos/chips/msp430/adc12/Msp430Adc12SingleChannel.nc"
 static error_t AdcP__SingleChannel__default__configureSingle(
 # 49 "/home/tinyos/local/src/tinyos-2.x/tos/chips/msp430/adc12/AdcP.nc"
-uint8_t arg_0x40bd9e40, 
+uint8_t arg_0x40bd9d18, 
 # 84 "/home/tinyos/local/src/tinyos-2.x/tos/chips/msp430/adc12/Msp430Adc12SingleChannel.nc"
 const msp430adc12_channel_config_t * config);
 #line 227
 static uint16_t * AdcP__SingleChannel__multipleDataReady(
 # 49 "/home/tinyos/local/src/tinyos-2.x/tos/chips/msp430/adc12/AdcP.nc"
-uint8_t arg_0x40bd9e40, 
+uint8_t arg_0x40bd9d18, 
 # 227 "/home/tinyos/local/src/tinyos-2.x/tos/chips/msp430/adc12/Msp430Adc12SingleChannel.nc"
 uint16_t * buffer, uint16_t numSamples);
 #line 206
 static error_t AdcP__SingleChannel__singleDataReady(
 # 49 "/home/tinyos/local/src/tinyos-2.x/tos/chips/msp430/adc12/AdcP.nc"
-uint8_t arg_0x40bd9e40, 
+uint8_t arg_0x40bd9d18, 
 # 206 "/home/tinyos/local/src/tinyos-2.x/tos/chips/msp430/adc12/Msp430Adc12SingleChannel.nc"
 uint16_t data);
 # 110 "/home/tinyos/local/src/tinyos-2.x/tos/interfaces/Resource.nc"
 static error_t AdcP__ResourceRead__default__release(
 # 44 "/home/tinyos/local/src/tinyos-2.x/tos/chips/msp430/adc12/AdcP.nc"
-uint8_t arg_0x40bbd670);
+uint8_t arg_0x40bbd130);
 # 78 "/home/tinyos/local/src/tinyos-2.x/tos/interfaces/Resource.nc"
 static error_t AdcP__ResourceRead__default__request(
 # 44 "/home/tinyos/local/src/tinyos-2.x/tos/chips/msp430/adc12/AdcP.nc"
-uint8_t arg_0x40bbd670);
+uint8_t arg_0x40bbd130);
 # 92 "/home/tinyos/local/src/tinyos-2.x/tos/interfaces/Resource.nc"
 static void AdcP__ResourceRead__granted(
 # 44 "/home/tinyos/local/src/tinyos-2.x/tos/chips/msp430/adc12/AdcP.nc"
-uint8_t arg_0x40bbd670);
+uint8_t arg_0x40bbd130);
 # 64 "/home/tinyos/local/src/tinyos-2.x/tos/interfaces/TaskBasic.nc"
 static void AdcP__readDone__runTask(void );
 # 107 "/home/tinyos/local/src/tinyos-2.x/tos/chips/msp430/adc12/Msp430Adc12MultiChannel.nc"
 static void Msp430Adc12ImplP__MultiChannel__default__dataReady(
 # 42 "/home/tinyos/local/src/tinyos-2.x/tos/chips/msp430/adc12/Msp430Adc12ImplP.nc"
-uint8_t arg_0x40bf2108, 
+uint8_t arg_0x40bf4a08, 
 # 107 "/home/tinyos/local/src/tinyos-2.x/tos/chips/msp430/adc12/Msp430Adc12MultiChannel.nc"
 uint16_t *buffer, uint16_t numSamples);
 # 112 "/home/tinyos/local/src/tinyos-2.x/tos/chips/msp430/adc12/HplAdc12.nc"
@@ -3382,11 +3382,11 @@ static void Msp430Adc12ImplP__CompareA1__fired(void );
 # 49 "/home/tinyos/local/src/tinyos-2.x/tos/chips/msp430/adc12/Msp430Adc12Overflow.nc"
 static void Msp430Adc12ImplP__Overflow__default__memOverflow(
 # 43 "/home/tinyos/local/src/tinyos-2.x/tos/chips/msp430/adc12/Msp430Adc12ImplP.nc"
-uint8_t arg_0x40bf29f8);
+uint8_t arg_0x40bf2388);
 # 54 "/home/tinyos/local/src/tinyos-2.x/tos/chips/msp430/adc12/Msp430Adc12Overflow.nc"
 static void Msp430Adc12ImplP__Overflow__default__conversionTimeOverflow(
 # 43 "/home/tinyos/local/src/tinyos-2.x/tos/chips/msp430/adc12/Msp430Adc12ImplP.nc"
-uint8_t arg_0x40bf29f8);
+uint8_t arg_0x40bf2388);
 # 51 "/home/tinyos/local/src/tinyos-2.x/tos/interfaces/Init.nc"
 static error_t Msp430Adc12ImplP__Init__init(void );
 # 37 "/home/tinyos/local/src/tinyos-2.x/tos/chips/msp430/timer/Msp430Timer.nc"
@@ -3394,23 +3394,23 @@ static void Msp430Adc12ImplP__TimerA__overflow(void );
 # 189 "/home/tinyos/local/src/tinyos-2.x/tos/chips/msp430/adc12/Msp430Adc12SingleChannel.nc"
 static error_t Msp430Adc12ImplP__SingleChannel__getData(
 # 41 "/home/tinyos/local/src/tinyos-2.x/tos/chips/msp430/adc12/Msp430Adc12ImplP.nc"
-uint8_t arg_0x40bf43f0);
+uint8_t arg_0x40bf7d18);
 # 84 "/home/tinyos/local/src/tinyos-2.x/tos/chips/msp430/adc12/Msp430Adc12SingleChannel.nc"
 static error_t Msp430Adc12ImplP__SingleChannel__configureSingle(
 # 41 "/home/tinyos/local/src/tinyos-2.x/tos/chips/msp430/adc12/Msp430Adc12ImplP.nc"
-uint8_t arg_0x40bf43f0, 
+uint8_t arg_0x40bf7d18, 
 # 84 "/home/tinyos/local/src/tinyos-2.x/tos/chips/msp430/adc12/Msp430Adc12SingleChannel.nc"
 const msp430adc12_channel_config_t * config);
 #line 227
 static uint16_t * Msp430Adc12ImplP__SingleChannel__default__multipleDataReady(
 # 41 "/home/tinyos/local/src/tinyos-2.x/tos/chips/msp430/adc12/Msp430Adc12ImplP.nc"
-uint8_t arg_0x40bf43f0, 
+uint8_t arg_0x40bf7d18, 
 # 227 "/home/tinyos/local/src/tinyos-2.x/tos/chips/msp430/adc12/Msp430Adc12SingleChannel.nc"
 uint16_t * buffer, uint16_t numSamples);
 #line 206
 static error_t Msp430Adc12ImplP__SingleChannel__default__singleDataReady(
 # 41 "/home/tinyos/local/src/tinyos-2.x/tos/chips/msp430/adc12/Msp430Adc12ImplP.nc"
-uint8_t arg_0x40bf43f0, 
+uint8_t arg_0x40bf7d18, 
 # 206 "/home/tinyos/local/src/tinyos-2.x/tos/chips/msp430/adc12/Msp430Adc12SingleChannel.nc"
 uint16_t data);
 # 34 "/home/tinyos/local/src/tinyos-2.x/tos/chips/msp430/timer/Msp430Compare.nc"
@@ -4151,23 +4151,23 @@ uint16_t data);
 # 110 "/home/tinyos/local/src/tinyos-2.x/tos/interfaces/Resource.nc"
 static error_t CC2420SpiP__Resource__release(
 # 45 "/home/tinyos/local/src/tinyos-2.x/tos/chips/cc2420/spi/CC2420SpiP.nc"
-uint8_t arg_0x411085c8);
+uint8_t arg_0x411095c8);
 # 87 "/home/tinyos/local/src/tinyos-2.x/tos/interfaces/Resource.nc"
 static error_t CC2420SpiP__Resource__immediateRequest(
 # 45 "/home/tinyos/local/src/tinyos-2.x/tos/chips/cc2420/spi/CC2420SpiP.nc"
-uint8_t arg_0x411085c8);
+uint8_t arg_0x411095c8);
 # 78 "/home/tinyos/local/src/tinyos-2.x/tos/interfaces/Resource.nc"
 static error_t CC2420SpiP__Resource__request(
 # 45 "/home/tinyos/local/src/tinyos-2.x/tos/chips/cc2420/spi/CC2420SpiP.nc"
-uint8_t arg_0x411085c8);
+uint8_t arg_0x411095c8);
 # 92 "/home/tinyos/local/src/tinyos-2.x/tos/interfaces/Resource.nc"
 static void CC2420SpiP__Resource__default__granted(
 # 45 "/home/tinyos/local/src/tinyos-2.x/tos/chips/cc2420/spi/CC2420SpiP.nc"
-uint8_t arg_0x411085c8);
+uint8_t arg_0x411095c8);
 # 118 "/home/tinyos/local/src/tinyos-2.x/tos/interfaces/Resource.nc"
 static bool CC2420SpiP__Resource__isOwner(
 # 45 "/home/tinyos/local/src/tinyos-2.x/tos/chips/cc2420/spi/CC2420SpiP.nc"
-uint8_t arg_0x411085c8);
+uint8_t arg_0x411095c8);
 # 64 "/home/tinyos/local/src/tinyos-2.x/tos/interfaces/TaskBasic.nc"
 static void CC2420SpiP__grant__runTask(void );
 # 45 "/home/tinyos/local/src/tinyos-2.x/tos/chips/cc2420/interfaces/CC2420Strobe.nc"
@@ -4209,11 +4209,11 @@ uint8_t reqState);
 # 55 "/home/tinyos/local/src/tinyos-2.x/tos/interfaces/ResourceConfigure.nc"
 static void /*Msp430SpiNoDma0P.SpiP*/Msp430SpiNoDmaP__0__ResourceConfigure__unconfigure(
 # 42 "/home/tinyos/local/src/tinyos-2.x/tos/chips/msp430/usart/Msp430SpiNoDmaP.nc"
-uint8_t arg_0x41161c98);
+uint8_t arg_0x41162c98);
 # 49 "/home/tinyos/local/src/tinyos-2.x/tos/interfaces/ResourceConfigure.nc"
 static void /*Msp430SpiNoDma0P.SpiP*/Msp430SpiNoDmaP__0__ResourceConfigure__configure(
 # 42 "/home/tinyos/local/src/tinyos-2.x/tos/chips/msp430/usart/Msp430SpiNoDmaP.nc"
-uint8_t arg_0x41161c98);
+uint8_t arg_0x41162c98);
 # 59 "/home/tinyos/local/src/tinyos-2.x/tos/interfaces/SpiPacket.nc"
 static error_t /*Msp430SpiNoDma0P.SpiP*/Msp430SpiNoDmaP__0__SpiPacket__send(
 # 44 "/home/tinyos/local/src/tinyos-2.x/tos/chips/msp430/usart/Msp430SpiNoDmaP.nc"
@@ -4274,23 +4274,23 @@ uint8_t arg_0x4115f030);
 # 110 "/home/tinyos/local/src/tinyos-2.x/tos/interfaces/Resource.nc"
 static error_t /*Msp430SpiNoDma0P.SpiP*/Msp430SpiNoDmaP__0__Resource__release(
 # 41 "/home/tinyos/local/src/tinyos-2.x/tos/chips/msp430/usart/Msp430SpiNoDmaP.nc"
-uint8_t arg_0x41161250);
+uint8_t arg_0x41162250);
 # 87 "/home/tinyos/local/src/tinyos-2.x/tos/interfaces/Resource.nc"
 static error_t /*Msp430SpiNoDma0P.SpiP*/Msp430SpiNoDmaP__0__Resource__immediateRequest(
 # 41 "/home/tinyos/local/src/tinyos-2.x/tos/chips/msp430/usart/Msp430SpiNoDmaP.nc"
-uint8_t arg_0x41161250);
+uint8_t arg_0x41162250);
 # 78 "/home/tinyos/local/src/tinyos-2.x/tos/interfaces/Resource.nc"
 static error_t /*Msp430SpiNoDma0P.SpiP*/Msp430SpiNoDmaP__0__Resource__request(
 # 41 "/home/tinyos/local/src/tinyos-2.x/tos/chips/msp430/usart/Msp430SpiNoDmaP.nc"
-uint8_t arg_0x41161250);
+uint8_t arg_0x41162250);
 # 92 "/home/tinyos/local/src/tinyos-2.x/tos/interfaces/Resource.nc"
 static void /*Msp430SpiNoDma0P.SpiP*/Msp430SpiNoDmaP__0__Resource__default__granted(
 # 41 "/home/tinyos/local/src/tinyos-2.x/tos/chips/msp430/usart/Msp430SpiNoDmaP.nc"
-uint8_t arg_0x41161250);
+uint8_t arg_0x41162250);
 # 118 "/home/tinyos/local/src/tinyos-2.x/tos/interfaces/Resource.nc"
 static bool /*Msp430SpiNoDma0P.SpiP*/Msp430SpiNoDmaP__0__Resource__isOwner(
 # 41 "/home/tinyos/local/src/tinyos-2.x/tos/chips/msp430/usart/Msp430SpiNoDmaP.nc"
-uint8_t arg_0x41161250);
+uint8_t arg_0x41162250);
 # 54 "/home/tinyos/local/src/tinyos-2.x/tos/chips/msp430/usart/HplMsp430UsartInterrupts.nc"
 static void /*Msp430SpiNoDma0P.SpiP*/Msp430SpiNoDmaP__0__UsartInterrupts__rxDone(uint8_t data);
 #line 49
@@ -7633,37 +7633,37 @@ static inline void AdcSimpleC__RadioControl__stopDone(error_t error);
 # 63 "/home/tinyos/local/src/tinyos-2.x/tos/interfaces/Read.nc"
 static void AdcP__Read__readDone(
 # 38 "/home/tinyos/local/src/tinyos-2.x/tos/chips/msp430/adc12/AdcP.nc"
-uint8_t arg_0x40bc25c8, 
+uint8_t arg_0x40bc2170, 
 # 63 "/home/tinyos/local/src/tinyos-2.x/tos/interfaces/Read.nc"
 error_t result, AdcP__Read__val_t val);
 # 66 "/home/tinyos/local/src/tinyos-2.x/tos/interfaces/ReadNow.nc"
 static void AdcP__ReadNow__readDone(
 # 39 "/home/tinyos/local/src/tinyos-2.x/tos/chips/msp430/adc12/AdcP.nc"
-uint8_t arg_0x40bbeb08, 
+uint8_t arg_0x40bbe620, 
 # 66 "/home/tinyos/local/src/tinyos-2.x/tos/interfaces/ReadNow.nc"
 error_t result, AdcP__ReadNow__val_t val);
 # 58 "/home/tinyos/local/src/tinyos-2.x/tos/interfaces/AdcConfigure.nc"
 static AdcP__Config__adc_config_t AdcP__Config__getConfiguration(
 # 48 "/home/tinyos/local/src/tinyos-2.x/tos/chips/msp430/adc12/AdcP.nc"
-uint8_t arg_0x40bbcdf0);
+uint8_t arg_0x40bbc8e8);
 # 189 "/home/tinyos/local/src/tinyos-2.x/tos/chips/msp430/adc12/Msp430Adc12SingleChannel.nc"
 static error_t AdcP__SingleChannel__getData(
 # 49 "/home/tinyos/local/src/tinyos-2.x/tos/chips/msp430/adc12/AdcP.nc"
-uint8_t arg_0x40bd9e40);
+uint8_t arg_0x40bd9d18);
 # 84 "/home/tinyos/local/src/tinyos-2.x/tos/chips/msp430/adc12/Msp430Adc12SingleChannel.nc"
 static error_t AdcP__SingleChannel__configureSingle(
 # 49 "/home/tinyos/local/src/tinyos-2.x/tos/chips/msp430/adc12/AdcP.nc"
-uint8_t arg_0x40bd9e40, 
+uint8_t arg_0x40bd9d18, 
 # 84 "/home/tinyos/local/src/tinyos-2.x/tos/chips/msp430/adc12/Msp430Adc12SingleChannel.nc"
 const msp430adc12_channel_config_t * config);
 # 110 "/home/tinyos/local/src/tinyos-2.x/tos/interfaces/Resource.nc"
 static error_t AdcP__ResourceRead__release(
 # 44 "/home/tinyos/local/src/tinyos-2.x/tos/chips/msp430/adc12/AdcP.nc"
-uint8_t arg_0x40bbd670);
+uint8_t arg_0x40bbd130);
 # 78 "/home/tinyos/local/src/tinyos-2.x/tos/interfaces/Resource.nc"
 static error_t AdcP__ResourceRead__request(
 # 44 "/home/tinyos/local/src/tinyos-2.x/tos/chips/msp430/adc12/AdcP.nc"
-uint8_t arg_0x40bbd670);
+uint8_t arg_0x40bbd130);
 # 56 "/home/tinyos/local/src/tinyos-2.x/tos/interfaces/TaskBasic.nc"
 static error_t AdcP__readDone__postTask(void );
 # 136 "/home/tinyos/local/src/tinyos-2.x/tos/chips/msp430/adc12/AdcP.nc"
@@ -7745,7 +7745,7 @@ const msp430adc12_channel_config_t *config);
 # 107 "/home/tinyos/local/src/tinyos-2.x/tos/chips/msp430/adc12/Msp430Adc12MultiChannel.nc"
 static void Msp430Adc12ImplP__MultiChannel__dataReady(
 # 42 "/home/tinyos/local/src/tinyos-2.x/tos/chips/msp430/adc12/Msp430Adc12ImplP.nc"
-uint8_t arg_0x40bf2108, 
+uint8_t arg_0x40bf4a08, 
 # 107 "/home/tinyos/local/src/tinyos-2.x/tos/chips/msp430/adc12/Msp430Adc12MultiChannel.nc"
 uint16_t *buffer, uint16_t numSamples);
 # 63 "/home/tinyos/local/src/tinyos-2.x/tos/chips/msp430/adc12/HplAdc12.nc"
@@ -7787,11 +7787,11 @@ static void Msp430Adc12ImplP__Port62__selectModuleFunc(void );
 # 49 "/home/tinyos/local/src/tinyos-2.x/tos/chips/msp430/adc12/Msp430Adc12Overflow.nc"
 static void Msp430Adc12ImplP__Overflow__memOverflow(
 # 43 "/home/tinyos/local/src/tinyos-2.x/tos/chips/msp430/adc12/Msp430Adc12ImplP.nc"
-uint8_t arg_0x40bf29f8);
+uint8_t arg_0x40bf2388);
 # 54 "/home/tinyos/local/src/tinyos-2.x/tos/chips/msp430/adc12/Msp430Adc12Overflow.nc"
 static void Msp430Adc12ImplP__Overflow__conversionTimeOverflow(
 # 43 "/home/tinyos/local/src/tinyos-2.x/tos/chips/msp430/adc12/Msp430Adc12ImplP.nc"
-uint8_t arg_0x40bf29f8);
+uint8_t arg_0x40bf2388);
 # 64 "/home/tinyos/local/src/tinyos-2.x/tos/chips/msp430/pins/HplMsp430GeneralIO.nc"
 static void Msp430Adc12ImplP__Port67__makeInput(void );
 #line 85
@@ -7819,13 +7819,13 @@ static void Msp430Adc12ImplP__ControlA1__setControl(msp430_compare_control_t con
 # 227 "/home/tinyos/local/src/tinyos-2.x/tos/chips/msp430/adc12/Msp430Adc12SingleChannel.nc"
 static uint16_t * Msp430Adc12ImplP__SingleChannel__multipleDataReady(
 # 41 "/home/tinyos/local/src/tinyos-2.x/tos/chips/msp430/adc12/Msp430Adc12ImplP.nc"
-uint8_t arg_0x40bf43f0, 
+uint8_t arg_0x40bf7d18, 
 # 227 "/home/tinyos/local/src/tinyos-2.x/tos/chips/msp430/adc12/Msp430Adc12SingleChannel.nc"
 uint16_t * buffer, uint16_t numSamples);
 #line 206
 static error_t Msp430Adc12ImplP__SingleChannel__singleDataReady(
 # 41 "/home/tinyos/local/src/tinyos-2.x/tos/chips/msp430/adc12/Msp430Adc12ImplP.nc"
-uint8_t arg_0x40bf43f0, 
+uint8_t arg_0x40bf7d18, 
 # 206 "/home/tinyos/local/src/tinyos-2.x/tos/chips/msp430/adc12/Msp430Adc12SingleChannel.nc"
 uint16_t data);
 # 64 "/home/tinyos/local/src/tinyos-2.x/tos/chips/msp430/pins/HplMsp430GeneralIO.nc"
@@ -9749,7 +9749,7 @@ static bool CC2420SpiP__SpiResource__isOwner(void );
 #line 92
 static void CC2420SpiP__Resource__granted(
 # 45 "/home/tinyos/local/src/tinyos-2.x/tos/chips/cc2420/spi/CC2420SpiP.nc"
-uint8_t arg_0x411085c8);
+uint8_t arg_0x411095c8);
 # 56 "/home/tinyos/local/src/tinyos-2.x/tos/interfaces/TaskBasic.nc"
 static error_t CC2420SpiP__grant__postTask(void );
 # 88 "/home/tinyos/local/src/tinyos-2.x/tos/chips/cc2420/spi/CC2420SpiP.nc"
@@ -9969,7 +9969,7 @@ uint8_t arg_0x4115f030);
 # 92 "/home/tinyos/local/src/tinyos-2.x/tos/interfaces/Resource.nc"
 static void /*Msp430SpiNoDma0P.SpiP*/Msp430SpiNoDmaP__0__Resource__granted(
 # 41 "/home/tinyos/local/src/tinyos-2.x/tos/chips/msp430/usart/Msp430SpiNoDmaP.nc"
-uint8_t arg_0x41161250);
+uint8_t arg_0x41162250);
 # 56 "/home/tinyos/local/src/tinyos-2.x/tos/interfaces/TaskBasic.nc"
 static error_t /*Msp430SpiNoDma0P.SpiP*/Msp430SpiNoDmaP__0__signalDone_task__postTask(void );
 # 67 "/home/tinyos/local/src/tinyos-2.x/tos/chips/msp430/usart/Msp430SpiNoDmaP.nc"
@@ -18219,9 +18219,9 @@ static inline void /*Msp430SpiNoDma0P.SpiP*/Msp430SpiNoDmaP__0__Resource__defaul
 }
 
 # 92 "/home/tinyos/local/src/tinyos-2.x/tos/interfaces/Resource.nc"
-inline static void /*Msp430SpiNoDma0P.SpiP*/Msp430SpiNoDmaP__0__Resource__granted(uint8_t arg_0x41161250){
+inline static void /*Msp430SpiNoDma0P.SpiP*/Msp430SpiNoDmaP__0__Resource__granted(uint8_t arg_0x41162250){
 #line 92
-  switch (arg_0x41161250) {
+  switch (arg_0x41162250) {
 #line 92
     case /*CC2420SpiWireC.HplCC2420SpiC.SpiC*/Msp430Spi0C__0__CLIENT_ID:
 #line 92
@@ -18231,7 +18231,7 @@ inline static void /*Msp430SpiNoDma0P.SpiP*/Msp430SpiNoDmaP__0__Resource__grante
 #line 92
     default:
 #line 92
-      /*Msp430SpiNoDma0P.SpiP*/Msp430SpiNoDmaP__0__Resource__default__granted(arg_0x41161250);
+      /*Msp430SpiNoDma0P.SpiP*/Msp430SpiNoDmaP__0__Resource__default__granted(arg_0x41162250);
 #line 92
       break;
 #line 92
@@ -19570,9 +19570,9 @@ static inline void CC2420SpiP__Resource__default__granted(uint8_t id)
 }
 
 # 92 "/home/tinyos/local/src/tinyos-2.x/tos/interfaces/Resource.nc"
-inline static void CC2420SpiP__Resource__granted(uint8_t arg_0x411085c8){
+inline static void CC2420SpiP__Resource__granted(uint8_t arg_0x411095c8){
 #line 92
-  switch (arg_0x411085c8) {
+  switch (arg_0x411095c8) {
 #line 92
     case /*CC2420ControlC.Spi*/CC2420SpiC__0__CLIENT_ID:
 #line 92
@@ -19606,7 +19606,7 @@ inline static void CC2420SpiP__Resource__granted(uint8_t arg_0x411085c8){
 #line 92
     default:
 #line 92
-      CC2420SpiP__Resource__default__granted(arg_0x411085c8);
+      CC2420SpiP__Resource__default__granted(arg_0x411095c8);
 #line 92
       break;
 #line 92
@@ -21586,13 +21586,13 @@ static inline error_t AdcP__ResourceRead__default__request(uint8_t client)
 }
 
 # 78 "/home/tinyos/local/src/tinyos-2.x/tos/interfaces/Resource.nc"
-inline static error_t AdcP__ResourceRead__request(uint8_t arg_0x40bbd670){
+inline static error_t AdcP__ResourceRead__request(uint8_t arg_0x40bbd130){
 #line 78
   unsigned char result;
 #line 78
 
 #line 78
-  switch (arg_0x40bbd670) {
+  switch (arg_0x40bbd130) {
 #line 78
     case /*AdcSimpleAppC.AdcReadClientC*/AdcReadClientC__0__CLIENT:
 #line 78
@@ -21602,7 +21602,7 @@ inline static error_t AdcP__ResourceRead__request(uint8_t arg_0x40bbd670){
 #line 78
     default:
 #line 78
-      result = AdcP__ResourceRead__default__request(arg_0x40bbd670);
+      result = AdcP__ResourceRead__default__request(arg_0x40bbd130);
 #line 78
       break;
 #line 78
@@ -21710,7 +21710,7 @@ static inline void AdcSimpleC__Timer__fired(void )
 
 
   if (AdcSimpleC__syncTimer == 0 && TOS_NODE_ID == 0 && AdcSimpleC__radioReady == TRUE) {
-      AdcSimpleC__AMSend__send(AM_BROADCAST_ADDR, &AdcSimpleC__msg, sizeof AdcSimpleC__msg);
+
       AdcSimpleC__radioReady = FALSE;
     }
   AdcSimpleC__syncTimer = AdcSimpleC__syncTimer++ % 1000;
@@ -22674,13 +22674,13 @@ const msp430adc12_channel_config_t *config)
 }
 
 # 84 "/home/tinyos/local/src/tinyos-2.x/tos/chips/msp430/adc12/Msp430Adc12SingleChannel.nc"
-inline static error_t AdcP__SingleChannel__configureSingle(uint8_t arg_0x40bd9e40, const msp430adc12_channel_config_t * config){
+inline static error_t AdcP__SingleChannel__configureSingle(uint8_t arg_0x40bd9d18, const msp430adc12_channel_config_t * config){
 #line 84
   unsigned char result;
 #line 84
 
 #line 84
-  switch (arg_0x40bd9e40) {
+  switch (arg_0x40bd9d18) {
 #line 84
     case /*AdcSimpleAppC.AdcReadClientC*/AdcReadClientC__0__CLIENT:
 #line 84
@@ -22690,7 +22690,7 @@ inline static error_t AdcP__SingleChannel__configureSingle(uint8_t arg_0x40bd9e4
 #line 84
     default:
 #line 84
-      result = AdcP__SingleChannel__default__configureSingle(arg_0x40bd9e40, config);
+      result = AdcP__SingleChannel__default__configureSingle(arg_0x40bd9d18, config);
 #line 84
       break;
 #line 84
@@ -22716,13 +22716,13 @@ AdcP__Config__default__getConfiguration(uint8_t client)
 }
 
 # 58 "/home/tinyos/local/src/tinyos-2.x/tos/interfaces/AdcConfigure.nc"
-inline static AdcP__Config__adc_config_t AdcP__Config__getConfiguration(uint8_t arg_0x40bbcdf0){
+inline static AdcP__Config__adc_config_t AdcP__Config__getConfiguration(uint8_t arg_0x40bbc8e8){
 #line 58
   struct __nesc_unnamed4296 const *result;
 #line 58
 
 #line 58
-  switch (arg_0x40bbcdf0) {
+  switch (arg_0x40bbc8e8) {
 #line 58
     case /*AdcSimpleAppC.AdcReadClientC*/AdcReadClientC__0__CLIENT:
 #line 58
@@ -22732,7 +22732,7 @@ inline static AdcP__Config__adc_config_t AdcP__Config__getConfiguration(uint8_t 
 #line 58
     default:
 #line 58
-      result = AdcP__Config__default__getConfiguration(arg_0x40bbcdf0);
+      result = AdcP__Config__default__getConfiguration(arg_0x40bbc8e8);
 #line 58
       break;
 #line 58
@@ -23248,13 +23248,13 @@ static inline error_t AdcP__SingleChannel__default__getData(uint8_t client)
 }
 
 # 189 "/home/tinyos/local/src/tinyos-2.x/tos/chips/msp430/adc12/Msp430Adc12SingleChannel.nc"
-inline static error_t AdcP__SingleChannel__getData(uint8_t arg_0x40bd9e40){
+inline static error_t AdcP__SingleChannel__getData(uint8_t arg_0x40bd9d18){
 #line 189
   unsigned char result;
 #line 189
 
 #line 189
-  switch (arg_0x40bd9e40) {
+  switch (arg_0x40bd9d18) {
 #line 189
     case /*AdcSimpleAppC.AdcReadClientC*/AdcReadClientC__0__CLIENT:
 #line 189
@@ -23264,7 +23264,7 @@ inline static error_t AdcP__SingleChannel__getData(uint8_t arg_0x40bd9e40){
 #line 189
     default:
 #line 189
-      result = AdcP__SingleChannel__default__getData(arg_0x40bd9e40);
+      result = AdcP__SingleChannel__default__getData(arg_0x40bd9d18);
 #line 189
       break;
 #line 189
@@ -23874,9 +23874,9 @@ static inline void AdcP__Read__default__readDone(uint8_t client, error_t result,
 }
 
 # 63 "/home/tinyos/local/src/tinyos-2.x/tos/interfaces/Read.nc"
-inline static void AdcP__Read__readDone(uint8_t arg_0x40bc25c8, error_t result, AdcP__Read__val_t val){
+inline static void AdcP__Read__readDone(uint8_t arg_0x40bc2170, error_t result, AdcP__Read__val_t val){
 #line 63
-  switch (arg_0x40bc25c8) {
+  switch (arg_0x40bc2170) {
 #line 63
     case /*AdcSimpleAppC.AdcReadClientC*/AdcReadClientC__0__CLIENT:
 #line 63
@@ -23886,7 +23886,7 @@ inline static void AdcP__Read__readDone(uint8_t arg_0x40bc25c8, error_t result, 
 #line 63
     default:
 #line 63
-      AdcP__Read__default__readDone(arg_0x40bc25c8, result, val);
+      AdcP__Read__default__readDone(arg_0x40bc2170, result, val);
 #line 63
       break;
 #line 63
@@ -23903,13 +23903,13 @@ static inline error_t AdcP__ResourceRead__default__release(uint8_t client)
 }
 
 # 110 "/home/tinyos/local/src/tinyos-2.x/tos/interfaces/Resource.nc"
-inline static error_t AdcP__ResourceRead__release(uint8_t arg_0x40bbd670){
+inline static error_t AdcP__ResourceRead__release(uint8_t arg_0x40bbd130){
 #line 110
   unsigned char result;
 #line 110
 
 #line 110
-  switch (arg_0x40bbd670) {
+  switch (arg_0x40bbd130) {
 #line 110
     case /*AdcSimpleAppC.AdcReadClientC*/AdcReadClientC__0__CLIENT:
 #line 110
@@ -23919,7 +23919,7 @@ inline static error_t AdcP__ResourceRead__release(uint8_t arg_0x40bbd670){
 #line 110
     default:
 #line 110
-      result = AdcP__ResourceRead__default__release(arg_0x40bbd670);
+      result = AdcP__ResourceRead__default__release(arg_0x40bbd130);
 #line 110
       break;
 #line 110
@@ -27599,13 +27599,13 @@ uint16_t *buf, uint16_t numSamples)
 }
 
 # 227 "/home/tinyos/local/src/tinyos-2.x/tos/chips/msp430/adc12/Msp430Adc12SingleChannel.nc"
-inline static uint16_t * Msp430Adc12ImplP__SingleChannel__multipleDataReady(uint8_t arg_0x40bf43f0, uint16_t * buffer, uint16_t numSamples){
+inline static uint16_t * Msp430Adc12ImplP__SingleChannel__multipleDataReady(uint8_t arg_0x40bf7d18, uint16_t * buffer, uint16_t numSamples){
 #line 227
   unsigned int *result;
 #line 227
 
 #line 227
-  switch (arg_0x40bf43f0) {
+  switch (arg_0x40bf7d18) {
 #line 227
     case /*AdcSimpleAppC.AdcReadClientC.Msp430AdcClient*/Msp430Adc12ClientAutoRVGC__0__ID:
 #line 227
@@ -27615,7 +27615,7 @@ inline static uint16_t * Msp430Adc12ImplP__SingleChannel__multipleDataReady(uint
 #line 227
     default:
 #line 227
-      result = Msp430Adc12ImplP__SingleChannel__default__multipleDataReady(arg_0x40bf43f0, buffer, numSamples);
+      result = Msp430Adc12ImplP__SingleChannel__default__multipleDataReady(arg_0x40bf7d18, buffer, numSamples);
 #line 227
       break;
 #line 227
@@ -27656,9 +27656,9 @@ static inline void Msp430Adc12ImplP__MultiChannel__default__dataReady(uint8_t id
 }
 
 # 107 "/home/tinyos/local/src/tinyos-2.x/tos/chips/msp430/adc12/Msp430Adc12MultiChannel.nc"
-inline static void Msp430Adc12ImplP__MultiChannel__dataReady(uint8_t arg_0x40bf2108, uint16_t *buffer, uint16_t numSamples){
+inline static void Msp430Adc12ImplP__MultiChannel__dataReady(uint8_t arg_0x40bf4a08, uint16_t *buffer, uint16_t numSamples){
 #line 107
-    Msp430Adc12ImplP__MultiChannel__default__dataReady(arg_0x40bf2108, buffer, numSamples);
+    Msp430Adc12ImplP__MultiChannel__default__dataReady(arg_0x40bf4a08, buffer, numSamples);
 #line 107
 }
 #line 107
@@ -27669,13 +27669,13 @@ static inline error_t Msp430Adc12ImplP__SingleChannel__default__singleDataReady(
 }
 
 # 206 "/home/tinyos/local/src/tinyos-2.x/tos/chips/msp430/adc12/Msp430Adc12SingleChannel.nc"
-inline static error_t Msp430Adc12ImplP__SingleChannel__singleDataReady(uint8_t arg_0x40bf43f0, uint16_t data){
+inline static error_t Msp430Adc12ImplP__SingleChannel__singleDataReady(uint8_t arg_0x40bf7d18, uint16_t data){
 #line 206
   unsigned char result;
 #line 206
 
 #line 206
-  switch (arg_0x40bf43f0) {
+  switch (arg_0x40bf7d18) {
 #line 206
     case /*AdcSimpleAppC.AdcReadClientC.Msp430AdcClient*/Msp430Adc12ClientAutoRVGC__0__ID:
 #line 206
@@ -27685,7 +27685,7 @@ inline static error_t Msp430Adc12ImplP__SingleChannel__singleDataReady(uint8_t a
 #line 206
     default:
 #line 206
-      result = Msp430Adc12ImplP__SingleChannel__default__singleDataReady(arg_0x40bf43f0, data);
+      result = Msp430Adc12ImplP__SingleChannel__default__singleDataReady(arg_0x40bf7d18, data);
 #line 206
       break;
 #line 206
@@ -27704,9 +27704,9 @@ static inline void Msp430Adc12ImplP__Overflow__default__conversionTimeOverflow(u
 }
 
 # 54 "/home/tinyos/local/src/tinyos-2.x/tos/chips/msp430/adc12/Msp430Adc12Overflow.nc"
-inline static void Msp430Adc12ImplP__Overflow__conversionTimeOverflow(uint8_t arg_0x40bf29f8){
+inline static void Msp430Adc12ImplP__Overflow__conversionTimeOverflow(uint8_t arg_0x40bf2388){
 #line 54
-    Msp430Adc12ImplP__Overflow__default__conversionTimeOverflow(arg_0x40bf29f8);
+    Msp430Adc12ImplP__Overflow__default__conversionTimeOverflow(arg_0x40bf2388);
 #line 54
 }
 #line 54
@@ -27717,9 +27717,9 @@ static inline void Msp430Adc12ImplP__Overflow__default__memOverflow(uint8_t id)
 }
 
 # 49 "/home/tinyos/local/src/tinyos-2.x/tos/chips/msp430/adc12/Msp430Adc12Overflow.nc"
-inline static void Msp430Adc12ImplP__Overflow__memOverflow(uint8_t arg_0x40bf29f8){
+inline static void Msp430Adc12ImplP__Overflow__memOverflow(uint8_t arg_0x40bf2388){
 #line 49
-    Msp430Adc12ImplP__Overflow__default__memOverflow(arg_0x40bf29f8);
+    Msp430Adc12ImplP__Overflow__default__memOverflow(arg_0x40bf2388);
 #line 49
 }
 #line 49
@@ -28044,9 +28044,9 @@ static inline void AdcP__ReadNow__default__readDone(uint8_t client, error_t resu
 }
 
 # 66 "/home/tinyos/local/src/tinyos-2.x/tos/interfaces/ReadNow.nc"
-inline static void AdcP__ReadNow__readDone(uint8_t arg_0x40bbeb08, error_t result, AdcP__ReadNow__val_t val){
+inline static void AdcP__ReadNow__readDone(uint8_t arg_0x40bbe620, error_t result, AdcP__ReadNow__val_t val){
 #line 66
-    AdcP__ReadNow__default__readDone(arg_0x40bbeb08, result, val);
+    AdcP__ReadNow__default__readDone(arg_0x40bbe620, result, val);
 #line 66
 }
 #line 66

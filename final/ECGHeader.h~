@@ -13,7 +13,7 @@ typedef nx_struct ECG_DATA{
   nx_int8_t D5;
   nx_int8_t D6;
   nx_int16_t D7;
-  nx_int8_t TIME;
+  nx_int32_t TIME;
   
 } ECG_DATA;
 
@@ -30,7 +30,13 @@ typedef nx_struct ECG_PACKET{
   
 } ECG_PACKET;
 
-
+typedef nx_struct UPDATE_PATIENT_PACKET{
+  nx_int8_t NODE_ID;
+  nx_int16_t UPDATE_INTERVAL;
+  nx_int16_t BEAT_INTERVAL;
+  nx_int8_t IS_LIVE;
+ 
+} UPDATE_PATIENT_PACKET;
 
 
 

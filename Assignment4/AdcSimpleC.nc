@@ -91,7 +91,7 @@ implementation {
 		
 
 	if(syncTimer == 0 && TOS_NODE_ID == 0 && radioReady== TRUE){
-			call AMSend.send(AM_BROADCAST_ADDR, &msg, sizeof(msg));
+			//call AMSend.send(AM_BROADCAST_ADDR, &msg, sizeof(msg));
 			radioReady = FALSE;
 	}	
 	syncTimer = syncTimer++ % 1000;

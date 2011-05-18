@@ -12,6 +12,7 @@ module patientC {
 	  
 	interface Packet;
 	interface AMPacket;
+        interface Receive;
 	interface AMSend as ECGMsgSend;
 	interface SplitControl as RadioControl;
 	interface GlobalTime<TMilli>;
@@ -33,7 +34,8 @@ module patientC {
   uint16_t seq = 0;
   bool m_busy = TRUE;
   ECG_DATA m_entry;
-
+  // CHANGE THIS FOR REAL LIVE
+  bool LIVE = TRUE;
 
 
   event void Boot.booted(){
@@ -46,7 +48,8 @@ module patientC {
 
   }
 
-
+ //Currently, on button press, read flash and send to base
+ //Change this to be either timed or when flash getting full
   event void Notify.notify (button_state_t state) {
     if ( state == BUTTON_PRESSED) {
       call LogRead.seek(0);
@@ -62,7 +65,12 @@ module patientC {
     };
   }
 
+  //Send message (this will currently loop, sending one message for each peice of data stored
+  // Innefecient, need to ask about sending large messages
   void sendMessage(ECG_DATA * buf){
+	printf("SENDING ECG PACKET\n");
+	printfflush();
+	
 	ECG_PACKET * m_packet = (ECG_PACKET*)(call Packet.getPayload(&msg, sizeof (ECG_PACKET)));
 		m_packet->NODE_ID = ID;
 		m_packet->D1 = buf->D1;
@@ -73,28 +81,25 @@ module patientC {
  		m_packet->D6 = buf->D6;
  		m_packet->D7 = buf->D7;
  		m_packet->TIME = buf->TIME;
+	
+	printf("SENDING ECG PACKET\n");
+	printfflush();
 
 	call ECGMsgSend.send(AM_BROADCAST_ADDR, &msg, sizeof(ECG_PACKET)); 
 
   }
 
-
+  //Event fired after each read from the flash, (ie, each full struct of ECG data is read 
  event void LogRead.readDone(void* buf, storage_len_t len, error_t err) {
     printf("read done!\n");
     if ( (len == sizeof(ECG_DATA)) && (buf == &m_entry) ) {
        //call Send.send(&m_entry.msg, m_entry.len);
-      printf("%i %i %i %i %i %i %i %i ", 		
-		m_entry.D1 , 
- 		m_entry.D2 ,
- 		m_entry.D3 ,
- 		m_entry.D4 ,
- 		m_entry.D5 ,
- 		m_entry.D6 ,
- 		m_entry.D7 ,
- 		m_entry.TIME);
 
-      //sendMessage(buf);
-      printfflush();
+	
+      /* CHANGE THIS TO SEND MESSAGE VIA RADIIO */
+
+      sendMessage(m_entry);
+      
       call Leds.led1On();
       call LogRead.read(&m_entry, sizeof(ECG_DATA));
     }
@@ -151,54 +156,68 @@ event void LogWrite.eraseDone(error_t err) {
 
   }
 
-
+  //Dummy data, should read from ecg. Reads ECG data, stores on flash.
+  //Need to implement local checking to test for emrgency.
   event void ReadTimer.fired(){
 	
 	uint32_t currGlobTime = call GlobalTime.getLocalTime();
         call GlobalTime.getGlobalTime(&currGlobTime);
-
-
-	if (!m_busy) {
-		m_entry.D1 =1;
- 		m_entry.D2 =1;
- 		m_entry.D3 =1;
- 		m_entry.D4 =1;
- 		m_entry.D5 =1;
- 		m_entry.D6 =1;
- 		m_entry.D7 =1;
- 		m_entry.TIME =currGlobTime;
- 		
+	
+	if(LIVE == TRUE){
+		if (!m_busy) {
+			m_entry.D1 =1;
+	 		m_entry.D2 =1;
+	 		m_entry.D3 =1;
+	 		m_entry.D4 =1;
+	 		m_entry.D5 =1;
+	 		m_entry.D6 =1;
+	 		m_entry.D7 =1;
+	 		m_entry.TIME =currGlobTime;
+	 		
 		
-		m_busy = TRUE;
-		if (call LogWrite.append(&m_entry, sizeof(ECG_DATA)) != SUCCESS) {
-		    m_busy = FALSE;
-		    printf("write error");
-		    printfflush();
+			m_busy = TRUE;
+			if (call LogWrite.append(&m_entry, sizeof(ECG_DATA)) != SUCCESS) {
+			    m_busy = FALSE;
+			    printf("write error");
+			    printfflush();
+			}
 		}
-        }
-
-
-
-
-	/*RssiMsg * rssi_msg = (RssiMsg*)(call Packet.getPayload(&msg, sizeof (RssiMsg)));
-
-	Sequence_Number = ++Sequence_Number % 1000;
-
-	
-	
-	rssi_msg->NODE_ID = ID;
-	rssi_msg->seq_num = Sequence_Number;
-
-	if(rssi_msg->NODE_ID == 33){
-		call Leds.led0Toggle();
-	} else {
-		call Leds.led1Toggle();
 	}
-	
-
-
-	call RssiMsgSend.send(AM_BROADCAST_ADDR, &msg, sizeof(RssiMsg));  */  
   }
+
+	// recieves a message 
+    /*Test for message from basestation. This causes the patient node to set its flag to live
+      This enables it to start storing data. Origanlly live will be set to false, however teh beat will
+      start from the moment the node has initalised. This is to allow the basestation to identify that 
+      the node is ready to start, but will not cause problems before the node and patient information has been specified
+      at the basestation.*/
+    event message_t* Receive.receive(message_t* msgPtr, void* payload, uint8_t len)
+    {
+	UPDATE_PATIENT_PACKET * packet;
+
+	if(len == sizeof(UPDATE_PATIENT_PACKET)) {
+	packet = (UPDATE_PATIENT_PACKET*)call Packet.getPayload(msgPtr, 
+					sizeof(UPDATE_PATIENT_PACKET));
+
+		if(packet ->NODE_ID == ID){
+			READ_INTERVAL_MS = packet->READ_INTERVAL;
+                        BEAT_INTERVAL_MS = packet->BEAT_INTERVAL;
+			LIVE = packet->IS_LIVE;
+			
+			printf("UPDATE_PATIENT_PACKET recieved");
+			printfflush();
+			
+		
+		}
+
+	}
+
+
+        return msgPtr;
+    }
+
+
+  
 
   event void ECGMsgSend.sendDone(message_t *m, error_t error){}
 }
