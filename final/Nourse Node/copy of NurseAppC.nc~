@@ -1,0 +1,31 @@
+#include "printf.h"
+
+configuration NurseAppC {
+
+}
+implementation {
+  
+components HplPirC;
+
+
+
+components NurseC as App;
+components  MainC, LedsC;  
+
+
+  App.Boot -> MainC;
+  App.Leds -> LedsC;
+
+components new TimerMilliC() as BuzzTimer;
+
+  App.GpioInterrupt -> HplPirC.GpioInterrupt;
+  App.GeneralIO -> HplPirC.GeneralIO;
+
+  components HplMsp430GeneralIOC;
+  App.ADC5 -> HplMsp430GeneralIOC.Port63;
+
+
+  components UserButtonC;  
+  App.Notify -> UserButtonC;
+
+}
