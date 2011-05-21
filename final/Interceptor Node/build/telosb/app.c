@@ -2752,6 +2752,39 @@ nx_struct udp_report {
 } __attribute__((packed));
 # 118 "/home/tinyos/local/src/tinyos-2.x/tos/lib/net/blip/PrintfUART.h"
 static inline void printfUART_init();
+# 49 "/home/tinyos/local/src/tinyos-2.x/tos/lib/ftsp/TimeSyncMsg.h"
+#line 29
+typedef nx_struct TimeSyncMsg {
+
+  nx_uint16_t rootID;
+  nx_uint16_t nodeID;
+  nx_uint8_t seqNum;
+#line 45
+  nx_uint32_t globalTime;
+
+
+  nx_uint32_t localTime;
+} __attribute__((packed)) TimeSyncMsg;
+
+enum __nesc_unnamed4333 {
+  TIMESYNC_AM_FTSP = 0x3E, 
+  TIMESYNCMSG_LEN = sizeof(TimeSyncMsg ) - sizeof(nx_uint32_t ), 
+  TS_TIMER_MODE = 0, 
+  TS_USER_MODE = 1
+};
+# 32 "/home/tinyos/local/src/tinyos-2.x/tos/chips/cc2420/CC2420TimeSyncMessage.h"
+typedef nx_uint32_t timesync_radio_t;
+
+
+
+
+
+#line 34
+typedef struct timesync_footer_t {
+
+  nx_am_id_t type;
+  timesync_radio_t timestamp;
+} timesync_footer_t;
 # 38 "/home/tinyos/local/src/tinyos-2.x/tos/chips/cc2420/IEEE802154.h"
 enum ieee154_fcf_enums {
   IEEE154_FCF_FRAME_TYPE = 0, 
@@ -2776,25 +2809,25 @@ enum iee154_fcf_addr_mode_enums {
   IEEE154_ADDR_EXT = 3
 };
 # 64 "/home/tinyos/local/src/tinyos-2.x/tos/chips/msp430/dma/Msp430Dma.h"
-enum __nesc_unnamed4333 {
+enum __nesc_unnamed4334 {
   DMA_CHANNELS = 3
 };
 
-enum __nesc_unnamed4334 {
+enum __nesc_unnamed4335 {
   DMA_CHANNEL0 = 0, 
   DMA_CHANNEL1 = 1, 
   DMA_CHANNEL2 = 2, 
   DMA_CHANNEL_UNKNOWN = 3
 };
 
-enum __nesc_unnamed4335 {
+enum __nesc_unnamed4336 {
   DMA_CHANNEL_AVAILABLE = 0, 
   DMA_CHANNEL_IN_USE = 1
 };
 
 
 
-enum __nesc_unnamed4336 {
+enum __nesc_unnamed4337 {
   DMA0TSEL_SHIFT = 0, 
   DMA1TSEL_SHIFT = 4, 
   DMA2TSEL_SHIFT = 8, 
@@ -2805,7 +2838,7 @@ enum __nesc_unnamed4336 {
 };
 #line 110
 #line 93
-typedef enum __nesc_unnamed4337 {
+typedef enum __nesc_unnamed4338 {
   DMA_TRIGGER_DMAREQ = 0x0, 
   DMA_TRIGGER_TACCR2 = 0x1, 
   DMA_TRIGGER_TBCCR2 = 0x2, 
@@ -2835,17 +2868,17 @@ typedef struct dma_channel_trigger_s {
 
 
 
-enum __nesc_unnamed4338 {
+enum __nesc_unnamed4339 {
   DISABLE_NMI = 0, 
   ENABLE_NMI = 1
 };
 
-enum __nesc_unnamed4339 {
+enum __nesc_unnamed4340 {
   NOT_ROUND_ROBIN = 0, 
   ROUND_ROBIN = 1
 };
 
-enum __nesc_unnamed4340 {
+enum __nesc_unnamed4341 {
   NOT_ON_FETCH = 0, 
   ON_FETCH = 1
 };
@@ -2867,7 +2900,7 @@ typedef struct dma_state_s {
 
 
 
-enum __nesc_unnamed4341 {
+enum __nesc_unnamed4342 {
   DMADT_SHIFT = 12, 
   DMADT_MASK = 0x7
 };
@@ -2880,7 +2913,7 @@ enum __nesc_unnamed4341 {
 
 
 #line 150
-typedef enum __nesc_unnamed4342 {
+typedef enum __nesc_unnamed4343 {
   DMA_SINGLE_TRANSFER = 0x0, 
   DMA_BLOCK_TRANSFER = 0x1, 
   DMA_BURST_BLOCK_TRANSFER = 0x2, 
@@ -2890,7 +2923,7 @@ typedef enum __nesc_unnamed4342 {
 } dma_transfer_mode_t;
 
 
-enum __nesc_unnamed4343 {
+enum __nesc_unnamed4344 {
   DMASRCINCR_SHIFT = 8, 
   DMADSTINCR_SHIFT = 10, 
   DMAINCR_MASK = 0x3
@@ -2901,7 +2934,7 @@ enum __nesc_unnamed4343 {
 
 
 #line 166
-typedef enum __nesc_unnamed4344 {
+typedef enum __nesc_unnamed4345 {
   DMA_ADDRESS_UNCHANGED = 0x0, 
   DMA_ADDRESS_DECREMENTED = 0x2, 
   DMA_ADDRESS_INCREMENTED = 0x3
@@ -2911,7 +2944,7 @@ typedef enum __nesc_unnamed4344 {
 
 
 #line 172
-typedef enum __nesc_unnamed4345 {
+typedef enum __nesc_unnamed4346 {
   DMA_WORD = 0x0, 
   DMA_BYTE = 0x1
 } dma_byte_t;
@@ -2921,7 +2954,7 @@ typedef enum __nesc_unnamed4345 {
 
 
 #line 178
-typedef enum __nesc_unnamed4346 {
+typedef enum __nesc_unnamed4347 {
   DMA_EDGE_SENSITIVE = 0x0, 
   DMA_LEVEL_SENSITIVE = 0x1
 } dma_level_t;
@@ -2941,22 +2974,9 @@ typedef struct dma_channel_state_s {
   unsigned int transferMode : 3;
   unsigned int reserved2 : 1;
 } __attribute((packed))  dma_channel_state_t;
-# 32 "/home/tinyos/local/src/tinyos-2.x/tos/chips/cc2420/CC2420TimeSyncMessage.h"
-typedef nx_uint32_t timesync_radio_t;
-
-
-
-
-
-#line 34
-typedef struct timesync_footer_t {
-
-  nx_am_id_t type;
-  timesync_radio_t timestamp;
-} timesync_footer_t;
 # 37 "/home/tinyos/local/src/tinyos-2.x/support/sdk/c/blip/lib6lowpan/in_cksum.h"
 #line 34
-typedef struct __nesc_unnamed4347 {
+typedef struct __nesc_unnamed4348 {
   const uint8_t *ptr;
   int len;
 } vec_t;
@@ -2974,28 +2994,28 @@ void *ip_malloc(uint16_t sz);
 void ip_free(void *ptr);
 # 31 "/home/tinyos/local/src/tinyos-2.x/tos/lib/net/blip/table.h"
 #line 27
-typedef struct __nesc_unnamed4348 {
+typedef struct __nesc_unnamed4349 {
   void *data;
   uint16_t elt_len;
   uint16_t n_elts;
 } table_t;
 
 void table_init(table_t *table, void *data, uint16_t elt_len, uint16_t n_elts);
-void *table_search(table_t *table, int (*pred)(void *arg_0x4143b068));
-void table_map(table_t *table, void (*fn)(void *arg_0x4143b9b8));
+void *table_search(table_t *table, int (*pred)(void *arg_0x41547b00));
+void table_map(table_t *table, void (*fn)(void *arg_0x41545470));
 # 26 "/home/tinyos/local/src/tinyos-2.x/tos/lib/net/blip/IPAddressP.nc"
 extern struct in6_addr __my_address;
 extern uint8_t globalPrefix;
 # 2 "/home/tinyos/local/src/tinyos-2.x/tos/lib/net/blip/platform/CC2420ReadLqiC.nc"
 static uint16_t adjustLQI(uint8_t val);
 # 25 "/home/tinyos/local/src/tinyos-2.x/tos/lib/net/blip/ICMP.h"
-enum __nesc_unnamed4349 {
+enum __nesc_unnamed4350 {
   ICMP_EXT_TYPE_PREFIX = 3, 
   ICMP_EXT_TYPE_BEACON = 17
 };
 
 
-enum __nesc_unnamed4350 {
+enum __nesc_unnamed4351 {
 
   TRICKLE_JITTER = 10240, 
 
@@ -3068,7 +3088,7 @@ typedef nx_struct rpfx {
 
 
 #line 92
-typedef nx_struct __nesc_unnamed4351 {
+typedef nx_struct __nesc_unnamed4352 {
   nx_uint8_t type;
   nx_uint8_t length;
   nx_uint16_t metric;
@@ -3082,10 +3102,10 @@ struct icmp_stats {
   uint32_t rtt;
 };
 # 25 "/home/tinyos/local/src/tinyos-2.x/tos/lib/net/blip/shell/Shell.h"
-enum __nesc_unnamed4352 {
+enum __nesc_unnamed4353 {
   MAX_REPLY_LEN = 128
 };
-enum /*PlatformSerialC.UartC*/Msp430Uart1C__0____nesc_unnamed4353 {
+enum /*PlatformSerialC.UartC*/Msp430Uart1C__0____nesc_unnamed4354 {
   Msp430Uart1C__0__CLIENT_ID = 0U
 };
 typedef T32khz /*Msp430Uart1P.UartP*/Msp430UartP__0__Counter__precision_tag;
@@ -3093,18 +3113,18 @@ typedef uint16_t /*Msp430Uart1P.UartP*/Msp430UartP__0__Counter__size_type;
 typedef T32khz /*Msp430Counter32khzC.Counter*/Msp430CounterC__0__frequency_tag;
 typedef /*Msp430Counter32khzC.Counter*/Msp430CounterC__0__frequency_tag /*Msp430Counter32khzC.Counter*/Msp430CounterC__0__Counter__precision_tag;
 typedef uint16_t /*Msp430Counter32khzC.Counter*/Msp430CounterC__0__Counter__size_type;
-enum /*PlatformSerialC.UartC.UsartC*/Msp430Usart1C__0____nesc_unnamed4354 {
+enum /*PlatformSerialC.UartC.UsartC*/Msp430Usart1C__0____nesc_unnamed4355 {
   Msp430Usart1C__0__CLIENT_ID = 0U
 };
-enum SerialAMQueueP____nesc_unnamed4355 {
+enum SerialAMQueueP____nesc_unnamed4356 {
   SerialAMQueueP__NUM_CLIENTS = 1U
 };
 typedef uint8_t /*PrintfC.QueueC*/QueueC__0__queue_t;
 typedef /*PrintfC.QueueC*/QueueC__0__queue_t /*PrintfC.QueueC*/QueueC__0__Queue__t;
 typedef uint8_t PrintfP__Queue__t;
-typedef TMilli ECG_ForwarderC__Timer0__precision_tag;
-typedef TMilli ECG_ForwarderC__StatusTimer__precision_tag;
-enum /*HilTimerMilliC.AlarmMilli32C.AlarmFrom.Msp430Timer*/Msp430Timer32khzC__0____nesc_unnamed4356 {
+typedef TMilli ECG_ForwarderC__GlobalTime__precision_tag;
+typedef TMilli ECG_ForwarderC__TimeKeeper__precision_tag;
+enum /*HilTimerMilliC.AlarmMilli32C.AlarmFrom.Msp430Timer*/Msp430Timer32khzC__0____nesc_unnamed4357 {
   Msp430Timer32khzC__0__ALARM_ID = 0U
 };
 typedef T32khz /*HilTimerMilliC.AlarmMilli32C.AlarmFrom.Msp430Alarm*/Msp430AlarmC__0__frequency_tag;
@@ -3140,13 +3160,35 @@ typedef TMilli /*HilTimerMilliC.CounterToLocalTimeC*/CounterToLocalTimeC__0__pre
 typedef /*HilTimerMilliC.CounterToLocalTimeC*/CounterToLocalTimeC__0__precision_tag /*HilTimerMilliC.CounterToLocalTimeC*/CounterToLocalTimeC__0__LocalTime__precision_tag;
 typedef /*HilTimerMilliC.CounterToLocalTimeC*/CounterToLocalTimeC__0__precision_tag /*HilTimerMilliC.CounterToLocalTimeC*/CounterToLocalTimeC__0__Counter__precision_tag;
 typedef uint32_t /*HilTimerMilliC.CounterToLocalTimeC*/CounterToLocalTimeC__0__Counter__size_type;
-enum CC2420ActiveMessageC____nesc_unnamed4357 {
+typedef TMilli /*TimeSyncC.TimeSyncP*/TimeSyncP__0__precision_tag;
+typedef /*TimeSyncC.TimeSyncP*/TimeSyncP__0__precision_tag /*TimeSyncC.TimeSyncP*/TimeSyncP__0__GlobalTime__precision_tag;
+typedef /*TimeSyncC.TimeSyncP*/TimeSyncP__0__precision_tag /*TimeSyncC.TimeSyncP*/TimeSyncP__0__LocalTime__precision_tag;
+typedef /*TimeSyncC.TimeSyncP*/TimeSyncP__0__precision_tag /*TimeSyncC.TimeSyncP*/TimeSyncP__0__Send__precision_tag;
+typedef uint32_t /*TimeSyncC.TimeSyncP*/TimeSyncP__0__Send__size_type;
+typedef TMilli /*TimeSyncC.TimeSyncP*/TimeSyncP__0__Timer__precision_tag;
+typedef /*TimeSyncC.TimeSyncP*/TimeSyncP__0__precision_tag /*TimeSyncC.TimeSyncP*/TimeSyncP__0__TimeSyncPacket__precision_tag;
+typedef uint32_t /*TimeSyncC.TimeSyncP*/TimeSyncP__0__TimeSyncPacket__size_type;
+typedef TMilli CC2420TimeSyncMessageP__TimeSyncPacketMilli__precision_tag;
+typedef uint32_t CC2420TimeSyncMessageP__TimeSyncPacketMilli__size_type;
+typedef TMilli CC2420TimeSyncMessageP__TimeSyncAMSendMilli__precision_tag;
+typedef uint32_t CC2420TimeSyncMessageP__TimeSyncAMSendMilli__size_type;
+typedef T32khz CC2420TimeSyncMessageP__PacketTimeStamp32khz__precision_tag;
+typedef uint32_t CC2420TimeSyncMessageP__PacketTimeStamp32khz__size_type;
+typedef T32khz CC2420TimeSyncMessageP__LocalTime32khz__precision_tag;
+typedef TMilli CC2420TimeSyncMessageP__LocalTimeMilli__precision_tag;
+typedef T32khz CC2420TimeSyncMessageP__TimeSyncAMSend32khz__precision_tag;
+typedef uint32_t CC2420TimeSyncMessageP__TimeSyncAMSend32khz__size_type;
+typedef T32khz CC2420TimeSyncMessageP__TimeSyncPacket32khz__precision_tag;
+typedef uint32_t CC2420TimeSyncMessageP__TimeSyncPacket32khz__size_type;
+typedef TMilli CC2420TimeSyncMessageP__PacketTimeStampMilli__precision_tag;
+typedef uint32_t CC2420TimeSyncMessageP__PacketTimeStampMilli__size_type;
+enum CC2420ActiveMessageC____nesc_unnamed4358 {
   CC2420ActiveMessageC__CC2420_AM_SEND_ID = 0U
 };
 typedef T32khz CC2420ControlP__StartupTimer__precision_tag;
 typedef uint32_t CC2420ControlP__StartupTimer__size_type;
 typedef uint16_t CC2420ControlP__ReadRssi__val_t;
-enum /*AlarmMultiplexC.Alarm.Alarm32khz32C.AlarmC.Msp430Timer*/Msp430Timer32khzC__1____nesc_unnamed4358 {
+enum /*AlarmMultiplexC.Alarm.Alarm32khz32C.AlarmC.Msp430Timer*/Msp430Timer32khzC__1____nesc_unnamed4359 {
   Msp430Timer32khzC__1__ALARM_ID = 1U
 };
 typedef T32khz /*AlarmMultiplexC.Alarm.Alarm32khz32C.AlarmC.Msp430Alarm*/Msp430AlarmC__1__frequency_tag;
@@ -3171,38 +3213,38 @@ typedef /*AlarmMultiplexC.Alarm.Alarm32khz32C.Transform*/TransformAlarmC__1__fro
 typedef /*AlarmMultiplexC.Alarm.Alarm32khz32C.Transform*/TransformAlarmC__1__from_size_type /*AlarmMultiplexC.Alarm.Alarm32khz32C.Transform*/TransformAlarmC__1__AlarmFrom__size_type;
 typedef /*AlarmMultiplexC.Alarm.Alarm32khz32C.Transform*/TransformAlarmC__1__to_precision_tag /*AlarmMultiplexC.Alarm.Alarm32khz32C.Transform*/TransformAlarmC__1__Counter__precision_tag;
 typedef /*AlarmMultiplexC.Alarm.Alarm32khz32C.Transform*/TransformAlarmC__1__to_size_type /*AlarmMultiplexC.Alarm.Alarm32khz32C.Transform*/TransformAlarmC__1__Counter__size_type;
-enum /*CC2420ControlC.Spi*/CC2420SpiC__0____nesc_unnamed4359 {
+enum /*CC2420ControlC.Spi*/CC2420SpiC__0____nesc_unnamed4360 {
   CC2420SpiC__0__CLIENT_ID = 0U
 };
-enum /*CC2420SpiWireC.HplCC2420SpiC.SpiC*/Msp430Spi0C__0____nesc_unnamed4360 {
+enum /*CC2420SpiWireC.HplCC2420SpiC.SpiC*/Msp430Spi0C__0____nesc_unnamed4361 {
   Msp430Spi0C__0__CLIENT_ID = 0U
 };
-enum Msp430SpiDma0P____nesc_unnamed4361 {
+enum Msp430SpiDma0P____nesc_unnamed4362 {
   Msp430SpiDma0P__DMA_CHANNELS = 3
 };
-enum Msp430SpiDma0P____nesc_unnamed4362 {
+enum Msp430SpiDma0P____nesc_unnamed4363 {
   Msp430SpiDma0P__DMA_CHANNEL0 = 0, Msp430SpiDma0P__DMA_CHANNEL1 = 1, Msp430SpiDma0P__DMA_CHANNEL2 = 2, Msp430SpiDma0P__DMA_CHANNEL_UNKNOWN = 3
 };
-enum Msp430SpiDma0P____nesc_unnamed4363 {
+enum Msp430SpiDma0P____nesc_unnamed4364 {
   Msp430SpiDma0P__DMA_CHANNEL_AVAILABLE = 0, Msp430SpiDma0P__DMA_CHANNEL_IN_USE = 1
 };
-enum Msp430SpiDma0P____nesc_unnamed4364 {
+enum Msp430SpiDma0P____nesc_unnamed4365 {
   Msp430SpiDma0P__DMA0TSEL_SHIFT = 0, Msp430SpiDma0P__DMA1TSEL_SHIFT = 4, Msp430SpiDma0P__DMA2TSEL_SHIFT = 8, Msp430SpiDma0P__DMATSEL_MASK = (uint16_t )0xf, Msp430SpiDma0P__DMA0TSEL_MASK = 0xf, Msp430SpiDma0P__DMA1TSEL_MASK = 0xf0, Msp430SpiDma0P__DMA2TSEL_MASK = 0xf00
 };
-typedef enum Msp430SpiDma0P____nesc_unnamed4365 {
+typedef enum Msp430SpiDma0P____nesc_unnamed4366 {
   Msp430SpiDma0P__DMA_TRIGGER_DMAREQ = 0x0, Msp430SpiDma0P__DMA_TRIGGER_TACCR2 = 0x1, Msp430SpiDma0P__DMA_TRIGGER_TBCCR2 = 0x2, Msp430SpiDma0P__DMA_TRIGGER_URXIFG0 = 0x3, Msp430SpiDma0P__DMA_TRIGGER_UTXIFG0 = 0x4, Msp430SpiDma0P__DMA_TRIGGER_DAC12IFG = 0x5, Msp430SpiDma0P__DMA_TRIGGER_ADC12IFGx = 0x6, Msp430SpiDma0P__DMA_TRIGGER_TACCR0 = 0x7, Msp430SpiDma0P__DMA_TRIGGER_TBCCR0 = 0x8, Msp430SpiDma0P__DMA_TRIGGER_URXIFG1 = 0x9, Msp430SpiDma0P__DMA_TRIGGER_UTXIFG1 = 0xa, Msp430SpiDma0P__DMA_TRIGGER_MULT = 0xb, Msp430SpiDma0P__DMA_TRIGGER_DMAxIFG = 0xe, Msp430SpiDma0P__DMA_TRIGGER_DMAE0 = 0xf
 } Msp430SpiDma0P__dma_trigger_t;
 typedef struct Msp430SpiDma0P__dma_channel_trigger_s {
   unsigned int trigger : 4;
   unsigned int reserved : 12;
 } __attribute((packed))  Msp430SpiDma0P__dma_channel_trigger_t;
-enum Msp430SpiDma0P____nesc_unnamed4366 {
+enum Msp430SpiDma0P____nesc_unnamed4367 {
   Msp430SpiDma0P__DISABLE_NMI = 0, Msp430SpiDma0P__ENABLE_NMI = 1
 };
-enum Msp430SpiDma0P____nesc_unnamed4367 {
+enum Msp430SpiDma0P____nesc_unnamed4368 {
   Msp430SpiDma0P__NOT_ROUND_ROBIN = 0, Msp430SpiDma0P__ROUND_ROBIN = 1
 };
-enum Msp430SpiDma0P____nesc_unnamed4368 {
+enum Msp430SpiDma0P____nesc_unnamed4369 {
   Msp430SpiDma0P__NOT_ON_FETCH = 0, Msp430SpiDma0P__ON_FETCH = 1
 };
 typedef struct Msp430SpiDma0P__dma_state_s {
@@ -3211,22 +3253,22 @@ typedef struct Msp430SpiDma0P__dma_state_s {
   unsigned int onFetch : 1;
   unsigned int reserved : 13;
 } __attribute((packed))  Msp430SpiDma0P__dma_state_t;
-enum Msp430SpiDma0P____nesc_unnamed4369 {
+enum Msp430SpiDma0P____nesc_unnamed4370 {
   Msp430SpiDma0P__DMADT_SHIFT = 12, Msp430SpiDma0P__DMADT_MASK = 0x7
 };
-typedef enum Msp430SpiDma0P____nesc_unnamed4370 {
+typedef enum Msp430SpiDma0P____nesc_unnamed4371 {
   Msp430SpiDma0P__DMA_SINGLE_TRANSFER = 0x0, Msp430SpiDma0P__DMA_BLOCK_TRANSFER = 0x1, Msp430SpiDma0P__DMA_BURST_BLOCK_TRANSFER = 0x2, Msp430SpiDma0P__DMA_REPEATED_SINGLE_TRANSFER = 0x4, Msp430SpiDma0P__DMA_REPEATED_BLOCK_TRANSFER = 0x5, Msp430SpiDma0P__DMA_REPEATED_BURST_BLOCK_TRANSFER = 0x7
 } Msp430SpiDma0P__dma_transfer_mode_t;
-enum Msp430SpiDma0P____nesc_unnamed4371 {
+enum Msp430SpiDma0P____nesc_unnamed4372 {
   Msp430SpiDma0P__DMASRCINCR_SHIFT = 8, Msp430SpiDma0P__DMADSTINCR_SHIFT = 10, Msp430SpiDma0P__DMAINCR_MASK = 0x3
 };
-typedef enum Msp430SpiDma0P____nesc_unnamed4372 {
+typedef enum Msp430SpiDma0P____nesc_unnamed4373 {
   Msp430SpiDma0P__DMA_ADDRESS_UNCHANGED = 0x0, Msp430SpiDma0P__DMA_ADDRESS_DECREMENTED = 0x2, Msp430SpiDma0P__DMA_ADDRESS_INCREMENTED = 0x3
 } Msp430SpiDma0P__dma_incr_t;
-typedef enum Msp430SpiDma0P____nesc_unnamed4373 {
+typedef enum Msp430SpiDma0P____nesc_unnamed4374 {
   Msp430SpiDma0P__DMA_WORD = 0x0, Msp430SpiDma0P__DMA_BYTE = 0x1
 } Msp430SpiDma0P__dma_byte_t;
-typedef enum Msp430SpiDma0P____nesc_unnamed4374 {
+typedef enum Msp430SpiDma0P____nesc_unnamed4375 {
   Msp430SpiDma0P__DMA_EDGE_SENSITIVE = 0x0, Msp430SpiDma0P__DMA_LEVEL_SENSITIVE = 0x1
 } Msp430SpiDma0P__dma_level_t;
 typedef struct Msp430SpiDma0P__dma_channel_state_s {
@@ -3243,20 +3285,20 @@ typedef struct Msp430SpiDma0P__dma_channel_state_s {
   unsigned int transferMode : 3;
   unsigned int reserved2 : 1;
 } __attribute((packed))  Msp430SpiDma0P__dma_channel_state_t;
-enum /*CC2420SpiWireC.HplCC2420SpiC.SpiC.UsartC*/Msp430Usart0C__0____nesc_unnamed4375 {
+enum /*CC2420SpiWireC.HplCC2420SpiC.SpiC.UsartC*/Msp430Usart0C__0____nesc_unnamed4376 {
   Msp430Usart0C__0__CLIENT_ID = 0U
 };
-enum /*CC2420ControlC.SyncSpiC*/CC2420SpiC__1____nesc_unnamed4376 {
+enum /*CC2420ControlC.SyncSpiC*/CC2420SpiC__1____nesc_unnamed4377 {
   CC2420SpiC__1__CLIENT_ID = 1U
 };
-enum /*CC2420ControlC.RssiResource*/CC2420SpiC__2____nesc_unnamed4377 {
+enum /*CC2420ControlC.RssiResource*/CC2420SpiC__2____nesc_unnamed4378 {
   CC2420SpiC__2__CLIENT_ID = 2U
 };
 typedef T32khz CC2420TransmitP__PacketTimeStamp__precision_tag;
 typedef uint32_t CC2420TransmitP__PacketTimeStamp__size_type;
 typedef T32khz CC2420TransmitP__BackoffTimer__precision_tag;
 typedef uint32_t CC2420TransmitP__BackoffTimer__size_type;
-enum /*CC2420TransmitC.Spi*/CC2420SpiC__3____nesc_unnamed4378 {
+enum /*CC2420TransmitC.Spi*/CC2420SpiC__3____nesc_unnamed4379 {
   CC2420SpiC__3__CLIENT_ID = 3U
 };
 typedef T32khz CC2420ReceiveP__PacketTimeStamp__precision_tag;
@@ -3271,17 +3313,21 @@ typedef T32khz /*CC2420PacketC.CounterToLocalTimeC*/CounterToLocalTimeC__1__prec
 typedef /*CC2420PacketC.CounterToLocalTimeC*/CounterToLocalTimeC__1__precision_tag /*CC2420PacketC.CounterToLocalTimeC*/CounterToLocalTimeC__1__LocalTime__precision_tag;
 typedef /*CC2420PacketC.CounterToLocalTimeC*/CounterToLocalTimeC__1__precision_tag /*CC2420PacketC.CounterToLocalTimeC*/CounterToLocalTimeC__1__Counter__precision_tag;
 typedef uint32_t /*CC2420PacketC.CounterToLocalTimeC*/CounterToLocalTimeC__1__Counter__size_type;
-enum /*CC2420ReceiveC.Spi*/CC2420SpiC__4____nesc_unnamed4379 {
+enum /*CC2420ReceiveC.Spi*/CC2420SpiC__4____nesc_unnamed4380 {
   CC2420SpiC__4__CLIENT_ID = 4U
 };
 typedef uint16_t RandomMlcgC__SeedInit__parameter;
-enum CC2420TinyosNetworkC____nesc_unnamed4380 {
+enum CC2420TinyosNetworkC____nesc_unnamed4381 {
   CC2420TinyosNetworkC__TINYOS_N_NETWORKS = 2U
 };
 typedef TMilli PacketLinkP__DelayTimer__precision_tag;
-enum AMQueueP____nesc_unnamed4381 {
-  AMQueueP__NUM_CLIENTS = 1U
+enum AMQueueP____nesc_unnamed4382 {
+  AMQueueP__NUM_CLIENTS = 2U
 };
+typedef T32khz /*CC2420TimeSyncMessageC.LocalTime32khzC*/CounterToLocalTimeC__2__precision_tag;
+typedef /*CC2420TimeSyncMessageC.LocalTime32khzC*/CounterToLocalTimeC__2__precision_tag /*CC2420TimeSyncMessageC.LocalTime32khzC*/CounterToLocalTimeC__2__LocalTime__precision_tag;
+typedef /*CC2420TimeSyncMessageC.LocalTime32khzC*/CounterToLocalTimeC__2__precision_tag /*CC2420TimeSyncMessageC.LocalTime32khzC*/CounterToLocalTimeC__2__Counter__precision_tag;
+typedef uint32_t /*CC2420TimeSyncMessageC.LocalTime32khzC*/CounterToLocalTimeC__2__Counter__size_type;
 typedef send_info_t IPDispatchP__SendInfoPool__t;
 typedef send_entry_t *IPDispatchP__SendQueue__t;
 typedef TMilli IPDispatchP__ExpireTimer__precision_tag;
@@ -4291,16 +4337,18 @@ error_t error);
 static void PrintfP__retrySend__runTask(void );
 # 49 "/home/tinyos/local/src/tinyos-2.x/tos/interfaces/Boot.nc"
 static void PrintfP__MainBoot__booted(void );
-# 72 "/home/tinyos/local/src/tinyos-2.x/tos/lib/timer/Timer.nc"
-static void ECG_ForwarderC__Timer0__fired(void );
 # 92 "/home/tinyos/local/src/tinyos-2.x/tos/interfaces/SplitControl.nc"
 static void ECG_ForwarderC__AMControl__startDone(error_t error);
 #line 117
 static void ECG_ForwarderC__AMControl__stopDone(error_t error);
 # 49 "/home/tinyos/local/src/tinyos-2.x/tos/interfaces/Boot.nc"
 static void ECG_ForwarderC__Boot__booted(void );
+# 92 "/home/tinyos/local/src/tinyos-2.x/tos/interfaces/SplitControl.nc"
+static void ECG_ForwarderC__RadioControl__startDone(error_t error);
+#line 117
+static void ECG_ForwarderC__RadioControl__stopDone(error_t error);
 # 99 "/home/tinyos/local/src/tinyos-2.x/tos/interfaces/AMSend.nc"
-static void ECG_ForwarderC__AMSend__sendDone(
+static void ECG_ForwarderC__ECGMsgSend__sendDone(
 #line 92
 message_t * msg, 
 
@@ -4310,15 +4358,9 @@ message_t * msg,
 
 
 error_t error);
-# 92 "/home/tinyos/local/src/tinyos-2.x/tos/interfaces/SplitControl.nc"
-static void ECG_ForwarderC__RadioControl__startDone(error_t error);
-#line 117
-static void ECG_ForwarderC__RadioControl__stopDone(error_t error);
 # 24 "/home/tinyos/local/src/tinyos-2.x/tos/lib/net/blip/interfaces/UDP.nc"
 static void ECG_ForwarderC__Status__recvfrom(struct sockaddr_in6 *src, void *payload, 
 uint16_t len, struct ip_metadata *meta);
-# 72 "/home/tinyos/local/src/tinyos-2.x/tos/lib/timer/Timer.nc"
-static void ECG_ForwarderC__StatusTimer__fired(void );
 # 67 "/home/tinyos/local/src/tinyos-2.x/tos/interfaces/Receive.nc"
 static 
 #line 63
@@ -4336,6 +4378,8 @@ void * payload,
 
 
 uint8_t len);
+# 72 "/home/tinyos/local/src/tinyos-2.x/tos/lib/timer/Timer.nc"
+static void ECG_ForwarderC__TimeKeeper__fired(void );
 # 34 "/home/tinyos/local/src/tinyos-2.x/tos/chips/msp430/timer/Msp430Compare.nc"
 static void /*HilTimerMilliC.AlarmMilli32C.AlarmFrom.Msp430Alarm*/Msp430AlarmC__0__Msp430Compare__fired(void );
 # 37 "/home/tinyos/local/src/tinyos-2.x/tos/chips/msp430/timer/Msp430Timer.nc"
@@ -4382,15 +4426,15 @@ static void /*HilTimerMilliC.VirtualizeTimerC*/VirtualizeTimerC__0__TimerFrom__f
 #line 72
 static void /*HilTimerMilliC.VirtualizeTimerC*/VirtualizeTimerC__0__Timer__default__fired(
 # 37 "/home/tinyos/local/src/tinyos-2.x/tos/lib/timer/VirtualizeTimerC.nc"
-uint8_t arg_0x40caf068);
+uint8_t arg_0x40caf2d8);
 # 81 "/home/tinyos/local/src/tinyos-2.x/tos/lib/timer/Timer.nc"
 static bool /*HilTimerMilliC.VirtualizeTimerC*/VirtualizeTimerC__0__Timer__isRunning(
 # 37 "/home/tinyos/local/src/tinyos-2.x/tos/lib/timer/VirtualizeTimerC.nc"
-uint8_t arg_0x40caf068);
+uint8_t arg_0x40caf2d8);
 # 53 "/home/tinyos/local/src/tinyos-2.x/tos/lib/timer/Timer.nc"
 static void /*HilTimerMilliC.VirtualizeTimerC*/VirtualizeTimerC__0__Timer__startPeriodic(
 # 37 "/home/tinyos/local/src/tinyos-2.x/tos/lib/timer/VirtualizeTimerC.nc"
-uint8_t arg_0x40caf068, 
+uint8_t arg_0x40caf2d8, 
 # 53 "/home/tinyos/local/src/tinyos-2.x/tos/lib/timer/Timer.nc"
 uint32_t dt);
 
@@ -4403,7 +4447,7 @@ uint32_t dt);
 
 static void /*HilTimerMilliC.VirtualizeTimerC*/VirtualizeTimerC__0__Timer__startOneShot(
 # 37 "/home/tinyos/local/src/tinyos-2.x/tos/lib/timer/VirtualizeTimerC.nc"
-uint8_t arg_0x40caf068, 
+uint8_t arg_0x40caf2d8, 
 # 62 "/home/tinyos/local/src/tinyos-2.x/tos/lib/timer/Timer.nc"
 uint32_t dt);
 
@@ -4412,11 +4456,206 @@ uint32_t dt);
 
 static void /*HilTimerMilliC.VirtualizeTimerC*/VirtualizeTimerC__0__Timer__stop(
 # 37 "/home/tinyos/local/src/tinyos-2.x/tos/lib/timer/VirtualizeTimerC.nc"
-uint8_t arg_0x40caf068);
+uint8_t arg_0x40caf2d8);
 # 50 "/home/tinyos/local/src/tinyos-2.x/tos/lib/timer/LocalTime.nc"
 static uint32_t /*HilTimerMilliC.CounterToLocalTimeC*/CounterToLocalTimeC__0__LocalTime__get(void );
 # 71 "/home/tinyos/local/src/tinyos-2.x/tos/lib/timer/Counter.nc"
 static void /*HilTimerMilliC.CounterToLocalTimeC*/CounterToLocalTimeC__0__Counter__overflow(void );
+# 49 "/home/tinyos/local/src/tinyos-2.x/tos/interfaces/Boot.nc"
+static void /*TimeSyncC.TimeSyncP*/TimeSyncP__0__Boot__booted(void );
+# 31 "/home/tinyos/local/src/tinyos-2.x/tos/lib/ftsp/GlobalTime.nc"
+static uint32_t /*TimeSyncC.TimeSyncP*/TimeSyncP__0__GlobalTime__getLocalTime(void );
+
+
+
+
+
+
+static error_t /*TimeSyncC.TimeSyncP*/TimeSyncP__0__GlobalTime__getGlobalTime(uint32_t *time);
+#line 55
+static error_t /*TimeSyncC.TimeSyncP*/TimeSyncP__0__GlobalTime__local2Global(uint32_t *time);
+# 92 "/home/tinyos/local/src/tinyos-2.x/tos/interfaces/SplitControl.nc"
+static void /*TimeSyncC.TimeSyncP*/TimeSyncP__0__RadioControl__startDone(error_t error);
+#line 117
+static void /*TimeSyncC.TimeSyncP*/TimeSyncP__0__RadioControl__stopDone(error_t error);
+# 82 "/home/tinyos/local/src/tinyos-2.x/tos/interfaces/TimeSyncAMSend.nc"
+static void /*TimeSyncC.TimeSyncP*/TimeSyncP__0__Send__sendDone(message_t *msg, error_t error);
+# 51 "/home/tinyos/local/src/tinyos-2.x/tos/interfaces/Init.nc"
+static error_t /*TimeSyncC.TimeSyncP*/TimeSyncP__0__Init__init(void );
+# 67 "/home/tinyos/local/src/tinyos-2.x/tos/interfaces/Receive.nc"
+static 
+#line 63
+message_t * 
+
+
+
+/*TimeSyncC.TimeSyncP*/TimeSyncP__0__Receive__receive(
+#line 60
+message_t * msg, 
+void * payload, 
+
+
+
+
+
+uint8_t len);
+# 39 "/home/tinyos/local/src/tinyos-2.x/tos/lib/ftsp/TimeSyncMode.nc"
+static error_t /*TimeSyncC.TimeSyncP*/TimeSyncP__0__TimeSyncMode__setMode(uint8_t mode);
+# 64 "/home/tinyos/local/src/tinyos-2.x/tos/interfaces/TaskBasic.nc"
+static void /*TimeSyncC.TimeSyncP*/TimeSyncP__0__sendMsg__runTask(void );
+#line 64
+static void /*TimeSyncC.TimeSyncP*/TimeSyncP__0__processMsg__runTask(void );
+# 35 "/home/tinyos/local/src/tinyos-2.x/tos/lib/ftsp/TimeSyncNotify.nc"
+static void /*TimeSyncC.TimeSyncP*/TimeSyncP__0__TimeSyncNotify__default__msg_received(void );
+
+
+
+
+
+static void /*TimeSyncC.TimeSyncP*/TimeSyncP__0__TimeSyncNotify__default__msg_sent(void );
+# 74 "/home/tinyos/local/src/tinyos-2.x/tos/interfaces/StdControl.nc"
+static error_t /*TimeSyncC.TimeSyncP*/TimeSyncP__0__StdControl__start(void );
+# 72 "/home/tinyos/local/src/tinyos-2.x/tos/lib/timer/Timer.nc"
+static void /*TimeSyncC.TimeSyncP*/TimeSyncP__0__Timer__fired(void );
+# 67 "/home/tinyos/local/src/tinyos-2.x/tos/interfaces/Receive.nc"
+static 
+#line 63
+message_t * 
+
+
+
+CC2420TimeSyncMessageP__SubReceive__receive(
+#line 60
+message_t * msg, 
+void * payload, 
+
+
+
+
+
+uint8_t len);
+# 99 "/home/tinyos/local/src/tinyos-2.x/tos/interfaces/AMSend.nc"
+static void CC2420TimeSyncMessageP__SubSend__sendDone(
+#line 92
+message_t * msg, 
+
+
+
+
+
+
+error_t error);
+# 35 "/home/tinyos/local/src/tinyos-2.x/tos/interfaces/TimeSyncPacket.nc"
+static bool CC2420TimeSyncMessageP__TimeSyncPacketMilli__isValid(message_t *msg);
+
+
+
+
+
+
+
+
+
+static CC2420TimeSyncMessageP__TimeSyncPacketMilli__size_type CC2420TimeSyncMessageP__TimeSyncPacketMilli__eventTime(message_t *msg);
+# 53 "/home/tinyos/local/src/tinyos-2.x/tos/interfaces/TimeSyncAMSend.nc"
+static error_t CC2420TimeSyncMessageP__TimeSyncAMSendMilli__send(
+# 31 "/home/tinyos/local/src/tinyos-2.x/tos/chips/cc2420/CC2420TimeSyncMessageP.nc"
+uint8_t arg_0x40d71148, 
+# 53 "/home/tinyos/local/src/tinyos-2.x/tos/interfaces/TimeSyncAMSend.nc"
+am_addr_t addr, message_t *msg, uint8_t len, CC2420TimeSyncMessageP__TimeSyncAMSendMilli__size_type event_time);
+#line 103
+static void *CC2420TimeSyncMessageP__TimeSyncAMSendMilli__getPayload(
+# 31 "/home/tinyos/local/src/tinyos-2.x/tos/chips/cc2420/CC2420TimeSyncMessageP.nc"
+uint8_t arg_0x40d71148, 
+# 103 "/home/tinyos/local/src/tinyos-2.x/tos/interfaces/TimeSyncAMSend.nc"
+message_t *msg, uint8_t len);
+#line 82
+static void CC2420TimeSyncMessageP__TimeSyncAMSendMilli__default__sendDone(
+# 31 "/home/tinyos/local/src/tinyos-2.x/tos/chips/cc2420/CC2420TimeSyncMessageP.nc"
+uint8_t arg_0x40d71148, 
+# 82 "/home/tinyos/local/src/tinyos-2.x/tos/interfaces/TimeSyncAMSend.nc"
+message_t *msg, error_t error);
+# 67 "/home/tinyos/local/src/tinyos-2.x/tos/interfaces/Packet.nc"
+static uint8_t CC2420TimeSyncMessageP__Packet__payloadLength(
+#line 63
+message_t * msg);
+# 67 "/home/tinyos/local/src/tinyos-2.x/tos/interfaces/Receive.nc"
+static 
+#line 63
+message_t * 
+
+
+
+CC2420TimeSyncMessageP__Snoop__default__receive(
+# 39 "/home/tinyos/local/src/tinyos-2.x/tos/chips/cc2420/CC2420TimeSyncMessageP.nc"
+am_id_t arg_0x40d9a5b8, 
+# 60 "/home/tinyos/local/src/tinyos-2.x/tos/interfaces/Receive.nc"
+message_t * msg, 
+void * payload, 
+
+
+
+
+
+uint8_t len);
+#line 67
+static 
+#line 63
+message_t * 
+
+
+
+CC2420TimeSyncMessageP__Receive__default__receive(
+# 38 "/home/tinyos/local/src/tinyos-2.x/tos/chips/cc2420/CC2420TimeSyncMessageP.nc"
+am_id_t arg_0x40d9ce70, 
+# 60 "/home/tinyos/local/src/tinyos-2.x/tos/interfaces/Receive.nc"
+message_t * msg, 
+void * payload, 
+
+
+
+
+
+uint8_t len);
+# 53 "/home/tinyos/local/src/tinyos-2.x/tos/interfaces/TimeSyncAMSend.nc"
+static error_t CC2420TimeSyncMessageP__TimeSyncAMSend32khz__send(
+# 30 "/home/tinyos/local/src/tinyos-2.x/tos/chips/cc2420/CC2420TimeSyncMessageP.nc"
+uint8_t arg_0x40d743f8, 
+# 53 "/home/tinyos/local/src/tinyos-2.x/tos/interfaces/TimeSyncAMSend.nc"
+am_addr_t addr, message_t *msg, uint8_t len, CC2420TimeSyncMessageP__TimeSyncAMSend32khz__size_type event_time);
+#line 103
+static void *CC2420TimeSyncMessageP__TimeSyncAMSend32khz__getPayload(
+# 30 "/home/tinyos/local/src/tinyos-2.x/tos/chips/cc2420/CC2420TimeSyncMessageP.nc"
+uint8_t arg_0x40d743f8, 
+# 103 "/home/tinyos/local/src/tinyos-2.x/tos/interfaces/TimeSyncAMSend.nc"
+message_t *msg, uint8_t len);
+#line 82
+static void CC2420TimeSyncMessageP__TimeSyncAMSend32khz__default__sendDone(
+# 30 "/home/tinyos/local/src/tinyos-2.x/tos/chips/cc2420/CC2420TimeSyncMessageP.nc"
+uint8_t arg_0x40d743f8, 
+# 82 "/home/tinyos/local/src/tinyos-2.x/tos/interfaces/TimeSyncAMSend.nc"
+message_t *msg, error_t error);
+# 136 "/home/tinyos/local/src/tinyos-2.x/tos/interfaces/AMPacket.nc"
+static am_id_t CC2420TimeSyncMessageP__AMPacket__type(
+#line 132
+message_t * amsg);
+# 67 "/home/tinyos/local/src/tinyos-2.x/tos/interfaces/Receive.nc"
+static 
+#line 63
+message_t * 
+
+
+
+CC2420TimeSyncMessageP__SubSnoop__receive(
+#line 60
+message_t * msg, 
+void * payload, 
+
+
+
+
+
+uint8_t len);
 # 83 "/home/tinyos/local/src/tinyos-2.x/tos/interfaces/SplitControl.nc"
 static error_t CC2420CsmaP__SplitControl__start(void );
 #line 109
@@ -4688,31 +4927,31 @@ error_t error);
 # 62 "/home/tinyos/local/src/tinyos-2.x/tos/chips/cc2420/interfaces/CC2420Fifo.nc"
 static error_t CC2420SpiP__Fifo__continueRead(
 # 46 "/home/tinyos/local/src/tinyos-2.x/tos/chips/cc2420/spi/CC2420SpiP.nc"
-uint8_t arg_0x40eee010, 
+uint8_t arg_0x40fc5010, 
 # 62 "/home/tinyos/local/src/tinyos-2.x/tos/chips/cc2420/interfaces/CC2420Fifo.nc"
 uint8_t * data, uint8_t length);
 #line 91
 static void CC2420SpiP__Fifo__default__writeDone(
 # 46 "/home/tinyos/local/src/tinyos-2.x/tos/chips/cc2420/spi/CC2420SpiP.nc"
-uint8_t arg_0x40eee010, 
+uint8_t arg_0x40fc5010, 
 # 91 "/home/tinyos/local/src/tinyos-2.x/tos/chips/cc2420/interfaces/CC2420Fifo.nc"
 uint8_t * data, uint8_t length, error_t error);
 #line 82
 static cc2420_status_t CC2420SpiP__Fifo__write(
 # 46 "/home/tinyos/local/src/tinyos-2.x/tos/chips/cc2420/spi/CC2420SpiP.nc"
-uint8_t arg_0x40eee010, 
+uint8_t arg_0x40fc5010, 
 # 82 "/home/tinyos/local/src/tinyos-2.x/tos/chips/cc2420/interfaces/CC2420Fifo.nc"
 uint8_t * data, uint8_t length);
 #line 51
 static cc2420_status_t CC2420SpiP__Fifo__beginRead(
 # 46 "/home/tinyos/local/src/tinyos-2.x/tos/chips/cc2420/spi/CC2420SpiP.nc"
-uint8_t arg_0x40eee010, 
+uint8_t arg_0x40fc5010, 
 # 51 "/home/tinyos/local/src/tinyos-2.x/tos/chips/cc2420/interfaces/CC2420Fifo.nc"
 uint8_t * data, uint8_t length);
 #line 71
 static void CC2420SpiP__Fifo__default__readDone(
 # 46 "/home/tinyos/local/src/tinyos-2.x/tos/chips/cc2420/spi/CC2420SpiP.nc"
-uint8_t arg_0x40eee010, 
+uint8_t arg_0x40fc5010, 
 # 71 "/home/tinyos/local/src/tinyos-2.x/tos/chips/cc2420/interfaces/CC2420Fifo.nc"
 uint8_t * data, uint8_t length, error_t error);
 # 31 "/home/tinyos/local/src/tinyos-2.x/tos/chips/cc2420/interfaces/ChipSpiResource.nc"
@@ -4730,13 +4969,13 @@ static void CC2420SpiP__SpiResource__granted(void );
 # 63 "/home/tinyos/local/src/tinyos-2.x/tos/chips/cc2420/interfaces/CC2420Ram.nc"
 static cc2420_status_t CC2420SpiP__Ram__write(
 # 47 "/home/tinyos/local/src/tinyos-2.x/tos/chips/cc2420/spi/CC2420SpiP.nc"
-uint16_t arg_0x40eeea38, 
+uint16_t arg_0x40fc5a38, 
 # 63 "/home/tinyos/local/src/tinyos-2.x/tos/chips/cc2420/interfaces/CC2420Ram.nc"
 uint8_t offset, uint8_t * data, uint8_t length);
 # 47 "/home/tinyos/local/src/tinyos-2.x/tos/chips/cc2420/interfaces/CC2420Register.nc"
 static cc2420_status_t CC2420SpiP__Reg__read(
 # 48 "/home/tinyos/local/src/tinyos-2.x/tos/chips/cc2420/spi/CC2420SpiP.nc"
-uint8_t arg_0x40eed200, 
+uint8_t arg_0x40fc3200, 
 # 47 "/home/tinyos/local/src/tinyos-2.x/tos/chips/cc2420/interfaces/CC2420Register.nc"
 uint16_t *data);
 
@@ -4748,59 +4987,59 @@ uint16_t *data);
 
 static cc2420_status_t CC2420SpiP__Reg__write(
 # 48 "/home/tinyos/local/src/tinyos-2.x/tos/chips/cc2420/spi/CC2420SpiP.nc"
-uint8_t arg_0x40eed200, 
+uint8_t arg_0x40fc3200, 
 # 55 "/home/tinyos/local/src/tinyos-2.x/tos/chips/cc2420/interfaces/CC2420Register.nc"
 uint16_t data);
 # 110 "/home/tinyos/local/src/tinyos-2.x/tos/interfaces/Resource.nc"
 static error_t CC2420SpiP__Resource__release(
 # 45 "/home/tinyos/local/src/tinyos-2.x/tos/chips/cc2420/spi/CC2420SpiP.nc"
-uint8_t arg_0x40eb95c8);
+uint8_t arg_0x40fc65c8);
 # 87 "/home/tinyos/local/src/tinyos-2.x/tos/interfaces/Resource.nc"
 static error_t CC2420SpiP__Resource__immediateRequest(
 # 45 "/home/tinyos/local/src/tinyos-2.x/tos/chips/cc2420/spi/CC2420SpiP.nc"
-uint8_t arg_0x40eb95c8);
+uint8_t arg_0x40fc65c8);
 # 78 "/home/tinyos/local/src/tinyos-2.x/tos/interfaces/Resource.nc"
 static error_t CC2420SpiP__Resource__request(
 # 45 "/home/tinyos/local/src/tinyos-2.x/tos/chips/cc2420/spi/CC2420SpiP.nc"
-uint8_t arg_0x40eb95c8);
+uint8_t arg_0x40fc65c8);
 # 92 "/home/tinyos/local/src/tinyos-2.x/tos/interfaces/Resource.nc"
 static void CC2420SpiP__Resource__default__granted(
 # 45 "/home/tinyos/local/src/tinyos-2.x/tos/chips/cc2420/spi/CC2420SpiP.nc"
-uint8_t arg_0x40eb95c8);
+uint8_t arg_0x40fc65c8);
 # 118 "/home/tinyos/local/src/tinyos-2.x/tos/interfaces/Resource.nc"
 static bool CC2420SpiP__Resource__isOwner(
 # 45 "/home/tinyos/local/src/tinyos-2.x/tos/chips/cc2420/spi/CC2420SpiP.nc"
-uint8_t arg_0x40eb95c8);
+uint8_t arg_0x40fc65c8);
 # 64 "/home/tinyos/local/src/tinyos-2.x/tos/interfaces/TaskBasic.nc"
 static void CC2420SpiP__grant__runTask(void );
 # 45 "/home/tinyos/local/src/tinyos-2.x/tos/chips/cc2420/interfaces/CC2420Strobe.nc"
 static cc2420_status_t CC2420SpiP__Strobe__strobe(
 # 49 "/home/tinyos/local/src/tinyos-2.x/tos/chips/cc2420/spi/CC2420SpiP.nc"
-uint8_t arg_0x40eed9b8);
+uint8_t arg_0x40fc39b8);
 # 51 "/home/tinyos/local/src/tinyos-2.x/tos/interfaces/Init.nc"
 static error_t StateImplP__Init__init(void );
 # 71 "/home/tinyos/local/src/tinyos-2.x/tos/interfaces/State.nc"
 static uint8_t StateImplP__State__getState(
 # 67 "/home/tinyos/local/src/tinyos-2.x/tos/system/StateImplP.nc"
-uint8_t arg_0x40f17d18);
+uint8_t arg_0x40ff5d18);
 # 56 "/home/tinyos/local/src/tinyos-2.x/tos/interfaces/State.nc"
 static void StateImplP__State__toIdle(
 # 67 "/home/tinyos/local/src/tinyos-2.x/tos/system/StateImplP.nc"
-uint8_t arg_0x40f17d18);
+uint8_t arg_0x40ff5d18);
 # 66 "/home/tinyos/local/src/tinyos-2.x/tos/interfaces/State.nc"
 static bool StateImplP__State__isState(
 # 67 "/home/tinyos/local/src/tinyos-2.x/tos/system/StateImplP.nc"
-uint8_t arg_0x40f17d18, 
+uint8_t arg_0x40ff5d18, 
 # 66 "/home/tinyos/local/src/tinyos-2.x/tos/interfaces/State.nc"
 uint8_t myState);
 #line 61
 static bool StateImplP__State__isIdle(
 # 67 "/home/tinyos/local/src/tinyos-2.x/tos/system/StateImplP.nc"
-uint8_t arg_0x40f17d18);
+uint8_t arg_0x40ff5d18);
 # 45 "/home/tinyos/local/src/tinyos-2.x/tos/interfaces/State.nc"
 static error_t StateImplP__State__requestState(
 # 67 "/home/tinyos/local/src/tinyos-2.x/tos/system/StateImplP.nc"
-uint8_t arg_0x40f17d18, 
+uint8_t arg_0x40ff5d18, 
 # 45 "/home/tinyos/local/src/tinyos-2.x/tos/interfaces/State.nc"
 uint8_t reqState);
 
@@ -4810,21 +5049,21 @@ uint8_t reqState);
 
 static void StateImplP__State__forceState(
 # 67 "/home/tinyos/local/src/tinyos-2.x/tos/system/StateImplP.nc"
-uint8_t arg_0x40f17d18, 
+uint8_t arg_0x40ff5d18, 
 # 51 "/home/tinyos/local/src/tinyos-2.x/tos/interfaces/State.nc"
 uint8_t reqState);
 # 55 "/home/tinyos/local/src/tinyos-2.x/tos/interfaces/ResourceConfigure.nc"
 static void /*Msp430SpiDma0P.SpiP*/Msp430SpiDmaP__0__ResourceConfigure__unconfigure(
 # 49 "/home/tinyos/local/src/tinyos-2.x/tos/chips/msp430/usart/Msp430SpiDmaP.nc"
-uint8_t arg_0x40f586b0);
+uint8_t arg_0x4103b6b0);
 # 49 "/home/tinyos/local/src/tinyos-2.x/tos/interfaces/ResourceConfigure.nc"
 static void /*Msp430SpiDma0P.SpiP*/Msp430SpiDmaP__0__ResourceConfigure__configure(
 # 49 "/home/tinyos/local/src/tinyos-2.x/tos/chips/msp430/usart/Msp430SpiDmaP.nc"
-uint8_t arg_0x40f586b0);
+uint8_t arg_0x4103b6b0);
 # 59 "/home/tinyos/local/src/tinyos-2.x/tos/interfaces/SpiPacket.nc"
 static error_t /*Msp430SpiDma0P.SpiP*/Msp430SpiDmaP__0__SpiPacket__send(
 # 51 "/home/tinyos/local/src/tinyos-2.x/tos/chips/msp430/usart/Msp430SpiDmaP.nc"
-uint8_t arg_0x40f561b8, 
+uint8_t arg_0x4103a1b8, 
 # 48 "/home/tinyos/local/src/tinyos-2.x/tos/interfaces/SpiPacket.nc"
 uint8_t * txBuf, 
 
@@ -4841,7 +5080,7 @@ uint16_t len);
 #line 71
 static void /*Msp430SpiDma0P.SpiP*/Msp430SpiDmaP__0__SpiPacket__default__sendDone(
 # 51 "/home/tinyos/local/src/tinyos-2.x/tos/chips/msp430/usart/Msp430SpiDmaP.nc"
-uint8_t arg_0x40f561b8, 
+uint8_t arg_0x4103a1b8, 
 # 64 "/home/tinyos/local/src/tinyos-2.x/tos/interfaces/SpiPacket.nc"
 uint8_t * txBuf, 
 uint8_t * rxBuf, 
@@ -4855,7 +5094,7 @@ error_t error);
 # 39 "/home/tinyos/local/src/tinyos-2.x/tos/chips/msp430/usart/Msp430SpiConfigure.nc"
 static msp430_spi_union_config_t */*Msp430SpiDma0P.SpiP*/Msp430SpiDmaP__0__Msp430SpiConfigure__default__getConfig(
 # 56 "/home/tinyos/local/src/tinyos-2.x/tos/chips/msp430/usart/Msp430SpiDmaP.nc"
-uint8_t arg_0x40f54cf8);
+uint8_t arg_0x41038cf8);
 # 34 "/home/tinyos/local/src/tinyos-2.x/tos/interfaces/SpiByte.nc"
 static uint8_t /*Msp430SpiDma0P.SpiP*/Msp430SpiDmaP__0__SpiByte__write(uint8_t tx);
 # 96 "/home/tinyos/local/src/tinyos-2.x/tos/chips/msp430/dma/Msp430DmaChannel.nc"
@@ -4863,43 +5102,43 @@ static void /*Msp430SpiDma0P.SpiP*/Msp430SpiDmaP__0__DmaChannel1__transferDone(e
 # 110 "/home/tinyos/local/src/tinyos-2.x/tos/interfaces/Resource.nc"
 static error_t /*Msp430SpiDma0P.SpiP*/Msp430SpiDmaP__0__UsartResource__default__release(
 # 55 "/home/tinyos/local/src/tinyos-2.x/tos/chips/msp430/usart/Msp430SpiDmaP.nc"
-uint8_t arg_0x40f542a8);
+uint8_t arg_0x410382a8);
 # 87 "/home/tinyos/local/src/tinyos-2.x/tos/interfaces/Resource.nc"
 static error_t /*Msp430SpiDma0P.SpiP*/Msp430SpiDmaP__0__UsartResource__default__immediateRequest(
 # 55 "/home/tinyos/local/src/tinyos-2.x/tos/chips/msp430/usart/Msp430SpiDmaP.nc"
-uint8_t arg_0x40f542a8);
+uint8_t arg_0x410382a8);
 # 78 "/home/tinyos/local/src/tinyos-2.x/tos/interfaces/Resource.nc"
 static error_t /*Msp430SpiDma0P.SpiP*/Msp430SpiDmaP__0__UsartResource__default__request(
 # 55 "/home/tinyos/local/src/tinyos-2.x/tos/chips/msp430/usart/Msp430SpiDmaP.nc"
-uint8_t arg_0x40f542a8);
+uint8_t arg_0x410382a8);
 # 92 "/home/tinyos/local/src/tinyos-2.x/tos/interfaces/Resource.nc"
 static void /*Msp430SpiDma0P.SpiP*/Msp430SpiDmaP__0__UsartResource__granted(
 # 55 "/home/tinyos/local/src/tinyos-2.x/tos/chips/msp430/usart/Msp430SpiDmaP.nc"
-uint8_t arg_0x40f542a8);
+uint8_t arg_0x410382a8);
 # 118 "/home/tinyos/local/src/tinyos-2.x/tos/interfaces/Resource.nc"
 static bool /*Msp430SpiDma0P.SpiP*/Msp430SpiDmaP__0__UsartResource__default__isOwner(
 # 55 "/home/tinyos/local/src/tinyos-2.x/tos/chips/msp430/usart/Msp430SpiDmaP.nc"
-uint8_t arg_0x40f542a8);
+uint8_t arg_0x410382a8);
 # 110 "/home/tinyos/local/src/tinyos-2.x/tos/interfaces/Resource.nc"
 static error_t /*Msp430SpiDma0P.SpiP*/Msp430SpiDmaP__0__Resource__release(
 # 48 "/home/tinyos/local/src/tinyos-2.x/tos/chips/msp430/usart/Msp430SpiDmaP.nc"
-uint8_t arg_0x40f59c30);
+uint8_t arg_0x4103cc30);
 # 87 "/home/tinyos/local/src/tinyos-2.x/tos/interfaces/Resource.nc"
 static error_t /*Msp430SpiDma0P.SpiP*/Msp430SpiDmaP__0__Resource__immediateRequest(
 # 48 "/home/tinyos/local/src/tinyos-2.x/tos/chips/msp430/usart/Msp430SpiDmaP.nc"
-uint8_t arg_0x40f59c30);
+uint8_t arg_0x4103cc30);
 # 78 "/home/tinyos/local/src/tinyos-2.x/tos/interfaces/Resource.nc"
 static error_t /*Msp430SpiDma0P.SpiP*/Msp430SpiDmaP__0__Resource__request(
 # 48 "/home/tinyos/local/src/tinyos-2.x/tos/chips/msp430/usart/Msp430SpiDmaP.nc"
-uint8_t arg_0x40f59c30);
+uint8_t arg_0x4103cc30);
 # 92 "/home/tinyos/local/src/tinyos-2.x/tos/interfaces/Resource.nc"
 static void /*Msp430SpiDma0P.SpiP*/Msp430SpiDmaP__0__Resource__default__granted(
 # 48 "/home/tinyos/local/src/tinyos-2.x/tos/chips/msp430/usart/Msp430SpiDmaP.nc"
-uint8_t arg_0x40f59c30);
+uint8_t arg_0x4103cc30);
 # 118 "/home/tinyos/local/src/tinyos-2.x/tos/interfaces/Resource.nc"
 static bool /*Msp430SpiDma0P.SpiP*/Msp430SpiDmaP__0__Resource__isOwner(
 # 48 "/home/tinyos/local/src/tinyos-2.x/tos/chips/msp430/usart/Msp430SpiDmaP.nc"
-uint8_t arg_0x40f59c30);
+uint8_t arg_0x4103cc30);
 # 96 "/home/tinyos/local/src/tinyos-2.x/tos/chips/msp430/dma/Msp430DmaChannel.nc"
 static void /*Msp430SpiDma0P.SpiP*/Msp430SpiDmaP__0__DmaChannel2__transferDone(error_t success);
 # 54 "/home/tinyos/local/src/tinyos-2.x/tos/chips/msp430/usart/HplMsp430UsartInterrupts.nc"
@@ -5178,9 +5417,17 @@ static void CC2420PacketP__CC2420Packet__setNetwork(message_t *p_msg, uint8_t ne
 static uint8_t CC2420PacketP__CC2420Packet__getNetwork(message_t *p_msg);
 #line 72
 static uint8_t CC2420PacketP__CC2420Packet__getLqi(message_t *p_msg);
-# 59 "/home/tinyos/local/src/tinyos-2.x/tos/interfaces/PacketTimeStamp.nc"
+# 52 "/home/tinyos/local/src/tinyos-2.x/tos/interfaces/PacketTimeStamp.nc"
+static CC2420PacketP__PacketTimeStamp32khz__size_type CC2420PacketP__PacketTimeStamp32khz__timestamp(
+#line 41
+message_t * msg);
+#line 59
 static void CC2420PacketP__PacketTimeStamp32khz__clear(
 #line 55
+message_t * msg);
+#line 38
+static bool CC2420PacketP__PacketTimeStamp32khz__isValid(
+#line 27
 message_t * msg);
 #line 67
 static void CC2420PacketP__PacketTimeStamp32khz__set(
@@ -5206,6 +5453,18 @@ message_t * msg);
 static bool CC2420PacketP__PacketTimeSyncOffset__isSet(
 #line 35
 message_t * msg);
+#line 54
+static void CC2420PacketP__PacketTimeSyncOffset__set(
+#line 50
+message_t * msg);
+# 52 "/home/tinyos/local/src/tinyos-2.x/tos/interfaces/PacketTimeStamp.nc"
+static CC2420PacketP__PacketTimeStampMilli__size_type CC2420PacketP__PacketTimeStampMilli__timestamp(
+#line 41
+message_t * msg);
+#line 38
+static bool CC2420PacketP__PacketTimeStampMilli__isValid(
+#line 27
+message_t * msg);
 # 48 "/home/tinyos/local/src/tinyos-2.x/tos/interfaces/PacketAcknowledgements.nc"
 static error_t CC2420PacketP__Acks__requestAck(
 #line 42
@@ -5214,6 +5473,8 @@ message_t * msg);
 static bool CC2420PacketP__Acks__wasAcked(
 #line 69
 message_t * msg);
+# 50 "/home/tinyos/local/src/tinyos-2.x/tos/lib/timer/LocalTime.nc"
+static uint32_t /*CC2420PacketC.CounterToLocalTimeC*/CounterToLocalTimeC__1__LocalTime__get(void );
 # 71 "/home/tinyos/local/src/tinyos-2.x/tos/lib/timer/Counter.nc"
 static void /*CC2420PacketC.CounterToLocalTimeC*/CounterToLocalTimeC__1__Counter__overflow(void );
 # 41 "/home/tinyos/local/src/tinyos-2.x/tos/interfaces/Random.nc"
@@ -5321,24 +5582,35 @@ message_t * msg,
 
 
 uint8_t len);
+#line 114
+static 
+#line 112
+void * 
+
+CC2420TinyosNetworkP__ActiveSend__getPayload(
+#line 111
+message_t * msg, 
+
+
+uint8_t len);
 #line 101
 static uint8_t CC2420TinyosNetworkP__ActiveSend__maxPayloadLength(void );
 # 110 "/home/tinyos/local/src/tinyos-2.x/tos/interfaces/Resource.nc"
 static error_t CC2420TinyosNetworkP__Resource__release(
 # 46 "/home/tinyos/local/src/tinyos-2.x/tos/chips/cc2420/lowpan/CC2420TinyosNetworkP.nc"
-uint8_t arg_0x4132b628);
+uint8_t arg_0x413fc628);
 # 87 "/home/tinyos/local/src/tinyos-2.x/tos/interfaces/Resource.nc"
 static error_t CC2420TinyosNetworkP__Resource__immediateRequest(
 # 46 "/home/tinyos/local/src/tinyos-2.x/tos/chips/cc2420/lowpan/CC2420TinyosNetworkP.nc"
-uint8_t arg_0x4132b628);
+uint8_t arg_0x413fc628);
 # 78 "/home/tinyos/local/src/tinyos-2.x/tos/interfaces/Resource.nc"
 static error_t CC2420TinyosNetworkP__Resource__request(
 # 46 "/home/tinyos/local/src/tinyos-2.x/tos/chips/cc2420/lowpan/CC2420TinyosNetworkP.nc"
-uint8_t arg_0x4132b628);
+uint8_t arg_0x413fc628);
 # 92 "/home/tinyos/local/src/tinyos-2.x/tos/interfaces/Resource.nc"
 static void CC2420TinyosNetworkP__Resource__default__granted(
 # 46 "/home/tinyos/local/src/tinyos-2.x/tos/chips/cc2420/lowpan/CC2420TinyosNetworkP.nc"
-uint8_t arg_0x4132b628);
+uint8_t arg_0x413fc628);
 # 64 "/home/tinyos/local/src/tinyos-2.x/tos/interfaces/Send.nc"
 static error_t CC2420TinyosNetworkP__BareSend__send(
 #line 56
@@ -5463,13 +5735,13 @@ static void CC2420ActiveMessageP__CC2420Config__syncDone(error_t error);
 # 95 "/home/tinyos/local/src/tinyos-2.x/tos/chips/cc2420/interfaces/RadioBackoff.nc"
 static void CC2420ActiveMessageP__RadioBackoff__default__requestCca(
 # 45 "/home/tinyos/local/src/tinyos-2.x/tos/chips/cc2420/CC2420ActiveMessageP.nc"
-am_id_t arg_0x41399df8, 
+am_id_t arg_0x41474df8, 
 # 95 "/home/tinyos/local/src/tinyos-2.x/tos/chips/cc2420/interfaces/RadioBackoff.nc"
 message_t * msg);
 #line 81
 static void CC2420ActiveMessageP__RadioBackoff__default__requestInitialBackoff(
 # 45 "/home/tinyos/local/src/tinyos-2.x/tos/chips/cc2420/CC2420ActiveMessageP.nc"
-am_id_t arg_0x41399df8, 
+am_id_t arg_0x41474df8, 
 # 81 "/home/tinyos/local/src/tinyos-2.x/tos/chips/cc2420/interfaces/RadioBackoff.nc"
 message_t * msg);
 
@@ -5480,13 +5752,13 @@ message_t * msg);
 
 static void CC2420ActiveMessageP__RadioBackoff__default__requestCongestionBackoff(
 # 45 "/home/tinyos/local/src/tinyos-2.x/tos/chips/cc2420/CC2420ActiveMessageP.nc"
-am_id_t arg_0x41399df8, 
+am_id_t arg_0x41474df8, 
 # 88 "/home/tinyos/local/src/tinyos-2.x/tos/chips/cc2420/interfaces/RadioBackoff.nc"
 message_t * msg);
 # 59 "/home/tinyos/local/src/tinyos-2.x/tos/interfaces/SendNotifier.nc"
 static void CC2420ActiveMessageP__SendNotifier__default__aboutToSend(
 # 44 "/home/tinyos/local/src/tinyos-2.x/tos/chips/cc2420/CC2420ActiveMessageP.nc"
-am_id_t arg_0x41399780, 
+am_id_t arg_0x41474780, 
 # 59 "/home/tinyos/local/src/tinyos-2.x/tos/interfaces/SendNotifier.nc"
 am_addr_t dest, 
 #line 57
@@ -5506,12 +5778,34 @@ static void CC2420ActiveMessageP__SubBackoff__requestCongestionBackoff(message_t
 static uint8_t CC2420ActiveMessageP__Packet__payloadLength(
 #line 63
 message_t * msg);
+#line 115
+static 
+#line 112
+void * 
+
+
+CC2420ActiveMessageP__Packet__getPayload(
+#line 110
+message_t * msg, 
+
+
+
+
+uint8_t len);
 #line 95
 static uint8_t CC2420ActiveMessageP__Packet__maxPayloadLength(void );
+#line 83
+static void CC2420ActiveMessageP__Packet__setPayloadLength(
+#line 79
+message_t * msg, 
+
+
+
+uint8_t len);
 # 69 "/home/tinyos/local/src/tinyos-2.x/tos/interfaces/AMSend.nc"
 static error_t CC2420ActiveMessageP__AMSend__send(
 # 39 "/home/tinyos/local/src/tinyos-2.x/tos/chips/cc2420/CC2420ActiveMessageP.nc"
-am_id_t arg_0x41356cb0, 
+am_id_t arg_0x41479cb0, 
 # 69 "/home/tinyos/local/src/tinyos-2.x/tos/interfaces/AMSend.nc"
 am_addr_t addr, 
 #line 60
@@ -5525,6 +5819,19 @@ message_t * msg,
 
 
 uint8_t len);
+#line 124
+static 
+#line 122
+void * 
+
+CC2420ActiveMessageP__AMSend__getPayload(
+# 39 "/home/tinyos/local/src/tinyos-2.x/tos/chips/cc2420/CC2420ActiveMessageP.nc"
+am_id_t arg_0x41479cb0, 
+# 121 "/home/tinyos/local/src/tinyos-2.x/tos/interfaces/AMSend.nc"
+message_t * msg, 
+
+
+uint8_t len);
 # 67 "/home/tinyos/local/src/tinyos-2.x/tos/interfaces/Receive.nc"
 static 
 #line 63
@@ -5534,7 +5841,7 @@ message_t *
 
 CC2420ActiveMessageP__Snoop__default__receive(
 # 41 "/home/tinyos/local/src/tinyos-2.x/tos/chips/cc2420/CC2420ActiveMessageP.nc"
-am_id_t arg_0x41353da0, 
+am_id_t arg_0x41476da0, 
 # 60 "/home/tinyos/local/src/tinyos-2.x/tos/interfaces/Receive.nc"
 message_t * msg, 
 void * payload, 
@@ -5553,7 +5860,7 @@ message_t *
 
 CC2420ActiveMessageP__Receive__default__receive(
 # 40 "/home/tinyos/local/src/tinyos-2.x/tos/chips/cc2420/CC2420ActiveMessageP.nc"
-am_id_t arg_0x41353708, 
+am_id_t arg_0x41476708, 
 # 60 "/home/tinyos/local/src/tinyos-2.x/tos/interfaces/Receive.nc"
 message_t * msg, 
 void * payload, 
@@ -5577,18 +5884,58 @@ static am_addr_t CC2420ActiveMessageP__AMPacket__address(void );
 static am_addr_t CC2420ActiveMessageP__AMPacket__destination(
 #line 63
 message_t * amsg);
+#line 92
+static void CC2420ActiveMessageP__AMPacket__setDestination(
+#line 88
+message_t * amsg, 
+
+
+
+am_addr_t addr);
 #line 136
 static am_id_t CC2420ActiveMessageP__AMPacket__type(
 #line 132
 message_t * amsg);
+#line 151
+static void CC2420ActiveMessageP__AMPacket__setType(
+#line 147
+message_t * amsg, 
+
+
+
+am_id_t t);
 #line 125
 static bool CC2420ActiveMessageP__AMPacket__isForMe(
 #line 122
 message_t * amsg);
 # 92 "/home/tinyos/local/src/tinyos-2.x/tos/interfaces/Resource.nc"
 static void CC2420ActiveMessageP__RadioResource__granted(void );
+# 69 "/home/tinyos/local/src/tinyos-2.x/tos/interfaces/AMSend.nc"
+static error_t /*CC2420TimeSyncMessageC.AMSenderC.SenderC.AMQueueEntryP*/AMQueueEntryP__1__AMSend__send(am_addr_t addr, 
+#line 60
+message_t * msg, 
+
+
+
+
+
+
+
+
+uint8_t len);
+#line 124
+static 
+#line 122
+void * 
+
+/*CC2420TimeSyncMessageC.AMSenderC.SenderC.AMQueueEntryP*/AMQueueEntryP__1__AMSend__getPayload(
+#line 121
+message_t * msg, 
+
+
+uint8_t len);
 # 89 "/home/tinyos/local/src/tinyos-2.x/tos/interfaces/Send.nc"
-static void /*ECG_ForwarderAppC.AMSenderC.SenderC.AMQueueEntryP*/AMQueueEntryP__1__Send__sendDone(
+static void /*CC2420TimeSyncMessageC.AMSenderC.SenderC.AMQueueEntryP*/AMQueueEntryP__1__Send__sendDone(
 #line 85
 message_t * msg, 
 
@@ -5608,7 +5955,34 @@ message_t * msg,
 
 
 error_t error);
-# 89 "/home/tinyos/local/src/tinyos-2.x/tos/interfaces/Send.nc"
+# 64 "/home/tinyos/local/src/tinyos-2.x/tos/interfaces/Send.nc"
+static error_t /*AMQueueP.AMQueueImplP*/AMQueueImplP__1__Send__send(
+# 38 "/home/tinyos/local/src/tinyos-2.x/tos/system/AMQueueImplP.nc"
+uint8_t arg_0x40b36e58, 
+# 56 "/home/tinyos/local/src/tinyos-2.x/tos/interfaces/Send.nc"
+message_t * msg, 
+
+
+
+
+
+
+
+uint8_t len);
+#line 114
+static 
+#line 112
+void * 
+
+/*AMQueueP.AMQueueImplP*/AMQueueImplP__1__Send__getPayload(
+# 38 "/home/tinyos/local/src/tinyos-2.x/tos/system/AMQueueImplP.nc"
+uint8_t arg_0x40b36e58, 
+# 111 "/home/tinyos/local/src/tinyos-2.x/tos/interfaces/Send.nc"
+message_t * msg, 
+
+
+uint8_t len);
+#line 89
 static void /*AMQueueP.AMQueueImplP*/AMQueueImplP__1__Send__default__sendDone(
 # 38 "/home/tinyos/local/src/tinyos-2.x/tos/system/AMQueueImplP.nc"
 uint8_t arg_0x40b36e58, 
@@ -5622,7 +5996,36 @@ error_t error);
 static void /*AMQueueP.AMQueueImplP*/AMQueueImplP__1__errorTask__runTask(void );
 #line 64
 static void /*AMQueueP.AMQueueImplP*/AMQueueImplP__1__CancelTask__runTask(void );
+# 50 "/home/tinyos/local/src/tinyos-2.x/tos/lib/timer/LocalTime.nc"
+static uint32_t /*CC2420TimeSyncMessageC.LocalTime32khzC*/CounterToLocalTimeC__2__LocalTime__get(void );
+# 71 "/home/tinyos/local/src/tinyos-2.x/tos/lib/timer/Counter.nc"
+static void /*CC2420TimeSyncMessageC.LocalTime32khzC*/CounterToLocalTimeC__2__Counter__overflow(void );
+# 56 "/home/tinyos/local/src/tinyos-2.x/tos/interfaces/Leds.nc"
+static void NoLedsC__Leds__led0Toggle(void );
+#line 72
+static void NoLedsC__Leds__led1Toggle(void );
+# 69 "/home/tinyos/local/src/tinyos-2.x/tos/interfaces/AMSend.nc"
+static error_t /*ECG_ForwarderAppC.AMSenderC.SenderC.AMQueueEntryP*/AMQueueEntryP__2__AMSend__send(am_addr_t addr, 
+#line 60
+message_t * msg, 
+
+
+
+
+
+
+
+
+uint8_t len);
 # 89 "/home/tinyos/local/src/tinyos-2.x/tos/interfaces/Send.nc"
+static void /*ECG_ForwarderAppC.AMSenderC.SenderC.AMQueueEntryP*/AMQueueEntryP__2__Send__sendDone(
+#line 85
+message_t * msg, 
+
+
+
+error_t error);
+#line 89
 static void CC2420Ieee154MessageP__SubSend__sendDone(
 #line 85
 message_t * msg, 
@@ -5708,13 +6111,13 @@ uint8_t len);
 # 15 "/home/tinyos/local/src/tinyos-2.x/tos/lib/net/blip/interfaces/IP.nc"
 static error_t IPDispatchP__IP__send(
 # 90 "/home/tinyos/local/src/tinyos-2.x/tos/lib/net/blip/IPDispatchP.nc"
-uint8_t arg_0x4143a810, 
+uint8_t arg_0x41543230, 
 # 15 "/home/tinyos/local/src/tinyos-2.x/tos/lib/net/blip/interfaces/IP.nc"
 struct split_ip_msg *msg);
 
 static error_t IPDispatchP__IP__bareSend(
 # 90 "/home/tinyos/local/src/tinyos-2.x/tos/lib/net/blip/IPDispatchP.nc"
-uint8_t arg_0x4143a810, 
+uint8_t arg_0x41543230, 
 # 17 "/home/tinyos/local/src/tinyos-2.x/tos/lib/net/blip/interfaces/IP.nc"
 struct split_ip_msg *msg, 
 struct ip6_route *route, 
@@ -5726,7 +6129,7 @@ int flags);
 
 static void IPDispatchP__IP__default__recv(
 # 90 "/home/tinyos/local/src/tinyos-2.x/tos/lib/net/blip/IPDispatchP.nc"
-uint8_t arg_0x4143a810, 
+uint8_t arg_0x41543230, 
 # 25 "/home/tinyos/local/src/tinyos-2.x/tos/lib/net/blip/interfaces/IP.nc"
 struct ip6_hdr *iph, void *payload, struct ip_metadata *meta);
 # 29 "/home/tinyos/local/src/tinyos-2.x/tos/lib/net/blip/interfaces/IPAddress.nc"
@@ -5816,8 +6219,6 @@ static void IPRoutingP__IPRouting__reportReception(ieee154_saddr_t neigh, uint8_
 
 
 static struct ip6_route *IPRoutingP__IPRouting__insertRoutingHeader(struct split_ip_msg *msg);
-# 72 "/home/tinyos/local/src/tinyos-2.x/tos/interfaces/Leds.nc"
-static void NoLedsC__Leds__led1Toggle(void );
 # 86 "/home/tinyos/local/src/tinyos-2.x/tos/interfaces/Ieee154Send.nc"
 static void ResourceSendP__SubSend__sendDone(message_t *msg, error_t error);
 #line 56
@@ -5915,19 +6316,19 @@ static void ICMPResponderP__Solicitation__fired(void );
 # 10 "/home/tinyos/local/src/tinyos-2.x/tos/lib/net/blip/interfaces/ICMPPing.nc"
 static void ICMPResponderP__ICMPPing__default__pingDone(
 # 35 "/home/tinyos/local/src/tinyos-2.x/tos/lib/net/blip/ICMPResponderP.nc"
-uint16_t arg_0x4161f2e0, 
+uint16_t arg_0x41713998, 
 # 10 "/home/tinyos/local/src/tinyos-2.x/tos/lib/net/blip/interfaces/ICMPPing.nc"
 uint16_t ping_rcv, uint16_t ping_n);
 #line 8
 static void ICMPResponderP__ICMPPing__default__pingReply(
 # 35 "/home/tinyos/local/src/tinyos-2.x/tos/lib/net/blip/ICMPResponderP.nc"
-uint16_t arg_0x4161f2e0, 
+uint16_t arg_0x41713998, 
 # 8 "/home/tinyos/local/src/tinyos-2.x/tos/lib/net/blip/interfaces/ICMPPing.nc"
 struct in6_addr *source, struct icmp_stats *stats);
 #line 6
 static error_t ICMPResponderP__ICMPPing__ping(
 # 35 "/home/tinyos/local/src/tinyos-2.x/tos/lib/net/blip/ICMPResponderP.nc"
-uint16_t arg_0x4161f2e0, 
+uint16_t arg_0x41713998, 
 # 6 "/home/tinyos/local/src/tinyos-2.x/tos/lib/net/blip/interfaces/ICMPPing.nc"
 struct in6_addr *target, uint16_t period, uint16_t n);
 # 25 "/home/tinyos/local/src/tinyos-2.x/tos/lib/net/blip/interfaces/IP.nc"
@@ -5935,7 +6336,7 @@ static void ICMPResponderP__IP__recv(struct ip6_hdr *iph, void *payload, struct 
 # 5 "/home/tinyos/local/src/tinyos-2.x/tos/lib/net/blip/interfaces/TLVHeader.nc"
 static struct tlv_hdr *IPExtensionP__HopByHopExt__default__getHeader(
 # 16 "/home/tinyos/local/src/tinyos-2.x/tos/lib/net/blip/IPExtensionP.nc"
-uint8_t arg_0x416a5710, 
+uint8_t arg_0x417a5010, 
 # 5 "/home/tinyos/local/src/tinyos-2.x/tos/lib/net/blip/interfaces/TLVHeader.nc"
 int label, int nxt_hdr, 
 struct ip6_hdr *msg);
@@ -5948,7 +6349,7 @@ static error_t IPExtensionP__Init__init(void );
 # 5 "/home/tinyos/local/src/tinyos-2.x/tos/lib/net/blip/interfaces/TLVHeader.nc"
 static struct tlv_hdr *IPExtensionP__DestinationExt__default__getHeader(
 # 17 "/home/tinyos/local/src/tinyos-2.x/tos/lib/net/blip/IPExtensionP.nc"
-uint8_t arg_0x416a5f20, 
+uint8_t arg_0x417a5820, 
 # 5 "/home/tinyos/local/src/tinyos-2.x/tos/lib/net/blip/interfaces/TLVHeader.nc"
 int label, int nxt_hdr, 
 struct ip6_hdr *msg);
@@ -5957,20 +6358,20 @@ static error_t UdpP__Init__init(void );
 # 16 "/home/tinyos/local/src/tinyos-2.x/tos/lib/net/blip/interfaces/UDP.nc"
 static error_t UdpP__UDP__sendto(
 # 7 "/home/tinyos/local/src/tinyos-2.x/tos/lib/net/blip/UdpP.nc"
-uint8_t arg_0x416cee08, 
+uint8_t arg_0x417d2440, 
 # 16 "/home/tinyos/local/src/tinyos-2.x/tos/lib/net/blip/interfaces/UDP.nc"
 struct sockaddr_in6 *dest, void *payload, 
 uint16_t len);
 #line 10
 static error_t UdpP__UDP__bind(
 # 7 "/home/tinyos/local/src/tinyos-2.x/tos/lib/net/blip/UdpP.nc"
-uint8_t arg_0x416cee08, 
+uint8_t arg_0x417d2440, 
 # 10 "/home/tinyos/local/src/tinyos-2.x/tos/lib/net/blip/interfaces/UDP.nc"
 uint16_t port);
 #line 24
 static void UdpP__UDP__default__recvfrom(
 # 7 "/home/tinyos/local/src/tinyos-2.x/tos/lib/net/blip/UdpP.nc"
-uint8_t arg_0x416cee08, 
+uint8_t arg_0x417d2440, 
 # 24 "/home/tinyos/local/src/tinyos-2.x/tos/lib/net/blip/interfaces/UDP.nc"
 struct sockaddr_in6 *src, void *payload, 
 uint16_t len, struct ip_metadata *meta);
@@ -5988,13 +6389,13 @@ uint16_t len, struct ip_metadata *meta);
 # 11 "/home/tinyos/local/src/tinyos-2.x/tos/lib/net/blip/shell/ShellCommand.nc"
 static char *UDPShellP__ShellCommand__default__eval(
 # 30 "/home/tinyos/local/src/tinyos-2.x/tos/lib/net/blip/shell/UDPShellP.nc"
-uint8_t arg_0x416ed520, 
+uint8_t arg_0x417f7920, 
 # 11 "/home/tinyos/local/src/tinyos-2.x/tos/lib/net/blip/shell/ShellCommand.nc"
 int argc, char **argv);
 # 3 "/home/tinyos/local/src/tinyos-2.x/tos/lib/net/blip/shell/RegisterShellCommand.nc"
 static char *UDPShellP__RegisterShellCommand__default__getCommandName(
 # 31 "/home/tinyos/local/src/tinyos-2.x/tos/lib/net/blip/shell/UDPShellP.nc"
-uint8_t arg_0x416ec4e8);
+uint8_t arg_0x417f98e0);
 # 10 "/home/tinyos/local/src/tinyos-2.x/tos/lib/net/blip/interfaces/ICMPPing.nc"
 static void UDPShellP__ICMPPing__pingDone(uint16_t ping_rcv, uint16_t ping_n);
 #line 8
@@ -6046,7 +6447,7 @@ static volatile uint16_t Msp430ClockP__TA0IV __asm ("0x012E");
 static volatile uint16_t Msp430ClockP__TBCTL __asm ("0x0180");
 static volatile uint16_t Msp430ClockP__TBIV __asm ("0x011E");
 
-enum Msp430ClockP____nesc_unnamed4382 {
+enum Msp430ClockP____nesc_unnamed4383 {
 
   Msp430ClockP__ACLK_CALIB_PERIOD = 8, 
   Msp430ClockP__TARGET_DCO_DELTA = 4096 / 32 * Msp430ClockP__ACLK_CALIB_PERIOD
@@ -6638,9 +7039,9 @@ uint8_t arg_0x4059ab40);
 # 59 "/home/tinyos/local/src/tinyos-2.x/tos/interfaces/McuSleep.nc"
 static void SchedulerBasicP__McuSleep__sleep(void );
 # 50 "/home/tinyos/local/src/tinyos-2.x/tos/system/SchedulerBasicP.nc"
-enum SchedulerBasicP____nesc_unnamed4383 {
+enum SchedulerBasicP____nesc_unnamed4384 {
 
-  SchedulerBasicP__NUM_TASKS = 26U, 
+  SchedulerBasicP__NUM_TASKS = 28U, 
   SchedulerBasicP__NO_TASK = 255
 };
 
@@ -6860,14 +7261,14 @@ static void SerialP__ReceiveBytePacket__byteReceived(uint8_t data);
 
 static void SerialP__ReceiveBytePacket__endPacket(error_t result);
 # 189 "/home/tinyos/local/src/tinyos-2.x/tos/lib/serial/SerialP.nc"
-enum SerialP____nesc_unnamed4384 {
+enum SerialP____nesc_unnamed4385 {
 #line 189
   SerialP__RunTx = 0U
 };
 #line 189
 typedef int SerialP____nesc_sillytask_RunTx[SerialP__RunTx];
 #line 320
-enum SerialP____nesc_unnamed4385 {
+enum SerialP____nesc_unnamed4386 {
 #line 320
   SerialP__startDoneTask = 1U
 };
@@ -6878,7 +7279,7 @@ typedef int SerialP____nesc_sillytask_startDoneTask[SerialP__startDoneTask];
 
 
 
-enum SerialP____nesc_unnamed4386 {
+enum SerialP____nesc_unnamed4387 {
 #line 326
   SerialP__stopDoneTask = 2U
 };
@@ -6892,14 +7293,14 @@ typedef int SerialP____nesc_sillytask_stopDoneTask[SerialP__stopDoneTask];
 
 
 
-enum SerialP____nesc_unnamed4387 {
+enum SerialP____nesc_unnamed4388 {
 #line 335
   SerialP__defaultSerialFlushTask = 3U
 };
 #line 335
 typedef int SerialP____nesc_sillytask_defaultSerialFlushTask[SerialP__defaultSerialFlushTask];
 #line 79
-enum SerialP____nesc_unnamed4388 {
+enum SerialP____nesc_unnamed4389 {
   SerialP__RX_DATA_BUFFER_SIZE = 2, 
   SerialP__TX_DATA_BUFFER_SIZE = 4, 
   SerialP__SERIAL_MTU = 255, 
@@ -6907,7 +7308,7 @@ enum SerialP____nesc_unnamed4388 {
   SerialP__ACK_QUEUE_SIZE = 5
 };
 
-enum SerialP____nesc_unnamed4389 {
+enum SerialP____nesc_unnamed4390 {
   SerialP__RXSTATE_NOSYNC, 
   SerialP__RXSTATE_PROTO, 
   SerialP__RXSTATE_TOKEN, 
@@ -6915,7 +7316,7 @@ enum SerialP____nesc_unnamed4389 {
   SerialP__RXSTATE_INACTIVE
 };
 
-enum SerialP____nesc_unnamed4390 {
+enum SerialP____nesc_unnamed4391 {
   SerialP__TXSTATE_IDLE, 
   SerialP__TXSTATE_PROTO, 
   SerialP__TXSTATE_SEQNO, 
@@ -6934,13 +7335,13 @@ enum SerialP____nesc_unnamed4390 {
 
 
 #line 109
-typedef enum SerialP____nesc_unnamed4391 {
+typedef enum SerialP____nesc_unnamed4392 {
   SerialP__BUFFER_AVAILABLE, 
   SerialP__BUFFER_FILLING, 
   SerialP__BUFFER_COMPLETE
 } SerialP__tx_data_buffer_states_t;
 
-enum SerialP____nesc_unnamed4392 {
+enum SerialP____nesc_unnamed4393 {
   SerialP__TX_ACK_INDEX = 0, 
   SerialP__TX_DATA_INDEX = 1, 
   SerialP__TX_BUFFER_COUNT = 2
@@ -6952,7 +7353,7 @@ enum SerialP____nesc_unnamed4392 {
 
 
 #line 122
-typedef struct SerialP____nesc_unnamed4393 {
+typedef struct SerialP____nesc_unnamed4394 {
   uint8_t writePtr;
   uint8_t readPtr;
   uint8_t buf[SerialP__RX_DATA_BUFFER_SIZE + 1];
@@ -6962,7 +7363,7 @@ typedef struct SerialP____nesc_unnamed4393 {
 
 
 #line 128
-typedef struct SerialP____nesc_unnamed4394 {
+typedef struct SerialP____nesc_unnamed4395 {
   uint8_t state;
   uint8_t buf;
 } SerialP__tx_buf_t;
@@ -6972,7 +7373,7 @@ typedef struct SerialP____nesc_unnamed4394 {
 
 
 #line 133
-typedef struct SerialP____nesc_unnamed4395 {
+typedef struct SerialP____nesc_unnamed4396 {
   uint8_t writePtr;
   uint8_t readPtr;
   uint8_t buf[SerialP__ACK_QUEUE_SIZE + 1];
@@ -7240,14 +7641,14 @@ static error_t /*SerialDispatcherC.SerialDispatcherP*/SerialDispatcherP__0__Send
 #line 51
 static error_t /*SerialDispatcherC.SerialDispatcherP*/SerialDispatcherP__0__SendBytePacket__startSend(uint8_t first_byte);
 # 147 "/home/tinyos/local/src/tinyos-2.x/tos/lib/serial/SerialDispatcherP.nc"
-enum /*SerialDispatcherC.SerialDispatcherP*/SerialDispatcherP__0____nesc_unnamed4396 {
+enum /*SerialDispatcherC.SerialDispatcherP*/SerialDispatcherP__0____nesc_unnamed4397 {
 #line 147
   SerialDispatcherP__0__signalSendDone = 4U
 };
 #line 147
 typedef int /*SerialDispatcherC.SerialDispatcherP*/SerialDispatcherP__0____nesc_sillytask_signalSendDone[/*SerialDispatcherC.SerialDispatcherP*/SerialDispatcherP__0__signalSendDone];
 #line 264
-enum /*SerialDispatcherC.SerialDispatcherP*/SerialDispatcherP__0____nesc_unnamed4397 {
+enum /*SerialDispatcherC.SerialDispatcherP*/SerialDispatcherP__0____nesc_unnamed4398 {
 #line 264
   SerialDispatcherP__0__receiveTask = 5U
 };
@@ -7255,13 +7656,13 @@ enum /*SerialDispatcherC.SerialDispatcherP*/SerialDispatcherP__0____nesc_unnamed
 typedef int /*SerialDispatcherC.SerialDispatcherP*/SerialDispatcherP__0____nesc_sillytask_receiveTask[/*SerialDispatcherC.SerialDispatcherP*/SerialDispatcherP__0__receiveTask];
 #line 55
 #line 51
-typedef enum /*SerialDispatcherC.SerialDispatcherP*/SerialDispatcherP__0____nesc_unnamed4398 {
+typedef enum /*SerialDispatcherC.SerialDispatcherP*/SerialDispatcherP__0____nesc_unnamed4399 {
   SerialDispatcherP__0__SEND_STATE_IDLE = 0, 
   SerialDispatcherP__0__SEND_STATE_BEGIN = 1, 
   SerialDispatcherP__0__SEND_STATE_DATA = 2
 } /*SerialDispatcherC.SerialDispatcherP*/SerialDispatcherP__0__send_state_t;
 
-enum /*SerialDispatcherC.SerialDispatcherP*/SerialDispatcherP__0____nesc_unnamed4399 {
+enum /*SerialDispatcherC.SerialDispatcherP*/SerialDispatcherP__0____nesc_unnamed4400 {
   SerialDispatcherP__0__RECV_STATE_IDLE = 0, 
   SerialDispatcherP__0__RECV_STATE_BEGIN = 1, 
   SerialDispatcherP__0__RECV_STATE_DATA = 2
@@ -7273,7 +7674,7 @@ enum /*SerialDispatcherC.SerialDispatcherP*/SerialDispatcherP__0____nesc_unnamed
 
 
 #line 63
-typedef struct /*SerialDispatcherC.SerialDispatcherP*/SerialDispatcherP__0____nesc_unnamed4400 {
+typedef struct /*SerialDispatcherC.SerialDispatcherP*/SerialDispatcherP__0____nesc_unnamed4401 {
   uint8_t which : 1;
   uint8_t bufZeroLocked : 1;
   uint8_t bufOneLocked : 1;
@@ -7395,7 +7796,7 @@ static void HdlcTranslateC__SerialFrameComm__putDone(void );
 static void HdlcTranslateC__SerialFrameComm__delimiterReceived(void );
 # 47 "/home/tinyos/local/src/tinyos-2.x/tos/lib/serial/HdlcTranslateC.nc"
 #line 44
-typedef struct HdlcTranslateC____nesc_unnamed4401 {
+typedef struct HdlcTranslateC____nesc_unnamed4402 {
   uint8_t sendEscape : 1;
   uint8_t receiveEscape : 1;
 } HdlcTranslateC__HdlcState;
@@ -7926,7 +8327,7 @@ static inline void /*Msp430UsartShare1P.UsartShareP*/Msp430UsartShareP__0__RawIn
 static inline void /*Msp430UsartShare1P.UsartShareP*/Msp430UsartShareP__0__Interrupts__default__txDone(uint8_t id);
 static inline void /*Msp430UsartShare1P.UsartShareP*/Msp430UsartShareP__0__Interrupts__default__rxDone(uint8_t id, uint8_t data);
 # 39 "/home/tinyos/local/src/tinyos-2.x/tos/system/FcfsResourceQueueC.nc"
-enum /*Msp430UsartShare1P.ArbiterC.Queue*/FcfsResourceQueueC__1____nesc_unnamed4402 {
+enum /*Msp430UsartShare1P.ArbiterC.Queue*/FcfsResourceQueueC__1____nesc_unnamed4403 {
 #line 39
   FcfsResourceQueueC__1__NO_ENTRY = 0xFF
 };
@@ -7975,24 +8376,24 @@ uint8_t arg_0x40ac0e88);
 # 56 "/home/tinyos/local/src/tinyos-2.x/tos/interfaces/TaskBasic.nc"
 static error_t /*Msp430UsartShare1P.ArbiterC.Arbiter*/ArbiterP__0__grantedTask__postTask(void );
 # 75 "/home/tinyos/local/src/tinyos-2.x/tos/system/ArbiterP.nc"
-enum /*Msp430UsartShare1P.ArbiterC.Arbiter*/ArbiterP__0____nesc_unnamed4403 {
+enum /*Msp430UsartShare1P.ArbiterC.Arbiter*/ArbiterP__0____nesc_unnamed4404 {
 #line 75
   ArbiterP__0__grantedTask = 6U
 };
 #line 75
 typedef int /*Msp430UsartShare1P.ArbiterC.Arbiter*/ArbiterP__0____nesc_sillytask_grantedTask[/*Msp430UsartShare1P.ArbiterC.Arbiter*/ArbiterP__0__grantedTask];
 #line 67
-enum /*Msp430UsartShare1P.ArbiterC.Arbiter*/ArbiterP__0____nesc_unnamed4404 {
+enum /*Msp430UsartShare1P.ArbiterC.Arbiter*/ArbiterP__0____nesc_unnamed4405 {
 #line 67
   ArbiterP__0__RES_CONTROLLED, ArbiterP__0__RES_GRANTING, ArbiterP__0__RES_IMM_GRANTING, ArbiterP__0__RES_BUSY
 };
 #line 68
-enum /*Msp430UsartShare1P.ArbiterC.Arbiter*/ArbiterP__0____nesc_unnamed4405 {
+enum /*Msp430UsartShare1P.ArbiterC.Arbiter*/ArbiterP__0____nesc_unnamed4406 {
 #line 68
   ArbiterP__0__default_owner_id = 1U
 };
 #line 69
-enum /*Msp430UsartShare1P.ArbiterC.Arbiter*/ArbiterP__0____nesc_unnamed4406 {
+enum /*Msp430UsartShare1P.ArbiterC.Arbiter*/ArbiterP__0____nesc_unnamed4407 {
 #line 69
   ArbiterP__0__NO_RES = 0xFF
 };
@@ -8196,14 +8597,14 @@ static am_id_t /*SerialAMQueueP.AMQueueImplP*/AMQueueImplP__0__AMPacket__type(
 #line 132
 message_t * amsg);
 # 118 "/home/tinyos/local/src/tinyos-2.x/tos/system/AMQueueImplP.nc"
-enum /*SerialAMQueueP.AMQueueImplP*/AMQueueImplP__0____nesc_unnamed4407 {
+enum /*SerialAMQueueP.AMQueueImplP*/AMQueueImplP__0____nesc_unnamed4408 {
 #line 118
   AMQueueImplP__0__CancelTask = 7U
 };
 #line 118
 typedef int /*SerialAMQueueP.AMQueueImplP*/AMQueueImplP__0____nesc_sillytask_CancelTask[/*SerialAMQueueP.AMQueueImplP*/AMQueueImplP__0__CancelTask];
 #line 161
-enum /*SerialAMQueueP.AMQueueImplP*/AMQueueImplP__0____nesc_unnamed4408 {
+enum /*SerialAMQueueP.AMQueueImplP*/AMQueueImplP__0____nesc_unnamed4409 {
 #line 161
   AMQueueImplP__0__errorTask = 8U
 };
@@ -8211,7 +8612,7 @@ enum /*SerialAMQueueP.AMQueueImplP*/AMQueueImplP__0____nesc_unnamed4408 {
 typedef int /*SerialAMQueueP.AMQueueImplP*/AMQueueImplP__0____nesc_sillytask_errorTask[/*SerialAMQueueP.AMQueueImplP*/AMQueueImplP__0__errorTask];
 #line 49
 #line 47
-typedef struct /*SerialAMQueueP.AMQueueImplP*/AMQueueImplP__0____nesc_unnamed4409 {
+typedef struct /*SerialAMQueueP.AMQueueImplP*/AMQueueImplP__0____nesc_unnamed4410 {
   message_t * msg;
 } /*SerialAMQueueP.AMQueueImplP*/AMQueueImplP__0__queue_entry_t;
 
@@ -8325,14 +8726,14 @@ uint8_t len);
 # 56 "/home/tinyos/local/src/tinyos-2.x/tos/interfaces/TaskBasic.nc"
 static error_t PrintfP__retrySend__postTask(void );
 # 127 "/home/tinyos/local/src/tinyos-2.x/tos/lib/printf/PrintfP.nc"
-enum PrintfP____nesc_unnamed4410 {
+enum PrintfP____nesc_unnamed4411 {
 #line 127
   PrintfP__retrySend = 9U
 };
 #line 127
 typedef int PrintfP____nesc_sillytask_retrySend[PrintfP__retrySend];
 #line 100
-enum PrintfP____nesc_unnamed4411 {
+enum PrintfP____nesc_unnamed4412 {
   PrintfP__S_STOPPED, 
   PrintfP__S_STARTED, 
   PrintfP__S_FLUSHING
@@ -8390,30 +8791,69 @@ static void PrintfP__AMSend__sendDone(message_t *msg, error_t error);
 int putchar(int c) __attribute((noinline))   ;
 # 83 "/home/tinyos/local/src/tinyos-2.x/tos/interfaces/SplitControl.nc"
 static error_t ECG_ForwarderC__AMControl__start(void );
-#line 83
+# 31 "/home/tinyos/local/src/tinyos-2.x/tos/lib/ftsp/GlobalTime.nc"
+static uint32_t ECG_ForwarderC__GlobalTime__getLocalTime(void );
+
+
+
+
+
+
+static error_t ECG_ForwarderC__GlobalTime__getGlobalTime(uint32_t *time);
+# 83 "/home/tinyos/local/src/tinyos-2.x/tos/interfaces/SplitControl.nc"
 static error_t ECG_ForwarderC__RadioControl__start(void );
+# 69 "/home/tinyos/local/src/tinyos-2.x/tos/interfaces/AMSend.nc"
+static error_t ECG_ForwarderC__ECGMsgSend__send(am_addr_t addr, 
+#line 60
+message_t * msg, 
+
+
+
+
+
+
+
+
+uint8_t len);
 # 16 "/home/tinyos/local/src/tinyos-2.x/tos/lib/net/blip/interfaces/UDP.nc"
 static error_t ECG_ForwarderC__Status__sendto(struct sockaddr_in6 *dest, void *payload, 
 uint16_t len);
 #line 10
 static error_t ECG_ForwarderC__Status__bind(uint16_t port);
-# 55 "ECG_ForwarderC.nc"
+# 43 "ECG_ForwarderC.nc"
+nx_struct udp_report;
 struct sockaddr_in6 ECG_ForwarderC__route_dest;
 
 
+
+
+
+
+
+
 static inline void ECG_ForwarderC__Boot__booted(void );
-#line 72
+#line 68
+static inline void ECG_ForwarderC__updateNodes(void *data, uint16_t len);
+
+
+
+
+
+
 static inline void ECG_ForwarderC__RadioControl__startDone(error_t e);
 
 static inline void ECG_ForwarderC__RadioControl__stopDone(error_t e);
 
 static inline void ECG_ForwarderC__Status__recvfrom(struct sockaddr_in6 *from, void *data, 
 uint16_t len, struct ip_metadata *meta);
+#line 92
+static inline void ECG_ForwarderC__TimeKeeper__fired(void );
 
 
 
 
-static inline void ECG_ForwarderC__StatusTimer__fired(void );
+
+
 
 
 static inline void ECG_ForwarderC__send_UPD_Beat_Message(BEAT_MSG *beatMsg);
@@ -8426,9 +8866,9 @@ static inline void ECG_ForwarderC__send_UPD_Beat_Message(BEAT_MSG *beatMsg);
 
 
 static inline void ECG_ForwarderC__send_UPD_ECG_Message(ECG_PACKET *ECGMsg);
-#line 128
+#line 139
 static inline message_t *ECG_ForwarderC__Receive__receive(message_t *msg, void *payload, uint8_t len);
-#line 154
+#line 165
 static inline void ECG_ForwarderC__AMControl__startDone(error_t err);
 
 
@@ -8439,10 +8879,7 @@ static inline void ECG_ForwarderC__AMControl__startDone(error_t err);
 static inline void ECG_ForwarderC__AMControl__stopDone(error_t err);
 
 
-static inline void ECG_ForwarderC__AMSend__sendDone(message_t *msg, error_t error);
-
-
-static inline void ECG_ForwarderC__Timer0__fired(void );
+static inline void ECG_ForwarderC__ECGMsgSend__sendDone(message_t *msg, error_t error);
 # 30 "/home/tinyos/local/src/tinyos-2.x/tos/chips/msp430/timer/Msp430Compare.nc"
 static void /*HilTimerMilliC.AlarmMilli32C.AlarmFrom.Msp430Alarm*/Msp430AlarmC__0__Msp430Compare__setEvent(uint16_t time);
 
@@ -8513,7 +8950,7 @@ static void /*CounterMilli32C.Transform*/TransformCounterC__0__Counter__overflow
 # 56 "/home/tinyos/local/src/tinyos-2.x/tos/lib/timer/TransformCounterC.nc"
 /*CounterMilli32C.Transform*/TransformCounterC__0__upper_count_type /*CounterMilli32C.Transform*/TransformCounterC__0__m_upper;
 
-enum /*CounterMilli32C.Transform*/TransformCounterC__0____nesc_unnamed4412 {
+enum /*CounterMilli32C.Transform*/TransformCounterC__0____nesc_unnamed4413 {
 
   TransformCounterC__0__LOW_SHIFT_RIGHT = 5, 
   TransformCounterC__0__HIGH_SHIFT_LEFT = 8 * sizeof(/*CounterMilli32C.Transform*/TransformCounterC__0__from_size_type ) - /*CounterMilli32C.Transform*/TransformCounterC__0__LOW_SHIFT_RIGHT, 
@@ -8539,7 +8976,7 @@ static /*HilTimerMilliC.AlarmMilli32C.Transform*/TransformAlarmC__0__Counter__si
 /*HilTimerMilliC.AlarmMilli32C.Transform*/TransformAlarmC__0__to_size_type /*HilTimerMilliC.AlarmMilli32C.Transform*/TransformAlarmC__0__m_t0;
 /*HilTimerMilliC.AlarmMilli32C.Transform*/TransformAlarmC__0__to_size_type /*HilTimerMilliC.AlarmMilli32C.Transform*/TransformAlarmC__0__m_dt;
 
-enum /*HilTimerMilliC.AlarmMilli32C.Transform*/TransformAlarmC__0____nesc_unnamed4413 {
+enum /*HilTimerMilliC.AlarmMilli32C.Transform*/TransformAlarmC__0____nesc_unnamed4414 {
 
   TransformAlarmC__0__MAX_DELAY_LOG2 = 8 * sizeof(/*HilTimerMilliC.AlarmMilli32C.Transform*/TransformAlarmC__0__from_size_type ) - 1 - 5, 
   TransformAlarmC__0__MAX_DELAY = (/*HilTimerMilliC.AlarmMilli32C.Transform*/TransformAlarmC__0__to_size_type )1 << /*HilTimerMilliC.AlarmMilli32C.Transform*/TransformAlarmC__0__MAX_DELAY_LOG2
@@ -8586,7 +9023,7 @@ static void /*HilTimerMilliC.AlarmToTimerC*/AlarmToTimerC__0__Alarm__stop(void )
 # 72 "/home/tinyos/local/src/tinyos-2.x/tos/lib/timer/Timer.nc"
 static void /*HilTimerMilliC.AlarmToTimerC*/AlarmToTimerC__0__Timer__fired(void );
 # 63 "/home/tinyos/local/src/tinyos-2.x/tos/lib/timer/AlarmToTimerC.nc"
-enum /*HilTimerMilliC.AlarmToTimerC*/AlarmToTimerC__0____nesc_unnamed4414 {
+enum /*HilTimerMilliC.AlarmToTimerC*/AlarmToTimerC__0____nesc_unnamed4415 {
 #line 63
   AlarmToTimerC__0__fired = 10U
 };
@@ -8628,16 +9065,16 @@ static void /*HilTimerMilliC.VirtualizeTimerC*/VirtualizeTimerC__0__TimerFrom__s
 
 static void /*HilTimerMilliC.VirtualizeTimerC*/VirtualizeTimerC__0__Timer__fired(
 # 37 "/home/tinyos/local/src/tinyos-2.x/tos/lib/timer/VirtualizeTimerC.nc"
-uint8_t arg_0x40caf068);
+uint8_t arg_0x40caf2d8);
 #line 60
-enum /*HilTimerMilliC.VirtualizeTimerC*/VirtualizeTimerC__0____nesc_unnamed4415 {
+enum /*HilTimerMilliC.VirtualizeTimerC*/VirtualizeTimerC__0____nesc_unnamed4416 {
 #line 60
   VirtualizeTimerC__0__updateFromTimer = 11U
 };
 #line 60
 typedef int /*HilTimerMilliC.VirtualizeTimerC*/VirtualizeTimerC__0____nesc_sillytask_updateFromTimer[/*HilTimerMilliC.VirtualizeTimerC*/VirtualizeTimerC__0__updateFromTimer];
 #line 42
-enum /*HilTimerMilliC.VirtualizeTimerC*/VirtualizeTimerC__0____nesc_unnamed4416 {
+enum /*HilTimerMilliC.VirtualizeTimerC*/VirtualizeTimerC__0____nesc_unnamed4417 {
 
   VirtualizeTimerC__0__NUM_TIMERS = 10U, 
   VirtualizeTimerC__0__END_OF_LIST = 255
@@ -8651,7 +9088,7 @@ enum /*HilTimerMilliC.VirtualizeTimerC*/VirtualizeTimerC__0____nesc_unnamed4416 
 
 
 #line 48
-typedef struct /*HilTimerMilliC.VirtualizeTimerC*/VirtualizeTimerC__0____nesc_unnamed4417 {
+typedef struct /*HilTimerMilliC.VirtualizeTimerC*/VirtualizeTimerC__0____nesc_unnamed4418 {
 
   uint32_t t0;
   uint32_t dt;
@@ -8711,6 +9148,350 @@ static inline uint32_t /*HilTimerMilliC.CounterToLocalTimeC*/CounterToLocalTimeC
 
 
 static inline void /*HilTimerMilliC.CounterToLocalTimeC*/CounterToLocalTimeC__0__Counter__overflow(void );
+# 50 "/home/tinyos/local/src/tinyos-2.x/tos/lib/timer/LocalTime.nc"
+static uint32_t /*TimeSyncC.TimeSyncP*/TimeSyncP__0__LocalTime__get(void );
+# 83 "/home/tinyos/local/src/tinyos-2.x/tos/interfaces/SplitControl.nc"
+static error_t /*TimeSyncC.TimeSyncP*/TimeSyncP__0__RadioControl__start(void );
+# 53 "/home/tinyos/local/src/tinyos-2.x/tos/interfaces/TimeSyncAMSend.nc"
+static error_t /*TimeSyncC.TimeSyncP*/TimeSyncP__0__Send__send(am_addr_t addr, message_t *msg, uint8_t len, /*TimeSyncC.TimeSyncP*/TimeSyncP__0__Send__size_type event_time);
+#line 103
+static void */*TimeSyncC.TimeSyncP*/TimeSyncP__0__Send__getPayload(message_t *msg, uint8_t len);
+# 41 "/home/tinyos/local/src/tinyos-2.x/tos/interfaces/Random.nc"
+static uint16_t /*TimeSyncC.TimeSyncP*/TimeSyncP__0__Random__rand16(void );
+# 56 "/home/tinyos/local/src/tinyos-2.x/tos/interfaces/TaskBasic.nc"
+static error_t /*TimeSyncC.TimeSyncP*/TimeSyncP__0__sendMsg__postTask(void );
+#line 56
+static error_t /*TimeSyncC.TimeSyncP*/TimeSyncP__0__processMsg__postTask(void );
+# 56 "/home/tinyos/local/src/tinyos-2.x/tos/interfaces/Leds.nc"
+static void /*TimeSyncC.TimeSyncP*/TimeSyncP__0__Leds__led0Toggle(void );
+#line 72
+static void /*TimeSyncC.TimeSyncP*/TimeSyncP__0__Leds__led1Toggle(void );
+# 35 "/home/tinyos/local/src/tinyos-2.x/tos/lib/ftsp/TimeSyncNotify.nc"
+static void /*TimeSyncC.TimeSyncP*/TimeSyncP__0__TimeSyncNotify__msg_received(void );
+
+
+
+
+
+static void /*TimeSyncC.TimeSyncP*/TimeSyncP__0__TimeSyncNotify__msg_sent(void );
+# 53 "/home/tinyos/local/src/tinyos-2.x/tos/lib/timer/Timer.nc"
+static void /*TimeSyncC.TimeSyncP*/TimeSyncP__0__Timer__startPeriodic(uint32_t dt);
+#line 67
+static void /*TimeSyncC.TimeSyncP*/TimeSyncP__0__Timer__stop(void );
+# 35 "/home/tinyos/local/src/tinyos-2.x/tos/interfaces/TimeSyncPacket.nc"
+static bool /*TimeSyncC.TimeSyncP*/TimeSyncP__0__TimeSyncPacket__isValid(message_t *msg);
+
+
+
+
+
+
+
+
+
+static /*TimeSyncC.TimeSyncP*/TimeSyncP__0__TimeSyncPacket__size_type /*TimeSyncC.TimeSyncP*/TimeSyncP__0__TimeSyncPacket__eventTime(message_t *msg);
+# 281 "/home/tinyos/local/src/tinyos-2.x/tos/lib/ftsp/TimeSyncP.nc"
+enum /*TimeSyncC.TimeSyncP*/TimeSyncP__0____nesc_unnamed4419 {
+#line 281
+  TimeSyncP__0__processMsg = 12U
+};
+#line 281
+typedef int /*TimeSyncC.TimeSyncP*/TimeSyncP__0____nesc_sillytask_processMsg[/*TimeSyncC.TimeSyncP*/TimeSyncP__0__processMsg];
+#line 337
+enum /*TimeSyncC.TimeSyncP*/TimeSyncP__0____nesc_unnamed4420 {
+#line 337
+  TimeSyncP__0__sendMsg = 13U
+};
+#line 337
+typedef int /*TimeSyncC.TimeSyncP*/TimeSyncP__0____nesc_sillytask_sendMsg[/*TimeSyncC.TimeSyncP*/TimeSyncP__0__sendMsg];
+#line 64
+enum /*TimeSyncC.TimeSyncP*/TimeSyncP__0____nesc_unnamed4421 {
+  TimeSyncP__0__MAX_ENTRIES = 8, 
+  TimeSyncP__0__BEACON_RATE = 3, 
+  TimeSyncP__0__ROOT_TIMEOUT = 5, 
+  TimeSyncP__0__IGNORE_ROOT_MSG = 4, 
+  TimeSyncP__0__ENTRY_VALID_LIMIT = 4, 
+  TimeSyncP__0__ENTRY_SEND_LIMIT = 3, 
+  TimeSyncP__0__ENTRY_THROWOUT_LIMIT = 500
+};
+
+
+
+
+
+
+#line 74
+typedef struct /*TimeSyncC.TimeSyncP*/TimeSyncP__0__TableItem {
+
+  uint8_t state;
+  uint32_t localTime;
+  int32_t timeOffset;
+} /*TimeSyncC.TimeSyncP*/TimeSyncP__0__TableItem;
+
+enum /*TimeSyncC.TimeSyncP*/TimeSyncP__0____nesc_unnamed4422 {
+  TimeSyncP__0__ENTRY_EMPTY = 0, 
+  TimeSyncP__0__ENTRY_FULL = 1
+};
+
+/*TimeSyncC.TimeSyncP*/TimeSyncP__0__TableItem /*TimeSyncC.TimeSyncP*/TimeSyncP__0__table[/*TimeSyncC.TimeSyncP*/TimeSyncP__0__MAX_ENTRIES];
+uint8_t /*TimeSyncC.TimeSyncP*/TimeSyncP__0__tableEntries;
+
+enum /*TimeSyncC.TimeSyncP*/TimeSyncP__0____nesc_unnamed4423 {
+  TimeSyncP__0__STATE_IDLE = 0x00, 
+  TimeSyncP__0__STATE_PROCESSING = 0x01, 
+  TimeSyncP__0__STATE_SENDING = 0x02, 
+  TimeSyncP__0__STATE_INIT = 0x04
+};
+
+uint8_t /*TimeSyncC.TimeSyncP*/TimeSyncP__0__state;
+#line 96
+uint8_t /*TimeSyncC.TimeSyncP*/TimeSyncP__0__mode;
+#line 108
+float /*TimeSyncC.TimeSyncP*/TimeSyncP__0__skew;
+uint32_t /*TimeSyncC.TimeSyncP*/TimeSyncP__0__localAverage;
+int32_t /*TimeSyncC.TimeSyncP*/TimeSyncP__0__offsetAverage;
+uint8_t /*TimeSyncC.TimeSyncP*/TimeSyncP__0__numEntries;
+
+message_t /*TimeSyncC.TimeSyncP*/TimeSyncP__0__processedMsgBuffer;
+message_t */*TimeSyncC.TimeSyncP*/TimeSyncP__0__processedMsg;
+
+message_t /*TimeSyncC.TimeSyncP*/TimeSyncP__0__outgoingMsgBuffer;
+TimeSyncMsg */*TimeSyncC.TimeSyncP*/TimeSyncP__0__outgoingMsg;
+
+uint8_t /*TimeSyncC.TimeSyncP*/TimeSyncP__0__heartBeats;
+
+
+static inline uint32_t /*TimeSyncC.TimeSyncP*/TimeSyncP__0__GlobalTime__getLocalTime(void );
+
+
+
+
+static inline error_t /*TimeSyncC.TimeSyncP*/TimeSyncP__0__GlobalTime__getGlobalTime(uint32_t *time);
+
+
+
+
+
+static error_t /*TimeSyncC.TimeSyncP*/TimeSyncP__0__is_synced(void );
+
+
+
+
+
+
+
+
+static error_t /*TimeSyncC.TimeSyncP*/TimeSyncP__0__GlobalTime__local2Global(uint32_t *time);
+#line 155
+static inline void /*TimeSyncC.TimeSyncP*/TimeSyncP__0__calculateConversion(void );
+#line 221
+static void /*TimeSyncC.TimeSyncP*/TimeSyncP__0__clearTable(void );
+
+
+
+
+
+
+
+
+uint8_t /*TimeSyncC.TimeSyncP*/TimeSyncP__0__numErrors = 0;
+static inline void /*TimeSyncC.TimeSyncP*/TimeSyncP__0__addNewEntry(TimeSyncMsg *msg);
+#line 281
+static inline void /*TimeSyncC.TimeSyncP*/TimeSyncP__0__processMsg__runTask(void );
+#line 309
+static inline message_t */*TimeSyncC.TimeSyncP*/TimeSyncP__0__Receive__receive(message_t *msg, void *payload, uint8_t len);
+#line 337
+static inline void /*TimeSyncC.TimeSyncP*/TimeSyncP__0__sendMsg__runTask(void );
+#line 377
+static inline void /*TimeSyncC.TimeSyncP*/TimeSyncP__0__Send__sendDone(message_t *ptr, error_t error);
+#line 395
+static inline void /*TimeSyncC.TimeSyncP*/TimeSyncP__0__timeSyncMsgSend(void );
+#line 408
+static inline void /*TimeSyncC.TimeSyncP*/TimeSyncP__0__Timer__fired(void );
+
+
+
+
+
+
+
+
+static inline error_t /*TimeSyncC.TimeSyncP*/TimeSyncP__0__TimeSyncMode__setMode(uint8_t mode_);
+#line 440
+static inline error_t /*TimeSyncC.TimeSyncP*/TimeSyncP__0__Init__init(void );
+#line 459
+static inline void /*TimeSyncC.TimeSyncP*/TimeSyncP__0__Boot__booted(void );
+
+
+
+
+
+static inline error_t /*TimeSyncC.TimeSyncP*/TimeSyncP__0__StdControl__start(void );
+#line 488
+static inline void /*TimeSyncC.TimeSyncP*/TimeSyncP__0__TimeSyncNotify__default__msg_received(void );
+static inline void /*TimeSyncC.TimeSyncP*/TimeSyncP__0__TimeSyncNotify__default__msg_sent(void );
+
+static inline void /*TimeSyncC.TimeSyncP*/TimeSyncP__0__RadioControl__startDone(error_t error);
+static inline void /*TimeSyncC.TimeSyncP*/TimeSyncP__0__RadioControl__stopDone(error_t error);
+# 69 "/home/tinyos/local/src/tinyos-2.x/tos/interfaces/AMSend.nc"
+static error_t CC2420TimeSyncMessageP__SubSend__send(am_addr_t addr, 
+#line 60
+message_t * msg, 
+
+
+
+
+
+
+
+
+uint8_t len);
+#line 124
+static 
+#line 122
+void * 
+
+CC2420TimeSyncMessageP__SubSend__getPayload(
+#line 121
+message_t * msg, 
+
+
+uint8_t len);
+# 82 "/home/tinyos/local/src/tinyos-2.x/tos/interfaces/TimeSyncAMSend.nc"
+static void CC2420TimeSyncMessageP__TimeSyncAMSendMilli__sendDone(
+# 31 "/home/tinyos/local/src/tinyos-2.x/tos/chips/cc2420/CC2420TimeSyncMessageP.nc"
+uint8_t arg_0x40d71148, 
+# 82 "/home/tinyos/local/src/tinyos-2.x/tos/interfaces/TimeSyncAMSend.nc"
+message_t *msg, error_t error);
+# 67 "/home/tinyos/local/src/tinyos-2.x/tos/interfaces/Receive.nc"
+static 
+#line 63
+message_t * 
+
+
+
+CC2420TimeSyncMessageP__Snoop__receive(
+# 39 "/home/tinyos/local/src/tinyos-2.x/tos/chips/cc2420/CC2420TimeSyncMessageP.nc"
+am_id_t arg_0x40d9a5b8, 
+# 60 "/home/tinyos/local/src/tinyos-2.x/tos/interfaces/Receive.nc"
+message_t * msg, 
+void * payload, 
+
+
+
+
+
+uint8_t len);
+# 67 "/home/tinyos/local/src/tinyos-2.x/tos/interfaces/Packet.nc"
+static uint8_t CC2420TimeSyncMessageP__SubPacket__payloadLength(
+#line 63
+message_t * msg);
+# 67 "/home/tinyos/local/src/tinyos-2.x/tos/interfaces/Receive.nc"
+static 
+#line 63
+message_t * 
+
+
+
+CC2420TimeSyncMessageP__Receive__receive(
+# 38 "/home/tinyos/local/src/tinyos-2.x/tos/chips/cc2420/CC2420TimeSyncMessageP.nc"
+am_id_t arg_0x40d9ce70, 
+# 60 "/home/tinyos/local/src/tinyos-2.x/tos/interfaces/Receive.nc"
+message_t * msg, 
+void * payload, 
+
+
+
+
+
+uint8_t len);
+# 54 "/home/tinyos/local/src/tinyos-2.x/tos/chips/cc2420/interfaces/PacketTimeSyncOffset.nc"
+static void CC2420TimeSyncMessageP__PacketTimeSyncOffset__set(
+#line 50
+message_t * msg);
+# 50 "/home/tinyos/local/src/tinyos-2.x/tos/lib/timer/LocalTime.nc"
+static uint32_t CC2420TimeSyncMessageP__LocalTime32khz__get(void );
+#line 50
+static uint32_t CC2420TimeSyncMessageP__LocalTimeMilli__get(void );
+# 82 "/home/tinyos/local/src/tinyos-2.x/tos/interfaces/TimeSyncAMSend.nc"
+static void CC2420TimeSyncMessageP__TimeSyncAMSend32khz__sendDone(
+# 30 "/home/tinyos/local/src/tinyos-2.x/tos/chips/cc2420/CC2420TimeSyncMessageP.nc"
+uint8_t arg_0x40d743f8, 
+# 82 "/home/tinyos/local/src/tinyos-2.x/tos/interfaces/TimeSyncAMSend.nc"
+message_t *msg, error_t error);
+# 52 "/home/tinyos/local/src/tinyos-2.x/tos/interfaces/PacketTimeStamp.nc"
+static CC2420TimeSyncMessageP__PacketTimeStampMilli__size_type CC2420TimeSyncMessageP__PacketTimeStampMilli__timestamp(
+#line 41
+message_t * msg);
+#line 38
+static bool CC2420TimeSyncMessageP__PacketTimeStampMilli__isValid(
+#line 27
+message_t * msg);
+# 64 "/home/tinyos/local/src/tinyos-2.x/tos/chips/cc2420/CC2420TimeSyncMessageP.nc"
+static __inline timesync_footer_t *CC2420TimeSyncMessageP__getFooter(message_t *msg);
+#line 82
+static inline uint8_t CC2420TimeSyncMessageP__Packet__payloadLength(message_t *msg);
+#line 134
+static __inline am_id_t CC2420TimeSyncMessageP__AMPacket__type(message_t *msg);
+#line 155
+static inline error_t CC2420TimeSyncMessageP__TimeSyncAMSend32khz__send(am_id_t id, am_addr_t addr, message_t *msg, uint8_t len, uint32_t event_time);
+#line 173
+static inline void CC2420TimeSyncMessageP__TimeSyncAMSend32khz__default__sendDone(am_id_t id, message_t *msg, error_t error);
+
+
+
+
+
+
+static inline void *CC2420TimeSyncMessageP__TimeSyncAMSend32khz__getPayload(am_id_t id, message_t *msg, uint8_t len);
+
+
+
+
+
+static inline error_t CC2420TimeSyncMessageP__TimeSyncAMSendMilli__send(am_id_t id, am_addr_t addr, message_t *msg, uint8_t len, uint32_t event_time);
+#line 198
+static inline void CC2420TimeSyncMessageP__TimeSyncAMSendMilli__default__sendDone(am_id_t id, message_t *msg, error_t error);
+
+
+
+
+
+
+static inline void *CC2420TimeSyncMessageP__TimeSyncAMSendMilli__getPayload(am_id_t id, message_t *msg, uint8_t len);
+
+
+
+
+
+
+static inline message_t *CC2420TimeSyncMessageP__SubReceive__receive(message_t *msg, void *payload, uint8_t len);
+
+
+
+
+
+static inline message_t *CC2420TimeSyncMessageP__Receive__default__receive(am_id_t id, message_t *msg, void *payload, uint8_t len);
+
+
+
+static inline message_t *CC2420TimeSyncMessageP__SubSnoop__receive(message_t *msg, void *payload, uint8_t len);
+
+
+
+
+
+static inline message_t *CC2420TimeSyncMessageP__Snoop__default__receive(am_id_t id, message_t *msg, void *payload, uint8_t len);
+
+
+static void CC2420TimeSyncMessageP__SubSend__sendDone(message_t *msg, error_t error);
+#line 250
+static inline bool CC2420TimeSyncMessageP__TimeSyncPacketMilli__isValid(message_t *msg);
+
+
+
+
+static inline uint32_t CC2420TimeSyncMessageP__TimeSyncPacketMilli__eventTime(message_t *msg);
 # 92 "/home/tinyos/local/src/tinyos-2.x/tos/interfaces/SplitControl.nc"
 static void CC2420CsmaP__SplitControl__startDone(error_t error);
 #line 117
@@ -8790,26 +9571,26 @@ static error_t CC2420CsmaP__stopDone_task__postTask(void );
 #line 56
 static error_t CC2420CsmaP__startDone_task__postTask(void );
 # 74 "/home/tinyos/local/src/tinyos-2.x/tos/chips/cc2420/csma/CC2420CsmaP.nc"
-enum CC2420CsmaP____nesc_unnamed4418 {
+enum CC2420CsmaP____nesc_unnamed4424 {
 #line 74
-  CC2420CsmaP__startDone_task = 12U
+  CC2420CsmaP__startDone_task = 14U
 };
 #line 74
 typedef int CC2420CsmaP____nesc_sillytask_startDone_task[CC2420CsmaP__startDone_task];
-enum CC2420CsmaP____nesc_unnamed4419 {
+enum CC2420CsmaP____nesc_unnamed4425 {
 #line 75
-  CC2420CsmaP__stopDone_task = 13U
+  CC2420CsmaP__stopDone_task = 15U
 };
 #line 75
 typedef int CC2420CsmaP____nesc_sillytask_stopDone_task[CC2420CsmaP__stopDone_task];
-enum CC2420CsmaP____nesc_unnamed4420 {
+enum CC2420CsmaP____nesc_unnamed4426 {
 #line 76
-  CC2420CsmaP__sendDone_task = 14U
+  CC2420CsmaP__sendDone_task = 16U
 };
 #line 76
 typedef int CC2420CsmaP____nesc_sillytask_sendDone_task[CC2420CsmaP__sendDone_task];
 #line 58
-enum CC2420CsmaP____nesc_unnamed4421 {
+enum CC2420CsmaP____nesc_unnamed4427 {
   CC2420CsmaP__S_STOPPED, 
   CC2420CsmaP__S_STARTING, 
   CC2420CsmaP__S_STARTED, 
@@ -8968,21 +9749,21 @@ static error_t CC2420ControlP__RssiResource__release(void );
 # 45 "/home/tinyos/local/src/tinyos-2.x/tos/chips/cc2420/interfaces/CC2420Strobe.nc"
 static cc2420_status_t CC2420ControlP__SRFOFF__strobe(void );
 # 117 "/home/tinyos/local/src/tinyos-2.x/tos/chips/cc2420/control/CC2420ControlP.nc"
-enum CC2420ControlP____nesc_unnamed4422 {
+enum CC2420ControlP____nesc_unnamed4428 {
 #line 117
-  CC2420ControlP__sync = 15U
+  CC2420ControlP__sync = 17U
 };
 #line 117
 typedef int CC2420ControlP____nesc_sillytask_sync[CC2420ControlP__sync];
-enum CC2420ControlP____nesc_unnamed4423 {
+enum CC2420ControlP____nesc_unnamed4429 {
 #line 118
-  CC2420ControlP__syncDone = 16U
+  CC2420ControlP__syncDone = 18U
 };
 #line 118
 typedef int CC2420ControlP____nesc_sillytask_syncDone[CC2420ControlP__syncDone];
 #line 85
 #line 79
-typedef enum CC2420ControlP____nesc_unnamed4424 {
+typedef enum CC2420ControlP____nesc_unnamed4430 {
   CC2420ControlP__S_VREG_STOPPED, 
   CC2420ControlP__S_VREG_STARTING, 
   CC2420ControlP__S_VREG_STARTED, 
@@ -9199,7 +9980,7 @@ static void /*Counter32khz32C.Transform*/TransformCounterC__1__Counter__overflow
 # 56 "/home/tinyos/local/src/tinyos-2.x/tos/lib/timer/TransformCounterC.nc"
 /*Counter32khz32C.Transform*/TransformCounterC__1__upper_count_type /*Counter32khz32C.Transform*/TransformCounterC__1__m_upper;
 
-enum /*Counter32khz32C.Transform*/TransformCounterC__1____nesc_unnamed4425 {
+enum /*Counter32khz32C.Transform*/TransformCounterC__1____nesc_unnamed4431 {
 
   TransformCounterC__1__LOW_SHIFT_RIGHT = 0, 
   TransformCounterC__1__HIGH_SHIFT_LEFT = 8 * sizeof(/*Counter32khz32C.Transform*/TransformCounterC__1__from_size_type ) - /*Counter32khz32C.Transform*/TransformCounterC__1__LOW_SHIFT_RIGHT, 
@@ -9225,7 +10006,7 @@ static /*AlarmMultiplexC.Alarm.Alarm32khz32C.Transform*/TransformAlarmC__1__Coun
 /*AlarmMultiplexC.Alarm.Alarm32khz32C.Transform*/TransformAlarmC__1__to_size_type /*AlarmMultiplexC.Alarm.Alarm32khz32C.Transform*/TransformAlarmC__1__m_t0;
 /*AlarmMultiplexC.Alarm.Alarm32khz32C.Transform*/TransformAlarmC__1__to_size_type /*AlarmMultiplexC.Alarm.Alarm32khz32C.Transform*/TransformAlarmC__1__m_dt;
 
-enum /*AlarmMultiplexC.Alarm.Alarm32khz32C.Transform*/TransformAlarmC__1____nesc_unnamed4426 {
+enum /*AlarmMultiplexC.Alarm.Alarm32khz32C.Transform*/TransformAlarmC__1____nesc_unnamed4432 {
 
   TransformAlarmC__1__MAX_DELAY_LOG2 = 8 * sizeof(/*AlarmMultiplexC.Alarm.Alarm32khz32C.Transform*/TransformAlarmC__1__from_size_type ) - 1 - 0, 
   TransformAlarmC__1__MAX_DELAY = (/*AlarmMultiplexC.Alarm.Alarm32khz32C.Transform*/TransformAlarmC__1__to_size_type )1 << /*AlarmMultiplexC.Alarm.Alarm32khz32C.Transform*/TransformAlarmC__1__MAX_DELAY_LOG2
@@ -9543,13 +10324,13 @@ uint16_t len);
 # 91 "/home/tinyos/local/src/tinyos-2.x/tos/chips/cc2420/interfaces/CC2420Fifo.nc"
 static void CC2420SpiP__Fifo__writeDone(
 # 46 "/home/tinyos/local/src/tinyos-2.x/tos/chips/cc2420/spi/CC2420SpiP.nc"
-uint8_t arg_0x40eee010, 
+uint8_t arg_0x40fc5010, 
 # 91 "/home/tinyos/local/src/tinyos-2.x/tos/chips/cc2420/interfaces/CC2420Fifo.nc"
 uint8_t * data, uint8_t length, error_t error);
 #line 71
 static void CC2420SpiP__Fifo__readDone(
 # 46 "/home/tinyos/local/src/tinyos-2.x/tos/chips/cc2420/spi/CC2420SpiP.nc"
-uint8_t arg_0x40eee010, 
+uint8_t arg_0x40fc5010, 
 # 71 "/home/tinyos/local/src/tinyos-2.x/tos/chips/cc2420/interfaces/CC2420Fifo.nc"
 uint8_t * data, uint8_t length, error_t error);
 # 24 "/home/tinyos/local/src/tinyos-2.x/tos/chips/cc2420/interfaces/ChipSpiResource.nc"
@@ -9576,24 +10357,24 @@ static bool CC2420SpiP__SpiResource__isOwner(void );
 #line 92
 static void CC2420SpiP__Resource__granted(
 # 45 "/home/tinyos/local/src/tinyos-2.x/tos/chips/cc2420/spi/CC2420SpiP.nc"
-uint8_t arg_0x40eb95c8);
+uint8_t arg_0x40fc65c8);
 # 56 "/home/tinyos/local/src/tinyos-2.x/tos/interfaces/TaskBasic.nc"
 static error_t CC2420SpiP__grant__postTask(void );
 # 88 "/home/tinyos/local/src/tinyos-2.x/tos/chips/cc2420/spi/CC2420SpiP.nc"
-enum CC2420SpiP____nesc_unnamed4427 {
+enum CC2420SpiP____nesc_unnamed4433 {
 #line 88
-  CC2420SpiP__grant = 17U
+  CC2420SpiP__grant = 19U
 };
 #line 88
 typedef int CC2420SpiP____nesc_sillytask_grant[CC2420SpiP__grant];
 #line 63
-enum CC2420SpiP____nesc_unnamed4428 {
+enum CC2420SpiP____nesc_unnamed4434 {
   CC2420SpiP__RESOURCE_COUNT = 5U, 
   CC2420SpiP__NO_HOLDER = 0xFF
 };
 
 
-enum CC2420SpiP____nesc_unnamed4429 {
+enum CC2420SpiP____nesc_unnamed4435 {
   CC2420SpiP__S_IDLE, 
   CC2420SpiP__S_BUSY
 };
@@ -9709,7 +10490,7 @@ static inline void CC2420SpiP__Fifo__default__writeDone(uint8_t addr, uint8_t *t
 # 74 "/home/tinyos/local/src/tinyos-2.x/tos/system/StateImplP.nc"
 uint8_t StateImplP__state[5U];
 
-enum StateImplP____nesc_unnamed4430 {
+enum StateImplP____nesc_unnamed4436 {
   StateImplP__S_IDLE = 0
 };
 
@@ -9754,7 +10535,7 @@ static uint8_t StateImplP__State__getState(uint8_t id);
 # 71 "/home/tinyos/local/src/tinyos-2.x/tos/interfaces/SpiPacket.nc"
 static void /*Msp430SpiDma0P.SpiP*/Msp430SpiDmaP__0__SpiPacket__sendDone(
 # 51 "/home/tinyos/local/src/tinyos-2.x/tos/chips/msp430/usart/Msp430SpiDmaP.nc"
-uint8_t arg_0x40f561b8, 
+uint8_t arg_0x4103a1b8, 
 # 64 "/home/tinyos/local/src/tinyos-2.x/tos/interfaces/SpiPacket.nc"
 uint8_t * txBuf, 
 uint8_t * rxBuf, 
@@ -9768,7 +10549,7 @@ error_t error);
 # 39 "/home/tinyos/local/src/tinyos-2.x/tos/chips/msp430/usart/Msp430SpiConfigure.nc"
 static msp430_spi_union_config_t */*Msp430SpiDma0P.SpiP*/Msp430SpiDmaP__0__Msp430SpiConfigure__getConfig(
 # 56 "/home/tinyos/local/src/tinyos-2.x/tos/chips/msp430/usart/Msp430SpiDmaP.nc"
-uint8_t arg_0x40f54cf8);
+uint8_t arg_0x41038cf8);
 # 197 "/home/tinyos/local/src/tinyos-2.x/tos/chips/msp430/usart/HplMsp430Usart.nc"
 static void /*Msp430SpiDma0P.SpiP*/Msp430SpiDmaP__0__Usart__clrRxIntr(void );
 #line 97
@@ -9799,23 +10580,23 @@ static error_t /*Msp430SpiDma0P.SpiP*/Msp430SpiDmaP__0__DmaChannel1__startTransf
 # 110 "/home/tinyos/local/src/tinyos-2.x/tos/interfaces/Resource.nc"
 static error_t /*Msp430SpiDma0P.SpiP*/Msp430SpiDmaP__0__UsartResource__release(
 # 55 "/home/tinyos/local/src/tinyos-2.x/tos/chips/msp430/usart/Msp430SpiDmaP.nc"
-uint8_t arg_0x40f542a8);
+uint8_t arg_0x410382a8);
 # 87 "/home/tinyos/local/src/tinyos-2.x/tos/interfaces/Resource.nc"
 static error_t /*Msp430SpiDma0P.SpiP*/Msp430SpiDmaP__0__UsartResource__immediateRequest(
 # 55 "/home/tinyos/local/src/tinyos-2.x/tos/chips/msp430/usart/Msp430SpiDmaP.nc"
-uint8_t arg_0x40f542a8);
+uint8_t arg_0x410382a8);
 # 78 "/home/tinyos/local/src/tinyos-2.x/tos/interfaces/Resource.nc"
 static error_t /*Msp430SpiDma0P.SpiP*/Msp430SpiDmaP__0__UsartResource__request(
 # 55 "/home/tinyos/local/src/tinyos-2.x/tos/chips/msp430/usart/Msp430SpiDmaP.nc"
-uint8_t arg_0x40f542a8);
+uint8_t arg_0x410382a8);
 # 118 "/home/tinyos/local/src/tinyos-2.x/tos/interfaces/Resource.nc"
 static bool /*Msp430SpiDma0P.SpiP*/Msp430SpiDmaP__0__UsartResource__isOwner(
 # 55 "/home/tinyos/local/src/tinyos-2.x/tos/chips/msp430/usart/Msp430SpiDmaP.nc"
-uint8_t arg_0x40f542a8);
+uint8_t arg_0x410382a8);
 # 92 "/home/tinyos/local/src/tinyos-2.x/tos/interfaces/Resource.nc"
 static void /*Msp430SpiDma0P.SpiP*/Msp430SpiDmaP__0__Resource__granted(
 # 48 "/home/tinyos/local/src/tinyos-2.x/tos/chips/msp430/usart/Msp430SpiDmaP.nc"
-uint8_t arg_0x40f59c30);
+uint8_t arg_0x4103cc30);
 # 38 "/home/tinyos/local/src/tinyos-2.x/tos/chips/msp430/dma/Msp430DmaChannel.nc"
 static error_t /*Msp430SpiDma0P.SpiP*/Msp430SpiDmaP__0__DmaChannel2__setupTransfer(dma_transfer_mode_t transfer_mode, 
 dma_trigger_t trigger, 
@@ -9832,9 +10613,9 @@ static error_t /*Msp430SpiDma0P.SpiP*/Msp430SpiDmaP__0__DmaChannel2__startTransf
 # 56 "/home/tinyos/local/src/tinyos-2.x/tos/interfaces/TaskBasic.nc"
 static error_t /*Msp430SpiDma0P.SpiP*/Msp430SpiDmaP__0__signalDone_task__postTask(void );
 # 74 "/home/tinyos/local/src/tinyos-2.x/tos/chips/msp430/usart/Msp430SpiDmaP.nc"
-enum /*Msp430SpiDma0P.SpiP*/Msp430SpiDmaP__0____nesc_unnamed4431 {
+enum /*Msp430SpiDma0P.SpiP*/Msp430SpiDmaP__0____nesc_unnamed4437 {
 #line 74
-  Msp430SpiDmaP__0__signalDone_task = 18U
+  Msp430SpiDmaP__0__signalDone_task = 20U
 };
 #line 74
 typedef int /*Msp430SpiDma0P.SpiP*/Msp430SpiDmaP__0____nesc_sillytask_signalDone_task[/*Msp430SpiDma0P.SpiP*/Msp430SpiDmaP__0__signalDone_task];
@@ -10235,7 +11016,7 @@ static inline void /*Msp430UsartShare0P.UsartShareP*/Msp430UsartShareP__1__Inter
 static inline void /*Msp430UsartShare0P.UsartShareP*/Msp430UsartShareP__1__Interrupts__default__rxDone(uint8_t id, uint8_t data);
 static inline void /*Msp430UsartShare0P.UsartShareP*/Msp430UsartShareP__1__I2CInterrupts__default__fired(uint8_t id);
 # 39 "/home/tinyos/local/src/tinyos-2.x/tos/system/FcfsResourceQueueC.nc"
-enum /*Msp430UsartShare0P.ArbiterC.Queue*/FcfsResourceQueueC__2____nesc_unnamed4432 {
+enum /*Msp430UsartShare0P.ArbiterC.Queue*/FcfsResourceQueueC__2____nesc_unnamed4438 {
 #line 39
   FcfsResourceQueueC__2__NO_ENTRY = 0xFF
 };
@@ -10294,24 +11075,24 @@ uint8_t arg_0x40ac0e88);
 # 56 "/home/tinyos/local/src/tinyos-2.x/tos/interfaces/TaskBasic.nc"
 static error_t /*Msp430UsartShare0P.ArbiterC.Arbiter*/ArbiterP__1__grantedTask__postTask(void );
 # 75 "/home/tinyos/local/src/tinyos-2.x/tos/system/ArbiterP.nc"
-enum /*Msp430UsartShare0P.ArbiterC.Arbiter*/ArbiterP__1____nesc_unnamed4433 {
+enum /*Msp430UsartShare0P.ArbiterC.Arbiter*/ArbiterP__1____nesc_unnamed4439 {
 #line 75
-  ArbiterP__1__grantedTask = 19U
+  ArbiterP__1__grantedTask = 21U
 };
 #line 75
 typedef int /*Msp430UsartShare0P.ArbiterC.Arbiter*/ArbiterP__1____nesc_sillytask_grantedTask[/*Msp430UsartShare0P.ArbiterC.Arbiter*/ArbiterP__1__grantedTask];
 #line 67
-enum /*Msp430UsartShare0P.ArbiterC.Arbiter*/ArbiterP__1____nesc_unnamed4434 {
+enum /*Msp430UsartShare0P.ArbiterC.Arbiter*/ArbiterP__1____nesc_unnamed4440 {
 #line 67
   ArbiterP__1__RES_CONTROLLED, ArbiterP__1__RES_GRANTING, ArbiterP__1__RES_IMM_GRANTING, ArbiterP__1__RES_BUSY
 };
 #line 68
-enum /*Msp430UsartShare0P.ArbiterC.Arbiter*/ArbiterP__1____nesc_unnamed4435 {
+enum /*Msp430UsartShare0P.ArbiterC.Arbiter*/ArbiterP__1____nesc_unnamed4441 {
 #line 68
   ArbiterP__1__default_owner_id = 1U
 };
 #line 69
-enum /*Msp430UsartShare0P.ArbiterC.Arbiter*/ArbiterP__1____nesc_unnamed4436 {
+enum /*Msp430UsartShare0P.ArbiterC.Arbiter*/ArbiterP__1____nesc_unnamed4442 {
 #line 69
   ArbiterP__1__NO_RES = 0xFF
 };
@@ -10498,7 +11279,7 @@ static cc2420_status_t CC2420TransmitP__TXFIFO__write(uint8_t * data, uint8_t le
 static cc2420_status_t CC2420TransmitP__STXON__strobe(void );
 # 99 "/home/tinyos/local/src/tinyos-2.x/tos/chips/cc2420/transmit/CC2420TransmitP.nc"
 #line 89
-typedef enum CC2420TransmitP____nesc_unnamed4437 {
+typedef enum CC2420TransmitP____nesc_unnamed4443 {
   CC2420TransmitP__S_STOPPED, 
   CC2420TransmitP__S_STARTED, 
   CC2420TransmitP__S_LOAD, 
@@ -10514,7 +11295,7 @@ typedef enum CC2420TransmitP____nesc_unnamed4437 {
 
 
 
-enum CC2420TransmitP____nesc_unnamed4438 {
+enum CC2420TransmitP____nesc_unnamed4444 {
   CC2420TransmitP__CC2420_ABORT_PERIOD = 320
 };
 #line 120
@@ -10725,15 +11506,15 @@ static error_t CC2420ReceiveP__InterruptFIFOP__enableFallingEdge(void );
 # 45 "/home/tinyos/local/src/tinyos-2.x/tos/chips/cc2420/interfaces/CC2420Strobe.nc"
 static cc2420_status_t CC2420ReceiveP__SFLUSHRX__strobe(void );
 # 148 "/home/tinyos/local/src/tinyos-2.x/tos/chips/cc2420/receive/CC2420ReceiveP.nc"
-enum CC2420ReceiveP____nesc_unnamed4439 {
+enum CC2420ReceiveP____nesc_unnamed4445 {
 #line 148
-  CC2420ReceiveP__receiveDone_task = 20U
+  CC2420ReceiveP__receiveDone_task = 22U
 };
 #line 148
 typedef int CC2420ReceiveP____nesc_sillytask_receiveDone_task[CC2420ReceiveP__receiveDone_task];
 #line 89
 #line 81
-typedef enum CC2420ReceiveP____nesc_unnamed4440 {
+typedef enum CC2420ReceiveP____nesc_unnamed4446 {
   CC2420ReceiveP__S_STOPPED, 
   CC2420ReceiveP__S_STARTED, 
   CC2420ReceiveP__S_RX_LENGTH, 
@@ -10743,7 +11524,7 @@ typedef enum CC2420ReceiveP____nesc_unnamed4440 {
   CC2420ReceiveP__S_RX_PAYLOAD
 } CC2420ReceiveP__cc2420_receive_state_t;
 
-enum CC2420ReceiveP____nesc_unnamed4441 {
+enum CC2420ReceiveP____nesc_unnamed4447 {
   CC2420ReceiveP__RXFIFO_SIZE = 128, 
   CC2420ReceiveP__TIMESTAMP_QUEUE_SIZE = 8, 
   CC2420ReceiveP__SACK_HEADER_LENGTH = 7
@@ -10861,6 +11642,10 @@ static void CC2420ReceiveP__reset_state(void );
 
 
 static inline bool CC2420ReceiveP__passesAddressCheck(message_t *msg);
+# 50 "/home/tinyos/local/src/tinyos-2.x/tos/lib/timer/LocalTime.nc"
+static uint32_t CC2420PacketP__LocalTime32khz__get(void );
+#line 50
+static uint32_t CC2420PacketP__LocalTimeMilli__get(void );
 # 65 "/home/tinyos/local/src/tinyos-2.x/tos/chips/cc2420/packet/CC2420PacketP.nc"
 static error_t CC2420PacketP__Acks__requestAck(message_t *p_msg);
 
@@ -10899,7 +11684,24 @@ static inline cc2420_header_t * CC2420PacketP__CC2420PacketBody__getHeader(messa
 
 
 static inline cc2420_metadata_t *CC2420PacketP__CC2420PacketBody__getMetadata(message_t *msg);
-#line 137
+
+
+
+
+
+
+
+
+static inline bool CC2420PacketP__PacketTimeStamp32khz__isValid(message_t *msg);
+
+
+
+
+static inline uint32_t CC2420PacketP__PacketTimeStamp32khz__timestamp(message_t *msg);
+
+
+
+
 static void CC2420PacketP__PacketTimeStamp32khz__clear(message_t *msg);
 
 
@@ -10907,6 +11709,21 @@ static void CC2420PacketP__PacketTimeStamp32khz__clear(message_t *msg);
 
 
 static inline void CC2420PacketP__PacketTimeStamp32khz__set(message_t *msg, uint32_t value);
+
+
+
+
+
+
+
+static inline bool CC2420PacketP__PacketTimeStampMilli__isValid(message_t *msg);
+
+
+
+
+
+
+static inline uint32_t CC2420PacketP__PacketTimeStampMilli__timestamp(message_t *msg);
 #line 176
 static inline bool CC2420PacketP__PacketTimeSyncOffset__isSet(message_t *msg);
 
@@ -10918,7 +11735,22 @@ static inline bool CC2420PacketP__PacketTimeSyncOffset__isSet(message_t *msg);
 
 
 static inline uint8_t CC2420PacketP__PacketTimeSyncOffset__get(message_t *msg);
-# 47 "/home/tinyos/local/src/tinyos-2.x/tos/lib/timer/CounterToLocalTimeC.nc"
+
+
+
+
+
+
+
+static inline void CC2420PacketP__PacketTimeSyncOffset__set(message_t *msg);
+# 53 "/home/tinyos/local/src/tinyos-2.x/tos/lib/timer/Counter.nc"
+static /*CC2420PacketC.CounterToLocalTimeC*/CounterToLocalTimeC__1__Counter__size_type /*CC2420PacketC.CounterToLocalTimeC*/CounterToLocalTimeC__1__Counter__get(void );
+# 42 "/home/tinyos/local/src/tinyos-2.x/tos/lib/timer/CounterToLocalTimeC.nc"
+static inline uint32_t /*CC2420PacketC.CounterToLocalTimeC*/CounterToLocalTimeC__1__LocalTime__get(void );
+
+
+
+
 static inline void /*CC2420PacketC.CounterToLocalTimeC*/CounterToLocalTimeC__1__Counter__overflow(void );
 # 41 "/home/tinyos/local/src/tinyos-2.x/tos/system/RandomMlcgC.nc"
 uint32_t RandomMlcgC__seed;
@@ -10962,7 +11794,7 @@ static error_t UniqueSendP__State__requestState(uint8_t reqState);
 # 54 "/home/tinyos/local/src/tinyos-2.x/tos/chips/cc2420/unique/UniqueSendP.nc"
 uint8_t UniqueSendP__localSendId;
 
-enum UniqueSendP____nesc_unnamed4442 {
+enum UniqueSendP____nesc_unnamed4448 {
   UniqueSendP__S_IDLE, 
   UniqueSendP__S_SENDING
 };
@@ -11020,7 +11852,7 @@ void * payload,
 uint8_t len);
 # 59 "/home/tinyos/local/src/tinyos-2.x/tos/chips/cc2420/unique/UniqueReceiveP.nc"
 #line 56
-struct UniqueReceiveP____nesc_unnamed4443 {
+struct UniqueReceiveP____nesc_unnamed4449 {
   am_addr_t source;
   uint8_t dsn;
 } UniqueReceiveP__receivedMessages[4];
@@ -11030,7 +11862,7 @@ uint8_t UniqueReceiveP__writeIndex = 0;
 
 uint8_t UniqueReceiveP__recycleSourceElement;
 
-enum UniqueReceiveP____nesc_unnamed4444 {
+enum UniqueReceiveP____nesc_unnamed4450 {
   UniqueReceiveP__INVALID_ELEMENT = 0xFF
 };
 
@@ -11118,7 +11950,7 @@ uint8_t len);
 # 92 "/home/tinyos/local/src/tinyos-2.x/tos/interfaces/Resource.nc"
 static void CC2420TinyosNetworkP__Resource__granted(
 # 46 "/home/tinyos/local/src/tinyos-2.x/tos/chips/cc2420/lowpan/CC2420TinyosNetworkP.nc"
-uint8_t arg_0x4132b628);
+uint8_t arg_0x413fc628);
 # 89 "/home/tinyos/local/src/tinyos-2.x/tos/interfaces/Send.nc"
 static void CC2420TinyosNetworkP__BareSend__sendDone(
 #line 85
@@ -11145,14 +11977,14 @@ void * payload,
 
 uint8_t len);
 # 148 "/home/tinyos/local/src/tinyos-2.x/tos/chips/cc2420/lowpan/CC2420TinyosNetworkP.nc"
-enum CC2420TinyosNetworkP____nesc_unnamed4445 {
+enum CC2420TinyosNetworkP____nesc_unnamed4451 {
 #line 148
-  CC2420TinyosNetworkP__grantTask = 21U
+  CC2420TinyosNetworkP__grantTask = 23U
 };
 #line 148
 typedef int CC2420TinyosNetworkP____nesc_sillytask_grantTask[CC2420TinyosNetworkP__grantTask];
 #line 66
-enum CC2420TinyosNetworkP____nesc_unnamed4446 {
+enum CC2420TinyosNetworkP____nesc_unnamed4452 {
   CC2420TinyosNetworkP__OWNER_NONE = 0xff, 
   CC2420TinyosNetworkP__TINYOS_N_NETWORKS = 2U
 };
@@ -11171,7 +12003,18 @@ static inline error_t CC2420TinyosNetworkP__ActiveSend__send(message_t *msg, uin
 
 
 static inline uint8_t CC2420TinyosNetworkP__ActiveSend__maxPayloadLength(void );
-#line 95
+
+
+
+static void *CC2420TinyosNetworkP__ActiveSend__getPayload(message_t *msg, uint8_t len);
+
+
+
+
+
+
+
+
 static inline error_t CC2420TinyosNetworkP__BareSend__send(message_t *msg, uint8_t len);
 #line 107
 static inline void *CC2420TinyosNetworkP__BareSend__getPayload(message_t *msg, uint8_t len);
@@ -11206,7 +12049,7 @@ static inline error_t CC2420TinyosNetworkP__Resource__release(uint8_t id);
 #line 222
 static void CC2420TinyosNetworkP__Resource__default__granted(uint8_t client);
 # 39 "/home/tinyos/local/src/tinyos-2.x/tos/system/FcfsResourceQueueC.nc"
-enum /*CC2420TinyosNetworkC.FcfsResourceQueueC*/FcfsResourceQueueC__0____nesc_unnamed4447 {
+enum /*CC2420TinyosNetworkC.FcfsResourceQueueC*/FcfsResourceQueueC__0____nesc_unnamed4453 {
 #line 39
   FcfsResourceQueueC__0__NO_ENTRY = 0xFF
 };
@@ -11278,9 +12121,9 @@ static bool PacketLinkP__PacketAcknowledgements__wasAcked(
 #line 69
 message_t * msg);
 # 77 "/home/tinyos/local/src/tinyos-2.x/tos/chips/cc2420/link/PacketLinkP.nc"
-enum PacketLinkP____nesc_unnamed4448 {
+enum PacketLinkP____nesc_unnamed4454 {
 #line 77
-  PacketLinkP__send = 22U
+  PacketLinkP__send = 24U
 };
 #line 77
 typedef int PacketLinkP____nesc_sillytask_send[PacketLinkP__send];
@@ -11297,7 +12140,7 @@ uint16_t PacketLinkP__totalRetries;
 
 
 
-enum PacketLinkP____nesc_unnamed4449 {
+enum PacketLinkP____nesc_unnamed4455 {
   PacketLinkP__S_IDLE, 
   PacketLinkP__S_SENDING
 };
@@ -11392,6 +12235,17 @@ message_t * msg,
 
 
 uint8_t len);
+#line 114
+static 
+#line 112
+void * 
+
+CC2420ActiveMessageP__SubSend__getPayload(
+#line 111
+message_t * msg, 
+
+
+uint8_t len);
 #line 101
 static uint8_t CC2420ActiveMessageP__SubSend__maxPayloadLength(void );
 # 70 "/home/tinyos/local/src/tinyos-2.x/tos/chips/cc2420/interfaces/CC2420Config.nc"
@@ -11399,13 +12253,13 @@ static uint16_t CC2420ActiveMessageP__CC2420Config__getPanAddr(void );
 # 95 "/home/tinyos/local/src/tinyos-2.x/tos/chips/cc2420/interfaces/RadioBackoff.nc"
 static void CC2420ActiveMessageP__RadioBackoff__requestCca(
 # 45 "/home/tinyos/local/src/tinyos-2.x/tos/chips/cc2420/CC2420ActiveMessageP.nc"
-am_id_t arg_0x41399df8, 
+am_id_t arg_0x41474df8, 
 # 95 "/home/tinyos/local/src/tinyos-2.x/tos/chips/cc2420/interfaces/RadioBackoff.nc"
 message_t * msg);
 #line 81
 static void CC2420ActiveMessageP__RadioBackoff__requestInitialBackoff(
 # 45 "/home/tinyos/local/src/tinyos-2.x/tos/chips/cc2420/CC2420ActiveMessageP.nc"
-am_id_t arg_0x41399df8, 
+am_id_t arg_0x41474df8, 
 # 81 "/home/tinyos/local/src/tinyos-2.x/tos/chips/cc2420/interfaces/RadioBackoff.nc"
 message_t * msg);
 
@@ -11416,13 +12270,13 @@ message_t * msg);
 
 static void CC2420ActiveMessageP__RadioBackoff__requestCongestionBackoff(
 # 45 "/home/tinyos/local/src/tinyos-2.x/tos/chips/cc2420/CC2420ActiveMessageP.nc"
-am_id_t arg_0x41399df8, 
+am_id_t arg_0x41474df8, 
 # 88 "/home/tinyos/local/src/tinyos-2.x/tos/chips/cc2420/interfaces/RadioBackoff.nc"
 message_t * msg);
 # 59 "/home/tinyos/local/src/tinyos-2.x/tos/interfaces/SendNotifier.nc"
 static void CC2420ActiveMessageP__SendNotifier__aboutToSend(
 # 44 "/home/tinyos/local/src/tinyos-2.x/tos/chips/cc2420/CC2420ActiveMessageP.nc"
-am_id_t arg_0x41399780, 
+am_id_t arg_0x41474780, 
 # 59 "/home/tinyos/local/src/tinyos-2.x/tos/interfaces/SendNotifier.nc"
 am_addr_t dest, 
 #line 57
@@ -11430,7 +12284,7 @@ message_t * msg);
 # 99 "/home/tinyos/local/src/tinyos-2.x/tos/interfaces/AMSend.nc"
 static void CC2420ActiveMessageP__AMSend__sendDone(
 # 39 "/home/tinyos/local/src/tinyos-2.x/tos/chips/cc2420/CC2420ActiveMessageP.nc"
-am_id_t arg_0x41356cb0, 
+am_id_t arg_0x41479cb0, 
 # 92 "/home/tinyos/local/src/tinyos-2.x/tos/interfaces/AMSend.nc"
 message_t * msg, 
 
@@ -11449,7 +12303,7 @@ message_t *
 
 CC2420ActiveMessageP__Snoop__receive(
 # 41 "/home/tinyos/local/src/tinyos-2.x/tos/chips/cc2420/CC2420ActiveMessageP.nc"
-am_id_t arg_0x41353da0, 
+am_id_t arg_0x41476da0, 
 # 60 "/home/tinyos/local/src/tinyos-2.x/tos/interfaces/Receive.nc"
 message_t * msg, 
 void * payload, 
@@ -11472,7 +12326,7 @@ message_t *
 
 CC2420ActiveMessageP__Receive__receive(
 # 40 "/home/tinyos/local/src/tinyos-2.x/tos/chips/cc2420/CC2420ActiveMessageP.nc"
-am_id_t arg_0x41353708, 
+am_id_t arg_0x41476708, 
 # 60 "/home/tinyos/local/src/tinyos-2.x/tos/interfaces/Receive.nc"
 message_t * msg, 
 void * payload, 
@@ -11494,28 +12348,56 @@ message_t *CC2420ActiveMessageP__pending_message = (void *)0;
 
 static inline void CC2420ActiveMessageP__RadioResource__granted(void );
 #line 78
-static inline error_t CC2420ActiveMessageP__AMSend__send(am_id_t id, am_addr_t addr, 
+static error_t CC2420ActiveMessageP__AMSend__send(am_id_t id, am_addr_t addr, 
 message_t *msg, 
 uint8_t len);
-#line 122
+#line 117
+static inline void *CC2420ActiveMessageP__AMSend__getPayload(am_id_t id, message_t *m, uint8_t len);
+
+
+
+
 static inline am_addr_t CC2420ActiveMessageP__AMPacket__address(void );
 
 
 
 static am_addr_t CC2420ActiveMessageP__AMPacket__destination(message_t *amsg);
-#line 146
+
+
+
+
+
+
+
+
+
+static void CC2420ActiveMessageP__AMPacket__setDestination(message_t *amsg, am_addr_t addr);
+
+
+
+
+
+
+
+
+
 static inline bool CC2420ActiveMessageP__AMPacket__isForMe(message_t *amsg);
 
 
 
 
-static inline am_id_t CC2420ActiveMessageP__AMPacket__type(message_t *amsg);
+static am_id_t CC2420ActiveMessageP__AMPacket__type(message_t *amsg);
+
+
+
+
+static void CC2420ActiveMessageP__AMPacket__setType(message_t *amsg, am_id_t type);
 #line 181
 static inline uint8_t CC2420ActiveMessageP__Packet__payloadLength(message_t *msg);
 
 
 
-
+static inline void CC2420ActiveMessageP__Packet__setPayloadLength(message_t *msg, uint8_t len);
 
 
 
@@ -11523,7 +12405,7 @@ static inline uint8_t CC2420ActiveMessageP__Packet__maxPayloadLength(void );
 
 
 
-
+static inline void *CC2420ActiveMessageP__Packet__getPayload(message_t *msg, uint8_t len);
 
 
 
@@ -11580,7 +12462,7 @@ message_t *msg);
 static inline void CC2420ActiveMessageP__RadioBackoff__default__requestCca(am_id_t id, 
 message_t *msg);
 # 99 "/home/tinyos/local/src/tinyos-2.x/tos/interfaces/AMSend.nc"
-static void /*ECG_ForwarderAppC.AMSenderC.SenderC.AMQueueEntryP*/AMQueueEntryP__1__AMSend__sendDone(
+static void /*CC2420TimeSyncMessageC.AMSenderC.SenderC.AMQueueEntryP*/AMQueueEntryP__1__AMSend__sendDone(
 #line 92
 message_t * msg, 
 
@@ -11590,8 +12472,67 @@ message_t * msg,
 
 
 error_t error);
-# 57 "/home/tinyos/local/src/tinyos-2.x/tos/system/AMQueueEntryP.nc"
-static inline void /*ECG_ForwarderAppC.AMSenderC.SenderC.AMQueueEntryP*/AMQueueEntryP__1__Send__sendDone(message_t *m, error_t err);
+# 64 "/home/tinyos/local/src/tinyos-2.x/tos/interfaces/Send.nc"
+static error_t /*CC2420TimeSyncMessageC.AMSenderC.SenderC.AMQueueEntryP*/AMQueueEntryP__1__Send__send(
+#line 56
+message_t * msg, 
+
+
+
+
+
+
+
+uint8_t len);
+#line 114
+static 
+#line 112
+void * 
+
+/*CC2420TimeSyncMessageC.AMSenderC.SenderC.AMQueueEntryP*/AMQueueEntryP__1__Send__getPayload(
+#line 111
+message_t * msg, 
+
+
+uint8_t len);
+# 92 "/home/tinyos/local/src/tinyos-2.x/tos/interfaces/AMPacket.nc"
+static void /*CC2420TimeSyncMessageC.AMSenderC.SenderC.AMQueueEntryP*/AMQueueEntryP__1__AMPacket__setDestination(
+#line 88
+message_t * amsg, 
+
+
+
+am_addr_t addr);
+#line 151
+static void /*CC2420TimeSyncMessageC.AMSenderC.SenderC.AMQueueEntryP*/AMQueueEntryP__1__AMPacket__setType(
+#line 147
+message_t * amsg, 
+
+
+
+am_id_t t);
+# 45 "/home/tinyos/local/src/tinyos-2.x/tos/system/AMQueueEntryP.nc"
+static inline error_t /*CC2420TimeSyncMessageC.AMSenderC.SenderC.AMQueueEntryP*/AMQueueEntryP__1__AMSend__send(am_addr_t dest, 
+message_t *msg, 
+uint8_t len);
+
+
+
+
+
+
+
+
+
+static inline void /*CC2420TimeSyncMessageC.AMSenderC.SenderC.AMQueueEntryP*/AMQueueEntryP__1__Send__sendDone(message_t *m, error_t err);
+
+
+
+
+
+
+
+static inline void */*CC2420TimeSyncMessageC.AMSenderC.SenderC.AMQueueEntryP*/AMQueueEntryP__1__AMSend__getPayload(message_t *m, uint8_t len);
 # 69 "/home/tinyos/local/src/tinyos-2.x/tos/interfaces/AMSend.nc"
 static error_t /*AMQueueP.AMQueueImplP*/AMQueueImplP__1__AMSend__send(
 # 40 "/home/tinyos/local/src/tinyos-2.x/tos/system/AMQueueImplP.nc"
@@ -11609,6 +12550,19 @@ message_t * msg,
 
 
 uint8_t len);
+#line 124
+static 
+#line 122
+void * 
+
+/*AMQueueP.AMQueueImplP*/AMQueueImplP__1__AMSend__getPayload(
+# 40 "/home/tinyos/local/src/tinyos-2.x/tos/system/AMQueueImplP.nc"
+am_id_t arg_0x40b32908, 
+# 121 "/home/tinyos/local/src/tinyos-2.x/tos/interfaces/AMSend.nc"
+message_t * msg, 
+
+
+uint8_t len);
 # 89 "/home/tinyos/local/src/tinyos-2.x/tos/interfaces/Send.nc"
 static void /*AMQueueP.AMQueueImplP*/AMQueueImplP__1__Send__sendDone(
 # 38 "/home/tinyos/local/src/tinyos-2.x/tos/system/AMQueueImplP.nc"
@@ -11623,6 +12577,14 @@ error_t error);
 static uint8_t /*AMQueueP.AMQueueImplP*/AMQueueImplP__1__Packet__payloadLength(
 #line 63
 message_t * msg);
+#line 83
+static void /*AMQueueP.AMQueueImplP*/AMQueueImplP__1__Packet__setPayloadLength(
+#line 79
+message_t * msg, 
+
+
+
+uint8_t len);
 # 56 "/home/tinyos/local/src/tinyos-2.x/tos/interfaces/TaskBasic.nc"
 static error_t /*AMQueueP.AMQueueImplP*/AMQueueImplP__1__errorTask__postTask(void );
 # 67 "/home/tinyos/local/src/tinyos-2.x/tos/interfaces/AMPacket.nc"
@@ -11634,32 +12596,35 @@ static am_id_t /*AMQueueP.AMQueueImplP*/AMQueueImplP__1__AMPacket__type(
 #line 132
 message_t * amsg);
 # 118 "/home/tinyos/local/src/tinyos-2.x/tos/system/AMQueueImplP.nc"
-enum /*AMQueueP.AMQueueImplP*/AMQueueImplP__1____nesc_unnamed4450 {
+enum /*AMQueueP.AMQueueImplP*/AMQueueImplP__1____nesc_unnamed4456 {
 #line 118
-  AMQueueImplP__1__CancelTask = 23U
+  AMQueueImplP__1__CancelTask = 25U
 };
 #line 118
 typedef int /*AMQueueP.AMQueueImplP*/AMQueueImplP__1____nesc_sillytask_CancelTask[/*AMQueueP.AMQueueImplP*/AMQueueImplP__1__CancelTask];
 #line 161
-enum /*AMQueueP.AMQueueImplP*/AMQueueImplP__1____nesc_unnamed4451 {
+enum /*AMQueueP.AMQueueImplP*/AMQueueImplP__1____nesc_unnamed4457 {
 #line 161
-  AMQueueImplP__1__errorTask = 24U
+  AMQueueImplP__1__errorTask = 26U
 };
 #line 161
 typedef int /*AMQueueP.AMQueueImplP*/AMQueueImplP__1____nesc_sillytask_errorTask[/*AMQueueP.AMQueueImplP*/AMQueueImplP__1__errorTask];
 #line 49
 #line 47
-typedef struct /*AMQueueP.AMQueueImplP*/AMQueueImplP__1____nesc_unnamed4452 {
+typedef struct /*AMQueueP.AMQueueImplP*/AMQueueImplP__1____nesc_unnamed4458 {
   message_t * msg;
 } /*AMQueueP.AMQueueImplP*/AMQueueImplP__1__queue_entry_t;
 
-uint8_t /*AMQueueP.AMQueueImplP*/AMQueueImplP__1__current = 1;
-/*AMQueueP.AMQueueImplP*/AMQueueImplP__1__queue_entry_t /*AMQueueP.AMQueueImplP*/AMQueueImplP__1__queue[1];
-uint8_t /*AMQueueP.AMQueueImplP*/AMQueueImplP__1__cancelMask[1 / 8 + 1];
+uint8_t /*AMQueueP.AMQueueImplP*/AMQueueImplP__1__current = 2;
+/*AMQueueP.AMQueueImplP*/AMQueueImplP__1__queue_entry_t /*AMQueueP.AMQueueImplP*/AMQueueImplP__1__queue[2];
+uint8_t /*AMQueueP.AMQueueImplP*/AMQueueImplP__1__cancelMask[2 / 8 + 1];
 
 static inline void /*AMQueueP.AMQueueImplP*/AMQueueImplP__1__tryToSend(void );
 
 static inline void /*AMQueueP.AMQueueImplP*/AMQueueImplP__1__nextPacket(void );
+#line 82
+static error_t /*AMQueueP.AMQueueImplP*/AMQueueImplP__1__Send__send(uint8_t clientId, message_t *msg, 
+uint8_t len);
 #line 118
 static inline void /*AMQueueP.AMQueueImplP*/AMQueueImplP__1__CancelTask__runTask(void );
 #line 155
@@ -11677,8 +12642,80 @@ static inline void /*AMQueueP.AMQueueImplP*/AMQueueImplP__1__errorTask__runTask(
 static inline void /*AMQueueP.AMQueueImplP*/AMQueueImplP__1__tryToSend(void );
 #line 181
 static void /*AMQueueP.AMQueueImplP*/AMQueueImplP__1__AMSend__sendDone(am_id_t id, message_t *msg, error_t err);
-#line 207
+#line 203
+static inline void */*AMQueueP.AMQueueImplP*/AMQueueImplP__1__Send__getPayload(uint8_t id, message_t *m, uint8_t len);
+
+
+
 static inline void /*AMQueueP.AMQueueImplP*/AMQueueImplP__1__Send__default__sendDone(uint8_t id, message_t *msg, error_t err);
+# 53 "/home/tinyos/local/src/tinyos-2.x/tos/lib/timer/Counter.nc"
+static /*CC2420TimeSyncMessageC.LocalTime32khzC*/CounterToLocalTimeC__2__Counter__size_type /*CC2420TimeSyncMessageC.LocalTime32khzC*/CounterToLocalTimeC__2__Counter__get(void );
+# 42 "/home/tinyos/local/src/tinyos-2.x/tos/lib/timer/CounterToLocalTimeC.nc"
+static inline uint32_t /*CC2420TimeSyncMessageC.LocalTime32khzC*/CounterToLocalTimeC__2__LocalTime__get(void );
+
+
+
+
+static inline void /*CC2420TimeSyncMessageC.LocalTime32khzC*/CounterToLocalTimeC__2__Counter__overflow(void );
+# 44 "/home/tinyos/local/src/tinyos-2.x/tos/system/NoLedsC.nc"
+static inline void NoLedsC__Leds__led0Toggle(void );
+
+
+
+static inline void NoLedsC__Leds__led1Toggle(void );
+# 99 "/home/tinyos/local/src/tinyos-2.x/tos/interfaces/AMSend.nc"
+static void /*ECG_ForwarderAppC.AMSenderC.SenderC.AMQueueEntryP*/AMQueueEntryP__2__AMSend__sendDone(
+#line 92
+message_t * msg, 
+
+
+
+
+
+
+error_t error);
+# 64 "/home/tinyos/local/src/tinyos-2.x/tos/interfaces/Send.nc"
+static error_t /*ECG_ForwarderAppC.AMSenderC.SenderC.AMQueueEntryP*/AMQueueEntryP__2__Send__send(
+#line 56
+message_t * msg, 
+
+
+
+
+
+
+
+uint8_t len);
+# 92 "/home/tinyos/local/src/tinyos-2.x/tos/interfaces/AMPacket.nc"
+static void /*ECG_ForwarderAppC.AMSenderC.SenderC.AMQueueEntryP*/AMQueueEntryP__2__AMPacket__setDestination(
+#line 88
+message_t * amsg, 
+
+
+
+am_addr_t addr);
+#line 151
+static void /*ECG_ForwarderAppC.AMSenderC.SenderC.AMQueueEntryP*/AMQueueEntryP__2__AMPacket__setType(
+#line 147
+message_t * amsg, 
+
+
+
+am_id_t t);
+# 45 "/home/tinyos/local/src/tinyos-2.x/tos/system/AMQueueEntryP.nc"
+static inline error_t /*ECG_ForwarderAppC.AMSenderC.SenderC.AMQueueEntryP*/AMQueueEntryP__2__AMSend__send(am_addr_t dest, 
+message_t *msg, 
+uint8_t len);
+
+
+
+
+
+
+
+
+
+static inline void /*ECG_ForwarderAppC.AMSenderC.SenderC.AMQueueEntryP*/AMQueueEntryP__2__Send__sendDone(message_t *m, error_t err);
 # 64 "/home/tinyos/local/src/tinyos-2.x/tos/interfaces/Send.nc"
 static error_t CC2420Ieee154MessageP__SubSend__send(
 #line 56
@@ -11932,18 +12969,18 @@ static struct ip6_route *IPDispatchP__IPRouting__insertRoutingHeader(struct spli
 # 25 "/home/tinyos/local/src/tinyos-2.x/tos/lib/net/blip/interfaces/IP.nc"
 static void IPDispatchP__IP__recv(
 # 90 "/home/tinyos/local/src/tinyos-2.x/tos/lib/net/blip/IPDispatchP.nc"
-uint8_t arg_0x4143a810, 
+uint8_t arg_0x41543230, 
 # 25 "/home/tinyos/local/src/tinyos-2.x/tos/lib/net/blip/interfaces/IP.nc"
 struct ip6_hdr *iph, void *payload, struct ip_metadata *meta);
 # 176 "/home/tinyos/local/src/tinyos-2.x/tos/lib/net/blip/IPDispatchP.nc"
-enum IPDispatchP____nesc_unnamed4453 {
+enum IPDispatchP____nesc_unnamed4459 {
 #line 176
-  IPDispatchP__sendTask = 25U
+  IPDispatchP__sendTask = 27U
 };
 #line 176
 typedef int IPDispatchP____nesc_sillytask_sendTask[IPDispatchP__sendTask];
 #line 140
-enum IPDispatchP____nesc_unnamed4454 {
+enum IPDispatchP____nesc_unnamed4460 {
   IPDispatchP__S_RUNNING, 
   IPDispatchP__S_STOPPED, 
   IPDispatchP__S_STOPPING
@@ -12128,7 +13165,7 @@ static void IPRoutingP__TrafficGenTimer__startOneShot(uint32_t dt);
 
 static void IPRoutingP__TrafficGenTimer__stop(void );
 # 51 "/home/tinyos/local/src/tinyos-2.x/tos/lib/net/blip/IPRoutingP.nc"
-enum IPRoutingP____nesc_unnamed4455 {
+enum IPRoutingP____nesc_unnamed4461 {
   IPRoutingP__SHORT_EPOCH = 0, 
   IPRoutingP__LONG_EPOCH = 1
 };
@@ -12284,8 +13321,6 @@ static void IPRoutingP__swapNodes(struct neigh_entry *highNode, struct neigh_ent
 
 
 static uint8_t IPRoutingP__checkThresh(uint32_t firstVal, uint32_t secondVal, uint16_t thresh);
-# 48 "/home/tinyos/local/src/tinyos-2.x/tos/system/NoLedsC.nc"
-static inline void NoLedsC__Leds__led1Toggle(void );
 # 56 "/home/tinyos/local/src/tinyos-2.x/tos/interfaces/Ieee154Send.nc"
 static error_t ResourceSendP__SubSend__send(ieee154_saddr_t addr, message_t *msg, uint8_t len);
 #line 86
@@ -12438,13 +13473,13 @@ static void ICMPResponderP__Solicitation__startOneShot(uint32_t dt);
 # 10 "/home/tinyos/local/src/tinyos-2.x/tos/lib/net/blip/interfaces/ICMPPing.nc"
 static void ICMPResponderP__ICMPPing__pingDone(
 # 35 "/home/tinyos/local/src/tinyos-2.x/tos/lib/net/blip/ICMPResponderP.nc"
-uint16_t arg_0x4161f2e0, 
+uint16_t arg_0x41713998, 
 # 10 "/home/tinyos/local/src/tinyos-2.x/tos/lib/net/blip/interfaces/ICMPPing.nc"
 uint16_t ping_rcv, uint16_t ping_n);
 #line 8
 static void ICMPResponderP__ICMPPing__pingReply(
 # 35 "/home/tinyos/local/src/tinyos-2.x/tos/lib/net/blip/ICMPResponderP.nc"
-uint16_t arg_0x4161f2e0, 
+uint16_t arg_0x41713998, 
 # 8 "/home/tinyos/local/src/tinyos-2.x/tos/lib/net/blip/interfaces/ICMPPing.nc"
 struct in6_addr *source, struct icmp_stats *stats);
 # 15 "/home/tinyos/local/src/tinyos-2.x/tos/lib/net/blip/interfaces/IP.nc"
@@ -12538,14 +13573,14 @@ static inline void ICMPResponderP__ICMPPing__default__pingDone(uint16_t client, 
 # 5 "/home/tinyos/local/src/tinyos-2.x/tos/lib/net/blip/interfaces/TLVHeader.nc"
 static struct tlv_hdr *IPExtensionP__HopByHopExt__getHeader(
 # 16 "/home/tinyos/local/src/tinyos-2.x/tos/lib/net/blip/IPExtensionP.nc"
-uint8_t arg_0x416a5710, 
+uint8_t arg_0x417a5010, 
 # 5 "/home/tinyos/local/src/tinyos-2.x/tos/lib/net/blip/interfaces/TLVHeader.nc"
 int label, int nxt_hdr, 
 struct ip6_hdr *msg);
 #line 5
 static struct tlv_hdr *IPExtensionP__DestinationExt__getHeader(
 # 17 "/home/tinyos/local/src/tinyos-2.x/tos/lib/net/blip/IPExtensionP.nc"
-uint8_t arg_0x416a5f20, 
+uint8_t arg_0x417a5820, 
 # 5 "/home/tinyos/local/src/tinyos-2.x/tos/lib/net/blip/interfaces/TLVHeader.nc"
 int label, int nxt_hdr, 
 struct ip6_hdr *msg);
@@ -12588,21 +13623,21 @@ static void UdpP__IPAddress__setSource(struct ip6_hdr *hdr);
 # 24 "/home/tinyos/local/src/tinyos-2.x/tos/lib/net/blip/interfaces/UDP.nc"
 static void UdpP__UDP__recvfrom(
 # 7 "/home/tinyos/local/src/tinyos-2.x/tos/lib/net/blip/UdpP.nc"
-uint8_t arg_0x416cee08, 
+uint8_t arg_0x417d2440, 
 # 24 "/home/tinyos/local/src/tinyos-2.x/tos/lib/net/blip/interfaces/UDP.nc"
 struct sockaddr_in6 *src, void *payload, 
 uint16_t len, struct ip_metadata *meta);
 # 15 "/home/tinyos/local/src/tinyos-2.x/tos/lib/net/blip/interfaces/IP.nc"
 static error_t UdpP__IP__send(struct split_ip_msg *msg);
 # 19 "/home/tinyos/local/src/tinyos-2.x/tos/lib/net/blip/UdpP.nc"
-enum UdpP____nesc_unnamed4456 {
+enum UdpP____nesc_unnamed4462 {
   UdpP__N_CLIENTS = 2U
 };
 
 udp_statistics_t UdpP__stats;
 uint16_t UdpP__local_ports[UdpP__N_CLIENTS];
 
-enum UdpP____nesc_unnamed4457 {
+enum UdpP____nesc_unnamed4463 {
   UdpP__LOCAL_PORT_START = 51024U, 
   UdpP__LOCAL_PORT_STOP = 54999U
 };
@@ -12639,13 +13674,13 @@ static error_t UDPShellP__UDP__bind(uint16_t port);
 # 11 "/home/tinyos/local/src/tinyos-2.x/tos/lib/net/blip/shell/ShellCommand.nc"
 static char *UDPShellP__ShellCommand__eval(
 # 30 "/home/tinyos/local/src/tinyos-2.x/tos/lib/net/blip/shell/UDPShellP.nc"
-uint8_t arg_0x416ed520, 
+uint8_t arg_0x417f7920, 
 # 11 "/home/tinyos/local/src/tinyos-2.x/tos/lib/net/blip/shell/ShellCommand.nc"
 int argc, char **argv);
 # 3 "/home/tinyos/local/src/tinyos-2.x/tos/lib/net/blip/shell/RegisterShellCommand.nc"
 static char *UDPShellP__RegisterShellCommand__getCommandName(
 # 31 "/home/tinyos/local/src/tinyos-2.x/tos/lib/net/blip/shell/UDPShellP.nc"
-uint8_t arg_0x416ec4e8);
+uint8_t arg_0x417f98e0);
 # 6 "/home/tinyos/local/src/tinyos-2.x/tos/lib/net/blip/interfaces/ICMPPing.nc"
 static error_t UDPShellP__ICMPPing__ping(struct in6_addr *target, uint16_t period, uint16_t n);
 # 48 "/home/tinyos/local/src/tinyos-2.x/tos/lib/net/blip/shell/UDPShellP.nc"
@@ -12653,12 +13688,12 @@ struct sockaddr_in6 UDPShellP__session_endpoint;
 uint32_t UDPShellP__boot_time;
 uint64_t UDPShellP__uptime;
 
-enum UDPShellP____nesc_unnamed4458 {
+enum UDPShellP____nesc_unnamed4464 {
   UDPShellP__N_EXTERNAL = 0U
 };
 
 
-enum UDPShellP____nesc_unnamed4459 {
+enum UDPShellP____nesc_unnamed4465 {
   UDPShellP__N_BUILTINS = 5, 
 
   UDPShellP__N_ARGS = 10, 
@@ -12676,7 +13711,7 @@ struct UDPShellP__cmd_name {
   char c_name[UDPShellP__CMDNAMSIZ];
 };
 struct UDPShellP__cmd_builtin {
-  void (*action)(int arg_0x416e72d0, char **arg_0x416e7468);
+  void (*action)(int arg_0x417f0700, char **arg_0x417f0898);
 };
 
 struct UDPShellP__cmd_name UDPShellP__externals[UDPShellP__N_EXTERNAL];
@@ -12690,7 +13725,7 @@ const char *UDPShellP__ping_fmt = " icmp_seq=%i ttl=%i time=%i ms\n";
 const char *UDPShellP__ping_summary = "%i packets transmitted, %i received\n";
 char *UDPShellP__ident_string = "\t[app: "
 "ECG_ForwarderAp""]\n\t[user: ""tinyos""]\n\t[host: ""lenny"
-"]\n\t[time: ""0x4dd32d06L""]\n";
+"]\n\t[time: ""0x4dd760afL""]\n";
 
 
 static inline void UDPShellP__action_help(int argc, char **argv);
@@ -12871,7 +13906,7 @@ static inline  /*Msp430TimerC.Msp430TimerA0*/Msp430TimerCapComP__0__cc_t /*Msp43
 #line 47
 {
 #line 47
-  union /*Msp430TimerC.Msp430TimerA0*/Msp430TimerCapComP__0____nesc_unnamed4460 {
+  union /*Msp430TimerC.Msp430TimerA0*/Msp430TimerCapComP__0____nesc_unnamed4466 {
 #line 47
     uint16_t f;
 #line 47
@@ -12925,7 +13960,7 @@ static inline  /*Msp430TimerC.Msp430TimerA1*/Msp430TimerCapComP__1__cc_t /*Msp43
 #line 47
 {
 #line 47
-  union /*Msp430TimerC.Msp430TimerA1*/Msp430TimerCapComP__1____nesc_unnamed4461 {
+  union /*Msp430TimerC.Msp430TimerA1*/Msp430TimerCapComP__1____nesc_unnamed4467 {
 #line 47
     uint16_t f;
 #line 47
@@ -12979,7 +14014,7 @@ static inline  /*Msp430TimerC.Msp430TimerA2*/Msp430TimerCapComP__2__cc_t /*Msp43
 #line 47
 {
 #line 47
-  union /*Msp430TimerC.Msp430TimerA2*/Msp430TimerCapComP__2____nesc_unnamed4462 {
+  union /*Msp430TimerC.Msp430TimerA2*/Msp430TimerCapComP__2____nesc_unnamed4468 {
 #line 47
     uint16_t f;
 #line 47
@@ -13139,6 +14174,11 @@ static inline void /*CounterMilli32C.Transform*/TransformCounterC__0__CounterFro
   }
 }
 
+# 47 "/home/tinyos/local/src/tinyos-2.x/tos/lib/timer/CounterToLocalTimeC.nc"
+static inline void /*CC2420TimeSyncMessageC.LocalTime32khzC*/CounterToLocalTimeC__2__Counter__overflow(void )
+{
+}
+
 # 166 "/home/tinyos/local/src/tinyos-2.x/tos/lib/timer/TransformAlarmC.nc"
 static inline void /*AlarmMultiplexC.Alarm.Alarm32khz32C.Transform*/TransformAlarmC__1__Counter__overflow(void )
 {
@@ -13155,6 +14195,8 @@ inline static void /*Counter32khz32C.Transform*/TransformCounterC__1__Counter__o
   /*CC2420PacketC.CounterToLocalTimeC*/CounterToLocalTimeC__1__Counter__overflow();
 #line 71
   /*AlarmMultiplexC.Alarm.Alarm32khz32C.Transform*/TransformAlarmC__1__Counter__overflow();
+#line 71
+  /*CC2420TimeSyncMessageC.LocalTime32khzC*/CounterToLocalTimeC__2__Counter__overflow();
 #line 71
 }
 #line 71
@@ -13330,7 +14372,7 @@ static inline  /*Msp430TimerC.Msp430TimerB0*/Msp430TimerCapComP__3__cc_t /*Msp43
 #line 47
 {
 #line 47
-  union /*Msp430TimerC.Msp430TimerB0*/Msp430TimerCapComP__3____nesc_unnamed4463 {
+  union /*Msp430TimerC.Msp430TimerB0*/Msp430TimerCapComP__3____nesc_unnamed4469 {
 #line 47
     uint16_t f;
 #line 47
@@ -14082,8 +15124,8 @@ static __inline uint32_t CC2420TransmitP__getTime32(uint16_t time)
 static inline void CC2420TransmitP__CaptureSFD__captured(uint16_t time)
 #line 278
 {
-  unsigned char *__nesc_temp45;
-  unsigned char *__nesc_temp44;
+  unsigned char *__nesc_temp49;
+  unsigned char *__nesc_temp48;
 #line 279
   uint32_t time32;
   uint8_t sfd_state = 0;
@@ -14106,12 +15148,12 @@ static inline void CC2420TransmitP__CaptureSFD__captured(uint16_t time)
             uint8_t absOffset = sizeof(message_header_t ) - sizeof(cc2420_header_t ) + CC2420TransmitP__PacketTimeSyncOffset__get(CC2420TransmitP__m_msg);
             timesync_radio_t *timesync = (timesync_radio_t *)((nx_uint8_t *)CC2420TransmitP__m_msg + absOffset);
 
-            (__nesc_temp44 = (*timesync).data, __nesc_hton_uint32(__nesc_temp44, __nesc_ntoh_uint32(__nesc_temp44) - time32));
+            (__nesc_temp48 = (*timesync).data, __nesc_hton_uint32(__nesc_temp48, __nesc_ntoh_uint32(__nesc_temp48) - time32));
             CC2420TransmitP__CSN__clr();
             CC2420TransmitP__TXFIFO_RAM__write(absOffset, (uint8_t *)timesync, sizeof(timesync_radio_t ));
             CC2420TransmitP__CSN__set();
 
-            (__nesc_temp45 = (*timesync).data, __nesc_hton_uint32(__nesc_temp45, __nesc_ntoh_uint32(__nesc_temp45) + time32));
+            (__nesc_temp49 = (*timesync).data, __nesc_hton_uint32(__nesc_temp49, __nesc_ntoh_uint32(__nesc_temp49) + time32));
           }
 
         if (__nesc_ntoh_leuint16(CC2420TransmitP__CC2420PacketBody__getHeader(CC2420TransmitP__m_msg)->fcf.data) & (1 << IEEE154_FCF_ACK_REQ)) {
@@ -14242,7 +15284,7 @@ static inline  /*Msp430TimerC.Msp430TimerB1*/Msp430TimerCapComP__4__cc_t /*Msp43
 #line 47
 {
 #line 47
-  union /*Msp430TimerC.Msp430TimerB1*/Msp430TimerCapComP__4____nesc_unnamed4464 {
+  union /*Msp430TimerC.Msp430TimerB1*/Msp430TimerCapComP__4____nesc_unnamed4470 {
 #line 47
     uint16_t f;
 #line 47
@@ -14330,7 +15372,7 @@ static inline  uint16_t /*Msp430TimerC.Msp430TimerB1*/Msp430TimerCapComP__4__CC2
 #line 46
 {
 #line 46
-  union /*Msp430TimerC.Msp430TimerB1*/Msp430TimerCapComP__4____nesc_unnamed4465 {
+  union /*Msp430TimerC.Msp430TimerB1*/Msp430TimerCapComP__4____nesc_unnamed4471 {
 #line 46
     /*Msp430TimerC.Msp430TimerB1*/Msp430TimerCapComP__4__cc_t f;
 #line 46
@@ -14738,13 +15780,13 @@ static inline error_t /*Msp430SpiDma0P.SpiP*/Msp430SpiDmaP__0__UsartResource__de
 }
 
 # 110 "/home/tinyos/local/src/tinyos-2.x/tos/interfaces/Resource.nc"
-inline static error_t /*Msp430SpiDma0P.SpiP*/Msp430SpiDmaP__0__UsartResource__release(uint8_t arg_0x40f542a8){
+inline static error_t /*Msp430SpiDma0P.SpiP*/Msp430SpiDmaP__0__UsartResource__release(uint8_t arg_0x410382a8){
 #line 110
   unsigned char result;
 #line 110
 
 #line 110
-  switch (arg_0x40f542a8) {
+  switch (arg_0x410382a8) {
 #line 110
     case /*CC2420SpiWireC.HplCC2420SpiC.SpiC*/Msp430Spi0C__0__CLIENT_ID:
 #line 110
@@ -14754,7 +15796,7 @@ inline static error_t /*Msp430SpiDma0P.SpiP*/Msp430SpiDmaP__0__UsartResource__re
 #line 110
     default:
 #line 110
-      result = /*Msp430SpiDma0P.SpiP*/Msp430SpiDmaP__0__UsartResource__default__release(arg_0x40f542a8);
+      result = /*Msp430SpiDma0P.SpiP*/Msp430SpiDmaP__0__UsartResource__default__release(arg_0x410382a8);
 #line 110
       break;
 #line 110
@@ -15271,7 +16313,7 @@ static inline  /*Msp430TimerC.Msp430TimerB2*/Msp430TimerCapComP__5__cc_t /*Msp43
 #line 47
 {
 #line 47
-  union /*Msp430TimerC.Msp430TimerB2*/Msp430TimerCapComP__5____nesc_unnamed4466 {
+  union /*Msp430TimerC.Msp430TimerB2*/Msp430TimerCapComP__5____nesc_unnamed4472 {
 #line 47
     uint16_t f;
 #line 47
@@ -15310,9 +16352,9 @@ message_t *msg)
 }
 
 # 88 "/home/tinyos/local/src/tinyos-2.x/tos/chips/cc2420/interfaces/RadioBackoff.nc"
-inline static void CC2420ActiveMessageP__RadioBackoff__requestCongestionBackoff(am_id_t arg_0x41399df8, message_t * msg){
+inline static void CC2420ActiveMessageP__RadioBackoff__requestCongestionBackoff(am_id_t arg_0x41474df8, message_t * msg){
 #line 88
-    CC2420ActiveMessageP__RadioBackoff__default__requestCongestionBackoff(arg_0x41399df8, msg);
+    CC2420ActiveMessageP__RadioBackoff__default__requestCongestionBackoff(arg_0x41474df8, msg);
 #line 88
 }
 #line 88
@@ -15422,13 +16464,13 @@ static inline error_t /*Msp430SpiDma0P.SpiP*/Msp430SpiDmaP__0__UsartResource__de
 }
 
 # 118 "/home/tinyos/local/src/tinyos-2.x/tos/interfaces/Resource.nc"
-inline static bool /*Msp430SpiDma0P.SpiP*/Msp430SpiDmaP__0__UsartResource__isOwner(uint8_t arg_0x40f542a8){
+inline static bool /*Msp430SpiDma0P.SpiP*/Msp430SpiDmaP__0__UsartResource__isOwner(uint8_t arg_0x410382a8){
 #line 118
   unsigned char result;
 #line 118
 
 #line 118
-  switch (arg_0x40f542a8) {
+  switch (arg_0x410382a8) {
 #line 118
     case /*CC2420SpiWireC.HplCC2420SpiC.SpiC*/Msp430Spi0C__0__CLIENT_ID:
 #line 118
@@ -15438,7 +16480,7 @@ inline static bool /*Msp430SpiDma0P.SpiP*/Msp430SpiDmaP__0__UsartResource__isOwn
 #line 118
     default:
 #line 118
-      result = /*Msp430SpiDma0P.SpiP*/Msp430SpiDmaP__0__UsartResource__default__isOwner(arg_0x40f542a8);
+      result = /*Msp430SpiDma0P.SpiP*/Msp430SpiDmaP__0__UsartResource__default__isOwner(arg_0x410382a8);
 #line 118
       break;
 #line 118
@@ -15480,13 +16522,13 @@ static inline msp430_spi_union_config_t */*Msp430SpiDma0P.SpiP*/Msp430SpiDmaP__0
 }
 
 # 39 "/home/tinyos/local/src/tinyos-2.x/tos/chips/msp430/usart/Msp430SpiConfigure.nc"
-inline static msp430_spi_union_config_t */*Msp430SpiDma0P.SpiP*/Msp430SpiDmaP__0__Msp430SpiConfigure__getConfig(uint8_t arg_0x40f54cf8){
+inline static msp430_spi_union_config_t */*Msp430SpiDma0P.SpiP*/Msp430SpiDmaP__0__Msp430SpiConfigure__getConfig(uint8_t arg_0x41038cf8){
 #line 39
   union __nesc_unnamed4291 *result;
 #line 39
 
 #line 39
-    result = /*Msp430SpiDma0P.SpiP*/Msp430SpiDmaP__0__Msp430SpiConfigure__default__getConfig(arg_0x40f54cf8);
+    result = /*Msp430SpiDma0P.SpiP*/Msp430SpiDmaP__0__Msp430SpiConfigure__default__getConfig(arg_0x41038cf8);
 #line 39
 
 #line 39
@@ -15604,13 +16646,13 @@ static inline error_t /*Msp430SpiDma0P.SpiP*/Msp430SpiDmaP__0__UsartResource__de
 }
 
 # 87 "/home/tinyos/local/src/tinyos-2.x/tos/interfaces/Resource.nc"
-inline static error_t /*Msp430SpiDma0P.SpiP*/Msp430SpiDmaP__0__UsartResource__immediateRequest(uint8_t arg_0x40f542a8){
+inline static error_t /*Msp430SpiDma0P.SpiP*/Msp430SpiDmaP__0__UsartResource__immediateRequest(uint8_t arg_0x410382a8){
 #line 87
   unsigned char result;
 #line 87
 
 #line 87
-  switch (arg_0x40f542a8) {
+  switch (arg_0x410382a8) {
 #line 87
     case /*CC2420SpiWireC.HplCC2420SpiC.SpiC*/Msp430Spi0C__0__CLIENT_ID:
 #line 87
@@ -15620,7 +16662,7 @@ inline static error_t /*Msp430SpiDma0P.SpiP*/Msp430SpiDmaP__0__UsartResource__im
 #line 87
     default:
 #line 87
-      result = /*Msp430SpiDma0P.SpiP*/Msp430SpiDmaP__0__UsartResource__default__immediateRequest(arg_0x40f542a8);
+      result = /*Msp430SpiDma0P.SpiP*/Msp430SpiDmaP__0__UsartResource__default__immediateRequest(arg_0x410382a8);
 #line 87
       break;
 #line 87
@@ -15985,13 +17027,13 @@ static inline error_t /*Msp430SpiDma0P.SpiP*/Msp430SpiDmaP__0__UsartResource__de
 }
 
 # 78 "/home/tinyos/local/src/tinyos-2.x/tos/interfaces/Resource.nc"
-inline static error_t /*Msp430SpiDma0P.SpiP*/Msp430SpiDmaP__0__UsartResource__request(uint8_t arg_0x40f542a8){
+inline static error_t /*Msp430SpiDma0P.SpiP*/Msp430SpiDmaP__0__UsartResource__request(uint8_t arg_0x410382a8){
 #line 78
   unsigned char result;
 #line 78
 
 #line 78
-  switch (arg_0x40f542a8) {
+  switch (arg_0x410382a8) {
 #line 78
     case /*CC2420SpiWireC.HplCC2420SpiC.SpiC*/Msp430Spi0C__0__CLIENT_ID:
 #line 78
@@ -16001,7 +17043,7 @@ inline static error_t /*Msp430SpiDma0P.SpiP*/Msp430SpiDmaP__0__UsartResource__re
 #line 78
     default:
 #line 78
-      result = /*Msp430SpiDma0P.SpiP*/Msp430SpiDmaP__0__UsartResource__default__request(arg_0x40f542a8);
+      result = /*Msp430SpiDma0P.SpiP*/Msp430SpiDmaP__0__UsartResource__default__request(arg_0x410382a8);
 #line 78
       break;
 #line 78
@@ -16113,7 +17155,7 @@ static inline  /*Msp430TimerC.Msp430TimerB3*/Msp430TimerCapComP__6__cc_t /*Msp43
 #line 47
 {
 #line 47
-  union /*Msp430TimerC.Msp430TimerB3*/Msp430TimerCapComP__6____nesc_unnamed4467 {
+  union /*Msp430TimerC.Msp430TimerB3*/Msp430TimerCapComP__6____nesc_unnamed4473 {
 #line 47
     uint16_t f;
 #line 47
@@ -16181,7 +17223,7 @@ static inline  /*Msp430TimerC.Msp430TimerB4*/Msp430TimerCapComP__7__cc_t /*Msp43
 #line 47
 {
 #line 47
-  union /*Msp430TimerC.Msp430TimerB4*/Msp430TimerCapComP__7____nesc_unnamed4468 {
+  union /*Msp430TimerC.Msp430TimerB4*/Msp430TimerCapComP__7____nesc_unnamed4474 {
 #line 47
     uint16_t f;
 #line 47
@@ -16249,7 +17291,7 @@ static inline  /*Msp430TimerC.Msp430TimerB5*/Msp430TimerCapComP__8__cc_t /*Msp43
 #line 47
 {
 #line 47
-  union /*Msp430TimerC.Msp430TimerB5*/Msp430TimerCapComP__8____nesc_unnamed4469 {
+  union /*Msp430TimerC.Msp430TimerB5*/Msp430TimerCapComP__8____nesc_unnamed4475 {
 #line 47
     uint16_t f;
 #line 47
@@ -16317,7 +17359,7 @@ static inline  /*Msp430TimerC.Msp430TimerB6*/Msp430TimerCapComP__9__cc_t /*Msp43
 #line 47
 {
 #line 47
-  union /*Msp430TimerC.Msp430TimerB6*/Msp430TimerCapComP__9____nesc_unnamed4470 {
+  union /*Msp430TimerC.Msp430TimerB6*/Msp430TimerCapComP__9____nesc_unnamed4476 {
 #line 47
     uint16_t f;
 #line 47
@@ -17465,8 +18507,8 @@ inline static void IPDispatchP__Ieee154Packet__setDestination(message_t *msg, ie
 static inline void IPDispatchP__sendTask__runTask(void )
 #line 781
 {
-  unsigned char __nesc_temp61;
-  unsigned char *__nesc_temp60;
+  unsigned char __nesc_temp65;
+  unsigned char *__nesc_temp64;
 #line 782
   send_entry_t *s_entry;
 
@@ -17521,7 +18563,7 @@ static inline void IPDispatchP__sendTask__runTask(void )
   return;
   fail: 
     IPDispatchP__sendTask__postTask();
-  (__nesc_temp60 = IPDispatchP__stats.tx_drop.data, __nesc_hton_uint8(__nesc_temp60, (__nesc_temp61 = __nesc_ntoh_uint8(__nesc_temp60)) + 1), __nesc_temp61);
+  (__nesc_temp64 = IPDispatchP__stats.tx_drop.data, __nesc_hton_uint8(__nesc_temp64, (__nesc_temp65 = __nesc_ntoh_uint8(__nesc_temp64)) + 1), __nesc_temp65);
 
 
 
@@ -17558,24 +18600,38 @@ static inline void /*IPDispatchC.QueueC*/QueueC__1__printQueue(void )
 {
 }
 
-# 164 "ECG_ForwarderC.nc"
-static inline void ECG_ForwarderC__AMSend__sendDone(message_t *msg, error_t error)
-#line 164
-{
-}
-
 # 99 "/home/tinyos/local/src/tinyos-2.x/tos/interfaces/AMSend.nc"
-inline static void /*ECG_ForwarderAppC.AMSenderC.SenderC.AMQueueEntryP*/AMQueueEntryP__1__AMSend__sendDone(message_t * msg, error_t error){
+inline static void /*CC2420TimeSyncMessageC.AMSenderC.SenderC.AMQueueEntryP*/AMQueueEntryP__1__AMSend__sendDone(message_t * msg, error_t error){
 #line 99
-  ECG_ForwarderC__AMSend__sendDone(msg, error);
+  CC2420TimeSyncMessageP__SubSend__sendDone(msg, error);
 #line 99
 }
 #line 99
 # 57 "/home/tinyos/local/src/tinyos-2.x/tos/system/AMQueueEntryP.nc"
-static inline void /*ECG_ForwarderAppC.AMSenderC.SenderC.AMQueueEntryP*/AMQueueEntryP__1__Send__sendDone(message_t *m, error_t err)
+static inline void /*CC2420TimeSyncMessageC.AMSenderC.SenderC.AMQueueEntryP*/AMQueueEntryP__1__Send__sendDone(message_t *m, error_t err)
 #line 57
 {
-  /*ECG_ForwarderAppC.AMSenderC.SenderC.AMQueueEntryP*/AMQueueEntryP__1__AMSend__sendDone(m, err);
+  /*CC2420TimeSyncMessageC.AMSenderC.SenderC.AMQueueEntryP*/AMQueueEntryP__1__AMSend__sendDone(m, err);
+}
+
+# 175 "ECG_ForwarderC.nc"
+static inline void ECG_ForwarderC__ECGMsgSend__sendDone(message_t *msg, error_t error)
+#line 175
+{
+}
+
+# 99 "/home/tinyos/local/src/tinyos-2.x/tos/interfaces/AMSend.nc"
+inline static void /*ECG_ForwarderAppC.AMSenderC.SenderC.AMQueueEntryP*/AMQueueEntryP__2__AMSend__sendDone(message_t * msg, error_t error){
+#line 99
+  ECG_ForwarderC__ECGMsgSend__sendDone(msg, error);
+#line 99
+}
+#line 99
+# 57 "/home/tinyos/local/src/tinyos-2.x/tos/system/AMQueueEntryP.nc"
+static inline void /*ECG_ForwarderAppC.AMSenderC.SenderC.AMQueueEntryP*/AMQueueEntryP__2__Send__sendDone(message_t *m, error_t err)
+#line 57
+{
+  /*ECG_ForwarderAppC.AMSenderC.SenderC.AMQueueEntryP*/AMQueueEntryP__2__AMSend__sendDone(m, err);
 }
 
 # 207 "/home/tinyos/local/src/tinyos-2.x/tos/system/AMQueueImplP.nc"
@@ -17591,7 +18647,13 @@ inline static void /*AMQueueP.AMQueueImplP*/AMQueueImplP__1__Send__sendDone(uint
 #line 89
     case 0U:
 #line 89
-      /*ECG_ForwarderAppC.AMSenderC.SenderC.AMQueueEntryP*/AMQueueEntryP__1__Send__sendDone(msg, error);
+      /*CC2420TimeSyncMessageC.AMSenderC.SenderC.AMQueueEntryP*/AMQueueEntryP__1__Send__sendDone(msg, error);
+#line 89
+      break;
+#line 89
+    case 1U:
+#line 89
+      /*ECG_ForwarderAppC.AMSenderC.SenderC.AMQueueEntryP*/AMQueueEntryP__2__Send__sendDone(msg, error);
 #line 89
       break;
 #line 89
@@ -17619,7 +18681,7 @@ static inline void /*AMQueueP.AMQueueImplP*/AMQueueImplP__1__CancelTask__runTask
   message_t *msg;
 
 #line 121
-  for (i = 0; i < 1 / 8 + 1; i++) {
+  for (i = 0; i < 2 / 8 + 1; i++) {
       if (/*AMQueueP.AMQueueImplP*/AMQueueImplP__1__cancelMask[i]) {
           for (mask = 1, j = 0; j < 8; j++) {
               if (/*AMQueueP.AMQueueImplP*/AMQueueImplP__1__cancelMask[i] & mask) {
@@ -17635,7 +18697,106 @@ static inline void /*AMQueueP.AMQueueImplP*/AMQueueImplP__1__CancelTask__runTask
     }
 }
 
-#line 161
+# 173 "/home/tinyos/local/src/tinyos-2.x/tos/chips/cc2420/CC2420TimeSyncMessageP.nc"
+static inline void CC2420TimeSyncMessageP__TimeSyncAMSend32khz__default__sendDone(am_id_t id, message_t *msg, error_t error)
+#line 173
+{
+}
+
+# 82 "/home/tinyos/local/src/tinyos-2.x/tos/interfaces/TimeSyncAMSend.nc"
+inline static void CC2420TimeSyncMessageP__TimeSyncAMSend32khz__sendDone(uint8_t arg_0x40d743f8, message_t *msg, error_t error){
+#line 82
+    CC2420TimeSyncMessageP__TimeSyncAMSend32khz__default__sendDone(arg_0x40d743f8, msg, error);
+#line 82
+}
+#line 82
+# 264 "/usr/lib/ncc/nesc_nx.h"
+static __inline  uint16_t __nesc_ntoh_uint16(const void * source)
+#line 264
+{
+  const uint8_t *base = source;
+
+#line 266
+  return ((uint16_t )base[0] << 8) | base[1];
+}
+
+# 489 "/home/tinyos/local/src/tinyos-2.x/tos/lib/ftsp/TimeSyncP.nc"
+static inline void /*TimeSyncC.TimeSyncP*/TimeSyncP__0__TimeSyncNotify__default__msg_sent(void )
+#line 489
+{
+}
+
+# 41 "/home/tinyos/local/src/tinyos-2.x/tos/lib/ftsp/TimeSyncNotify.nc"
+inline static void /*TimeSyncC.TimeSyncP*/TimeSyncP__0__TimeSyncNotify__msg_sent(void ){
+#line 41
+  /*TimeSyncC.TimeSyncP*/TimeSyncP__0__TimeSyncNotify__default__msg_sent();
+#line 41
+}
+#line 41
+# 48 "/home/tinyos/local/src/tinyos-2.x/tos/system/NoLedsC.nc"
+static inline void NoLedsC__Leds__led1Toggle(void )
+#line 48
+{
+}
+
+# 72 "/home/tinyos/local/src/tinyos-2.x/tos/interfaces/Leds.nc"
+inline static void /*TimeSyncC.TimeSyncP*/TimeSyncP__0__Leds__led1Toggle(void ){
+#line 72
+  NoLedsC__Leds__led1Toggle();
+#line 72
+}
+#line 72
+# 377 "/home/tinyos/local/src/tinyos-2.x/tos/lib/ftsp/TimeSyncP.nc"
+static inline void /*TimeSyncC.TimeSyncP*/TimeSyncP__0__Send__sendDone(message_t *ptr, error_t error)
+{
+  unsigned char __nesc_temp45;
+  unsigned char *__nesc_temp44;
+
+#line 379
+  if (ptr != &/*TimeSyncC.TimeSyncP*/TimeSyncP__0__outgoingMsgBuffer) {
+    return;
+    }
+  if (error == SUCCESS) 
+    {
+      ++/*TimeSyncC.TimeSyncP*/TimeSyncP__0__heartBeats;
+      /*TimeSyncC.TimeSyncP*/TimeSyncP__0__Leds__led1Toggle();
+
+      if (__nesc_ntoh_uint16(/*TimeSyncC.TimeSyncP*/TimeSyncP__0__outgoingMsg->rootID.data) == TOS_NODE_ID) {
+        (__nesc_temp44 = /*TimeSyncC.TimeSyncP*/TimeSyncP__0__outgoingMsg->seqNum.data, __nesc_hton_uint8(__nesc_temp44, (__nesc_temp45 = __nesc_ntoh_uint8(__nesc_temp44) + 1)), __nesc_temp45);
+        }
+    }
+  /*TimeSyncC.TimeSyncP*/TimeSyncP__0__state &= ~/*TimeSyncC.TimeSyncP*/TimeSyncP__0__STATE_SENDING;
+  /*TimeSyncC.TimeSyncP*/TimeSyncP__0__TimeSyncNotify__msg_sent();
+}
+
+# 198 "/home/tinyos/local/src/tinyos-2.x/tos/chips/cc2420/CC2420TimeSyncMessageP.nc"
+static inline void CC2420TimeSyncMessageP__TimeSyncAMSendMilli__default__sendDone(am_id_t id, message_t *msg, error_t error)
+#line 198
+{
+}
+
+# 82 "/home/tinyos/local/src/tinyos-2.x/tos/interfaces/TimeSyncAMSend.nc"
+inline static void CC2420TimeSyncMessageP__TimeSyncAMSendMilli__sendDone(uint8_t arg_0x40d71148, message_t *msg, error_t error){
+#line 82
+  switch (arg_0x40d71148) {
+#line 82
+    case TIMESYNC_AM_FTSP:
+#line 82
+      /*TimeSyncC.TimeSyncP*/TimeSyncP__0__Send__sendDone(msg, error);
+#line 82
+      break;
+#line 82
+    default:
+#line 82
+      CC2420TimeSyncMessageP__TimeSyncAMSendMilli__default__sendDone(arg_0x40d71148, msg, error);
+#line 82
+      break;
+#line 82
+    }
+#line 82
+}
+#line 82
+# 161 "/home/tinyos/local/src/tinyos-2.x/tos/system/AMQueueImplP.nc"
 static inline void /*AMQueueP.AMQueueImplP*/AMQueueImplP__1__errorTask__runTask(void )
 #line 161
 {
@@ -17657,213 +18818,132 @@ inline static error_t /*AMQueueP.AMQueueImplP*/AMQueueImplP__1__errorTask__postT
 #line 56
 }
 #line 56
-# 251 "/usr/lib/ncc/nesc_nx.h"
-static __inline  uint8_t __nesc_hton_leuint8(void * target, uint8_t value)
-#line 251
-{
-  uint8_t *base = target;
-
-#line 253
-  base[0] = value;
-  return value;
-}
-
-# 78 "/home/tinyos/local/src/tinyos-2.x/tos/interfaces/Resource.nc"
-inline static error_t CC2420ActiveMessageP__RadioResource__request(void ){
-#line 78
+# 69 "/home/tinyos/local/src/tinyos-2.x/tos/interfaces/AMSend.nc"
+inline static error_t /*AMQueueP.AMQueueImplP*/AMQueueImplP__1__AMSend__send(am_id_t arg_0x40b32908, am_addr_t addr, message_t * msg, uint8_t len){
+#line 69
   unsigned char result;
-#line 78
+#line 69
 
-#line 78
-  result = CC2420TinyosNetworkP__Resource__request(CC2420ActiveMessageC__CC2420_AM_SEND_ID);
-#line 78
+#line 69
+  result = CC2420ActiveMessageP__AMSend__send(arg_0x40b32908, addr, msg, len);
+#line 69
 
-#line 78
+#line 69
   return result;
-#line 78
+#line 69
 }
-#line 78
-# 198 "/home/tinyos/local/src/tinyos-2.x/tos/chips/cc2420/lowpan/CC2420TinyosNetworkP.nc"
-static inline error_t CC2420TinyosNetworkP__Resource__release(uint8_t id)
-#line 198
+#line 69
+# 42 "/home/tinyos/local/src/tinyos-2.x/tos/chips/cc2420/interfaces/CC2420PacketBody.nc"
+inline static cc2420_header_t * CC2420ActiveMessageP__CC2420PacketBody__getHeader(message_t * msg){
+#line 42
+  nx_struct cc2420_header_t *result;
+#line 42
+
+#line 42
+  result = CC2420PacketP__CC2420PacketBody__getHeader(msg);
+#line 42
+
+#line 42
+  return result;
+#line 42
+}
+#line 42
+# 181 "/home/tinyos/local/src/tinyos-2.x/tos/chips/cc2420/CC2420ActiveMessageP.nc"
+static inline uint8_t CC2420ActiveMessageP__Packet__payloadLength(message_t *msg)
+#line 181
 {
-  if (CC2420TinyosNetworkP__TINYOS_N_NETWORKS > 1) {
-      CC2420TinyosNetworkP__grantTask__postTask();
-    }
-  CC2420TinyosNetworkP__resource_owner = CC2420TinyosNetworkP__OWNER_NONE;
-  return SUCCESS;
+  return __nesc_ntoh_leuint8(CC2420ActiveMessageP__CC2420PacketBody__getHeader(msg)->length.data) - CC2420_SIZE;
 }
 
-# 110 "/home/tinyos/local/src/tinyos-2.x/tos/interfaces/Resource.nc"
-inline static error_t CC2420ActiveMessageP__RadioResource__release(void ){
-#line 110
+# 67 "/home/tinyos/local/src/tinyos-2.x/tos/interfaces/Packet.nc"
+inline static uint8_t /*AMQueueP.AMQueueImplP*/AMQueueImplP__1__Packet__payloadLength(message_t * msg){
+#line 67
   unsigned char result;
-#line 110
+#line 67
 
-#line 110
-  result = CC2420TinyosNetworkP__Resource__release(CC2420ActiveMessageC__CC2420_AM_SEND_ID);
-#line 110
+#line 67
+  result = CC2420ActiveMessageP__Packet__payloadLength(msg);
+#line 67
 
-#line 110
+#line 67
   return result;
-#line 110
+#line 67
 }
-#line 110
-# 64 "/home/tinyos/local/src/tinyos-2.x/tos/interfaces/Send.nc"
-inline static error_t CC2420TinyosNetworkP__SubSend__send(message_t * msg, uint8_t len){
-#line 64
+#line 67
+# 67 "/home/tinyos/local/src/tinyos-2.x/tos/interfaces/AMPacket.nc"
+inline static am_addr_t /*AMQueueP.AMQueueImplP*/AMQueueImplP__1__AMPacket__destination(message_t * amsg){
+#line 67
+  unsigned int result;
+#line 67
+
+#line 67
+  result = CC2420ActiveMessageP__AMPacket__destination(amsg);
+#line 67
+
+#line 67
+  return result;
+#line 67
+}
+#line 67
+#line 136
+inline static am_id_t /*AMQueueP.AMQueueImplP*/AMQueueImplP__1__AMPacket__type(message_t * amsg){
+#line 136
   unsigned char result;
-#line 64
+#line 136
 
-#line 64
-  result = UniqueSendP__Send__send(msg, len);
-#line 64
+#line 136
+  result = CC2420ActiveMessageP__AMPacket__type(amsg);
+#line 136
 
-#line 64
+#line 136
   return result;
-#line 64
+#line 136
 }
-#line 64
-# 77 "/home/tinyos/local/src/tinyos-2.x/tos/chips/cc2420/interfaces/CC2420Packet.nc"
-inline static void CC2420TinyosNetworkP__CC2420Packet__setNetwork(message_t *p_msg, uint8_t networkId){
-#line 77
-  CC2420PacketP__CC2420Packet__setNetwork(p_msg, networkId);
-#line 77
-}
-#line 77
-# 73 "/home/tinyos/local/src/tinyos-2.x/tos/chips/cc2420/lowpan/CC2420TinyosNetworkP.nc"
-static inline error_t CC2420TinyosNetworkP__ActiveSend__send(message_t *msg, uint8_t len)
-#line 73
+#line 136
+# 57 "/home/tinyos/local/src/tinyos-2.x/tos/system/AMQueueImplP.nc"
+static inline void /*AMQueueP.AMQueueImplP*/AMQueueImplP__1__nextPacket(void )
+#line 57
 {
-  CC2420TinyosNetworkP__CC2420Packet__setNetwork(msg, 0x3f);
-  return CC2420TinyosNetworkP__SubSend__send(msg, len);
-}
+  uint8_t i;
 
-# 64 "/home/tinyos/local/src/tinyos-2.x/tos/interfaces/Send.nc"
-inline static error_t CC2420ActiveMessageP__SubSend__send(message_t * msg, uint8_t len){
-#line 64
-  unsigned char result;
-#line 64
-
-#line 64
-  result = CC2420TinyosNetworkP__ActiveSend__send(msg, len);
-#line 64
-
-#line 64
-  return result;
-#line 64
-}
-#line 64
-# 278 "/home/tinyos/local/src/tinyos-2.x/tos/chips/cc2420/CC2420ActiveMessageP.nc"
-static inline void CC2420ActiveMessageP__SendNotifier__default__aboutToSend(am_id_t amId, am_addr_t addr, message_t *msg)
-#line 278
-{
-}
-
-# 59 "/home/tinyos/local/src/tinyos-2.x/tos/interfaces/SendNotifier.nc"
-inline static void CC2420ActiveMessageP__SendNotifier__aboutToSend(am_id_t arg_0x41399780, am_addr_t dest, message_t * msg){
 #line 59
-    CC2420ActiveMessageP__SendNotifier__default__aboutToSend(arg_0x41399780, dest, msg);
-#line 59
-}
-#line 59
-# 43 "/home/tinyos/local/src/tinyos-2.x/tos/interfaces/ResourceQueue.nc"
-inline static bool CC2420TinyosNetworkP__Queue__isEmpty(void ){
-#line 43
-  unsigned char result;
-#line 43
-
-#line 43
-  result = /*CC2420TinyosNetworkC.FcfsResourceQueueC*/FcfsResourceQueueC__0__FcfsQueue__isEmpty();
-#line 43
-
-#line 43
-  return result;
-#line 43
-}
-#line 43
-# 184 "/home/tinyos/local/src/tinyos-2.x/tos/chips/cc2420/lowpan/CC2420TinyosNetworkP.nc"
-static inline error_t CC2420TinyosNetworkP__Resource__immediateRequest(uint8_t id)
-#line 184
-{
-  if (CC2420TinyosNetworkP__resource_owner == id) {
-#line 185
-    return EALREADY;
-    }
-  if (CC2420TinyosNetworkP__TINYOS_N_NETWORKS > 1) {
-      if (CC2420TinyosNetworkP__resource_owner == CC2420TinyosNetworkP__OWNER_NONE && CC2420TinyosNetworkP__Queue__isEmpty()) {
-          CC2420TinyosNetworkP__resource_owner = id;
-          return SUCCESS;
+  /*AMQueueP.AMQueueImplP*/AMQueueImplP__1__current = (/*AMQueueP.AMQueueImplP*/AMQueueImplP__1__current + 1) % 2;
+  for (i = 0; i < 2; i++) {
+      if (/*AMQueueP.AMQueueImplP*/AMQueueImplP__1__queue[/*AMQueueP.AMQueueImplP*/AMQueueImplP__1__current].msg == (void *)0 || 
+      /*AMQueueP.AMQueueImplP*/AMQueueImplP__1__cancelMask[/*AMQueueP.AMQueueImplP*/AMQueueImplP__1__current / 8] & (1 << /*AMQueueP.AMQueueImplP*/AMQueueImplP__1__current % 8)) 
+        {
+          /*AMQueueP.AMQueueImplP*/AMQueueImplP__1__current = (/*AMQueueP.AMQueueImplP*/AMQueueImplP__1__current + 1) % 2;
         }
-      return FAIL;
+      else {
+          break;
+        }
     }
-  else 
-#line 193
-    {
-      CC2420TinyosNetworkP__resource_owner = id;
-      return SUCCESS;
+  if (i >= 2) {
+#line 70
+    /*AMQueueP.AMQueueImplP*/AMQueueImplP__1__current = 2;
     }
 }
 
-# 87 "/home/tinyos/local/src/tinyos-2.x/tos/interfaces/Resource.nc"
-inline static error_t CC2420ActiveMessageP__RadioResource__immediateRequest(void ){
-#line 87
-  unsigned char result;
-#line 87
-
-#line 87
-  result = CC2420TinyosNetworkP__Resource__immediateRequest(CC2420ActiveMessageC__CC2420_AM_SEND_ID);
-#line 87
-
-#line 87
-  return result;
-#line 87
-}
-#line 87
-# 61 "/home/tinyos/local/src/tinyos-2.x/tos/system/ActiveMessageAddressC.nc"
-static inline am_addr_t ActiveMessageAddressC__ActiveMessageAddress__amAddress(void )
-#line 61
+#line 166
+static inline void /*AMQueueP.AMQueueImplP*/AMQueueImplP__1__tryToSend(void )
+#line 166
 {
-  return ActiveMessageAddressC__amAddress();
+  /*AMQueueP.AMQueueImplP*/AMQueueImplP__1__nextPacket();
+  if (/*AMQueueP.AMQueueImplP*/AMQueueImplP__1__current < 2) {
+      error_t nextErr;
+      message_t *nextMsg = /*AMQueueP.AMQueueImplP*/AMQueueImplP__1__queue[/*AMQueueP.AMQueueImplP*/AMQueueImplP__1__current].msg;
+      am_id_t nextId = /*AMQueueP.AMQueueImplP*/AMQueueImplP__1__AMPacket__type(nextMsg);
+      am_addr_t nextDest = /*AMQueueP.AMQueueImplP*/AMQueueImplP__1__AMPacket__destination(nextMsg);
+      uint8_t len = /*AMQueueP.AMQueueImplP*/AMQueueImplP__1__Packet__payloadLength(nextMsg);
+
+#line 174
+      nextErr = /*AMQueueP.AMQueueImplP*/AMQueueImplP__1__AMSend__send(nextId, nextDest, nextMsg, len);
+      if (nextErr != SUCCESS) {
+          /*AMQueueP.AMQueueImplP*/AMQueueImplP__1__errorTask__postTask();
+        }
+    }
 }
 
-# 50 "/home/tinyos/local/src/tinyos-2.x/tos/interfaces/ActiveMessageAddress.nc"
-inline static am_addr_t CC2420ActiveMessageP__ActiveMessageAddress__amAddress(void ){
-#line 50
-  unsigned int result;
-#line 50
-
-#line 50
-  result = ActiveMessageAddressC__ActiveMessageAddress__amAddress();
-#line 50
-
-#line 50
-  return result;
-#line 50
-}
-#line 50
-# 122 "/home/tinyos/local/src/tinyos-2.x/tos/chips/cc2420/CC2420ActiveMessageP.nc"
-static inline am_addr_t CC2420ActiveMessageP__AMPacket__address(void )
-#line 122
-{
-  return CC2420ActiveMessageP__ActiveMessageAddress__amAddress();
-}
-
-# 70 "/home/tinyos/local/src/tinyos-2.x/tos/chips/cc2420/interfaces/CC2420Config.nc"
-inline static uint16_t CC2420ActiveMessageP__CC2420Config__getPanAddr(void ){
-#line 70
-  unsigned int result;
-#line 70
-
-#line 70
-  result = CC2420ControlP__CC2420Config__getPanAddr();
-#line 70
-
-#line 70
-  return result;
-#line 70
-}
-#line 70
 # 170 "/home/tinyos/local/src/tinyos-2.x/tos/chips/cc2420/csma/CC2420CsmaP.nc"
 static inline uint8_t CC2420CsmaP__Send__maxPayloadLength(void )
 #line 170
@@ -17959,181 +19039,74 @@ static inline uint8_t CC2420ActiveMessageP__Packet__maxPayloadLength(void )
   return CC2420ActiveMessageP__SubSend__maxPayloadLength();
 }
 
-# 42 "/home/tinyos/local/src/tinyos-2.x/tos/chips/cc2420/interfaces/CC2420PacketBody.nc"
-inline static cc2420_header_t * CC2420ActiveMessageP__CC2420PacketBody__getHeader(message_t * msg){
-#line 42
-  nx_struct cc2420_header_t *result;
-#line 42
+# 70 "/home/tinyos/local/src/tinyos-2.x/tos/chips/cc2420/interfaces/CC2420Config.nc"
+inline static uint16_t CC2420ActiveMessageP__CC2420Config__getPanAddr(void ){
+#line 70
+  unsigned int result;
+#line 70
 
-#line 42
-  result = CC2420PacketP__CC2420PacketBody__getHeader(msg);
-#line 42
+#line 70
+  result = CC2420ControlP__CC2420Config__getPanAddr();
+#line 70
 
-#line 42
+#line 70
   return result;
-#line 42
+#line 70
 }
-#line 42
-# 78 "/home/tinyos/local/src/tinyos-2.x/tos/chips/cc2420/CC2420ActiveMessageP.nc"
-static inline error_t CC2420ActiveMessageP__AMSend__send(am_id_t id, am_addr_t addr, 
-message_t *msg, 
-uint8_t len)
-#line 80
+#line 70
+# 43 "/home/tinyos/local/src/tinyos-2.x/tos/interfaces/ResourceQueue.nc"
+inline static bool CC2420TinyosNetworkP__Queue__isEmpty(void ){
+#line 43
+  unsigned char result;
+#line 43
+
+#line 43
+  result = /*CC2420TinyosNetworkC.FcfsResourceQueueC*/FcfsResourceQueueC__0__FcfsQueue__isEmpty();
+#line 43
+
+#line 43
+  return result;
+#line 43
+}
+#line 43
+# 184 "/home/tinyos/local/src/tinyos-2.x/tos/chips/cc2420/lowpan/CC2420TinyosNetworkP.nc"
+static inline error_t CC2420TinyosNetworkP__Resource__immediateRequest(uint8_t id)
+#line 184
 {
-  cc2420_header_t *header = CC2420ActiveMessageP__CC2420PacketBody__getHeader(msg);
-
-  if (len > CC2420ActiveMessageP__Packet__maxPayloadLength()) {
-      return ESIZE;
+  if (CC2420TinyosNetworkP__resource_owner == id) {
+#line 185
+    return EALREADY;
     }
-
-  __nesc_hton_leuint8(header->type.data, id);
-  __nesc_hton_leuint16(header->dest.data, addr);
-  __nesc_hton_leuint16(header->destpan.data, CC2420ActiveMessageP__CC2420Config__getPanAddr());
-  __nesc_hton_leuint16(header->src.data, CC2420ActiveMessageP__AMPacket__address());
-
-  if (CC2420ActiveMessageP__RadioResource__immediateRequest() == SUCCESS) {
-      error_t rc;
-
-#line 94
-      CC2420ActiveMessageP__SendNotifier__aboutToSend(id, addr, msg);
-
-      rc = CC2420ActiveMessageP__SubSend__send(msg, len);
-      if (rc != SUCCESS) {
-          CC2420ActiveMessageP__RadioResource__release();
+  if (CC2420TinyosNetworkP__TINYOS_N_NETWORKS > 1) {
+      if (CC2420TinyosNetworkP__resource_owner == CC2420TinyosNetworkP__OWNER_NONE && CC2420TinyosNetworkP__Queue__isEmpty()) {
+          CC2420TinyosNetworkP__resource_owner = id;
+          return SUCCESS;
         }
-
-      return rc;
+      return FAIL;
     }
   else 
-#line 102
+#line 193
     {
-      CC2420ActiveMessageP__pending_length = len;
-      CC2420ActiveMessageP__pending_message = msg;
-      return CC2420ActiveMessageP__RadioResource__request();
+      CC2420TinyosNetworkP__resource_owner = id;
+      return SUCCESS;
     }
 }
 
-# 69 "/home/tinyos/local/src/tinyos-2.x/tos/interfaces/AMSend.nc"
-inline static error_t /*AMQueueP.AMQueueImplP*/AMQueueImplP__1__AMSend__send(am_id_t arg_0x40b32908, am_addr_t addr, message_t * msg, uint8_t len){
-#line 69
+# 87 "/home/tinyos/local/src/tinyos-2.x/tos/interfaces/Resource.nc"
+inline static error_t CC2420ActiveMessageP__RadioResource__immediateRequest(void ){
+#line 87
   unsigned char result;
-#line 69
+#line 87
 
-#line 69
-  result = CC2420ActiveMessageP__AMSend__send(arg_0x40b32908, addr, msg, len);
-#line 69
+#line 87
+  result = CC2420TinyosNetworkP__Resource__immediateRequest(CC2420ActiveMessageC__CC2420_AM_SEND_ID);
+#line 87
 
-#line 69
+#line 87
   return result;
-#line 69
+#line 87
 }
-#line 69
-# 181 "/home/tinyos/local/src/tinyos-2.x/tos/chips/cc2420/CC2420ActiveMessageP.nc"
-static inline uint8_t CC2420ActiveMessageP__Packet__payloadLength(message_t *msg)
-#line 181
-{
-  return __nesc_ntoh_leuint8(CC2420ActiveMessageP__CC2420PacketBody__getHeader(msg)->length.data) - CC2420_SIZE;
-}
-
-# 67 "/home/tinyos/local/src/tinyos-2.x/tos/interfaces/Packet.nc"
-inline static uint8_t /*AMQueueP.AMQueueImplP*/AMQueueImplP__1__Packet__payloadLength(message_t * msg){
-#line 67
-  unsigned char result;
-#line 67
-
-#line 67
-  result = CC2420ActiveMessageP__Packet__payloadLength(msg);
-#line 67
-
-#line 67
-  return result;
-#line 67
-}
-#line 67
-# 67 "/home/tinyos/local/src/tinyos-2.x/tos/interfaces/AMPacket.nc"
-inline static am_addr_t /*AMQueueP.AMQueueImplP*/AMQueueImplP__1__AMPacket__destination(message_t * amsg){
-#line 67
-  unsigned int result;
-#line 67
-
-#line 67
-  result = CC2420ActiveMessageP__AMPacket__destination(amsg);
-#line 67
-
-#line 67
-  return result;
-#line 67
-}
-#line 67
-# 151 "/home/tinyos/local/src/tinyos-2.x/tos/chips/cc2420/CC2420ActiveMessageP.nc"
-static inline am_id_t CC2420ActiveMessageP__AMPacket__type(message_t *amsg)
-#line 151
-{
-  cc2420_header_t *header = CC2420ActiveMessageP__CC2420PacketBody__getHeader(amsg);
-
-#line 153
-  return __nesc_ntoh_leuint8(header->type.data);
-}
-
-# 136 "/home/tinyos/local/src/tinyos-2.x/tos/interfaces/AMPacket.nc"
-inline static am_id_t /*AMQueueP.AMQueueImplP*/AMQueueImplP__1__AMPacket__type(message_t * amsg){
-#line 136
-  unsigned char result;
-#line 136
-
-#line 136
-  result = CC2420ActiveMessageP__AMPacket__type(amsg);
-#line 136
-
-#line 136
-  return result;
-#line 136
-}
-#line 136
-# 57 "/home/tinyos/local/src/tinyos-2.x/tos/system/AMQueueImplP.nc"
-static inline void /*AMQueueP.AMQueueImplP*/AMQueueImplP__1__nextPacket(void )
-#line 57
-{
-  uint8_t i;
-
-#line 59
-  /*AMQueueP.AMQueueImplP*/AMQueueImplP__1__current = (/*AMQueueP.AMQueueImplP*/AMQueueImplP__1__current + 1) % 1;
-  for (i = 0; i < 1; i++) {
-      if (/*AMQueueP.AMQueueImplP*/AMQueueImplP__1__queue[/*AMQueueP.AMQueueImplP*/AMQueueImplP__1__current].msg == (void *)0 || 
-      /*AMQueueP.AMQueueImplP*/AMQueueImplP__1__cancelMask[/*AMQueueP.AMQueueImplP*/AMQueueImplP__1__current / 8] & (1 << /*AMQueueP.AMQueueImplP*/AMQueueImplP__1__current % 8)) 
-        {
-          /*AMQueueP.AMQueueImplP*/AMQueueImplP__1__current = (/*AMQueueP.AMQueueImplP*/AMQueueImplP__1__current + 1) % 1;
-        }
-      else {
-          break;
-        }
-    }
-  if (i >= 1) {
-#line 70
-    /*AMQueueP.AMQueueImplP*/AMQueueImplP__1__current = 1;
-    }
-}
-
-#line 166
-static inline void /*AMQueueP.AMQueueImplP*/AMQueueImplP__1__tryToSend(void )
-#line 166
-{
-  /*AMQueueP.AMQueueImplP*/AMQueueImplP__1__nextPacket();
-  if (/*AMQueueP.AMQueueImplP*/AMQueueImplP__1__current < 1) {
-      error_t nextErr;
-      message_t *nextMsg = /*AMQueueP.AMQueueImplP*/AMQueueImplP__1__queue[/*AMQueueP.AMQueueImplP*/AMQueueImplP__1__current].msg;
-      am_id_t nextId = /*AMQueueP.AMQueueImplP*/AMQueueImplP__1__AMPacket__type(nextMsg);
-      am_addr_t nextDest = /*AMQueueP.AMQueueImplP*/AMQueueImplP__1__AMPacket__destination(nextMsg);
-      uint8_t len = /*AMQueueP.AMQueueImplP*/AMQueueImplP__1__Packet__payloadLength(nextMsg);
-
-#line 174
-      nextErr = /*AMQueueP.AMQueueImplP*/AMQueueImplP__1__AMSend__send(nextId, nextDest, nextMsg, len);
-      if (nextErr != SUCCESS) {
-          /*AMQueueP.AMQueueImplP*/AMQueueImplP__1__errorTask__postTask();
-        }
-    }
-}
-
+#line 87
 # 45 "/home/tinyos/local/src/tinyos-2.x/tos/interfaces/State.nc"
 inline static error_t UniqueSendP__State__requestState(uint8_t reqState){
 #line 45
@@ -18194,16 +19167,6 @@ inline static error_t PacketLinkP__PacketAcknowledgements__requestAck(message_t 
 #line 48
 }
 #line 48
-# 264 "/usr/lib/ncc/nesc_nx.h"
-static __inline  uint16_t __nesc_ntoh_uint16(const void * source)
-#line 264
-{
-  const uint8_t *base = source;
-
-#line 266
-  return ((uint16_t )base[0] << 8) | base[1];
-}
-
 # 104 "/home/tinyos/local/src/tinyos-2.x/tos/chips/cc2420/link/PacketLinkP.nc"
 static inline uint16_t PacketLinkP__PacketLink__getRetries(message_t *msg)
 #line 104
@@ -18309,9 +19272,9 @@ message_t *msg)
 }
 
 # 95 "/home/tinyos/local/src/tinyos-2.x/tos/chips/cc2420/interfaces/RadioBackoff.nc"
-inline static void CC2420ActiveMessageP__RadioBackoff__requestCca(am_id_t arg_0x41399df8, message_t * msg){
+inline static void CC2420ActiveMessageP__RadioBackoff__requestCca(am_id_t arg_0x41474df8, message_t * msg){
 #line 95
-    CC2420ActiveMessageP__RadioBackoff__default__requestCca(arg_0x41399df8, msg);
+    CC2420ActiveMessageP__RadioBackoff__default__requestCca(arg_0x41474df8, msg);
 #line 95
 }
 #line 95
@@ -18801,6 +19764,22 @@ inline static error_t /*Msp430SpiDma0P.SpiP*/Msp430SpiDmaP__0__signalDone_task__
 #line 56
 }
 #line 56
+# 78 "/home/tinyos/local/src/tinyos-2.x/tos/interfaces/Resource.nc"
+inline static error_t CC2420ActiveMessageP__RadioResource__request(void ){
+#line 78
+  unsigned char result;
+#line 78
+
+#line 78
+  result = CC2420TinyosNetworkP__Resource__request(CC2420ActiveMessageC__CC2420_AM_SEND_ID);
+#line 78
+
+#line 78
+  return result;
+#line 78
+}
+#line 78
+# 56 "/home/tinyos/local/src/tinyos-2.x/tos/interfaces/TaskBasic.nc"
 inline static error_t PacketLinkP__send__postTask(void ){
 #line 56
   unsigned char result;
@@ -18916,6 +19895,17 @@ static inline void CC2420TinyosNetworkP__grantTask__runTask(void )
     }
 }
 
+#line 198
+static inline error_t CC2420TinyosNetworkP__Resource__release(uint8_t id)
+#line 198
+{
+  if (CC2420TinyosNetworkP__TINYOS_N_NETWORKS > 1) {
+      CC2420TinyosNetworkP__grantTask__postTask();
+    }
+  CC2420TinyosNetworkP__resource_owner = CC2420TinyosNetworkP__OWNER_NONE;
+  return SUCCESS;
+}
+
 # 110 "/home/tinyos/local/src/tinyos-2.x/tos/interfaces/Resource.nc"
 inline static error_t ResourceSendP__Resource__release(void ){
 #line 110
@@ -18938,6 +19928,21 @@ inline static void ResourceSendP__Ieee154Send__sendDone(message_t *msg, error_t 
 #line 86
 }
 #line 86
+# 64 "/home/tinyos/local/src/tinyos-2.x/tos/interfaces/Send.nc"
+inline static error_t CC2420TinyosNetworkP__SubSend__send(message_t * msg, uint8_t len){
+#line 64
+  unsigned char result;
+#line 64
+
+#line 64
+  result = UniqueSendP__Send__send(msg, len);
+#line 64
+
+#line 64
+  return result;
+#line 64
+}
+#line 64
 # 95 "/home/tinyos/local/src/tinyos-2.x/tos/chips/cc2420/lowpan/CC2420TinyosNetworkP.nc"
 static inline error_t CC2420TinyosNetworkP__BareSend__send(message_t *msg, uint8_t len)
 #line 95
@@ -19487,12 +20492,70 @@ static inline uint16_t IPRoutingP__getSuccess(struct neigh_entry *neigh)
 }
 
 # 99 "/home/tinyos/local/src/tinyos-2.x/tos/interfaces/AMSend.nc"
-inline static void CC2420ActiveMessageP__AMSend__sendDone(am_id_t arg_0x41356cb0, message_t * msg, error_t error){
+inline static void CC2420ActiveMessageP__AMSend__sendDone(am_id_t arg_0x41479cb0, message_t * msg, error_t error){
 #line 99
-  /*AMQueueP.AMQueueImplP*/AMQueueImplP__1__AMSend__sendDone(arg_0x41356cb0, msg, error);
+  /*AMQueueP.AMQueueImplP*/AMQueueImplP__1__AMSend__sendDone(arg_0x41479cb0, msg, error);
 #line 99
 }
 #line 99
+# 110 "/home/tinyos/local/src/tinyos-2.x/tos/interfaces/Resource.nc"
+inline static error_t CC2420ActiveMessageP__RadioResource__release(void ){
+#line 110
+  unsigned char result;
+#line 110
+
+#line 110
+  result = CC2420TinyosNetworkP__Resource__release(CC2420ActiveMessageC__CC2420_AM_SEND_ID);
+#line 110
+
+#line 110
+  return result;
+#line 110
+}
+#line 110
+# 77 "/home/tinyos/local/src/tinyos-2.x/tos/chips/cc2420/interfaces/CC2420Packet.nc"
+inline static void CC2420TinyosNetworkP__CC2420Packet__setNetwork(message_t *p_msg, uint8_t networkId){
+#line 77
+  CC2420PacketP__CC2420Packet__setNetwork(p_msg, networkId);
+#line 77
+}
+#line 77
+# 73 "/home/tinyos/local/src/tinyos-2.x/tos/chips/cc2420/lowpan/CC2420TinyosNetworkP.nc"
+static inline error_t CC2420TinyosNetworkP__ActiveSend__send(message_t *msg, uint8_t len)
+#line 73
+{
+  CC2420TinyosNetworkP__CC2420Packet__setNetwork(msg, 0x3f);
+  return CC2420TinyosNetworkP__SubSend__send(msg, len);
+}
+
+# 64 "/home/tinyos/local/src/tinyos-2.x/tos/interfaces/Send.nc"
+inline static error_t CC2420ActiveMessageP__SubSend__send(message_t * msg, uint8_t len){
+#line 64
+  unsigned char result;
+#line 64
+
+#line 64
+  result = CC2420TinyosNetworkP__ActiveSend__send(msg, len);
+#line 64
+
+#line 64
+  return result;
+#line 64
+}
+#line 64
+# 278 "/home/tinyos/local/src/tinyos-2.x/tos/chips/cc2420/CC2420ActiveMessageP.nc"
+static inline void CC2420ActiveMessageP__SendNotifier__default__aboutToSend(am_id_t amId, am_addr_t addr, message_t *msg)
+#line 278
+{
+}
+
+# 59 "/home/tinyos/local/src/tinyos-2.x/tos/interfaces/SendNotifier.nc"
+inline static void CC2420ActiveMessageP__SendNotifier__aboutToSend(am_id_t arg_0x41474780, am_addr_t dest, message_t * msg){
+#line 59
+    CC2420ActiveMessageP__SendNotifier__default__aboutToSend(arg_0x41474780, dest, msg);
+#line 59
+}
+#line 59
 # 65 "/home/tinyos/local/src/tinyos-2.x/tos/chips/cc2420/CC2420ActiveMessageP.nc"
 static inline void CC2420ActiveMessageP__RadioResource__granted(void )
 #line 65
@@ -19579,9 +20642,9 @@ struct ip_metadata *meta)
 }
 
 # 25 "/home/tinyos/local/src/tinyos-2.x/tos/lib/net/blip/interfaces/IP.nc"
-inline static void IPDispatchP__IP__recv(uint8_t arg_0x4143a810, struct ip6_hdr *iph, void *payload, struct ip_metadata *meta){
+inline static void IPDispatchP__IP__recv(uint8_t arg_0x41543230, struct ip6_hdr *iph, void *payload, struct ip_metadata *meta){
 #line 25
-  switch (arg_0x4143a810) {
+  switch (arg_0x41543230) {
 #line 25
     case IANA_UDP:
 #line 25
@@ -19603,7 +20666,7 @@ inline static void IPDispatchP__IP__recv(uint8_t arg_0x4143a810, struct ip6_hdr 
 #line 25
     default:
 #line 25
-      IPDispatchP__IP__default__recv(arg_0x4143a810, iph, payload, meta);
+      IPDispatchP__IP__default__recv(arg_0x41543230, iph, payload, meta);
 #line 25
       break;
 #line 25
@@ -19786,12 +20849,6 @@ inline static void IPDispatchP__ICMP__sendTimeExceeded(struct ip6_hdr *hdr, unpa
 #line 35
 }
 #line 35
-# 48 "/home/tinyos/local/src/tinyos-2.x/tos/system/NoLedsC.nc"
-static inline void NoLedsC__Leds__led1Toggle(void )
-#line 48
-{
-}
-
 # 72 "/home/tinyos/local/src/tinyos-2.x/tos/interfaces/Leds.nc"
 inline static void IPDispatchP__Leds__led1Toggle(void ){
 #line 72
@@ -19964,10 +21021,10 @@ static inline void IPDispatchP__updateSourceRoute(ieee154_saddr_t prev_hop, stru
 static inline message_t *IPDispatchP__handle1stFrag(message_t *msg, packed_lowmsg_t *lowmsg)
 #line 433
 {
-  unsigned int __nesc_temp51;
-  unsigned char *__nesc_temp50;
-  unsigned char __nesc_temp49;
-  unsigned char *__nesc_temp48;
+  unsigned int __nesc_temp55;
+  unsigned char *__nesc_temp54;
+  unsigned char __nesc_temp53;
+  unsigned char *__nesc_temp52;
 #line 434
   uint8_t *unpack_buf;
   struct ip6_hdr *ip;
@@ -20175,12 +21232,12 @@ static inline message_t *IPDispatchP__handle1stFrag(message_t *msg, packed_lowms
       s_entry->info = s_info;
 
       if (IPDispatchP__SendQueue__enqueue(s_entry) != SUCCESS) {
-        (__nesc_temp48 = IPDispatchP__stats.encfail.data, __nesc_hton_uint8(__nesc_temp48, (__nesc_temp49 = __nesc_ntoh_uint8(__nesc_temp48)) + 1), __nesc_temp49);
+        (__nesc_temp52 = IPDispatchP__stats.encfail.data, __nesc_hton_uint8(__nesc_temp52, (__nesc_temp53 = __nesc_ntoh_uint8(__nesc_temp52)) + 1), __nesc_temp53);
         }
 #line 628
       IPDispatchP__sendTask__postTask();
 
-      (__nesc_temp50 = IPDispatchP__stats.forwarded.data, __nesc_hton_uint16(__nesc_temp50, (__nesc_temp51 = __nesc_ntoh_uint16(__nesc_temp50)) + 1), __nesc_temp51);
+      (__nesc_temp54 = IPDispatchP__stats.forwarded.data, __nesc_hton_uint16(__nesc_temp54, (__nesc_temp55 = __nesc_ntoh_uint16(__nesc_temp54)) + 1), __nesc_temp55);
 
 
       if (-- s_info->refcount == 0) {
@@ -20230,14 +21287,14 @@ inline static void IPDispatchP__IPRouting__reportReception(ieee154_saddr_t neigh
 static inline message_t *IPDispatchP__Ieee154Receive__receive(message_t *msg, void *msg_payload, uint8_t len)
 #line 651
 {
+  unsigned char __nesc_temp63;
+  unsigned char *__nesc_temp62;
+  unsigned char __nesc_temp61;
+  unsigned char *__nesc_temp60;
   unsigned char __nesc_temp59;
   unsigned char *__nesc_temp58;
   unsigned char __nesc_temp57;
   unsigned char *__nesc_temp56;
-  unsigned char __nesc_temp55;
-  unsigned char *__nesc_temp54;
-  unsigned char __nesc_temp53;
-  unsigned char *__nesc_temp52;
 #line 652
   packed_lowmsg_t lowmsg;
 
@@ -20250,7 +21307,7 @@ static inline message_t *IPDispatchP__Ieee154Receive__receive(message_t *msg, vo
 
   ;
 
-  (__nesc_temp52 = IPDispatchP__stats.rx_total.data, __nesc_hton_uint8(__nesc_temp52, (__nesc_temp53 = __nesc_ntoh_uint8(__nesc_temp52)) + 1), __nesc_temp53);
+  (__nesc_temp56 = IPDispatchP__stats.rx_total.data, __nesc_hton_uint8(__nesc_temp56, (__nesc_temp57 = __nesc_ntoh_uint8(__nesc_temp56)) + 1), __nesc_temp57);
 
   IPDispatchP__IPRouting__reportReception(IPDispatchP__Ieee154Packet__source(msg), 
   IPDispatchP__ReadLqi__read(msg));
@@ -20339,7 +21396,7 @@ static inline message_t *IPDispatchP__Ieee154Receive__receive(message_t *msg, vo
                 if (s_entry != (void *)0) {
                   IPDispatchP__SendEntryPool__put(s_entry);
                   }
-                (__nesc_temp54 = IPDispatchP__stats.fw_drop.data, __nesc_hton_uint8(__nesc_temp54, (__nesc_temp55 = __nesc_ntoh_uint8(__nesc_temp54)) + 1), __nesc_temp55);
+                (__nesc_temp58 = IPDispatchP__stats.fw_drop.data, __nesc_hton_uint8(__nesc_temp58, (__nesc_temp59 = __nesc_ntoh_uint8(__nesc_temp58)) + 1), __nesc_temp59);
                 fwd->timeout = T_FAILED1;
                 goto fail;
               }
@@ -20370,7 +21427,7 @@ static inline message_t *IPDispatchP__Ieee154Receive__receive(message_t *msg, vo
 
 
             if (IPDispatchP__SendQueue__enqueue(s_entry) != SUCCESS) {
-                (__nesc_temp56 = IPDispatchP__stats.encfail.data, __nesc_hton_uint8(__nesc_temp56, (__nesc_temp57 = __nesc_ntoh_uint8(__nesc_temp56)) + 1), __nesc_temp57);
+                (__nesc_temp60 = IPDispatchP__stats.encfail.data, __nesc_hton_uint8(__nesc_temp60, (__nesc_temp61 = __nesc_ntoh_uint8(__nesc_temp60)) + 1), __nesc_temp61);
                 ;
               }
             IPDispatchP__sendTask__postTask();
@@ -20389,7 +21446,7 @@ static inline message_t *IPDispatchP__Ieee154Receive__receive(message_t *msg, vo
     ;
 #line 768
   ;
-  (__nesc_temp58 = IPDispatchP__stats.rx_drop.data, __nesc_hton_uint8(__nesc_temp58, (__nesc_temp59 = __nesc_ntoh_uint8(__nesc_temp58)) + 1), __nesc_temp59);
+  (__nesc_temp62 = IPDispatchP__stats.rx_drop.data, __nesc_hton_uint8(__nesc_temp62, (__nesc_temp63 = __nesc_ntoh_uint8(__nesc_temp62)) + 1), __nesc_temp63);
   done: 
     return msg;
 }
@@ -20424,6 +21481,72 @@ inline static cc2420_header_t * CC2420TinyosNetworkP__CC2420PacketBody__getHeade
 #line 42
 }
 #line 42
+# 228 "/home/tinyos/local/src/tinyos-2.x/tos/chips/cc2420/CC2420TimeSyncMessageP.nc"
+static inline message_t *CC2420TimeSyncMessageP__Snoop__default__receive(am_id_t id, message_t *msg, void *payload, uint8_t len)
+#line 228
+{
+#line 228
+  return msg;
+}
+
+# 67 "/home/tinyos/local/src/tinyos-2.x/tos/interfaces/Receive.nc"
+inline static message_t * CC2420TimeSyncMessageP__Snoop__receive(am_id_t arg_0x40d9a5b8, message_t * msg, void * payload, uint8_t len){
+#line 67
+  nx_struct message_t *result;
+#line 67
+
+#line 67
+    result = CC2420TimeSyncMessageP__Snoop__default__receive(arg_0x40d9a5b8, msg, payload, len);
+#line 67
+
+#line 67
+  return result;
+#line 67
+}
+#line 67
+# 67 "/home/tinyos/local/src/tinyos-2.x/tos/interfaces/Packet.nc"
+inline static uint8_t CC2420TimeSyncMessageP__SubPacket__payloadLength(message_t * msg){
+#line 67
+  unsigned char result;
+#line 67
+
+#line 67
+  result = CC2420ActiveMessageP__Packet__payloadLength(msg);
+#line 67
+
+#line 67
+  return result;
+#line 67
+}
+#line 67
+# 82 "/home/tinyos/local/src/tinyos-2.x/tos/chips/cc2420/CC2420TimeSyncMessageP.nc"
+static inline uint8_t CC2420TimeSyncMessageP__Packet__payloadLength(message_t *msg)
+{
+  return CC2420TimeSyncMessageP__SubPacket__payloadLength(msg) - sizeof(timesync_footer_t );
+}
+
+#line 64
+static __inline timesync_footer_t *CC2420TimeSyncMessageP__getFooter(message_t *msg)
+{
+
+  return (timesync_footer_t *)(msg->data + CC2420TimeSyncMessageP__Packet__payloadLength(msg));
+}
+
+#line 134
+static __inline am_id_t CC2420TimeSyncMessageP__AMPacket__type(message_t *msg)
+{
+  return __nesc_ntoh_uint8(CC2420TimeSyncMessageP__getFooter(msg)->type.data);
+}
+
+#line 222
+static inline message_t *CC2420TimeSyncMessageP__SubSnoop__receive(message_t *msg, void *payload, uint8_t len)
+{
+  am_id_t id = CC2420TimeSyncMessageP__AMPacket__type(msg);
+
+#line 225
+  return CC2420TimeSyncMessageP__Snoop__receive(id, msg, payload, len - sizeof(timesync_footer_t ));
+}
+
 # 270 "/home/tinyos/local/src/tinyos-2.x/tos/chips/cc2420/CC2420ActiveMessageP.nc"
 static inline message_t *CC2420ActiveMessageP__Snoop__default__receive(am_id_t id, message_t *msg, void *payload, uint8_t len)
 #line 270
@@ -20432,13 +21555,27 @@ static inline message_t *CC2420ActiveMessageP__Snoop__default__receive(am_id_t i
 }
 
 # 67 "/home/tinyos/local/src/tinyos-2.x/tos/interfaces/Receive.nc"
-inline static message_t * CC2420ActiveMessageP__Snoop__receive(am_id_t arg_0x41353da0, message_t * msg, void * payload, uint8_t len){
+inline static message_t * CC2420ActiveMessageP__Snoop__receive(am_id_t arg_0x41476da0, message_t * msg, void * payload, uint8_t len){
 #line 67
   nx_struct message_t *result;
 #line 67
 
 #line 67
-    result = CC2420ActiveMessageP__Snoop__default__receive(arg_0x41353da0, msg, payload, len);
+  switch (arg_0x41476da0) {
+#line 67
+    case 0x3D:
+#line 67
+      result = CC2420TimeSyncMessageP__SubSnoop__receive(msg, payload, len);
+#line 67
+      break;
+#line 67
+    default:
+#line 67
+      result = CC2420ActiveMessageP__Snoop__default__receive(arg_0x41476da0, msg, payload, len);
+#line 67
+      break;
+#line 67
+    }
 #line 67
 
 #line 67
@@ -20446,6 +21583,261 @@ inline static message_t * CC2420ActiveMessageP__Snoop__receive(am_id_t arg_0x413
 #line 67
 }
 #line 67
+# 56 "/home/tinyos/local/src/tinyos-2.x/tos/interfaces/TaskBasic.nc"
+inline static error_t /*TimeSyncC.TimeSyncP*/TimeSyncP__0__processMsg__postTask(void ){
+#line 56
+  unsigned char result;
+#line 56
+
+#line 56
+  result = SchedulerBasicP__TaskBasic__postTask(/*TimeSyncC.TimeSyncP*/TimeSyncP__0__processMsg);
+#line 56
+
+#line 56
+  return result;
+#line 56
+}
+#line 56
+# 53 "/home/tinyos/local/src/tinyos-2.x/tos/lib/timer/Counter.nc"
+inline static /*HilTimerMilliC.CounterToLocalTimeC*/CounterToLocalTimeC__0__Counter__size_type /*HilTimerMilliC.CounterToLocalTimeC*/CounterToLocalTimeC__0__Counter__get(void ){
+#line 53
+  unsigned long result;
+#line 53
+
+#line 53
+  result = /*CounterMilli32C.Transform*/TransformCounterC__0__Counter__get();
+#line 53
+
+#line 53
+  return result;
+#line 53
+}
+#line 53
+# 42 "/home/tinyos/local/src/tinyos-2.x/tos/lib/timer/CounterToLocalTimeC.nc"
+static inline uint32_t /*HilTimerMilliC.CounterToLocalTimeC*/CounterToLocalTimeC__0__LocalTime__get(void )
+{
+  return /*HilTimerMilliC.CounterToLocalTimeC*/CounterToLocalTimeC__0__Counter__get();
+}
+
+# 50 "/home/tinyos/local/src/tinyos-2.x/tos/lib/timer/LocalTime.nc"
+inline static uint32_t CC2420PacketP__LocalTimeMilli__get(void ){
+#line 50
+  unsigned long result;
+#line 50
+
+#line 50
+  result = /*HilTimerMilliC.CounterToLocalTimeC*/CounterToLocalTimeC__0__LocalTime__get();
+#line 50
+
+#line 50
+  return result;
+#line 50
+}
+#line 50
+# 132 "/home/tinyos/local/src/tinyos-2.x/tos/chips/cc2420/packet/CC2420PacketP.nc"
+static inline uint32_t CC2420PacketP__PacketTimeStamp32khz__timestamp(message_t *msg)
+{
+  return __nesc_ntoh_uint32(CC2420PacketP__CC2420PacketBody__getMetadata(msg)->timestamp.data);
+}
+
+# 53 "/home/tinyos/local/src/tinyos-2.x/tos/lib/timer/Counter.nc"
+inline static /*CC2420PacketC.CounterToLocalTimeC*/CounterToLocalTimeC__1__Counter__size_type /*CC2420PacketC.CounterToLocalTimeC*/CounterToLocalTimeC__1__Counter__get(void ){
+#line 53
+  unsigned long result;
+#line 53
+
+#line 53
+  result = /*Counter32khz32C.Transform*/TransformCounterC__1__Counter__get();
+#line 53
+
+#line 53
+  return result;
+#line 53
+}
+#line 53
+# 42 "/home/tinyos/local/src/tinyos-2.x/tos/lib/timer/CounterToLocalTimeC.nc"
+static inline uint32_t /*CC2420PacketC.CounterToLocalTimeC*/CounterToLocalTimeC__1__LocalTime__get(void )
+{
+  return /*CC2420PacketC.CounterToLocalTimeC*/CounterToLocalTimeC__1__Counter__get();
+}
+
+# 50 "/home/tinyos/local/src/tinyos-2.x/tos/lib/timer/LocalTime.nc"
+inline static uint32_t CC2420PacketP__LocalTime32khz__get(void ){
+#line 50
+  unsigned long result;
+#line 50
+
+#line 50
+  result = /*CC2420PacketC.CounterToLocalTimeC*/CounterToLocalTimeC__1__LocalTime__get();
+#line 50
+
+#line 50
+  return result;
+#line 50
+}
+#line 50
+# 158 "/home/tinyos/local/src/tinyos-2.x/tos/chips/cc2420/packet/CC2420PacketP.nc"
+static inline uint32_t CC2420PacketP__PacketTimeStampMilli__timestamp(message_t *msg)
+{
+  int32_t offset = CC2420PacketP__LocalTime32khz__get() - CC2420PacketP__PacketTimeStamp32khz__timestamp(msg);
+
+#line 161
+  offset /= 28.1;
+  return CC2420PacketP__LocalTimeMilli__get() - offset;
+}
+
+# 52 "/home/tinyos/local/src/tinyos-2.x/tos/interfaces/PacketTimeStamp.nc"
+inline static CC2420TimeSyncMessageP__PacketTimeStampMilli__size_type CC2420TimeSyncMessageP__PacketTimeStampMilli__timestamp(message_t * msg){
+#line 52
+  unsigned long result;
+#line 52
+
+#line 52
+  result = CC2420PacketP__PacketTimeStampMilli__timestamp(msg);
+#line 52
+
+#line 52
+  return result;
+#line 52
+}
+#line 52
+# 255 "/home/tinyos/local/src/tinyos-2.x/tos/chips/cc2420/CC2420TimeSyncMessageP.nc"
+static inline uint32_t CC2420TimeSyncMessageP__TimeSyncPacketMilli__eventTime(message_t *msg)
+{
+  return ((int32_t )__nesc_ntoh_uint32(CC2420TimeSyncMessageP__getFooter(msg)->timestamp.data) >> 5) + CC2420TimeSyncMessageP__PacketTimeStampMilli__timestamp(msg);
+}
+
+# 45 "/home/tinyos/local/src/tinyos-2.x/tos/interfaces/TimeSyncPacket.nc"
+inline static /*TimeSyncC.TimeSyncP*/TimeSyncP__0__TimeSyncPacket__size_type /*TimeSyncC.TimeSyncP*/TimeSyncP__0__TimeSyncPacket__eventTime(message_t *msg){
+#line 45
+  unsigned long result;
+#line 45
+
+#line 45
+  result = CC2420TimeSyncMessageP__TimeSyncPacketMilli__eventTime(msg);
+#line 45
+
+#line 45
+  return result;
+#line 45
+}
+#line 45
+# 127 "/home/tinyos/local/src/tinyos-2.x/tos/chips/cc2420/packet/CC2420PacketP.nc"
+static inline bool CC2420PacketP__PacketTimeStamp32khz__isValid(message_t *msg)
+{
+  return __nesc_ntoh_uint32(CC2420PacketP__CC2420PacketBody__getMetadata(msg)->timestamp.data) != CC2420_INVALID_TIMESTAMP;
+}
+
+#line 151
+static inline bool CC2420PacketP__PacketTimeStampMilli__isValid(message_t *msg)
+{
+  return CC2420PacketP__PacketTimeStamp32khz__isValid(msg);
+}
+
+# 38 "/home/tinyos/local/src/tinyos-2.x/tos/interfaces/PacketTimeStamp.nc"
+inline static bool CC2420TimeSyncMessageP__PacketTimeStampMilli__isValid(message_t * msg){
+#line 38
+  unsigned char result;
+#line 38
+
+#line 38
+  result = CC2420PacketP__PacketTimeStampMilli__isValid(msg);
+#line 38
+
+#line 38
+  return result;
+#line 38
+}
+#line 38
+# 250 "/home/tinyos/local/src/tinyos-2.x/tos/chips/cc2420/CC2420TimeSyncMessageP.nc"
+static inline bool CC2420TimeSyncMessageP__TimeSyncPacketMilli__isValid(message_t *msg)
+{
+  return CC2420TimeSyncMessageP__PacketTimeStampMilli__isValid(msg) && __nesc_ntoh_uint32(CC2420TimeSyncMessageP__getFooter(msg)->timestamp.data) != CC2420_INVALID_TIMESTAMP;
+}
+
+# 35 "/home/tinyos/local/src/tinyos-2.x/tos/interfaces/TimeSyncPacket.nc"
+inline static bool /*TimeSyncC.TimeSyncP*/TimeSyncP__0__TimeSyncPacket__isValid(message_t *msg){
+#line 35
+  unsigned char result;
+#line 35
+
+#line 35
+  result = CC2420TimeSyncMessageP__TimeSyncPacketMilli__isValid(msg);
+#line 35
+
+#line 35
+  return result;
+#line 35
+}
+#line 35
+# 309 "/home/tinyos/local/src/tinyos-2.x/tos/lib/ftsp/TimeSyncP.nc"
+static inline message_t */*TimeSyncC.TimeSyncP*/TimeSyncP__0__Receive__receive(message_t *msg, void *payload, uint8_t len)
+{
+#line 322
+  if ((
+#line 321
+  /*TimeSyncC.TimeSyncP*/TimeSyncP__0__state & /*TimeSyncC.TimeSyncP*/TimeSyncP__0__STATE_PROCESSING) == 0
+   && /*TimeSyncC.TimeSyncP*/TimeSyncP__0__TimeSyncPacket__isValid(msg)) {
+      message_t *old = /*TimeSyncC.TimeSyncP*/TimeSyncP__0__processedMsg;
+
+      /*TimeSyncC.TimeSyncP*/TimeSyncP__0__processedMsg = msg;
+      __nesc_hton_uint32(((TimeSyncMsg *)payload)->localTime.data, /*TimeSyncC.TimeSyncP*/TimeSyncP__0__TimeSyncPacket__eventTime(msg));
+
+      /*TimeSyncC.TimeSyncP*/TimeSyncP__0__state |= /*TimeSyncC.TimeSyncP*/TimeSyncP__0__STATE_PROCESSING;
+      /*TimeSyncC.TimeSyncP*/TimeSyncP__0__processMsg__postTask();
+
+      return old;
+    }
+
+  return msg;
+}
+
+# 218 "/home/tinyos/local/src/tinyos-2.x/tos/chips/cc2420/CC2420TimeSyncMessageP.nc"
+static inline message_t *CC2420TimeSyncMessageP__Receive__default__receive(am_id_t id, message_t *msg, void *payload, uint8_t len)
+#line 218
+{
+#line 218
+  return msg;
+}
+
+# 67 "/home/tinyos/local/src/tinyos-2.x/tos/interfaces/Receive.nc"
+inline static message_t * CC2420TimeSyncMessageP__Receive__receive(am_id_t arg_0x40d9ce70, message_t * msg, void * payload, uint8_t len){
+#line 67
+  nx_struct message_t *result;
+#line 67
+
+#line 67
+  switch (arg_0x40d9ce70) {
+#line 67
+    case TIMESYNC_AM_FTSP:
+#line 67
+      result = /*TimeSyncC.TimeSyncP*/TimeSyncP__0__Receive__receive(msg, payload, len);
+#line 67
+      break;
+#line 67
+    default:
+#line 67
+      result = CC2420TimeSyncMessageP__Receive__default__receive(arg_0x40d9ce70, msg, payload, len);
+#line 67
+      break;
+#line 67
+    }
+#line 67
+
+#line 67
+  return result;
+#line 67
+}
+#line 67
+# 212 "/home/tinyos/local/src/tinyos-2.x/tos/chips/cc2420/CC2420TimeSyncMessageP.nc"
+static inline message_t *CC2420TimeSyncMessageP__SubReceive__receive(message_t *msg, void *payload, uint8_t len)
+{
+  am_id_t id = CC2420TimeSyncMessageP__AMPacket__type(msg);
+
+#line 215
+  return CC2420TimeSyncMessageP__Receive__receive(id, msg, payload, len - sizeof(timesync_footer_t ));
+}
+
 # 326 "/usr/lib/ncc/nesc_nx.h"
 static __inline  int32_t __nesc_ntoh_int32(const void * source)
 #line 326
@@ -20477,9 +21869,9 @@ inline static error_t ECG_ForwarderC__Status__sendto(struct sockaddr_in6 *dest, 
 #line 16
 }
 #line 16
-# 94 "ECG_ForwarderC.nc"
+# 110 "ECG_ForwarderC.nc"
 static inline void ECG_ForwarderC__send_UPD_ECG_Message(ECG_PACKET *ECGMsg)
-#line 94
+#line 110
 {
 
   ECG_ForwarderC__Status__sendto(&ECG_ForwarderC__route_dest, &ECGMsg, sizeof ECGMsg);
@@ -20495,9 +21887,9 @@ static inline void ECG_ForwarderC__send_UPD_ECG_Message(ECG_PACKET *ECGMsg)
   printfflush();
 }
 
-#line 85
+#line 101
 static inline void ECG_ForwarderC__send_UPD_Beat_Message(BEAT_MSG *beatMsg)
-#line 85
+#line 101
 {
 
   ECG_ForwarderC__Status__sendto(&ECG_ForwarderC__route_dest, &beatMsg, sizeof beatMsg);
@@ -20505,9 +21897,9 @@ static inline void ECG_ForwarderC__send_UPD_Beat_Message(BEAT_MSG *beatMsg)
   printfflush();
 }
 
-#line 128
+#line 139
 static inline message_t *ECG_ForwarderC__Receive__receive(message_t *msg, void *payload, uint8_t len)
-#line 128
+#line 139
 {
 
   BEAT_MSG *beatMsg;
@@ -20541,13 +21933,13 @@ static inline message_t *CC2420ActiveMessageP__Receive__default__receive(am_id_t
 }
 
 # 67 "/home/tinyos/local/src/tinyos-2.x/tos/interfaces/Receive.nc"
-inline static message_t * CC2420ActiveMessageP__Receive__receive(am_id_t arg_0x41353708, message_t * msg, void * payload, uint8_t len){
+inline static message_t * CC2420ActiveMessageP__Receive__receive(am_id_t arg_0x41476708, message_t * msg, void * payload, uint8_t len){
 #line 67
   nx_struct message_t *result;
 #line 67
 
 #line 67
-  switch (arg_0x41353708) {
+  switch (arg_0x41476708) {
 #line 67
     case 10:
 #line 67
@@ -20555,9 +21947,15 @@ inline static message_t * CC2420ActiveMessageP__Receive__receive(am_id_t arg_0x4
 #line 67
       break;
 #line 67
+    case 0x3D:
+#line 67
+      result = CC2420TimeSyncMessageP__SubReceive__receive(msg, payload, len);
+#line 67
+      break;
+#line 67
     default:
 #line 67
-      result = CC2420ActiveMessageP__Receive__default__receive(arg_0x41353708, msg, payload, len);
+      result = CC2420ActiveMessageP__Receive__default__receive(arg_0x41476708, msg, payload, len);
 #line 67
       break;
 #line 67
@@ -20569,7 +21967,36 @@ inline static message_t * CC2420ActiveMessageP__Receive__receive(am_id_t arg_0x4
 #line 67
 }
 #line 67
-# 146 "/home/tinyos/local/src/tinyos-2.x/tos/chips/cc2420/CC2420ActiveMessageP.nc"
+# 61 "/home/tinyos/local/src/tinyos-2.x/tos/system/ActiveMessageAddressC.nc"
+static inline am_addr_t ActiveMessageAddressC__ActiveMessageAddress__amAddress(void )
+#line 61
+{
+  return ActiveMessageAddressC__amAddress();
+}
+
+# 50 "/home/tinyos/local/src/tinyos-2.x/tos/interfaces/ActiveMessageAddress.nc"
+inline static am_addr_t CC2420ActiveMessageP__ActiveMessageAddress__amAddress(void ){
+#line 50
+  unsigned int result;
+#line 50
+
+#line 50
+  result = ActiveMessageAddressC__ActiveMessageAddress__amAddress();
+#line 50
+
+#line 50
+  return result;
+#line 50
+}
+#line 50
+# 122 "/home/tinyos/local/src/tinyos-2.x/tos/chips/cc2420/CC2420ActiveMessageP.nc"
+static inline am_addr_t CC2420ActiveMessageP__AMPacket__address(void )
+#line 122
+{
+  return CC2420ActiveMessageP__ActiveMessageAddress__amAddress();
+}
+
+#line 146
 static inline bool CC2420ActiveMessageP__AMPacket__isForMe(message_t *amsg)
 #line 146
 {
@@ -21009,6 +22436,17 @@ inline static void IPDispatchP__InternalIPExtension__ip_free(void ){
 #line 6
 }
 #line 6
+# 251 "/usr/lib/ncc/nesc_nx.h"
+static __inline  uint8_t __nesc_hton_leuint8(void * target, uint8_t value)
+#line 251
+{
+  uint8_t *base = target;
+
+#line 253
+  base[0] = value;
+  return value;
+}
+
 # 150 "/home/tinyos/local/src/tinyos-2.x/tos/chips/cc2420/CC2420Ieee154MessageP.nc"
 static inline void CC2420Ieee154MessageP__Packet__setPayloadLength(message_t *msg, uint8_t len)
 #line 150
@@ -21165,10 +22603,10 @@ struct ip6_route *route,
 int flags)
 #line 854
 {
-  unsigned int __nesc_temp65;
-  unsigned char *__nesc_temp64;
-  unsigned char __nesc_temp63;
-  unsigned char *__nesc_temp62;
+  unsigned int __nesc_temp69;
+  unsigned char *__nesc_temp68;
+  unsigned char __nesc_temp67;
+  unsigned char *__nesc_temp66;
 #line 855
   uint16_t payload_length;
 
@@ -21277,7 +22715,7 @@ int flags)
         s_entry->info = s_info;
 
         if (IPDispatchP__SendQueue__enqueue(s_entry) != SUCCESS) {
-            (__nesc_temp62 = IPDispatchP__stats.encfail.data, __nesc_hton_uint8(__nesc_temp62, (__nesc_temp63 = __nesc_ntoh_uint8(__nesc_temp62)) + 1), __nesc_temp63);
+            (__nesc_temp66 = IPDispatchP__stats.encfail.data, __nesc_hton_uint8(__nesc_temp66, (__nesc_temp67 = __nesc_ntoh_uint8(__nesc_temp66)) + 1), __nesc_temp67);
             ;
             goto done;
           }
@@ -21287,7 +22725,7 @@ int flags)
 
 
     done: 
-      (__nesc_temp64 = IPDispatchP__stats.sent.data, __nesc_hton_uint16(__nesc_temp64, (__nesc_temp65 = __nesc_ntoh_uint16(__nesc_temp64)) + 1), __nesc_temp65);
+      (__nesc_temp68 = IPDispatchP__stats.sent.data, __nesc_hton_uint16(__nesc_temp68, (__nesc_temp69 = __nesc_ntoh_uint16(__nesc_temp68)) + 1), __nesc_temp69);
     if (-- s_info->refcount == 0) {
 #line 964
       IPDispatchP__SendInfoPool__put(s_info);
@@ -21388,13 +22826,13 @@ struct ip6_hdr *msg)
 }
 
 # 5 "/home/tinyos/local/src/tinyos-2.x/tos/lib/net/blip/interfaces/TLVHeader.nc"
-inline static struct tlv_hdr *IPExtensionP__DestinationExt__getHeader(uint8_t arg_0x416a5f20, int label, int nxt_hdr, struct ip6_hdr *msg){
+inline static struct tlv_hdr *IPExtensionP__DestinationExt__getHeader(uint8_t arg_0x417a5820, int label, int nxt_hdr, struct ip6_hdr *msg){
 #line 5
   struct tlv_hdr *result;
 #line 5
 
 #line 5
-  switch (arg_0x416a5f20) {
+  switch (arg_0x417a5820) {
 #line 5
     case 0:
 #line 5
@@ -21404,7 +22842,7 @@ inline static struct tlv_hdr *IPExtensionP__DestinationExt__getHeader(uint8_t ar
 #line 5
     default:
 #line 5
-      result = IPExtensionP__DestinationExt__default__getHeader(arg_0x416a5f20, label, nxt_hdr, msg);
+      result = IPExtensionP__DestinationExt__default__getHeader(arg_0x417a5820, label, nxt_hdr, msg);
 #line 5
       break;
 #line 5
@@ -21425,13 +22863,13 @@ struct ip6_hdr *msg)
 }
 
 # 5 "/home/tinyos/local/src/tinyos-2.x/tos/lib/net/blip/interfaces/TLVHeader.nc"
-inline static struct tlv_hdr *IPExtensionP__HopByHopExt__getHeader(uint8_t arg_0x416a5710, int label, int nxt_hdr, struct ip6_hdr *msg){
+inline static struct tlv_hdr *IPExtensionP__HopByHopExt__getHeader(uint8_t arg_0x417a5010, int label, int nxt_hdr, struct ip6_hdr *msg){
 #line 5
   struct tlv_hdr *result;
 #line 5
 
 #line 5
-    result = IPExtensionP__HopByHopExt__default__getHeader(arg_0x416a5710, label, nxt_hdr, msg);
+    result = IPExtensionP__HopByHopExt__default__getHeader(arg_0x417a5010, label, nxt_hdr, msg);
 #line 5
 
 #line 5
@@ -21977,12 +23415,84 @@ static __inline uint32_t __attribute((unused)) ntoh32(uint32_t i)
   return ((uint32_t )lo << 16) | (uint32_t )hi;
 }
 
-# 76 "ECG_ForwarderC.nc"
+# 64 "/home/tinyos/local/src/tinyos-2.x/tos/interfaces/Send.nc"
+inline static error_t /*ECG_ForwarderAppC.AMSenderC.SenderC.AMQueueEntryP*/AMQueueEntryP__2__Send__send(message_t * msg, uint8_t len){
+#line 64
+  unsigned char result;
+#line 64
+
+#line 64
+  result = /*AMQueueP.AMQueueImplP*/AMQueueImplP__1__Send__send(1U, msg, len);
+#line 64
+
+#line 64
+  return result;
+#line 64
+}
+#line 64
+# 151 "/home/tinyos/local/src/tinyos-2.x/tos/interfaces/AMPacket.nc"
+inline static void /*ECG_ForwarderAppC.AMSenderC.SenderC.AMQueueEntryP*/AMQueueEntryP__2__AMPacket__setType(message_t * amsg, am_id_t t){
+#line 151
+  CC2420ActiveMessageP__AMPacket__setType(amsg, t);
+#line 151
+}
+#line 151
+#line 92
+inline static void /*ECG_ForwarderAppC.AMSenderC.SenderC.AMQueueEntryP*/AMQueueEntryP__2__AMPacket__setDestination(message_t * amsg, am_addr_t addr){
+#line 92
+  CC2420ActiveMessageP__AMPacket__setDestination(amsg, addr);
+#line 92
+}
+#line 92
+# 45 "/home/tinyos/local/src/tinyos-2.x/tos/system/AMQueueEntryP.nc"
+static inline error_t /*ECG_ForwarderAppC.AMSenderC.SenderC.AMQueueEntryP*/AMQueueEntryP__2__AMSend__send(am_addr_t dest, 
+message_t *msg, 
+uint8_t len)
+#line 47
+{
+  /*ECG_ForwarderAppC.AMSenderC.SenderC.AMQueueEntryP*/AMQueueEntryP__2__AMPacket__setDestination(msg, dest);
+  /*ECG_ForwarderAppC.AMSenderC.SenderC.AMQueueEntryP*/AMQueueEntryP__2__AMPacket__setType(msg, 10);
+  return /*ECG_ForwarderAppC.AMSenderC.SenderC.AMQueueEntryP*/AMQueueEntryP__2__Send__send(msg, len);
+}
+
+# 69 "/home/tinyos/local/src/tinyos-2.x/tos/interfaces/AMSend.nc"
+inline static error_t ECG_ForwarderC__ECGMsgSend__send(am_addr_t addr, message_t * msg, uint8_t len){
+#line 69
+  unsigned char result;
+#line 69
+
+#line 69
+  result = /*ECG_ForwarderAppC.AMSenderC.SenderC.AMQueueEntryP*/AMQueueEntryP__2__AMSend__send(addr, msg, len);
+#line 69
+
+#line 69
+  return result;
+#line 69
+}
+#line 69
+# 68 "ECG_ForwarderC.nc"
+static inline void ECG_ForwarderC__updateNodes(void *data, uint16_t len)
+#line 68
+{
+
+  ECG_ForwarderC__ECGMsgSend__send(AM_BROADCAST_ADDR, &data, len);
+}
+
+
+
+
+
+
+
 static inline void ECG_ForwarderC__Status__recvfrom(struct sockaddr_in6 *from, void *data, 
 uint16_t len, struct ip_metadata *meta)
-#line 77
+#line 80
 {
   ECG_ForwarderC__route_dest = *from;
+
+  if (len == 0) {
+      ECG_ForwarderC__updateNodes(data, len);
+    }
 }
 
 # 16 "/home/tinyos/local/src/tinyos-2.x/tos/lib/net/blip/interfaces/UDP.nc"
@@ -22008,13 +23518,13 @@ static inline char *UDPShellP__ShellCommand__default__eval(uint8_t cmd_id, int a
 }
 
 # 11 "/home/tinyos/local/src/tinyos-2.x/tos/lib/net/blip/shell/ShellCommand.nc"
-inline static char *UDPShellP__ShellCommand__eval(uint8_t arg_0x416ed520, int argc, char **argv){
+inline static char *UDPShellP__ShellCommand__eval(uint8_t arg_0x417f7920, int argc, char **argv){
 #line 11
   char *result;
 #line 11
 
 #line 11
-    result = UDPShellP__ShellCommand__default__eval(arg_0x416ed520, argc, argv);
+    result = UDPShellP__ShellCommand__default__eval(arg_0x417f7920, argc, argv);
 #line 11
 
 #line 11
@@ -22103,9 +23613,9 @@ uint16_t len, struct ip_metadata *meta)
 }
 
 # 24 "/home/tinyos/local/src/tinyos-2.x/tos/lib/net/blip/interfaces/UDP.nc"
-inline static void UdpP__UDP__recvfrom(uint8_t arg_0x416cee08, struct sockaddr_in6 *src, void *payload, uint16_t len, struct ip_metadata *meta){
+inline static void UdpP__UDP__recvfrom(uint8_t arg_0x417d2440, struct sockaddr_in6 *src, void *payload, uint16_t len, struct ip_metadata *meta){
 #line 24
-  switch (arg_0x416cee08) {
+  switch (arg_0x417d2440) {
 #line 24
     case 0U:
 #line 24
@@ -22121,7 +23631,7 @@ inline static void UdpP__UDP__recvfrom(uint8_t arg_0x416cee08, struct sockaddr_i
 #line 24
     default:
 #line 24
-      UdpP__UDP__default__recvfrom(arg_0x416cee08, src, payload, len, meta);
+      UdpP__UDP__default__recvfrom(arg_0x417d2440, src, payload, len, meta);
 #line 24
       break;
 #line 24
@@ -22129,6 +23639,20 @@ inline static void UdpP__UDP__recvfrom(uint8_t arg_0x416cee08, struct sockaddr_i
 #line 24
 }
 #line 24
+# 185 "/home/tinyos/local/src/tinyos-2.x/tos/chips/cc2420/CC2420ActiveMessageP.nc"
+static inline void CC2420ActiveMessageP__Packet__setPayloadLength(message_t *msg, uint8_t len)
+#line 185
+{
+  __nesc_hton_leuint8(CC2420ActiveMessageP__CC2420PacketBody__getHeader(msg)->length.data, len + CC2420_SIZE);
+}
+
+# 83 "/home/tinyos/local/src/tinyos-2.x/tos/interfaces/Packet.nc"
+inline static void /*AMQueueP.AMQueueImplP*/AMQueueImplP__1__Packet__setPayloadLength(message_t * msg, uint8_t len){
+#line 83
+  CC2420ActiveMessageP__Packet__setPayloadLength(msg, len);
+#line 83
+}
+#line 83
 # 69 "/home/tinyos/local/src/tinyos-2.x/tos/lib/net/blip/IPAddressP.nc"
 static inline void IPAddressP__IPAddress__setPrefix(uint8_t *pfx)
 #line 69
@@ -22466,9 +23990,9 @@ struct icmp_stats *ping_stats)
 }
 
 # 8 "/home/tinyos/local/src/tinyos-2.x/tos/lib/net/blip/interfaces/ICMPPing.nc"
-inline static void ICMPResponderP__ICMPPing__pingReply(uint16_t arg_0x4161f2e0, struct in6_addr *source, struct icmp_stats *stats){
+inline static void ICMPResponderP__ICMPPing__pingReply(uint16_t arg_0x41713998, struct in6_addr *source, struct icmp_stats *stats){
 #line 8
-  switch (arg_0x4161f2e0) {
+  switch (arg_0x41713998) {
 #line 8
     case 0U:
 #line 8
@@ -22478,7 +24002,7 @@ inline static void ICMPResponderP__ICMPPing__pingReply(uint16_t arg_0x4161f2e0, 
 #line 8
     default:
 #line 8
-      ICMPResponderP__ICMPPing__default__pingReply(arg_0x4161f2e0, source, stats);
+      ICMPResponderP__ICMPPing__default__pingReply(arg_0x41713998, source, stats);
 #line 8
       break;
 #line 8
@@ -22583,9 +24107,9 @@ static inline void /*Msp430SpiDma0P.SpiP*/Msp430SpiDmaP__0__Resource__default__g
 }
 
 # 92 "/home/tinyos/local/src/tinyos-2.x/tos/interfaces/Resource.nc"
-inline static void /*Msp430SpiDma0P.SpiP*/Msp430SpiDmaP__0__Resource__granted(uint8_t arg_0x40f59c30){
+inline static void /*Msp430SpiDma0P.SpiP*/Msp430SpiDmaP__0__Resource__granted(uint8_t arg_0x4103cc30){
 #line 92
-  switch (arg_0x40f59c30) {
+  switch (arg_0x4103cc30) {
 #line 92
     case /*CC2420SpiWireC.HplCC2420SpiC.SpiC*/Msp430Spi0C__0__CLIENT_ID:
 #line 92
@@ -22595,7 +24119,7 @@ inline static void /*Msp430SpiDma0P.SpiP*/Msp430SpiDmaP__0__Resource__granted(ui
 #line 92
     default:
 #line 92
-      /*Msp430SpiDma0P.SpiP*/Msp430SpiDmaP__0__Resource__default__granted(arg_0x40f59c30);
+      /*Msp430SpiDma0P.SpiP*/Msp430SpiDmaP__0__Resource__default__granted(arg_0x4103cc30);
 #line 92
       break;
 #line 92
@@ -22660,9 +24184,9 @@ static inline void /*Msp430SpiDma0P.SpiP*/Msp430SpiDmaP__0__SpiPacket__default__
 }
 
 # 71 "/home/tinyos/local/src/tinyos-2.x/tos/interfaces/SpiPacket.nc"
-inline static void /*Msp430SpiDma0P.SpiP*/Msp430SpiDmaP__0__SpiPacket__sendDone(uint8_t arg_0x40f561b8, uint8_t * txBuf, uint8_t * rxBuf, uint16_t len, error_t error){
+inline static void /*Msp430SpiDma0P.SpiP*/Msp430SpiDmaP__0__SpiPacket__sendDone(uint8_t arg_0x4103a1b8, uint8_t * txBuf, uint8_t * rxBuf, uint16_t len, error_t error){
 #line 71
-  switch (arg_0x40f561b8) {
+  switch (arg_0x4103a1b8) {
 #line 71
     case /*CC2420SpiWireC.HplCC2420SpiC.SpiC*/Msp430Spi0C__0__CLIENT_ID:
 #line 71
@@ -22672,7 +24196,7 @@ inline static void /*Msp430SpiDma0P.SpiP*/Msp430SpiDmaP__0__SpiPacket__sendDone(
 #line 71
     default:
 #line 71
-      /*Msp430SpiDma0P.SpiP*/Msp430SpiDmaP__0__SpiPacket__default__sendDone(arg_0x40f561b8, txBuf, rxBuf, len, error);
+      /*Msp430SpiDma0P.SpiP*/Msp430SpiDmaP__0__SpiPacket__default__sendDone(arg_0x4103a1b8, txBuf, rxBuf, len, error);
 #line 71
       break;
 #line 71
@@ -23205,9 +24729,9 @@ static inline void CC2420SpiP__Fifo__default__readDone(uint8_t addr, uint8_t *rx
 }
 
 # 71 "/home/tinyos/local/src/tinyos-2.x/tos/chips/cc2420/interfaces/CC2420Fifo.nc"
-inline static void CC2420SpiP__Fifo__readDone(uint8_t arg_0x40eee010, uint8_t * data, uint8_t length, error_t error){
+inline static void CC2420SpiP__Fifo__readDone(uint8_t arg_0x40fc5010, uint8_t * data, uint8_t length, error_t error){
 #line 71
-  switch (arg_0x40eee010) {
+  switch (arg_0x40fc5010) {
 #line 71
     case CC2420_TXFIFO:
 #line 71
@@ -23223,7 +24747,7 @@ inline static void CC2420SpiP__Fifo__readDone(uint8_t arg_0x40eee010, uint8_t * 
 #line 71
     default:
 #line 71
-      CC2420SpiP__Fifo__default__readDone(arg_0x40eee010, data, length, error);
+      CC2420SpiP__Fifo__default__readDone(arg_0x40fc5010, data, length, error);
 #line 71
       break;
 #line 71
@@ -23254,9 +24778,9 @@ message_t *msg)
 }
 
 # 81 "/home/tinyos/local/src/tinyos-2.x/tos/chips/cc2420/interfaces/RadioBackoff.nc"
-inline static void CC2420ActiveMessageP__RadioBackoff__requestInitialBackoff(am_id_t arg_0x41399df8, message_t * msg){
+inline static void CC2420ActiveMessageP__RadioBackoff__requestInitialBackoff(am_id_t arg_0x41474df8, message_t * msg){
 #line 81
-    CC2420ActiveMessageP__RadioBackoff__default__requestInitialBackoff(arg_0x41399df8, msg);
+    CC2420ActiveMessageP__RadioBackoff__default__requestInitialBackoff(arg_0x41474df8, msg);
 #line 81
 }
 #line 81
@@ -23395,9 +24919,9 @@ static inline void CC2420SpiP__Fifo__default__writeDone(uint8_t addr, uint8_t *t
 }
 
 # 91 "/home/tinyos/local/src/tinyos-2.x/tos/chips/cc2420/interfaces/CC2420Fifo.nc"
-inline static void CC2420SpiP__Fifo__writeDone(uint8_t arg_0x40eee010, uint8_t * data, uint8_t length, error_t error){
+inline static void CC2420SpiP__Fifo__writeDone(uint8_t arg_0x40fc5010, uint8_t * data, uint8_t length, error_t error){
 #line 91
-  switch (arg_0x40eee010) {
+  switch (arg_0x40fc5010) {
 #line 91
     case CC2420_TXFIFO:
 #line 91
@@ -23413,7 +24937,7 @@ inline static void CC2420SpiP__Fifo__writeDone(uint8_t arg_0x40eee010, uint8_t *
 #line 91
     default:
 #line 91
-      CC2420SpiP__Fifo__default__writeDone(arg_0x40eee010, data, length, error);
+      CC2420SpiP__Fifo__default__writeDone(arg_0x40fc5010, data, length, error);
 #line 91
       break;
 #line 91
@@ -23933,9 +25457,9 @@ static inline void CC2420SpiP__Resource__default__granted(uint8_t id)
 }
 
 # 92 "/home/tinyos/local/src/tinyos-2.x/tos/interfaces/Resource.nc"
-inline static void CC2420SpiP__Resource__granted(uint8_t arg_0x40eb95c8){
+inline static void CC2420SpiP__Resource__granted(uint8_t arg_0x40fc65c8){
 #line 92
-  switch (arg_0x40eb95c8) {
+  switch (arg_0x40fc65c8) {
 #line 92
     case /*CC2420ControlC.Spi*/CC2420SpiC__0__CLIENT_ID:
 #line 92
@@ -23969,7 +25493,7 @@ inline static void CC2420SpiP__Resource__granted(uint8_t arg_0x40eb95c8){
 #line 92
     default:
 #line 92
-      CC2420SpiP__Resource__default__granted(arg_0x40eb95c8);
+      CC2420SpiP__Resource__default__granted(arg_0x40fc65c8);
 #line 92
       break;
 #line 92
@@ -24212,7 +25736,7 @@ static inline void /*HilTimerMilliC.VirtualizeTimerC*/VirtualizeTimerC__0__Timer
 # 62 "/home/tinyos/local/src/tinyos-2.x/tos/lib/timer/Timer.nc"
 inline static void PacketLinkP__DelayTimer__startOneShot(uint32_t dt){
 #line 62
-  /*HilTimerMilliC.VirtualizeTimerC*/VirtualizeTimerC__0__Timer__startOneShot(3U, dt);
+  /*HilTimerMilliC.VirtualizeTimerC*/VirtualizeTimerC__0__Timer__startOneShot(2U, dt);
 #line 62
 }
 #line 62
@@ -24293,7 +25817,7 @@ static inline void CC2420CsmaP__sendDone_task__runTask(void )
 # 67 "/home/tinyos/local/src/tinyos-2.x/tos/lib/timer/Timer.nc"
 inline static void PacketLinkP__DelayTimer__stop(void ){
 #line 67
-  /*HilTimerMilliC.VirtualizeTimerC*/VirtualizeTimerC__0__Timer__stop(3U);
+  /*HilTimerMilliC.VirtualizeTimerC*/VirtualizeTimerC__0__Timer__stop(2U);
 #line 67
 }
 #line 67
@@ -24378,15 +25902,21 @@ inline static void PacketLinkP__Send__sendDone(message_t * msg, error_t error){
 #line 89
 }
 #line 89
-# 161 "ECG_ForwarderC.nc"
-static inline void ECG_ForwarderC__AMControl__stopDone(error_t err)
-#line 161
+# 492 "/home/tinyos/local/src/tinyos-2.x/tos/lib/ftsp/TimeSyncP.nc"
+static inline void /*TimeSyncC.TimeSyncP*/TimeSyncP__0__RadioControl__stopDone(error_t error)
+#line 492
 {
 }
 
-#line 74
+# 172 "ECG_ForwarderC.nc"
+static inline void ECG_ForwarderC__AMControl__stopDone(error_t err)
+#line 172
+{
+}
+
+#line 77
 static inline void ECG_ForwarderC__RadioControl__stopDone(error_t e)
-#line 74
+#line 77
 {
 }
 
@@ -24411,6 +25941,8 @@ inline static void CC2420CsmaP__SplitControl__stopDone(error_t error){
 #line 117
   ECG_ForwarderC__AMControl__stopDone(error);
 #line 117
+  /*TimeSyncC.TimeSyncP*/TimeSyncP__0__RadioControl__stopDone(error);
+#line 117
 }
 #line 117
 # 262 "/home/tinyos/local/src/tinyos-2.x/tos/chips/cc2420/csma/CC2420CsmaP.nc"
@@ -24419,6 +25951,12 @@ static inline void CC2420CsmaP__stopDone_task__runTask(void )
 {
   CC2420CsmaP__SplitControlState__forceState(CC2420CsmaP__S_STOPPED);
   CC2420CsmaP__SplitControl__stopDone(SUCCESS);
+}
+
+# 491 "/home/tinyos/local/src/tinyos-2.x/tos/lib/ftsp/TimeSyncP.nc"
+static inline void /*TimeSyncC.TimeSyncP*/TimeSyncP__0__RadioControl__startDone(error_t error)
+#line 491
+{
 }
 
 # 83 "/home/tinyos/local/src/tinyos-2.x/tos/interfaces/SplitControl.nc"
@@ -24436,22 +25974,22 @@ inline static error_t ECG_ForwarderC__AMControl__start(void ){
 #line 83
 }
 #line 83
-# 154 "ECG_ForwarderC.nc"
+# 165 "ECG_ForwarderC.nc"
 static inline void ECG_ForwarderC__AMControl__startDone(error_t err)
-#line 154
+#line 165
 {
   if (err == SUCCESS) {
     }
   else 
-#line 156
+#line 167
     {
       ECG_ForwarderC__AMControl__start();
     }
 }
 
-#line 72
+#line 75
 static inline void ECG_ForwarderC__RadioControl__startDone(error_t e)
-#line 72
+#line 75
 {
 }
 
@@ -24489,6 +26027,8 @@ inline static void CC2420CsmaP__SplitControl__startDone(error_t error){
   IPDispatchP__RadioControl__startDone(error);
 #line 92
   ECG_ForwarderC__AMControl__startDone(error);
+#line 92
+  /*TimeSyncC.TimeSyncP*/TimeSyncP__0__RadioControl__startDone(error);
 #line 92
 }
 #line 92
@@ -24839,6 +26379,551 @@ inline static error_t CC2420CsmaP__CC2420Power__startVReg(void ){
 #line 51
 }
 #line 51
+# 488 "/home/tinyos/local/src/tinyos-2.x/tos/lib/ftsp/TimeSyncP.nc"
+static inline void /*TimeSyncC.TimeSyncP*/TimeSyncP__0__TimeSyncNotify__default__msg_received(void )
+#line 488
+{
+}
+
+# 35 "/home/tinyos/local/src/tinyos-2.x/tos/lib/ftsp/TimeSyncNotify.nc"
+inline static void /*TimeSyncC.TimeSyncP*/TimeSyncP__0__TimeSyncNotify__msg_received(void ){
+#line 35
+  /*TimeSyncC.TimeSyncP*/TimeSyncP__0__TimeSyncNotify__default__msg_received();
+#line 35
+}
+#line 35
+# 155 "/home/tinyos/local/src/tinyos-2.x/tos/lib/ftsp/TimeSyncP.nc"
+static inline void /*TimeSyncC.TimeSyncP*/TimeSyncP__0__calculateConversion(void )
+{
+  float newSkew = /*TimeSyncC.TimeSyncP*/TimeSyncP__0__skew;
+  uint32_t newLocalAverage;
+  int32_t newOffsetAverage;
+  int32_t localAverageRest;
+  int32_t offsetAverageRest;
+
+  int64_t localSum;
+  int64_t offsetSum;
+
+  int8_t i;
+
+  for (i = 0; i < /*TimeSyncC.TimeSyncP*/TimeSyncP__0__MAX_ENTRIES && /*TimeSyncC.TimeSyncP*/TimeSyncP__0__table[i].state != /*TimeSyncC.TimeSyncP*/TimeSyncP__0__ENTRY_FULL; ++i) 
+    ;
+
+  if (i >= /*TimeSyncC.TimeSyncP*/TimeSyncP__0__MAX_ENTRIES) {
+    return;
+    }
+
+
+
+  newLocalAverage = /*TimeSyncC.TimeSyncP*/TimeSyncP__0__table[i].localTime;
+  newOffsetAverage = /*TimeSyncC.TimeSyncP*/TimeSyncP__0__table[i].timeOffset;
+
+  localSum = 0;
+  localAverageRest = 0;
+  offsetSum = 0;
+  offsetAverageRest = 0;
+
+  while (++i < /*TimeSyncC.TimeSyncP*/TimeSyncP__0__MAX_ENTRIES) 
+    if (/*TimeSyncC.TimeSyncP*/TimeSyncP__0__table[i].state == /*TimeSyncC.TimeSyncP*/TimeSyncP__0__ENTRY_FULL) {
+
+
+
+        localSum += (int32_t )(/*TimeSyncC.TimeSyncP*/TimeSyncP__0__table[i].localTime - newLocalAverage) / /*TimeSyncC.TimeSyncP*/TimeSyncP__0__tableEntries;
+        localAverageRest += (/*TimeSyncC.TimeSyncP*/TimeSyncP__0__table[i].localTime - newLocalAverage) % /*TimeSyncC.TimeSyncP*/TimeSyncP__0__tableEntries;
+        offsetSum += (int32_t )(/*TimeSyncC.TimeSyncP*/TimeSyncP__0__table[i].timeOffset - newOffsetAverage) / /*TimeSyncC.TimeSyncP*/TimeSyncP__0__tableEntries;
+        offsetAverageRest += (/*TimeSyncC.TimeSyncP*/TimeSyncP__0__table[i].timeOffset - newOffsetAverage) % /*TimeSyncC.TimeSyncP*/TimeSyncP__0__tableEntries;
+      }
+
+  newLocalAverage += localSum + localAverageRest / /*TimeSyncC.TimeSyncP*/TimeSyncP__0__tableEntries;
+  newOffsetAverage += offsetSum + offsetAverageRest / /*TimeSyncC.TimeSyncP*/TimeSyncP__0__tableEntries;
+
+  localSum = offsetSum = 0;
+  for (i = 0; i < /*TimeSyncC.TimeSyncP*/TimeSyncP__0__MAX_ENTRIES; ++i) 
+    if (/*TimeSyncC.TimeSyncP*/TimeSyncP__0__table[i].state == /*TimeSyncC.TimeSyncP*/TimeSyncP__0__ENTRY_FULL) {
+        int32_t a = /*TimeSyncC.TimeSyncP*/TimeSyncP__0__table[i].localTime - newLocalAverage;
+        int32_t b = /*TimeSyncC.TimeSyncP*/TimeSyncP__0__table[i].timeOffset - newOffsetAverage;
+
+        localSum += (int64_t )a * a;
+        offsetSum += (int64_t )a * b;
+      }
+
+  if (localSum != 0) {
+    newSkew = (float )offsetSum / (float )localSum;
+    }
+  { __nesc_atomic_t __nesc_atomic = __nesc_atomic_start();
+    {
+      /*TimeSyncC.TimeSyncP*/TimeSyncP__0__skew = newSkew;
+      /*TimeSyncC.TimeSyncP*/TimeSyncP__0__offsetAverage = newOffsetAverage;
+      /*TimeSyncC.TimeSyncP*/TimeSyncP__0__localAverage = newLocalAverage;
+      /*TimeSyncC.TimeSyncP*/TimeSyncP__0__numEntries = /*TimeSyncC.TimeSyncP*/TimeSyncP__0__tableEntries;
+    }
+#line 218
+    __nesc_atomic_end(__nesc_atomic); }
+}
+
+
+
+
+
+
+
+
+
+
+
+static inline void /*TimeSyncC.TimeSyncP*/TimeSyncP__0__addNewEntry(TimeSyncMsg *msg)
+{
+  int8_t i;
+#line 233
+  int8_t freeItem = -1;
+#line 233
+  int8_t oldestItem = 0;
+  uint32_t age;
+#line 234
+  uint32_t oldestTime = 0;
+  int32_t timeError;
+
+
+  timeError = __nesc_ntoh_uint32(msg->localTime.data);
+  /*TimeSyncC.TimeSyncP*/TimeSyncP__0__GlobalTime__local2Global((uint32_t *)&timeError);
+  timeError -= __nesc_ntoh_uint32(msg->globalTime.data);
+  if (/*TimeSyncC.TimeSyncP*/TimeSyncP__0__is_synced() == SUCCESS && (
+  timeError > /*TimeSyncC.TimeSyncP*/TimeSyncP__0__ENTRY_THROWOUT_LIMIT || timeError < -/*TimeSyncC.TimeSyncP*/TimeSyncP__0__ENTRY_THROWOUT_LIMIT)) 
+    {
+      if (++/*TimeSyncC.TimeSyncP*/TimeSyncP__0__numErrors > 3) {
+        /*TimeSyncC.TimeSyncP*/TimeSyncP__0__clearTable();
+        }
+#line 246
+      return;
+    }
+
+  /*TimeSyncC.TimeSyncP*/TimeSyncP__0__tableEntries = 0;
+  /*TimeSyncC.TimeSyncP*/TimeSyncP__0__numErrors = 0;
+
+  for (i = 0; i < /*TimeSyncC.TimeSyncP*/TimeSyncP__0__MAX_ENTRIES; ++i) {
+      age = __nesc_ntoh_uint32(msg->localTime.data) - /*TimeSyncC.TimeSyncP*/TimeSyncP__0__table[i].localTime;
+
+
+      if (age >= 0x7FFFFFFFL) {
+        /*TimeSyncC.TimeSyncP*/TimeSyncP__0__table[i].state = /*TimeSyncC.TimeSyncP*/TimeSyncP__0__ENTRY_EMPTY;
+        }
+      if (/*TimeSyncC.TimeSyncP*/TimeSyncP__0__table[i].state == /*TimeSyncC.TimeSyncP*/TimeSyncP__0__ENTRY_EMPTY) {
+        freeItem = i;
+        }
+      else {
+#line 262
+        ++/*TimeSyncC.TimeSyncP*/TimeSyncP__0__tableEntries;
+        }
+      if (age >= oldestTime) {
+          oldestTime = age;
+          oldestItem = i;
+        }
+    }
+
+  if (freeItem < 0) {
+    freeItem = oldestItem;
+    }
+  else {
+#line 273
+    ++/*TimeSyncC.TimeSyncP*/TimeSyncP__0__tableEntries;
+    }
+  /*TimeSyncC.TimeSyncP*/TimeSyncP__0__table[freeItem].state = /*TimeSyncC.TimeSyncP*/TimeSyncP__0__ENTRY_FULL;
+
+  /*TimeSyncC.TimeSyncP*/TimeSyncP__0__table[freeItem].localTime = __nesc_ntoh_uint32(msg->localTime.data);
+  /*TimeSyncC.TimeSyncP*/TimeSyncP__0__table[freeItem].timeOffset = __nesc_ntoh_uint32(msg->globalTime.data) - __nesc_ntoh_uint32(msg->localTime.data);
+}
+
+# 44 "/home/tinyos/local/src/tinyos-2.x/tos/system/NoLedsC.nc"
+static inline void NoLedsC__Leds__led0Toggle(void )
+#line 44
+{
+}
+
+# 56 "/home/tinyos/local/src/tinyos-2.x/tos/interfaces/Leds.nc"
+inline static void /*TimeSyncC.TimeSyncP*/TimeSyncP__0__Leds__led0Toggle(void ){
+#line 56
+  NoLedsC__Leds__led0Toggle();
+#line 56
+}
+#line 56
+# 114 "/home/tinyos/local/src/tinyos-2.x/tos/interfaces/Send.nc"
+inline static void * CC2420ActiveMessageP__SubSend__getPayload(message_t * msg, uint8_t len){
+#line 114
+  void *result;
+#line 114
+
+#line 114
+  result = CC2420TinyosNetworkP__ActiveSend__getPayload(msg, len);
+#line 114
+
+#line 114
+  return result;
+#line 114
+}
+#line 114
+# 193 "/home/tinyos/local/src/tinyos-2.x/tos/chips/cc2420/CC2420ActiveMessageP.nc"
+static inline void *CC2420ActiveMessageP__Packet__getPayload(message_t *msg, uint8_t len)
+#line 193
+{
+  return CC2420ActiveMessageP__SubSend__getPayload(msg, len);
+}
+
+#line 117
+static inline void *CC2420ActiveMessageP__AMSend__getPayload(am_id_t id, message_t *m, uint8_t len)
+#line 117
+{
+  return CC2420ActiveMessageP__Packet__getPayload(m, len);
+}
+
+# 124 "/home/tinyos/local/src/tinyos-2.x/tos/interfaces/AMSend.nc"
+inline static void * /*AMQueueP.AMQueueImplP*/AMQueueImplP__1__AMSend__getPayload(am_id_t arg_0x40b32908, message_t * msg, uint8_t len){
+#line 124
+  void *result;
+#line 124
+
+#line 124
+  result = CC2420ActiveMessageP__AMSend__getPayload(arg_0x40b32908, msg, len);
+#line 124
+
+#line 124
+  return result;
+#line 124
+}
+#line 124
+# 203 "/home/tinyos/local/src/tinyos-2.x/tos/system/AMQueueImplP.nc"
+static inline void */*AMQueueP.AMQueueImplP*/AMQueueImplP__1__Send__getPayload(uint8_t id, message_t *m, uint8_t len)
+#line 203
+{
+  return /*AMQueueP.AMQueueImplP*/AMQueueImplP__1__AMSend__getPayload(0, m, len);
+}
+
+# 114 "/home/tinyos/local/src/tinyos-2.x/tos/interfaces/Send.nc"
+inline static void * /*CC2420TimeSyncMessageC.AMSenderC.SenderC.AMQueueEntryP*/AMQueueEntryP__1__Send__getPayload(message_t * msg, uint8_t len){
+#line 114
+  void *result;
+#line 114
+
+#line 114
+  result = /*AMQueueP.AMQueueImplP*/AMQueueImplP__1__Send__getPayload(0U, msg, len);
+#line 114
+
+#line 114
+  return result;
+#line 114
+}
+#line 114
+# 65 "/home/tinyos/local/src/tinyos-2.x/tos/system/AMQueueEntryP.nc"
+static inline void */*CC2420TimeSyncMessageC.AMSenderC.SenderC.AMQueueEntryP*/AMQueueEntryP__1__AMSend__getPayload(message_t *m, uint8_t len)
+#line 65
+{
+  return /*CC2420TimeSyncMessageC.AMSenderC.SenderC.AMQueueEntryP*/AMQueueEntryP__1__Send__getPayload(m, len);
+}
+
+# 124 "/home/tinyos/local/src/tinyos-2.x/tos/interfaces/AMSend.nc"
+inline static void * CC2420TimeSyncMessageP__SubSend__getPayload(message_t * msg, uint8_t len){
+#line 124
+  void *result;
+#line 124
+
+#line 124
+  result = /*CC2420TimeSyncMessageC.AMSenderC.SenderC.AMQueueEntryP*/AMQueueEntryP__1__AMSend__getPayload(msg, len);
+#line 124
+
+#line 124
+  return result;
+#line 124
+}
+#line 124
+# 180 "/home/tinyos/local/src/tinyos-2.x/tos/chips/cc2420/CC2420TimeSyncMessageP.nc"
+static inline void *CC2420TimeSyncMessageP__TimeSyncAMSend32khz__getPayload(am_id_t id, message_t *msg, uint8_t len)
+{
+  return CC2420TimeSyncMessageP__SubSend__getPayload(msg, len + sizeof(timesync_footer_t ));
+}
+
+#line 205
+static inline void *CC2420TimeSyncMessageP__TimeSyncAMSendMilli__getPayload(am_id_t id, message_t *msg, uint8_t len)
+{
+  return CC2420TimeSyncMessageP__TimeSyncAMSend32khz__getPayload(id, msg, len);
+}
+
+# 103 "/home/tinyos/local/src/tinyos-2.x/tos/interfaces/TimeSyncAMSend.nc"
+inline static void */*TimeSyncC.TimeSyncP*/TimeSyncP__0__Send__getPayload(message_t *msg, uint8_t len){
+#line 103
+  void *result;
+#line 103
+
+#line 103
+  result = CC2420TimeSyncMessageP__TimeSyncAMSendMilli__getPayload(TIMESYNC_AM_FTSP, msg, len);
+#line 103
+
+#line 103
+  return result;
+#line 103
+}
+#line 103
+# 281 "/home/tinyos/local/src/tinyos-2.x/tos/lib/ftsp/TimeSyncP.nc"
+static inline void /*TimeSyncC.TimeSyncP*/TimeSyncP__0__processMsg__runTask(void )
+{
+  TimeSyncMsg *msg = (TimeSyncMsg *)/*TimeSyncC.TimeSyncP*/TimeSyncP__0__Send__getPayload(/*TimeSyncC.TimeSyncP*/TimeSyncP__0__processedMsg, sizeof(TimeSyncMsg ));
+
+  if (__nesc_ntoh_uint16(msg->rootID.data) < __nesc_ntoh_uint16(/*TimeSyncC.TimeSyncP*/TimeSyncP__0__outgoingMsg->rootID.data) && 
+
+  !(/*TimeSyncC.TimeSyncP*/TimeSyncP__0__heartBeats < /*TimeSyncC.TimeSyncP*/TimeSyncP__0__IGNORE_ROOT_MSG && __nesc_ntoh_uint16(/*TimeSyncC.TimeSyncP*/TimeSyncP__0__outgoingMsg->rootID.data) == TOS_NODE_ID)) {
+      __nesc_hton_uint16(/*TimeSyncC.TimeSyncP*/TimeSyncP__0__outgoingMsg->rootID.data, __nesc_ntoh_uint16(msg->rootID.data));
+      __nesc_hton_uint8(/*TimeSyncC.TimeSyncP*/TimeSyncP__0__outgoingMsg->seqNum.data, __nesc_ntoh_uint8(msg->seqNum.data));
+    }
+  else {
+#line 291
+    if (__nesc_ntoh_uint16(/*TimeSyncC.TimeSyncP*/TimeSyncP__0__outgoingMsg->rootID.data) == __nesc_ntoh_uint16(msg->rootID.data) && (int8_t )(__nesc_ntoh_uint8(msg->seqNum.data) - __nesc_ntoh_uint8(/*TimeSyncC.TimeSyncP*/TimeSyncP__0__outgoingMsg->seqNum.data)) > 0) {
+        __nesc_hton_uint8(/*TimeSyncC.TimeSyncP*/TimeSyncP__0__outgoingMsg->seqNum.data, __nesc_ntoh_uint8(msg->seqNum.data));
+      }
+    else {
+      goto exit;
+      }
+    }
+#line 297
+  /*TimeSyncC.TimeSyncP*/TimeSyncP__0__Leds__led0Toggle();
+  if (__nesc_ntoh_uint16(/*TimeSyncC.TimeSyncP*/TimeSyncP__0__outgoingMsg->rootID.data) < TOS_NODE_ID) {
+    /*TimeSyncC.TimeSyncP*/TimeSyncP__0__heartBeats = 0;
+    }
+  /*TimeSyncC.TimeSyncP*/TimeSyncP__0__addNewEntry(msg);
+  /*TimeSyncC.TimeSyncP*/TimeSyncP__0__calculateConversion();
+  /*TimeSyncC.TimeSyncP*/TimeSyncP__0__TimeSyncNotify__msg_received();
+
+  exit: 
+    /*TimeSyncC.TimeSyncP*/TimeSyncP__0__state &= ~/*TimeSyncC.TimeSyncP*/TimeSyncP__0__STATE_PROCESSING;
+}
+
+# 193 "/home/tinyos/local/src/tinyos-2.x/tos/chips/cc2420/packet/CC2420PacketP.nc"
+static inline void CC2420PacketP__PacketTimeSyncOffset__set(message_t *msg)
+{
+  __nesc_hton_int8(CC2420PacketP__CC2420PacketBody__getMetadata(msg)->timesync.data, TRUE);
+}
+
+# 54 "/home/tinyos/local/src/tinyos-2.x/tos/chips/cc2420/interfaces/PacketTimeSyncOffset.nc"
+inline static void CC2420TimeSyncMessageP__PacketTimeSyncOffset__set(message_t * msg){
+#line 54
+  CC2420PacketP__PacketTimeSyncOffset__set(msg);
+#line 54
+}
+#line 54
+# 64 "/home/tinyos/local/src/tinyos-2.x/tos/interfaces/Send.nc"
+inline static error_t /*CC2420TimeSyncMessageC.AMSenderC.SenderC.AMQueueEntryP*/AMQueueEntryP__1__Send__send(message_t * msg, uint8_t len){
+#line 64
+  unsigned char result;
+#line 64
+
+#line 64
+  result = /*AMQueueP.AMQueueImplP*/AMQueueImplP__1__Send__send(0U, msg, len);
+#line 64
+
+#line 64
+  return result;
+#line 64
+}
+#line 64
+# 151 "/home/tinyos/local/src/tinyos-2.x/tos/interfaces/AMPacket.nc"
+inline static void /*CC2420TimeSyncMessageC.AMSenderC.SenderC.AMQueueEntryP*/AMQueueEntryP__1__AMPacket__setType(message_t * amsg, am_id_t t){
+#line 151
+  CC2420ActiveMessageP__AMPacket__setType(amsg, t);
+#line 151
+}
+#line 151
+#line 92
+inline static void /*CC2420TimeSyncMessageC.AMSenderC.SenderC.AMQueueEntryP*/AMQueueEntryP__1__AMPacket__setDestination(message_t * amsg, am_addr_t addr){
+#line 92
+  CC2420ActiveMessageP__AMPacket__setDestination(amsg, addr);
+#line 92
+}
+#line 92
+# 45 "/home/tinyos/local/src/tinyos-2.x/tos/system/AMQueueEntryP.nc"
+static inline error_t /*CC2420TimeSyncMessageC.AMSenderC.SenderC.AMQueueEntryP*/AMQueueEntryP__1__AMSend__send(am_addr_t dest, 
+message_t *msg, 
+uint8_t len)
+#line 47
+{
+  /*CC2420TimeSyncMessageC.AMSenderC.SenderC.AMQueueEntryP*/AMQueueEntryP__1__AMPacket__setDestination(msg, dest);
+  /*CC2420TimeSyncMessageC.AMSenderC.SenderC.AMQueueEntryP*/AMQueueEntryP__1__AMPacket__setType(msg, 61U);
+  return /*CC2420TimeSyncMessageC.AMSenderC.SenderC.AMQueueEntryP*/AMQueueEntryP__1__Send__send(msg, len);
+}
+
+# 69 "/home/tinyos/local/src/tinyos-2.x/tos/interfaces/AMSend.nc"
+inline static error_t CC2420TimeSyncMessageP__SubSend__send(am_addr_t addr, message_t * msg, uint8_t len){
+#line 69
+  unsigned char result;
+#line 69
+
+#line 69
+  result = /*CC2420TimeSyncMessageC.AMSenderC.SenderC.AMQueueEntryP*/AMQueueEntryP__1__AMSend__send(addr, msg, len);
+#line 69
+
+#line 69
+  return result;
+#line 69
+}
+#line 69
+# 155 "/home/tinyos/local/src/tinyos-2.x/tos/chips/cc2420/CC2420TimeSyncMessageP.nc"
+static inline error_t CC2420TimeSyncMessageP__TimeSyncAMSend32khz__send(am_id_t id, am_addr_t addr, message_t *msg, uint8_t len, uint32_t event_time)
+{
+  error_t err;
+  timesync_footer_t *footer = (timesync_footer_t *)(msg->data + len);
+
+#line 159
+  __nesc_hton_uint8(footer->type.data, id);
+  __nesc_hton_uint32(footer->timestamp.data, event_time);
+
+  err = CC2420TimeSyncMessageP__SubSend__send(addr, msg, len + sizeof(timesync_footer_t ));
+  CC2420TimeSyncMessageP__PacketTimeSyncOffset__set(msg);
+  return err;
+}
+
+# 53 "/home/tinyos/local/src/tinyos-2.x/tos/lib/timer/Counter.nc"
+inline static /*CC2420TimeSyncMessageC.LocalTime32khzC*/CounterToLocalTimeC__2__Counter__size_type /*CC2420TimeSyncMessageC.LocalTime32khzC*/CounterToLocalTimeC__2__Counter__get(void ){
+#line 53
+  unsigned long result;
+#line 53
+
+#line 53
+  result = /*Counter32khz32C.Transform*/TransformCounterC__1__Counter__get();
+#line 53
+
+#line 53
+  return result;
+#line 53
+}
+#line 53
+# 42 "/home/tinyos/local/src/tinyos-2.x/tos/lib/timer/CounterToLocalTimeC.nc"
+static inline uint32_t /*CC2420TimeSyncMessageC.LocalTime32khzC*/CounterToLocalTimeC__2__LocalTime__get(void )
+{
+  return /*CC2420TimeSyncMessageC.LocalTime32khzC*/CounterToLocalTimeC__2__Counter__get();
+}
+
+# 50 "/home/tinyos/local/src/tinyos-2.x/tos/lib/timer/LocalTime.nc"
+inline static uint32_t CC2420TimeSyncMessageP__LocalTime32khz__get(void ){
+#line 50
+  unsigned long result;
+#line 50
+
+#line 50
+  result = /*CC2420TimeSyncMessageC.LocalTime32khzC*/CounterToLocalTimeC__2__LocalTime__get();
+#line 50
+
+#line 50
+  return result;
+#line 50
+}
+#line 50
+inline static uint32_t CC2420TimeSyncMessageP__LocalTimeMilli__get(void ){
+#line 50
+  unsigned long result;
+#line 50
+
+#line 50
+  result = /*HilTimerMilliC.CounterToLocalTimeC*/CounterToLocalTimeC__0__LocalTime__get();
+#line 50
+
+#line 50
+  return result;
+#line 50
+}
+#line 50
+# 186 "/home/tinyos/local/src/tinyos-2.x/tos/chips/cc2420/CC2420TimeSyncMessageP.nc"
+static inline error_t CC2420TimeSyncMessageP__TimeSyncAMSendMilli__send(am_id_t id, am_addr_t addr, message_t *msg, uint8_t len, uint32_t event_time)
+{
+
+  event_time = ((event_time - CC2420TimeSyncMessageP__LocalTimeMilli__get()) << 5) + CC2420TimeSyncMessageP__LocalTime32khz__get();
+  return CC2420TimeSyncMessageP__TimeSyncAMSend32khz__send(id, addr, msg, len, event_time);
+}
+
+# 53 "/home/tinyos/local/src/tinyos-2.x/tos/interfaces/TimeSyncAMSend.nc"
+inline static error_t /*TimeSyncC.TimeSyncP*/TimeSyncP__0__Send__send(am_addr_t addr, message_t *msg, uint8_t len, /*TimeSyncC.TimeSyncP*/TimeSyncP__0__Send__size_type event_time){
+#line 53
+  unsigned char result;
+#line 53
+
+#line 53
+  result = CC2420TimeSyncMessageP__TimeSyncAMSendMilli__send(TIMESYNC_AM_FTSP, addr, msg, len, event_time);
+#line 53
+
+#line 53
+  return result;
+#line 53
+}
+#line 53
+# 50 "/home/tinyos/local/src/tinyos-2.x/tos/lib/timer/LocalTime.nc"
+inline static uint32_t /*TimeSyncC.TimeSyncP*/TimeSyncP__0__LocalTime__get(void ){
+#line 50
+  unsigned long result;
+#line 50
+
+#line 50
+  result = /*HilTimerMilliC.CounterToLocalTimeC*/CounterToLocalTimeC__0__LocalTime__get();
+#line 50
+
+#line 50
+  return result;
+#line 50
+}
+#line 50
+# 122 "/home/tinyos/local/src/tinyos-2.x/tos/lib/ftsp/TimeSyncP.nc"
+static inline uint32_t /*TimeSyncC.TimeSyncP*/TimeSyncP__0__GlobalTime__getLocalTime(void )
+{
+  return /*TimeSyncC.TimeSyncP*/TimeSyncP__0__LocalTime__get();
+}
+
+#line 337
+static inline void /*TimeSyncC.TimeSyncP*/TimeSyncP__0__sendMsg__runTask(void )
+{
+  unsigned char __nesc_temp43;
+  unsigned char *__nesc_temp42;
+#line 339
+  uint32_t localTime;
+#line 339
+  uint32_t globalTime;
+
+  globalTime = localTime = /*TimeSyncC.TimeSyncP*/TimeSyncP__0__GlobalTime__getLocalTime();
+  /*TimeSyncC.TimeSyncP*/TimeSyncP__0__GlobalTime__local2Global(&globalTime);
+
+
+
+  if (__nesc_ntoh_uint16(/*TimeSyncC.TimeSyncP*/TimeSyncP__0__outgoingMsg->rootID.data) == TOS_NODE_ID) {
+      if ((int32_t )(localTime - /*TimeSyncC.TimeSyncP*/TimeSyncP__0__localAverage) >= 0x20000000) 
+        {
+          { __nesc_atomic_t __nesc_atomic = __nesc_atomic_start();
+            {
+              /*TimeSyncC.TimeSyncP*/TimeSyncP__0__localAverage = localTime;
+              /*TimeSyncC.TimeSyncP*/TimeSyncP__0__offsetAverage = globalTime - localTime;
+            }
+#line 353
+            __nesc_atomic_end(__nesc_atomic); }
+        }
+    }
+  else {
+#line 356
+    if (/*TimeSyncC.TimeSyncP*/TimeSyncP__0__heartBeats >= /*TimeSyncC.TimeSyncP*/TimeSyncP__0__ROOT_TIMEOUT) {
+        /*TimeSyncC.TimeSyncP*/TimeSyncP__0__heartBeats = 0;
+        __nesc_hton_uint16(/*TimeSyncC.TimeSyncP*/TimeSyncP__0__outgoingMsg->rootID.data, TOS_NODE_ID);
+        (__nesc_temp42 = /*TimeSyncC.TimeSyncP*/TimeSyncP__0__outgoingMsg->seqNum.data, __nesc_hton_uint8(__nesc_temp42, (__nesc_temp43 = __nesc_ntoh_uint8(__nesc_temp42) + 1)), __nesc_temp43);
+      }
+    }
+  __nesc_hton_uint32(/*TimeSyncC.TimeSyncP*/TimeSyncP__0__outgoingMsg->globalTime.data, globalTime);
+
+
+
+
+  if (/*TimeSyncC.TimeSyncP*/TimeSyncP__0__numEntries < /*TimeSyncC.TimeSyncP*/TimeSyncP__0__ENTRY_SEND_LIMIT && __nesc_ntoh_uint16(/*TimeSyncC.TimeSyncP*/TimeSyncP__0__outgoingMsg->rootID.data) != TOS_NODE_ID) {
+      ++/*TimeSyncC.TimeSyncP*/TimeSyncP__0__heartBeats;
+      /*TimeSyncC.TimeSyncP*/TimeSyncP__0__state &= ~/*TimeSyncC.TimeSyncP*/TimeSyncP__0__STATE_SENDING;
+    }
+  else {
+#line 371
+    if (/*TimeSyncC.TimeSyncP*/TimeSyncP__0__Send__send(AM_BROADCAST_ADDR, &/*TimeSyncC.TimeSyncP*/TimeSyncP__0__outgoingMsgBuffer, TIMESYNCMSG_LEN, localTime) != SUCCESS) {
+        /*TimeSyncC.TimeSyncP*/TimeSyncP__0__state &= ~/*TimeSyncC.TimeSyncP*/TimeSyncP__0__STATE_SENDING;
+        /*TimeSyncC.TimeSyncP*/TimeSyncP__0__TimeSyncNotify__msg_sent();
+      }
+    }
+}
+
 # 92 "/home/tinyos/local/src/tinyos-2.x/tos/lib/timer/Alarm.nc"
 inline static void /*HilTimerMilliC.AlarmToTimerC*/AlarmToTimerC__0__Alarm__startAt(/*HilTimerMilliC.AlarmToTimerC*/AlarmToTimerC__0__Alarm__size_type t0, /*HilTimerMilliC.AlarmToTimerC*/AlarmToTimerC__0__Alarm__size_type dt){
 #line 92
@@ -24951,16 +27036,53 @@ static inline void /*HilTimerMilliC.VirtualizeTimerC*/VirtualizeTimerC__0__updat
     }
 }
 
-# 167 "ECG_ForwarderC.nc"
-static inline void ECG_ForwarderC__Timer0__fired(void )
-#line 167
+# 127 "/home/tinyos/local/src/tinyos-2.x/tos/lib/ftsp/TimeSyncP.nc"
+static inline error_t /*TimeSyncC.TimeSyncP*/TimeSyncP__0__GlobalTime__getGlobalTime(uint32_t *time)
 {
+  *time = /*TimeSyncC.TimeSyncP*/TimeSyncP__0__GlobalTime__getLocalTime();
+  return /*TimeSyncC.TimeSyncP*/TimeSyncP__0__GlobalTime__local2Global(time);
 }
 
-#line 82
-static inline void ECG_ForwarderC__StatusTimer__fired(void )
-#line 82
+# 38 "/home/tinyos/local/src/tinyos-2.x/tos/lib/ftsp/GlobalTime.nc"
+inline static error_t ECG_ForwarderC__GlobalTime__getGlobalTime(uint32_t *time){
+#line 38
+  unsigned char result;
+#line 38
+
+#line 38
+  result = /*TimeSyncC.TimeSyncP*/TimeSyncP__0__GlobalTime__getGlobalTime(time);
+#line 38
+
+#line 38
+  return result;
+#line 38
+}
+#line 38
+#line 31
+inline static uint32_t ECG_ForwarderC__GlobalTime__getLocalTime(void ){
+#line 31
+  unsigned long result;
+#line 31
+
+#line 31
+  result = /*TimeSyncC.TimeSyncP*/TimeSyncP__0__GlobalTime__getLocalTime();
+#line 31
+
+#line 31
+  return result;
+#line 31
+}
+#line 31
+# 92 "ECG_ForwarderC.nc"
+static inline void ECG_ForwarderC__TimeKeeper__fired(void )
+#line 92
 {
+  uint32_t currGlobTime = ECG_ForwarderC__GlobalTime__getLocalTime();
+
+#line 94
+  ECG_ForwarderC__GlobalTime__getGlobalTime(&currGlobTime);
+
+  ECG_ForwarderC__Status__sendto(&ECG_ForwarderC__route_dest, &currGlobTime, sizeof currGlobTime);
 }
 
 # 202 "/home/tinyos/local/src/tinyos-2.x/tos/chips/cc2420/link/PacketLinkP.nc"
@@ -24969,6 +27091,52 @@ static inline void PacketLinkP__DelayTimer__fired(void )
 {
   if (PacketLinkP__SendState__getState() == PacketLinkP__S_SENDING) {
       PacketLinkP__send__postTask();
+    }
+}
+
+# 67 "/home/tinyos/local/src/tinyos-2.x/tos/lib/timer/Timer.nc"
+inline static void /*TimeSyncC.TimeSyncP*/TimeSyncP__0__Timer__stop(void ){
+#line 67
+  /*HilTimerMilliC.VirtualizeTimerC*/VirtualizeTimerC__0__Timer__stop(3U);
+#line 67
+}
+#line 67
+# 56 "/home/tinyos/local/src/tinyos-2.x/tos/interfaces/TaskBasic.nc"
+inline static error_t /*TimeSyncC.TimeSyncP*/TimeSyncP__0__sendMsg__postTask(void ){
+#line 56
+  unsigned char result;
+#line 56
+
+#line 56
+  result = SchedulerBasicP__TaskBasic__postTask(/*TimeSyncC.TimeSyncP*/TimeSyncP__0__sendMsg);
+#line 56
+
+#line 56
+  return result;
+#line 56
+}
+#line 56
+# 395 "/home/tinyos/local/src/tinyos-2.x/tos/lib/ftsp/TimeSyncP.nc"
+static inline void /*TimeSyncC.TimeSyncP*/TimeSyncP__0__timeSyncMsgSend(void )
+{
+  if (__nesc_ntoh_uint16(/*TimeSyncC.TimeSyncP*/TimeSyncP__0__outgoingMsg->rootID.data) == 0xFFFF && ++/*TimeSyncC.TimeSyncP*/TimeSyncP__0__heartBeats >= /*TimeSyncC.TimeSyncP*/TimeSyncP__0__ROOT_TIMEOUT) {
+      __nesc_hton_uint8(/*TimeSyncC.TimeSyncP*/TimeSyncP__0__outgoingMsg->seqNum.data, 0);
+      __nesc_hton_uint16(/*TimeSyncC.TimeSyncP*/TimeSyncP__0__outgoingMsg->rootID.data, TOS_NODE_ID);
+    }
+
+  if (__nesc_ntoh_uint16(/*TimeSyncC.TimeSyncP*/TimeSyncP__0__outgoingMsg->rootID.data) != 0xFFFF && (/*TimeSyncC.TimeSyncP*/TimeSyncP__0__state & /*TimeSyncC.TimeSyncP*/TimeSyncP__0__STATE_SENDING) == 0) {
+      /*TimeSyncC.TimeSyncP*/TimeSyncP__0__state |= /*TimeSyncC.TimeSyncP*/TimeSyncP__0__STATE_SENDING;
+      /*TimeSyncC.TimeSyncP*/TimeSyncP__0__sendMsg__postTask();
+    }
+}
+
+static inline void /*TimeSyncC.TimeSyncP*/TimeSyncP__0__Timer__fired(void )
+{
+  if (/*TimeSyncC.TimeSyncP*/TimeSyncP__0__mode == TS_TIMER_MODE) {
+      /*TimeSyncC.TimeSyncP*/TimeSyncP__0__timeSyncMsgSend();
+    }
+  else {
+    /*TimeSyncC.TimeSyncP*/TimeSyncP__0__Timer__stop();
     }
 }
 
@@ -25107,8 +27275,8 @@ inline static void ICMPResponderP__IPAddress__getLLAddr(struct in6_addr *addr){
 static inline void ICMPResponderP__sendSolicitation(void )
 #line 150
 {
-  unsigned char __nesc_temp69;
-  unsigned char *__nesc_temp68;
+  unsigned char __nesc_temp73;
+  unsigned char *__nesc_temp72;
 #line 151
   struct split_ip_msg *ipmsg = (struct split_ip_msg *)ip_malloc(sizeof(struct split_ip_msg ) + sizeof(rsol_t ));
   rsol_t *msg = (rsol_t *)(ipmsg + 1);
@@ -25117,7 +27285,7 @@ static inline void ICMPResponderP__sendSolicitation(void )
 #line 154
     return;
     }
-  (__nesc_temp68 = ICMPResponderP__stats.sol_tx.data, __nesc_hton_uint8(__nesc_temp68, (__nesc_temp69 = __nesc_ntoh_uint8(__nesc_temp68)) + 1), __nesc_temp69);
+  (__nesc_temp72 = ICMPResponderP__stats.sol_tx.data, __nesc_hton_uint8(__nesc_temp72, (__nesc_temp73 = __nesc_ntoh_uint8(__nesc_temp72)) + 1), __nesc_temp73);
 
   __nesc_hton_uint8(msg->type.data, ICMP_TYPE_ROUTER_SOL);
   __nesc_hton_uint8(msg->code.data, 0);
@@ -25210,8 +27378,8 @@ inline static uint8_t ICMPResponderP__IPRouting__getHopLimit(void ){
 static inline void ICMPResponderP__sendAdvertisement(void )
 #line 254
 {
-  unsigned char __nesc_temp71;
-  unsigned char *__nesc_temp70;
+  unsigned char __nesc_temp75;
+  unsigned char *__nesc_temp74;
 #line 255
   struct split_ip_msg *ipmsg = (struct split_ip_msg *)ip_malloc(sizeof(struct split_ip_msg ) + 
   sizeof(radv_t ) + 
@@ -25230,7 +27398,7 @@ static inline void ICMPResponderP__sendAdvertisement(void )
       ip_free(ipmsg);
       return;
     }
-  (__nesc_temp70 = ICMPResponderP__stats.adv_tx.data, __nesc_hton_uint8(__nesc_temp70, (__nesc_temp71 = __nesc_ntoh_uint8(__nesc_temp70)) + 1), __nesc_temp71);
+  (__nesc_temp74 = ICMPResponderP__stats.adv_tx.data, __nesc_hton_uint8(__nesc_temp74, (__nesc_temp75 = __nesc_ntoh_uint8(__nesc_temp74)) + 1), __nesc_temp75);
 
   __nesc_hton_uint8(r->type.data, ICMP_TYPE_ROUTER_ADV);
   __nesc_hton_uint8(r->code.data, 0);
@@ -25292,27 +27460,6 @@ static inline void ICMPResponderP__Advertisement__fired(void )
   if (ICMPResponderP__advertisement_period < TRICKLE_MAX) {
       ICMPResponderP__Advertisement__startOneShot(ICMPResponderP__advertisement_period);
     }
-}
-
-# 53 "/home/tinyos/local/src/tinyos-2.x/tos/lib/timer/Counter.nc"
-inline static /*HilTimerMilliC.CounterToLocalTimeC*/CounterToLocalTimeC__0__Counter__size_type /*HilTimerMilliC.CounterToLocalTimeC*/CounterToLocalTimeC__0__Counter__get(void ){
-#line 53
-  unsigned long result;
-#line 53
-
-#line 53
-  result = /*CounterMilli32C.Transform*/TransformCounterC__0__Counter__get();
-#line 53
-
-#line 53
-  return result;
-#line 53
-}
-#line 53
-# 42 "/home/tinyos/local/src/tinyos-2.x/tos/lib/timer/CounterToLocalTimeC.nc"
-static inline uint32_t /*HilTimerMilliC.CounterToLocalTimeC*/CounterToLocalTimeC__0__LocalTime__get(void )
-{
-  return /*HilTimerMilliC.CounterToLocalTimeC*/CounterToLocalTimeC__0__Counter__get();
 }
 
 # 50 "/home/tinyos/local/src/tinyos-2.x/tos/lib/timer/LocalTime.nc"
@@ -25390,9 +27537,9 @@ static inline void ICMPResponderP__ICMPPing__default__pingDone(uint16_t client, 
 }
 
 # 10 "/home/tinyos/local/src/tinyos-2.x/tos/lib/net/blip/interfaces/ICMPPing.nc"
-inline static void ICMPResponderP__ICMPPing__pingDone(uint16_t arg_0x4161f2e0, uint16_t ping_rcv, uint16_t ping_n){
+inline static void ICMPResponderP__ICMPPing__pingDone(uint16_t arg_0x41713998, uint16_t ping_rcv, uint16_t ping_n){
 #line 10
-  switch (arg_0x4161f2e0) {
+  switch (arg_0x41713998) {
 #line 10
     case 0U:
 #line 10
@@ -25402,7 +27549,7 @@ inline static void ICMPResponderP__ICMPPing__pingDone(uint16_t arg_0x4161f2e0, u
 #line 10
     default:
 #line 10
-      ICMPResponderP__ICMPPing__default__pingDone(arg_0x4161f2e0, ping_rcv, ping_n);
+      ICMPResponderP__ICMPPing__default__pingDone(arg_0x41713998, ping_rcv, ping_n);
 #line 10
       break;
 #line 10
@@ -25623,25 +27770,25 @@ static inline void /*HilTimerMilliC.VirtualizeTimerC*/VirtualizeTimerC__0__Timer
 }
 
 # 72 "/home/tinyos/local/src/tinyos-2.x/tos/lib/timer/Timer.nc"
-inline static void /*HilTimerMilliC.VirtualizeTimerC*/VirtualizeTimerC__0__Timer__fired(uint8_t arg_0x40caf068){
+inline static void /*HilTimerMilliC.VirtualizeTimerC*/VirtualizeTimerC__0__Timer__fired(uint8_t arg_0x40caf2d8){
 #line 72
-  switch (arg_0x40caf068) {
+  switch (arg_0x40caf2d8) {
 #line 72
     case 0U:
 #line 72
-      ECG_ForwarderC__Timer0__fired();
+      ECG_ForwarderC__TimeKeeper__fired();
 #line 72
       break;
 #line 72
-    case 1U:
+    case 2U:
 #line 72
-      ECG_ForwarderC__StatusTimer__fired();
+      PacketLinkP__DelayTimer__fired();
 #line 72
       break;
 #line 72
     case 3U:
 #line 72
-      PacketLinkP__DelayTimer__fired();
+      /*TimeSyncC.TimeSyncP*/TimeSyncP__0__Timer__fired();
 #line 72
       break;
 #line 72
@@ -25683,7 +27830,7 @@ inline static void /*HilTimerMilliC.VirtualizeTimerC*/VirtualizeTimerC__0__Timer
 #line 72
     default:
 #line 72
-      /*HilTimerMilliC.VirtualizeTimerC*/VirtualizeTimerC__0__Timer__default__fired(arg_0x40caf068);
+      /*HilTimerMilliC.VirtualizeTimerC*/VirtualizeTimerC__0__Timer__default__fired(arg_0x40caf2d8);
 #line 72
       break;
 #line 72
@@ -27075,6 +29222,74 @@ static inline void SerialP__stopDoneTask__runTask(void )
   SerialP__SerialFlush__flush();
 }
 
+# 41 "/home/tinyos/local/src/tinyos-2.x/tos/interfaces/Random.nc"
+inline static uint16_t /*TimeSyncC.TimeSyncP*/TimeSyncP__0__Random__rand16(void ){
+#line 41
+  unsigned int result;
+#line 41
+
+#line 41
+  result = RandomMlcgC__Random__rand16();
+#line 41
+
+#line 41
+  return result;
+#line 41
+}
+#line 41
+# 53 "/home/tinyos/local/src/tinyos-2.x/tos/lib/timer/Timer.nc"
+inline static void /*TimeSyncC.TimeSyncP*/TimeSyncP__0__Timer__startPeriodic(uint32_t dt){
+#line 53
+  /*HilTimerMilliC.VirtualizeTimerC*/VirtualizeTimerC__0__Timer__startPeriodic(3U, dt);
+#line 53
+}
+#line 53
+# 417 "/home/tinyos/local/src/tinyos-2.x/tos/lib/ftsp/TimeSyncP.nc"
+static inline error_t /*TimeSyncC.TimeSyncP*/TimeSyncP__0__TimeSyncMode__setMode(uint8_t mode_)
+#line 417
+{
+  if (mode_ == TS_TIMER_MODE) {
+      /*TimeSyncC.TimeSyncP*/TimeSyncP__0__Timer__startPeriodic((uint32_t )(896U + (/*TimeSyncC.TimeSyncP*/TimeSyncP__0__Random__rand16() & 0xFF)) * /*TimeSyncC.TimeSyncP*/TimeSyncP__0__BEACON_RATE);
+    }
+  else {
+    /*TimeSyncC.TimeSyncP*/TimeSyncP__0__Timer__stop();
+    }
+  /*TimeSyncC.TimeSyncP*/TimeSyncP__0__mode = mode_;
+  return SUCCESS;
+}
+
+#line 465
+static inline error_t /*TimeSyncC.TimeSyncP*/TimeSyncP__0__StdControl__start(void )
+{
+  /*TimeSyncC.TimeSyncP*/TimeSyncP__0__heartBeats = 0;
+  __nesc_hton_uint16(/*TimeSyncC.TimeSyncP*/TimeSyncP__0__outgoingMsg->nodeID.data, TOS_NODE_ID);
+  /*TimeSyncC.TimeSyncP*/TimeSyncP__0__TimeSyncMode__setMode(TS_TIMER_MODE);
+
+  return SUCCESS;
+}
+
+# 83 "/home/tinyos/local/src/tinyos-2.x/tos/interfaces/SplitControl.nc"
+inline static error_t /*TimeSyncC.TimeSyncP*/TimeSyncP__0__RadioControl__start(void ){
+#line 83
+  unsigned char result;
+#line 83
+
+#line 83
+  result = CC2420CsmaP__SplitControl__start();
+#line 83
+
+#line 83
+  return result;
+#line 83
+}
+#line 83
+# 459 "/home/tinyos/local/src/tinyos-2.x/tos/lib/ftsp/TimeSyncP.nc"
+static inline void /*TimeSyncC.TimeSyncP*/TimeSyncP__0__Boot__booted(void )
+{
+  /*TimeSyncC.TimeSyncP*/TimeSyncP__0__RadioControl__start();
+  /*TimeSyncC.TimeSyncP*/TimeSyncP__0__StdControl__start();
+}
+
 # 10 "/home/tinyos/local/src/tinyos-2.x/tos/lib/net/blip/interfaces/UDP.nc"
 inline static error_t ECG_ForwarderC__Status__bind(uint16_t port){
 #line 10
@@ -27133,15 +29348,18 @@ inline static error_t ECG_ForwarderC__RadioControl__start(void ){
 #line 83
 }
 #line 83
-# 58 "ECG_ForwarderC.nc"
+# 53 "ECG_ForwarderC.nc"
 static inline void ECG_ForwarderC__Boot__booted(void )
-#line 58
+#line 53
 {
   ECG_ForwarderC__AMControl__start();
   ECG_ForwarderC__RadioControl__start();
 
 
   printfUART_init();
+
+  ECG_ForwarderC__route_dest.sin6_port = (((uint16_t )7000 << 8) | ((uint16_t )7000 >> 8)) & 0xffff;
+  inet_pton6("fec0::64", & ECG_ForwarderC__route_dest.sin6_addr);
 
   ;
   ECG_ForwarderC__Status__bind(7001);
@@ -27252,13 +29470,13 @@ static inline char *UDPShellP__RegisterShellCommand__default__getCommandName(uin
 }
 
 # 3 "/home/tinyos/local/src/tinyos-2.x/tos/lib/net/blip/shell/RegisterShellCommand.nc"
-inline static char *UDPShellP__RegisterShellCommand__getCommandName(uint8_t arg_0x416ec4e8){
+inline static char *UDPShellP__RegisterShellCommand__getCommandName(uint8_t arg_0x417f98e0){
 #line 3
   char *result;
 #line 3
 
 #line 3
-    result = UDPShellP__RegisterShellCommand__default__getCommandName(arg_0x416ec4e8);
+    result = UDPShellP__RegisterShellCommand__default__getCommandName(arg_0x417f98e0);
 #line 3
 
 #line 3
@@ -27316,6 +29534,8 @@ inline static void PrintfP__Boot__booted(void ){
   IPRoutingP__Boot__booted();
 #line 49
   ECG_ForwarderC__Boot__booted();
+#line 49
+  /*TimeSyncC.TimeSyncP*/TimeSyncP__0__Boot__booted();
 #line 49
 }
 #line 49
@@ -27869,6 +30089,30 @@ inline static error_t HdlcTranslateC__UartStream__send(uint8_t * buf, uint16_t l
 #line 48
 }
 #line 48
+# 440 "/home/tinyos/local/src/tinyos-2.x/tos/lib/ftsp/TimeSyncP.nc"
+static inline error_t /*TimeSyncC.TimeSyncP*/TimeSyncP__0__Init__init(void )
+{
+  /* atomic removed: atomic calls only */
+#line 442
+  {
+    /*TimeSyncC.TimeSyncP*/TimeSyncP__0__skew = 0.0;
+    /*TimeSyncC.TimeSyncP*/TimeSyncP__0__localAverage = 0;
+    /*TimeSyncC.TimeSyncP*/TimeSyncP__0__offsetAverage = 0;
+  }
+#line 446
+  ;
+
+  /*TimeSyncC.TimeSyncP*/TimeSyncP__0__clearTable();
+  /* atomic removed: atomic calls only */
+  /*TimeSyncC.TimeSyncP*/TimeSyncP__0__outgoingMsg = (TimeSyncMsg *)/*TimeSyncC.TimeSyncP*/TimeSyncP__0__Send__getPayload(&/*TimeSyncC.TimeSyncP*/TimeSyncP__0__outgoingMsgBuffer, sizeof(TimeSyncMsg ));
+  __nesc_hton_uint16(/*TimeSyncC.TimeSyncP*/TimeSyncP__0__outgoingMsg->rootID.data, 0xFFFF);
+
+  /*TimeSyncC.TimeSyncP*/TimeSyncP__0__processedMsg = &/*TimeSyncC.TimeSyncP*/TimeSyncP__0__processedMsgBuffer;
+  /*TimeSyncC.TimeSyncP*/TimeSyncP__0__state = /*TimeSyncC.TimeSyncP*/TimeSyncP__0__STATE_INIT;
+
+  return SUCCESS;
+}
+
 # 214 "/home/tinyos/local/src/tinyos-2.x/tos/lib/serial/SerialP.nc"
 static __inline void SerialP__ackInit(void )
 #line 214
@@ -27931,7 +30175,7 @@ static inline  uint16_t /*Msp430TimerC.Msp430TimerB0*/Msp430TimerCapComP__3__CC2
 #line 46
 {
 #line 46
-  union /*Msp430TimerC.Msp430TimerB0*/Msp430TimerCapComP__3____nesc_unnamed4471 {
+  union /*Msp430TimerC.Msp430TimerB0*/Msp430TimerCapComP__3____nesc_unnamed4477 {
 #line 46
     /*Msp430TimerC.Msp430TimerB0*/Msp430TimerCapComP__3__cc_t f;
 #line 46
@@ -28182,7 +30426,7 @@ static inline  uint16_t /*Msp430TimerC.Msp430TimerB2*/Msp430TimerCapComP__5__CC2
 #line 46
 {
 #line 46
-  union /*Msp430TimerC.Msp430TimerB2*/Msp430TimerCapComP__5____nesc_unnamed4472 {
+  union /*Msp430TimerC.Msp430TimerB2*/Msp430TimerCapComP__5____nesc_unnamed4478 {
 #line 46
     /*Msp430TimerC.Msp430TimerB2*/Msp430TimerCapComP__5__cc_t f;
 #line 46
@@ -28484,6 +30728,8 @@ inline static error_t RealMainP__SoftwareInit__init(void ){
   result = ecombine(result, /*Msp430UsartShare1P.ArbiterC.Queue*/FcfsResourceQueueC__1__Init__init());
 #line 51
   result = ecombine(result, SerialP__Init__init());
+#line 51
+  result = ecombine(result, /*TimeSyncC.TimeSyncP*/TimeSyncP__0__Init__init());
 #line 51
 
 #line 51
@@ -31577,6 +33823,18 @@ static void SchedulerBasicP__TaskBasic__runTask(uint8_t arg_0x4059ab40){
 #line 64
       break;
 #line 64
+    case /*TimeSyncC.TimeSyncP*/TimeSyncP__0__processMsg:
+#line 64
+      /*TimeSyncC.TimeSyncP*/TimeSyncP__0__processMsg__runTask();
+#line 64
+      break;
+#line 64
+    case /*TimeSyncC.TimeSyncP*/TimeSyncP__0__sendMsg:
+#line 64
+      /*TimeSyncC.TimeSyncP*/TimeSyncP__0__sendMsg__runTask();
+#line 64
+      break;
+#line 64
     case CC2420CsmaP__startDone_task:
 #line 64
       CC2420CsmaP__startDone_task__runTask();
@@ -31813,6 +34071,16 @@ static /*IPDispatchC.QueueC*/QueueC__1__queue_t /*IPDispatchC.QueueC*/QueueC__1_
   return t;
 }
 
+# 231 "/home/tinyos/local/src/tinyos-2.x/tos/chips/cc2420/CC2420TimeSyncMessageP.nc"
+static void CC2420TimeSyncMessageP__SubSend__sendDone(message_t *msg, error_t error)
+{
+  am_id_t id = CC2420TimeSyncMessageP__AMPacket__type(msg);
+
+#line 234
+  CC2420TimeSyncMessageP__TimeSyncAMSend32khz__sendDone(id, msg, error);
+  CC2420TimeSyncMessageP__TimeSyncAMSendMilli__sendDone(id, msg, error);
+}
+
 # 155 "/home/tinyos/local/src/tinyos-2.x/tos/system/AMQueueImplP.nc"
 static void /*AMQueueP.AMQueueImplP*/AMQueueImplP__1__sendDone(uint8_t last, message_t * msg, error_t err)
 #line 155
@@ -31822,7 +34090,17 @@ static void /*AMQueueP.AMQueueImplP*/AMQueueImplP__1__sendDone(uint8_t last, mes
   /*AMQueueP.AMQueueImplP*/AMQueueImplP__1__Send__sendDone(last, msg, err);
 }
 
-# 126 "/home/tinyos/local/src/tinyos-2.x/tos/chips/cc2420/CC2420ActiveMessageP.nc"
+# 151 "/home/tinyos/local/src/tinyos-2.x/tos/chips/cc2420/CC2420ActiveMessageP.nc"
+static am_id_t CC2420ActiveMessageP__AMPacket__type(message_t *amsg)
+#line 151
+{
+  cc2420_header_t *header = CC2420ActiveMessageP__CC2420PacketBody__getHeader(amsg);
+
+#line 153
+  return __nesc_ntoh_leuint8(header->type.data);
+}
+
+#line 126
 static am_addr_t CC2420ActiveMessageP__AMPacket__destination(message_t *amsg)
 #line 126
 {
@@ -31830,6 +34108,45 @@ static am_addr_t CC2420ActiveMessageP__AMPacket__destination(message_t *amsg)
 
 #line 128
   return __nesc_ntoh_leuint16(header->dest.data);
+}
+
+#line 78
+static error_t CC2420ActiveMessageP__AMSend__send(am_id_t id, am_addr_t addr, 
+message_t *msg, 
+uint8_t len)
+#line 80
+{
+  cc2420_header_t *header = CC2420ActiveMessageP__CC2420PacketBody__getHeader(msg);
+
+  if (len > CC2420ActiveMessageP__Packet__maxPayloadLength()) {
+      return ESIZE;
+    }
+
+  __nesc_hton_leuint8(header->type.data, id);
+  __nesc_hton_leuint16(header->dest.data, addr);
+  __nesc_hton_leuint16(header->destpan.data, CC2420ActiveMessageP__CC2420Config__getPanAddr());
+  __nesc_hton_leuint16(header->src.data, CC2420ActiveMessageP__AMPacket__address());
+
+  if (CC2420ActiveMessageP__RadioResource__immediateRequest() == SUCCESS) {
+      error_t rc;
+
+#line 94
+      CC2420ActiveMessageP__SendNotifier__aboutToSend(id, addr, msg);
+
+      rc = CC2420ActiveMessageP__SubSend__send(msg, len);
+      if (rc != SUCCESS) {
+          CC2420ActiveMessageP__RadioResource__release();
+        }
+
+      return rc;
+    }
+  else 
+#line 102
+    {
+      CC2420ActiveMessageP__pending_length = len;
+      CC2420ActiveMessageP__pending_message = msg;
+      return CC2420ActiveMessageP__RadioResource__request();
+    }
 }
 
 # 287 "/home/tinyos/local/src/tinyos-2.x/tos/chips/cc2420/control/CC2420ControlP.nc"
@@ -31923,10 +34240,10 @@ static error_t UniqueSendP__Send__send(message_t *msg, uint8_t len)
 static error_t CC2420PacketP__Acks__requestAck(message_t *p_msg)
 #line 65
 {
-  unsigned char *__nesc_temp46;
+  unsigned char *__nesc_temp50;
 
 #line 66
-  (__nesc_temp46 = CC2420PacketP__CC2420PacketBody__getHeader(p_msg)->fcf.data, __nesc_hton_leuint16(__nesc_temp46, __nesc_ntoh_leuint16(__nesc_temp46) | (1 << IEEE154_FCF_ACK_REQ)));
+  (__nesc_temp50 = CC2420PacketP__CC2420PacketBody__getHeader(p_msg)->fcf.data, __nesc_hton_leuint16(__nesc_temp50, __nesc_ntoh_leuint16(__nesc_temp50) | (1 << IEEE154_FCF_ACK_REQ)));
   return SUCCESS;
 }
 
@@ -31934,8 +34251,8 @@ static error_t CC2420PacketP__Acks__requestAck(message_t *p_msg)
 static error_t CC2420CsmaP__Send__send(message_t *p_msg, uint8_t len)
 #line 122
 {
-  unsigned char *__nesc_temp43;
-  unsigned char *__nesc_temp42;
+  unsigned char *__nesc_temp47;
+  unsigned char *__nesc_temp46;
 #line 124
   cc2420_header_t *header = CC2420CsmaP__CC2420PacketBody__getHeader(p_msg);
   cc2420_metadata_t *metadata = CC2420CsmaP__CC2420PacketBody__getMetadata(p_msg);
@@ -31968,9 +34285,9 @@ static error_t CC2420CsmaP__Send__send(message_t *p_msg, uint8_t len)
 
 
 
-  (__nesc_temp42 = header->fcf.data, __nesc_hton_leuint16(__nesc_temp42, __nesc_ntoh_leuint16(__nesc_temp42) & (1 << IEEE154_FCF_ACK_REQ)));
+  (__nesc_temp46 = header->fcf.data, __nesc_hton_leuint16(__nesc_temp46, __nesc_ntoh_leuint16(__nesc_temp46) & (1 << IEEE154_FCF_ACK_REQ)));
 
-  (__nesc_temp43 = header->fcf.data, __nesc_hton_leuint16(__nesc_temp43, __nesc_ntoh_leuint16(__nesc_temp43) | ((((IEEE154_TYPE_DATA << IEEE154_FCF_FRAME_TYPE) | (
+  (__nesc_temp47 = header->fcf.data, __nesc_hton_leuint16(__nesc_temp47, __nesc_ntoh_leuint16(__nesc_temp47) | ((((IEEE154_TYPE_DATA << IEEE154_FCF_FRAME_TYPE) | (
   1 << IEEE154_FCF_INTRAPAN)) | (
   IEEE154_ADDR_SHORT << IEEE154_FCF_DEST_ADDR_MODE)) | (
   IEEE154_ADDR_SHORT << IEEE154_FCF_SRC_ADDR_MODE))));
@@ -32133,9 +34450,9 @@ static void CC2420TinyosNetworkP__Resource__default__granted(uint8_t client)
 }
 
 # 92 "/home/tinyos/local/src/tinyos-2.x/tos/interfaces/Resource.nc"
-static void CC2420TinyosNetworkP__Resource__granted(uint8_t arg_0x4132b628){
+static void CC2420TinyosNetworkP__Resource__granted(uint8_t arg_0x413fc628){
 #line 92
-  switch (arg_0x4132b628) {
+  switch (arg_0x413fc628) {
 #line 92
     case CC2420ActiveMessageC__CC2420_AM_SEND_ID:
 #line 92
@@ -32151,7 +34468,7 @@ static void CC2420TinyosNetworkP__Resource__granted(uint8_t arg_0x4132b628){
 #line 92
     default:
 #line 92
-      CC2420TinyosNetworkP__Resource__default__granted(arg_0x4132b628);
+      CC2420TinyosNetworkP__Resource__default__granted(arg_0x413fc628);
 #line 92
       break;
 #line 92
@@ -32185,8 +34502,8 @@ static uint16_t CC2420ControlP__CC2420Config__getShortAddr(void )
 static void IPDispatchP__Ieee154Send__sendDone(message_t *msg, error_t error)
 #line 974
 {
-  unsigned char __nesc_temp67;
-  unsigned char *__nesc_temp66;
+  unsigned char __nesc_temp71;
+  unsigned char *__nesc_temp70;
 #line 975
   send_entry_t *s_entry = IPDispatchP__SendQueue__head();
 
@@ -32232,7 +34549,7 @@ static void IPDispatchP__Ieee154Send__sendDone(message_t *msg, error_t error)
     ;
     }
 #line 1014
-  (__nesc_temp66 = IPDispatchP__stats.tx_drop.data, __nesc_hton_uint8(__nesc_temp66, (__nesc_temp67 = __nesc_ntoh_uint8(__nesc_temp66)) + 1), __nesc_temp67);
+  (__nesc_temp70 = IPDispatchP__stats.tx_drop.data, __nesc_hton_uint8(__nesc_temp70, (__nesc_temp71 = __nesc_ntoh_uint8(__nesc_temp70)) + 1), __nesc_temp71);
 
   done: 
     s_entry->info->policy.actRetries = IPDispatchP__PacketLink__getRetries(msg);
@@ -32495,7 +34812,7 @@ static void /*AMQueueP.AMQueueImplP*/AMQueueImplP__1__AMSend__sendDone(am_id_t i
 
 
 
-  if (/*AMQueueP.AMQueueImplP*/AMQueueImplP__1__current >= 1) {
+  if (/*AMQueueP.AMQueueImplP*/AMQueueImplP__1__current >= 2) {
       return;
     }
   if (/*AMQueueP.AMQueueImplP*/AMQueueImplP__1__queue[/*AMQueueP.AMQueueImplP*/AMQueueImplP__1__current].msg == msg) {
@@ -32521,8 +34838,8 @@ static error_t UdpP__UDP__sendto(uint8_t clnt, struct sockaddr_in6 *dest, void *
 uint16_t len)
 #line 129
 {
-  unsigned int __nesc_temp89;
-  unsigned char *__nesc_temp88;
+  unsigned int __nesc_temp93;
+  unsigned char *__nesc_temp92;
 #line 130
   struct split_ip_msg *msg;
   struct udp_hdr *udp;
@@ -32570,7 +34887,7 @@ uint16_t len)
   udp->chksum = (((uint16_t )msg_cksum(msg, IANA_UDP) << 8) | ((uint16_t )msg_cksum(msg, IANA_UDP) >> 8)) & 0xffff;
 
   rc = UdpP__IP__send(msg);
-  (__nesc_temp88 = UdpP__stats.sent.data, __nesc_hton_uint16(__nesc_temp88, (__nesc_temp89 = __nesc_ntoh_uint16(__nesc_temp88)) + 1), __nesc_temp89);
+  (__nesc_temp92 = UdpP__stats.sent.data, __nesc_hton_uint16(__nesc_temp92, (__nesc_temp93 = __nesc_ntoh_uint16(__nesc_temp92)) + 1), __nesc_temp93);
 
   ip_free(msg);
   return rc;
@@ -32580,7 +34897,7 @@ uint16_t len)
 static void IPAddressP__IPAddress__setSource(struct ip6_hdr *hdr)
 #line 79
 {
-  enum __nesc_unnamed4473 {
+  enum __nesc_unnamed4479 {
 #line 80
     LOCAL, GLOBAL
   } 
@@ -33079,10 +35396,10 @@ void *payload,
 struct ip_metadata *meta)
 #line 70
 {
-  unsigned int __nesc_temp87;
-  unsigned char *__nesc_temp86;
-  unsigned int __nesc_temp85;
-  unsigned char *__nesc_temp84;
+  unsigned int __nesc_temp91;
+  unsigned char *__nesc_temp90;
+  unsigned int __nesc_temp89;
+  unsigned char *__nesc_temp88;
 #line 71
   int i;
   struct sockaddr_in6 addr;
@@ -33126,12 +35443,12 @@ struct ip_metadata *meta)
     my_cksum = in_cksum(cksum_vec, 4);
     ;
     if (rx_cksum != my_cksum) {
-        (__nesc_temp84 = UdpP__stats.cksum.data, __nesc_hton_uint16(__nesc_temp84, (__nesc_temp85 = __nesc_ntoh_uint16(__nesc_temp84)) + 1), __nesc_temp85);
+        (__nesc_temp88 = UdpP__stats.cksum.data, __nesc_hton_uint16(__nesc_temp88, (__nesc_temp89 = __nesc_ntoh_uint16(__nesc_temp88)) + 1), __nesc_temp89);
       }
   }
 
 
-  (__nesc_temp86 = UdpP__stats.rcvd.data, __nesc_hton_uint16(__nesc_temp86, (__nesc_temp87 = __nesc_ntoh_uint16(__nesc_temp86)) + 1), __nesc_temp87);
+  (__nesc_temp90 = UdpP__stats.rcvd.data, __nesc_hton_uint16(__nesc_temp90, (__nesc_temp91 = __nesc_ntoh_uint16(__nesc_temp90)) + 1), __nesc_temp91);
   UdpP__UDP__recvfrom(i, &addr, (void *)(udph + 1), ((((uint16_t )iph->plen >> 8) | ((uint16_t )iph->plen << 8)) & 0xffff) - sizeof(struct udp_hdr ), meta);
 }
 
@@ -33155,30 +35472,89 @@ static int UDPShellP__lookup_cmd(char *cmd, int dbsize, struct UDPShellP__cmd_na
   return UDPShellP__CMD_NO_CMD;
 }
 
+# 136 "/home/tinyos/local/src/tinyos-2.x/tos/chips/cc2420/CC2420ActiveMessageP.nc"
+static void CC2420ActiveMessageP__AMPacket__setDestination(message_t *amsg, am_addr_t addr)
+#line 136
+{
+  cc2420_header_t *header = CC2420ActiveMessageP__CC2420PacketBody__getHeader(amsg);
+
+#line 138
+  __nesc_hton_leuint16(header->dest.data, addr);
+}
+
+#line 156
+static void CC2420ActiveMessageP__AMPacket__setType(message_t *amsg, am_id_t type)
+#line 156
+{
+  cc2420_header_t *header = CC2420ActiveMessageP__CC2420PacketBody__getHeader(amsg);
+
+#line 158
+  __nesc_hton_leuint8(header->type.data, type);
+}
+
+# 82 "/home/tinyos/local/src/tinyos-2.x/tos/system/AMQueueImplP.nc"
+static error_t /*AMQueueP.AMQueueImplP*/AMQueueImplP__1__Send__send(uint8_t clientId, message_t *msg, 
+uint8_t len)
+#line 83
+{
+  if (clientId >= 2) {
+      return FAIL;
+    }
+  if (/*AMQueueP.AMQueueImplP*/AMQueueImplP__1__queue[clientId].msg != (void *)0) {
+      return EBUSY;
+    }
+  ;
+
+  /*AMQueueP.AMQueueImplP*/AMQueueImplP__1__queue[clientId].msg = msg;
+  /*AMQueueP.AMQueueImplP*/AMQueueImplP__1__Packet__setPayloadLength(msg, len);
+
+  if (/*AMQueueP.AMQueueImplP*/AMQueueImplP__1__current >= 2) {
+      error_t err;
+      am_id_t amId = /*AMQueueP.AMQueueImplP*/AMQueueImplP__1__AMPacket__type(msg);
+      am_addr_t dest = /*AMQueueP.AMQueueImplP*/AMQueueImplP__1__AMPacket__destination(msg);
+
+      ;
+      /*AMQueueP.AMQueueImplP*/AMQueueImplP__1__current = clientId;
+
+      err = /*AMQueueP.AMQueueImplP*/AMQueueImplP__1__AMSend__send(amId, dest, msg, len);
+      if (err != SUCCESS) {
+          ;
+          /*AMQueueP.AMQueueImplP*/AMQueueImplP__1__current = 2;
+          /*AMQueueP.AMQueueImplP*/AMQueueImplP__1__queue[clientId].msg = (void *)0;
+        }
+
+      return err;
+    }
+  else {
+      ;
+    }
+  return SUCCESS;
+}
+
 # 321 "/home/tinyos/local/src/tinyos-2.x/tos/lib/net/blip/ICMPResponderP.nc"
 static void ICMPResponderP__IP__recv(struct ip6_hdr *iph, 
 void *payload, 
 struct ip_metadata *meta)
 #line 323
 {
+  unsigned char __nesc_temp87;
+  unsigned char *__nesc_temp86;
+  unsigned char __nesc_temp85;
+  unsigned char *__nesc_temp84;
   unsigned char __nesc_temp83;
   unsigned char *__nesc_temp82;
   unsigned char __nesc_temp81;
   unsigned char *__nesc_temp80;
   unsigned char __nesc_temp79;
   unsigned char *__nesc_temp78;
-  unsigned char __nesc_temp77;
+  unsigned int __nesc_temp77;
   unsigned char *__nesc_temp76;
-  unsigned char __nesc_temp75;
-  unsigned char *__nesc_temp74;
-  unsigned int __nesc_temp73;
-  unsigned char *__nesc_temp72;
 #line 324
   icmp_echo_hdr_t *req = (icmp_echo_hdr_t *)payload;
   uint16_t len = (((uint16_t )iph->plen >> 8) | ((uint16_t )iph->plen << 8)) & 0xffff;
 
 #line 326
-  (__nesc_temp72 = ICMPResponderP__stats.rx.data, __nesc_hton_uint16(__nesc_temp72, (__nesc_temp73 = __nesc_ntoh_uint16(__nesc_temp72)) + 1), __nesc_temp73);
+  (__nesc_temp76 = ICMPResponderP__stats.rx.data, __nesc_hton_uint16(__nesc_temp76, (__nesc_temp77 = __nesc_ntoh_uint16(__nesc_temp76)) + 1), __nesc_temp77);
 
 
   ;
@@ -33187,14 +35563,14 @@ struct ip_metadata *meta)
   switch (__nesc_ntoh_uint8(req->type.data)) {
       case ICMP_TYPE_ROUTER_ADV: 
         ICMPResponderP__handleRouterAdv(payload, len, meta);
-      (__nesc_temp74 = ICMPResponderP__stats.adv_rx.data, __nesc_hton_uint8(__nesc_temp74, (__nesc_temp75 = __nesc_ntoh_uint8(__nesc_temp74)) + 1), __nesc_temp75);
+      (__nesc_temp78 = ICMPResponderP__stats.adv_rx.data, __nesc_hton_uint8(__nesc_temp78, (__nesc_temp79 = __nesc_ntoh_uint8(__nesc_temp78)) + 1), __nesc_temp79);
       break;
       case ICMP_TYPE_ROUTER_SOL: 
 
         if (ICMPResponderP__IPRouting__hasRoute()) {
             ICMPResponderP__ICMP__sendAdvertisements();
           }
-      (__nesc_temp76 = ICMPResponderP__stats.sol_rx.data, __nesc_hton_uint8(__nesc_temp76, (__nesc_temp77 = __nesc_ntoh_uint8(__nesc_temp76)) + 1), __nesc_temp77);
+      (__nesc_temp80 = ICMPResponderP__stats.sol_rx.data, __nesc_hton_uint8(__nesc_temp80, (__nesc_temp81 = __nesc_ntoh_uint8(__nesc_temp80)) + 1), __nesc_temp81);
       break;
       case ICMP_TYPE_ECHO_REPLY: 
         {
@@ -33207,7 +35583,7 @@ struct ip_metadata *meta)
           p_stat.rtt = ICMPResponderP__LocalTime__get() - __nesc_ntoh_uint32((*sendTime).data);
           ICMPResponderP__ICMPPing__pingReply(__nesc_ntoh_uint16(req->ident.data), & iph->ip6_src, &p_stat);
           ICMPResponderP__ping_rcv++;
-          (__nesc_temp78 = ICMPResponderP__stats.echo_rx.data, __nesc_hton_uint8(__nesc_temp78, (__nesc_temp79 = __nesc_ntoh_uint8(__nesc_temp78)) + 1), __nesc_temp79);
+          (__nesc_temp82 = ICMPResponderP__stats.echo_rx.data, __nesc_hton_uint8(__nesc_temp82, (__nesc_temp83 = __nesc_ntoh_uint8(__nesc_temp82)) + 1), __nesc_temp83);
         }
       break;
       case ICMP_TYPE_ECHO_REQUEST: 
@@ -33230,11 +35606,11 @@ struct ip_metadata *meta)
 
 
           ICMPResponderP__IP__send(&msg);
-          (__nesc_temp80 = ICMPResponderP__stats.echo_tx.data, __nesc_hton_uint8(__nesc_temp80, (__nesc_temp81 = __nesc_ntoh_uint8(__nesc_temp80)) + 1), __nesc_temp81);
+          (__nesc_temp84 = ICMPResponderP__stats.echo_tx.data, __nesc_hton_uint8(__nesc_temp84, (__nesc_temp85 = __nesc_ntoh_uint8(__nesc_temp84)) + 1), __nesc_temp85);
           break;
         }
       default: 
-        (__nesc_temp82 = ICMPResponderP__stats.unk_rx.data, __nesc_hton_uint8(__nesc_temp82, (__nesc_temp83 = __nesc_ntoh_uint8(__nesc_temp82)) + 1), __nesc_temp83);
+        (__nesc_temp86 = ICMPResponderP__stats.unk_rx.data, __nesc_hton_uint8(__nesc_temp86, (__nesc_temp87 = __nesc_ntoh_uint8(__nesc_temp86)) + 1), __nesc_temp87);
     }
 }
 
@@ -33687,6 +36063,55 @@ static error_t CC2420CsmaP__SplitControl__start(void )
     }
 #line 93
   return EBUSY;
+}
+
+# 86 "/home/tinyos/local/src/tinyos-2.x/tos/chips/cc2420/lowpan/CC2420TinyosNetworkP.nc"
+static void *CC2420TinyosNetworkP__ActiveSend__getPayload(message_t *msg, uint8_t len)
+#line 86
+{
+  if (len <= CC2420TinyosNetworkP__ActiveSend__maxPayloadLength()) {
+      return msg->data;
+    }
+  else 
+#line 89
+    {
+      return (void *)0;
+    }
+}
+
+# 142 "/home/tinyos/local/src/tinyos-2.x/tos/lib/ftsp/TimeSyncP.nc"
+static error_t /*TimeSyncC.TimeSyncP*/TimeSyncP__0__GlobalTime__local2Global(uint32_t *time)
+{
+  *time += /*TimeSyncC.TimeSyncP*/TimeSyncP__0__offsetAverage + (int32_t )(/*TimeSyncC.TimeSyncP*/TimeSyncP__0__skew * (int32_t )(*time - /*TimeSyncC.TimeSyncP*/TimeSyncP__0__localAverage));
+  return /*TimeSyncC.TimeSyncP*/TimeSyncP__0__is_synced();
+}
+
+#line 133
+static error_t /*TimeSyncC.TimeSyncP*/TimeSyncP__0__is_synced(void )
+{
+  if (/*TimeSyncC.TimeSyncP*/TimeSyncP__0__numEntries >= /*TimeSyncC.TimeSyncP*/TimeSyncP__0__ENTRY_VALID_LIMIT || __nesc_ntoh_uint16(/*TimeSyncC.TimeSyncP*/TimeSyncP__0__outgoingMsg->rootID.data) == TOS_NODE_ID) {
+    return SUCCESS;
+    }
+  else {
+#line 138
+    return FAIL;
+    }
+}
+
+#line 221
+static void /*TimeSyncC.TimeSyncP*/TimeSyncP__0__clearTable(void )
+{
+  int8_t i;
+
+#line 224
+  for (i = 0; i < /*TimeSyncC.TimeSyncP*/TimeSyncP__0__MAX_ENTRIES; ++i) 
+    /*TimeSyncC.TimeSyncP*/TimeSyncP__0__table[i].state = /*TimeSyncC.TimeSyncP*/TimeSyncP__0__ENTRY_EMPTY;
+
+  { __nesc_atomic_t __nesc_atomic = __nesc_atomic_start();
+#line 227
+    /*TimeSyncC.TimeSyncP*/TimeSyncP__0__numEntries = 0;
+#line 227
+    __nesc_atomic_end(__nesc_atomic); }
 }
 
 # 62 "/home/tinyos/local/src/tinyos-2.x/tos/lib/timer/VirtualizeTimerC.nc"

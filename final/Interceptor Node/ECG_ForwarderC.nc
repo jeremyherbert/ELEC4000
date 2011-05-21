@@ -10,49 +10,44 @@
 
 #include "PrintfUART.h"
 
-//#include "ApplicationDefinitions.h"
-//#include "RssiDemoMessages.h"  
-
-
 module ECG_ForwarderC {
 
 	uses{
 		interface Boot;
 		interface Leds;
-		interface Timer<TMilli> as Timer0;
-		
+		interface Timer<TMilli> as TimeKeeper;
+		interface GlobalTime<TMilli>;		
+
+
 		//////////RADIO//////////////		
 		interface Packet;
 		interface AMPacket;
-		interface AMSend;
+		interface AMSend  as ECGMsgSend;
 		interface SplitControl as AMControl;
 		interface Receive;
-		
 
 
 		///////////UDP//////////////
 		interface SplitControl as RadioControl;
 		interface UDP as Status;
-		interface Timer<TMilli> as StatusTimer;
 
 
 	}
-#ifdef __CC2420_H__
-  uses interface CC2420Packet;
-#elif defined(TDA5250_MESSAGE_H)
-  uses interface Tda5250Packet;    
-#else
-  uses interface PacketField<uint8_t> as PacketRSSI;
-#endif 
+
+
 
 
 
 } implementation {
 
+  	  nx_struct udp_report stats;
+ 	 struct sockaddr_in6 route_dest;
+
 	bool busy = FALSE;	
   	bool timerStarted;								
 						
-  	struct sockaddr_in6 route_dest;					
+
+  			
 
 
 	event void Boot.booted() {
@@ -60,12 +55,20 @@ module ECG_ForwarderC {
 		call RadioControl.start();
 
 
-		printfUART_init();							
+		printfUART_init();
+
+    		route_dest.sin6_port = hton16(7000);
+    		inet_pton6(REPORT_DEST, &route_dest.sin6_addr);							
 
 		dbg("Boot", "booted: %i\n", TOS_NODE_ID);	
 		call Status.bind(7001);						
 	}
 
+
+void updateNodes(void *data, uint16_t len){
+
+    call ECGMsgSend.send(AM_BROADCAST_ADDR, &data, len);
+}
 
 
 ///////////////////// UDP ///////////////////////////////////
@@ -76,10 +79,23 @@ event void RadioControl.startDone(error_t e) {}
   event void Status.recvfrom(struct sockaddr_in6 *from, void *data, 
                              uint16_t len, struct ip_metadata *meta) {	
 		route_dest = *from;
-  }
+  
+	if(len == 0){
+		updateNodes(data, len);
+	}
+
+
+
+}
 
  
-  event void StatusTimer.fired() {}
+  event void TimeKeeper.fired() {
+	uint32_t currGlobTime = call GlobalTime.getLocalTime();
+        call GlobalTime.getGlobalTime(&currGlobTime);
+
+	call Status.sendto(&route_dest, &currGlobTime, sizeof(currGlobTime));
+
+  }
 
 
 void send_UPD_Beat_Message(BEAT_MSG* beatMsg){
@@ -119,11 +135,6 @@ void send_UPD_ECG_Message(ECG_PACKET* ECGMsg){
 ///////////////////// Radio /////////////////////////
 
 
-  
-
-	/* Recieves and AM Message, checks for validity, strips out the rssi, 
-		and calls the send udp function
-	*/
 
 	event message_t* Receive.receive(message_t* msg, void* payload, uint8_t len) {
     	
@@ -161,12 +172,13 @@ void send_UPD_ECG_Message(ECG_PACKET* ECGMsg){
 	event void AMControl.stopDone(error_t err) {
 	}
 
-	event void AMSend.sendDone(message_t* msg, error_t error){
+	event void ECGMsgSend.sendDone(message_t* msg, error_t error){
 	}
 
-	event void Timer0.fired(){
+	
 
-	}
+
+
 
 
 ////////////////////////////////////////////////////////////////////

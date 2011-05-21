@@ -11,11 +11,16 @@ configuration ECG_ForwarderAppC {
 
 
 	components new TimerMilliC() as Timer0;
-	components new TimerMilliC() as Timer1;
+
 
 	App.Boot -> MainC;
 	App.Leds -> LedsC;
-	App.Timer0 -> Timer0;
+	App.TimeKeeper -> Timer0;
+
+	components TimeSyncC;
+	TimeSyncC.Boot -> MainC;
+	MainC.SoftwareInit -> TimeSyncC;
+	App.GlobalTime -> TimeSyncC;
 
 
 ////////////// RADIO ///////////////////////////
@@ -26,15 +31,13 @@ configuration ECG_ForwarderAppC {
 
 	App.Packet -> AMSenderC;
 	App.AMPacket -> AMSenderC;
-  	App.AMSend -> AMSenderC;
+  	App.ECGMsgSend  -> AMSenderC;
 	App.AMControl -> ActiveMessageC;
 	App.Receive -> AMReceiverC;
 
 
 
 
-  components CC2420ActiveMessageC;
-  App -> CC2420ActiveMessageC.CC2420Packet;
 
 ////////////////////////////////////////////
 
@@ -47,8 +50,6 @@ configuration ECG_ForwarderAppC {
   components new UdpSocketC() as Status;
 
   App.Status -> Status;
-
-  App.StatusTimer -> Timer1;
 
   components UdpC;
 

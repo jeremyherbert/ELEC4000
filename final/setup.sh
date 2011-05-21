@@ -1,5 +1,0 @@
-#!/bin/sh
-export TOSROOT=/home/local/src/tinyos-2.x
-export TOSDIR=$TOSROOT/tos
-export CLASSPATH=/opt/tinyos-2.x/support/sdk/java/tinyos.jar:.
-export MAKERULES=$TOSROOT/support/make/Makerules

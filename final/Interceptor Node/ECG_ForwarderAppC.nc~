@@ -3,19 +3,24 @@
 #include <Timer.h>
 #include "ECGHeader.h"
 
-configuration ECG_ForwarderC {
+configuration ECG_ForwarderAppC {
 
 } implementation {
   	components MainC, LedsC;
-  	components RSSI_ForwarderP as App;
+  	components ECG_ForwarderC as App;
 
 
 	components new TimerMilliC() as Timer0;
-	components new TimerMilliC() as Timer1;
+
 
 	App.Boot -> MainC;
 	App.Leds -> LedsC;
-	App.Timer0 -> Timer0;
+	App.TimeKeeper -> Timer0;
+
+	components TimeSyncC;
+	TimeSyncC.Boot -> MainC;
+	MainC.SoftwareInit -> TimeSyncC;
+	App.GlobalTime -> TimeSyncC;
 
 
 ////////////// RADIO ///////////////////////////
@@ -33,8 +38,6 @@ configuration ECG_ForwarderC {
 
 
 
-  components CC2420ActiveMessageC;
-  App -> CC2420ActiveMessageC.CC2420Packet;
 
 ////////////////////////////////////////////
 
@@ -47,8 +50,6 @@ configuration ECG_ForwarderC {
   components new UdpSocketC() as Status;
 
   App.Status -> Status;
-
-  App.StatusTimer -> Timer1;
 
   components UdpC;
 
