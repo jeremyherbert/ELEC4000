@@ -6,13 +6,12 @@ enum {
 };
 
 enum {
-  ALARM_INTERVAL = 10000
+  ALARM_INTERVAL = 1000
 };
 
 
 typedef nx_struct ALARM_DATA{
-  nx_int8_t Type;
-
+  nx_int16_t Type;
   
 } ALARM_DATA;
 
