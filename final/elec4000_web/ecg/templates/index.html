@@ -1,0 +1,69 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.1//EN"
+	"http://www.w3.org/TR/xhtml11/DTD/xhtml11.dtd">
+<html>
+<head>
+	<title>ELEC4000 ECG Client</title>
+	<script type="text/javascript" src="https://www.google.com/jsapi"></script>
+	<script type="text/javascript">
+	      google.load("visualization", "1", {packages:["corechart"]});
+	      google.setOnLoadCallback(drawChart);
+	      function drawChart() {
+	        var data = new google.visualization.DataTable();
+	        data.addColumn('string', 'Year');
+	        data.addColumn('number', 'BPM');
+	        data.addRows(4);
+	        data.setValue(0, 0, '9:10:11');
+	        data.setValue(0, 1, 77);
+
+	        data.setValue(1, 0, '9:11:15');
+	        data.setValue(1, 1, 85);
+
+	        data.setValue(2, 0, '9:12:45');
+	        data.setValue(2, 1, 109);
+
+	        data.setValue(3, 0, '9:13:16');
+	        data.setValue(3, 1, 190);
+
+
+	        var chart = new google.visualization.LineChart(document.getElementById('chart_div'));
+	        chart.draw(data, {
+				curveType: "function",
+				width: 800, 
+				height: 400, 
+				title: 'Heart rate over time for node {{ selected_node.node_id }}',
+				legend: 'none',
+				hAxis: {title: 'Recording Time (24hr time)', minValue: 0, slantedTextAngle: 45, slantedText: true},
+				vAxis: {title: 'BPM', minValue: 30, maxValue: 250}
+			});
+	      }
+	</script>
+</head>
+<body>
+	<h2>ECG Data Client</h2>
+	<div id="node_listing">
+		<h4>Currently registered nodes</h4>
+		<table>
+			<tr>
+				<th>Node ID</th>
+				<th>ECG read interval</th>
+				<th>Network heartbeat interval</th>
+				<th>Bradycardia alarm threshold</th>
+				<th>Tachycardia alarm threshold</th>
+			</tr>
+			{% for node in node_list %}
+			<tr>
+				<td>{{ node.node_id }}</td>
+				<td>{{ node.read_interval }}</td>
+				<td>{{ node.beat_interval }}</td>
+				<td>{{ node.min_heart_rate }}</td>
+				<td>{{ node.max_heart_rate }}</td>
+			</tr>
+			{% endfor %}
+		</table>
+	</div><br />
+	<hr /><br />
+	<div id="node_graphs">
+		<div id="chart_div"></div>
+	</div>
+</body>
+</html>
