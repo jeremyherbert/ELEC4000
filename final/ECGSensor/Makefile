@@ -1,0 +1,5 @@
+COMPONENT=AdcSimpleAppC
+include $(MAKERULES)
+CFLAGS += -I$(TOSDIR)/lib/printf
+CFLAGS += -DPRINTF_BUFFER_SIZE=250
+
