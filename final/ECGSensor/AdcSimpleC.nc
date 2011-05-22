@@ -45,10 +45,11 @@ module AdcSimpleC {
     interface Boot;
     interface Read<uint16_t> as VoltageRead;
     interface Leds;
-    interface Timer<TMilli>;
+    interface Timer<TMilli> as RTimer;
     interface LocalTime<TMilli>;
     interface Timer<TMilli> as MovementDelayTimer;
     interface Timer<TMilli> as AlarmTimer;
+    interface Timer<TMilli> as SampleTimer;
   }
 }
 implementation {
@@ -64,6 +65,11 @@ implementation {
       sampcon_ssel: SAMPCON_SOURCE_SMCLK,
       sampcon_id: SAMPCON_CLOCK_DIV_1
   };
+  
+  #define MOVEMENT_THRESHOLD        200
+  #define ADC_BUFFER_SIZE           1000
+
+  void dumpAdc();
 
   uint8_t init = 0;
   uint8_t r_timer_ok = 0; // windowed r wave detection
@@ -74,17 +80,19 @@ implementation {
   uint8_t movement_error = 0; // is the patient moving ?
   uint16_t movement_delay = 5000; // how long should we wait before trying again ?
 
-  uint16_t alarm_interval = 5000;
+  uint16_t alarm_interval = 5000; // number of ms before alarm goes off
 
-  // sets the threshold for detecting movement and erronous signals
-  #define MOVEMENT_THRESHOLD 200
+  uint8_t sample_interval = 5; // sample every n ms
   
+  uint16_t adc_buffer[ADC_BUFFER_SIZE]; 
+  uint16_t adc_buffer_index = 0;
+
   event void Boot.booted() {
 	call Leds.led0Off();
 	call Leds.led1Off();
 	call Leds.led2Off();
-	call Timer.startOneShot(MOVEMENT_THRESHOLD);
-        call VoltageRead.read();
+	call RTimer.startOneShot(MOVEMENT_THRESHOLD);
+        call SampleTimer.startPeriodic(sample_interval);
   }
 
   void restartAlarmTimer()
@@ -96,9 +104,6 @@ implementation {
   event void VoltageRead.readDone( error_t result, uint16_t val )
   {
     if (result == SUCCESS){
-	//call Leds.led0On();
-	//call Leds.led1On();
-	//call Leds.led2On();
         if (movement_error == 0) {
             if ((val > r_threshold) && (r_flag == 0)) {
                 if ((r_timer_ok == 1) || (init == 0)) {
@@ -115,7 +120,7 @@ implementation {
                     call MovementDelayTimer.startOneShot(movement_delay);
                 }
                 r_timer_ok = 0;
-                if (movement_error == 0) call Timer.startOneShot(MOVEMENT_THRESHOLD);
+                if (movement_error == 0) call RTimer.startOneShot(MOVEMENT_THRESHOLD);
             
             } else {
                 r_flag = 0;
@@ -123,12 +128,15 @@ implementation {
             }
         
         }
-
-	    printf("%u,", val);
-	    printfflush();
+        if (adc_buffer_index < 1000) {
+            adc_buffer[adc_buffer_index++] = val;
+        } else {
+            dumpAdc();
+        }
+        printf(" ");
+        printfflush();
     }
 
-    call VoltageRead.read();
    }
 
   async command const msp430adc12_channel_config_t* VoltageConfigure.getConfiguration()
@@ -136,7 +144,28 @@ implementation {
     return &config; // must not be changed
   }
 
-  event void Timer.fired() 
+  void dumpAdc()
+  {
+    call SampleTimer.stop();
+    call AlarmTimer.stop();
+    
+    uint16_t i=0;
+    for (i=0; i<1000; i++) {
+        printf("%u,", adc_buffer[i]);
+    }
+    printfflush();
+
+    adc_buffer_index = 0;
+    call SampleTimer.startPeriodic(sample_interval);
+    restartAlarmTimer();
+  }
+
+  event void SampleTimer.fired()
+  {
+    call VoltageRead.read();
+  }
+
+  event void RTimer.fired() 
   {
     r_timer_ok = 1;
   }
