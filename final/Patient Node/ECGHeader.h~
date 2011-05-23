@@ -6,13 +6,13 @@ enum {
 };
 
 typedef nx_struct ECG_DATA{
-  nx_int8_t D1; // heart rate (4 beat avg)
-  nx_int8_t D2; // p mag (not used)
-  nx_int8_t D3; // q mag (not used)
-  nx_int8_t D4; // r mag
-  nx_int8_t D5; // s mag
-  nx_int8_t D6; // t mag (not used)
-  nx_int16_t D7; // movement flag
+  nx_int8_t D1;
+  nx_int8_t D2;
+  nx_int8_t D3;
+  nx_int8_t D4;
+  nx_int8_t D5;
+  nx_int8_t D6;
+  nx_int16_t D7;
   nx_int32_t TIME;
   
 } ECG_DATA;
