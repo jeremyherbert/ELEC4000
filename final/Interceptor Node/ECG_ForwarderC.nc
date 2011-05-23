@@ -55,7 +55,8 @@ module ECG_ForwarderC {
   	int dataCount = 0;
   	int position = 0;
   	int readPosition = 0;
-  	EMER_MSG EmrMsg[1];
+  	EMER_MSG EmrMsg;
+  	int heartBeat = 0;
   	
 	
   	static char *http_okay = "HTTP/1.0 200 OK\r\n\r\n";
@@ -102,34 +103,51 @@ module ECG_ForwarderC {
 
 	//Check which nodes have sent a heartbeat and send to server
 	void sendBeats(){
-		char reply[6];
-		memcpy(reply, "Beats\n", 6);
+		char reply[10];
+		char buf[15];
 		
 		call Tcp.send(http_okay, http_okay_len);
+		
+		if(heartBeat != 0){
+			itoa(heartBeat, reply, 10);
+			strcpy(buf, reply);
+			strcat(buf, "/");
+			strcat(buf, "/");
+			strcat(buf, "\n");
+			
+			heartBeat = 0;
+			
+			printf(" Beat Message : %s\n", buf);
+			printfflush();
+			
+			call Tcp.send(buf, strlen(buf) );
+		}
 
-		call Tcp.send(reply, 6);
 		call Tcp.close();
 	}
 
 	//Check which nodes have sent an emergency and send to server
 	void sendEmer(){
-		char reply[15];
-		char buf[20];
+		char id[10];
+		char type[10];
+		char time[15];
+		char buf[30];
 		
 		call Tcp.send(http_okay, http_okay_len);
 		
 		printf("GETTING EMERGENCY\n");
 		printfflush();
 		
-		if(EmrMsg->TYPE != 4){
-			itoa(reply, EmrMsg->NODE_ID, 10);
-			strcpy(buf, reply);
+		if(EmrMsg.TYPE != 0){
+			itoa(EmrMsg.NODE_ID, id, 10);
+			itoa(EmrMsg.TYPE, type, 10);
+			ltoa(EmrMsg.TIME, time, 10);
+			
+			strcpy(buf, id);
 			strcat(buf, "/");
-			itoa(reply, EmrMsg->TYPE, 10);
-			strcat(buf, reply);
+			strcat(buf, type);
 			strcat(buf, "/");
-			ltoa(reply, EmrMsg->TIME, 10);
-			strcat(buf, reply);
+			strcat(buf, time);
 			strcat(buf, "/");
 			strcat(buf, "/");
 			strcat(buf, "\n");
@@ -137,7 +155,7 @@ module ECG_ForwarderC {
 			printf("EMRGENCY MESSAGE : %s\n", buf);
 			printfflush();
 			
-			call Tcp.send(buf, sizeof(buf) );
+			call Tcp.send(buf, strlen(buf) );
 			
 		}
 		
@@ -334,11 +352,55 @@ module ECG_ForwarderC {
 		m_packet->BEAT_INTERVAL =  atol(beats);
 		m_packet->READ_INTERVAL = atol(read);
 	 	m_packet->IS_LIVE =  atoi(live);
+	 	m_packet->MIN_HR =  0;
+	 	m_packet->MAX_HR =  0;
+	 	
 	 	
 	 	//printf("ID : %i\n", m_packet->NODE_ID);
 	 	//printf("BEAT:%u\n", m_packet->BEAT_INTERVAL);
 	 	//printf("READ:%u\n", m_packet->READ_INTERVAL);
 	 	//printf("LIVE:%i\n", m_packet->IS_LIVE);
+	 	
+		printfflush();
+	 	
+	
+		call Tcp.send(http_okay, http_okay_len);
+		call Tcp.close();
+	
+		call ECGMsgSend.send(AM_BROADCAST_ADDR, &r_msg, sizeof(UPDATE_PATIENT_PACKET)); 
+	}
+	
+	
+	//Extract data from the reqest, and send radio signal to specified node 
+	//to set up its mode
+	void setPatientLimits(char *request){
+		char id[4] ;
+		char hi[4];
+		char low[4];
+
+	
+
+		UPDATE_PATIENT_PACKET *m_packet = (UPDATE_PATIENT_PACKET*)(call Packet.getPayload(&r_msg, sizeof (UPDATE_PATIENT_PACKET)));
+
+
+		printf("UPDATE PATIENT : %s \n", request);
+		printfflush();	
+
+		strncpy(id, request+9, 3);
+		id[3] = '\0';
+		strncpy(hi, request+13, 3);
+		hi[3] = '\0';
+		strncpy(low, request+17, 5);
+		low[3] = '\0';
+
+		 
+		m_packet->NODE_ID = atoi(id);
+		m_packet->BEAT_INTERVAL =  0;
+		m_packet->READ_INTERVAL = 0;
+	 	m_packet->IS_LIVE =  3;
+	 	m_packet->MIN_HR =  atoi(low);
+	 	m_packet->MAX_HR =  atoi(hi);
+
 	 	
 		printfflush();
 	 	
@@ -372,29 +434,16 @@ module ECG_ForwarderC {
 	//Process the incoming request from the tcp connection, and call the correct responce function
 	void process_request(int verb, char *request, int len) {
 		char id[2];
-
-	
-		//printf("Process Request : %s \n", request);
-		//printfflush();	
 		
-		//Alarm
-		if (len >= 7 &&
+		if (len >= 5 &&
 			request[0] == '/' &&
 			request[1] == 's' &&
 			request[2] == 'e' &&
 			request[3] == 'n' &&
-			request[4] == 'd' &&
-			request[5] == '/'
-			) 
+			request[4] == 'd' )
 		{
-			strncpy(id, request+6, 1);
-			printf("ALARM TYPE %i \n", (atoi(id[0])) ); 
-			printfflush();
-			alarm(atoi(id[0]));
+			alarm(1);
 		}
-		
-		
-		
 	   	if (len >= 9 &&
 			request[0] == '/' &&
 			request[1] == 'g' &&
@@ -455,6 +504,22 @@ module ECG_ForwarderC {
 		{
 		
 			setPatientNode(request);
+			
+		
+		}
+		
+		if (len >= 19 && 
+			request[0]  == '/' &&
+			request[1]  == 's' &&
+			request[2]  == 'e' &&
+			request[3]  == 't' &&
+			request[4]  == '/' &&
+			request[8]  == '/' &&
+			request[12] == '/' &&
+			request[16] == '/') 
+		{
+		
+			setPatientLimits(request);
 			
 		
 		}
@@ -586,7 +651,7 @@ module ECG_ForwarderC {
 		
 		printf("Booted\n");
 		printfflush();
-		EmrMsg[0].TYPE = 4;
+		EmrMsg.TYPE = 4;
 
 				
 	}
@@ -604,8 +669,10 @@ module ECG_ForwarderC {
  
 
 
-	void send_UPD_Beat_Message(BEAT_MSG* beatMsg){
+	void beatReceived(BEAT_MSG* beatMsg){
          
+        heartBeat = beatMsg->NODE_ID;
+        
         //call Status.sendto(&route_dest, &beatMsg, sizeof(beatMsg));
  		printf("Beat Recieved From : %i\n", beatMsg->NODE_ID);
         printfflush();
@@ -638,7 +705,7 @@ module ECG_ForwarderC {
 		
 		if(len == sizeof(BEAT_MSG)){	    
 			beatMsg = (BEAT_MSG*) payload;
-			send_UPD_Beat_Message(beatMsg);
+			beatReceived(beatMsg);
 
 		}
 		
@@ -667,14 +734,22 @@ module ECG_ForwarderC {
 		
 		if(len == sizeof(EMER_MSG)){
 			AlarmMsg = (EMER_MSG*) payload;
-			EmrMsg[0] = *AlarmMsg ;
 
 			
 			
+			
 			if(AlarmMsg->TYPE == 0){
-				EmrMsg[0].TYPE = 4;
-				alarm(3);
+				EmrMsg.TYPE = 0;
+				alarm(0);
 			}else {
+				EmrMsg.NODE_ID = AlarmMsg->NODE_ID;
+				EmrMsg.TYPE = AlarmMsg->TYPE;
+				EmrMsg.TIME = AlarmMsg->TIME;
+				
+				printf("ALARM Msg: %i %i %u \n",AlarmMsg->NODE_ID, AlarmMsg->TYPE, AlarmMsg->TIME  );
+				printf("EMRMsg: %i %i %u \n",EmrMsg.NODE_ID, EmrMsg.TYPE , EmrMsg.TIME  );
+				
+				
 				alarm(2);
 			}
 

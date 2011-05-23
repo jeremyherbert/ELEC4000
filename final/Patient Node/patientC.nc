@@ -275,7 +275,6 @@ module patientC {
 	//Currently, on button press, read flash and send to base
 //Change this to be either timed or when flash getting full
 		event void Notify.notify (button_state_t state) {
-			sendEmergency(1);
 			call LogWrite.erase();
 		}
 
@@ -409,9 +408,11 @@ module patientC {
 	//Need to implement local checking to test for emrgency.
 		event void ReadTimer.fired(){
 
-
-
+			
 			if(LIVE == TRUE){
+			printf("READ RAW\n");
+			printfflush();
+			
 				if (!m_busy) {
 
 					readRawECGData();
@@ -421,8 +422,9 @@ module patientC {
 						m_busy = FALSE;
 						printf("write error");
 						printfflush();
-					}
+					} 
 				}
+				m_busy = FALSE;
 				call ReadTimer.startOneShot(READ_INTERVAL_MS);
 			}
 
@@ -448,6 +450,10 @@ module patientC {
 	 		printf("BEAT:%u\n", m_packet->BEAT_INTERVAL);
 	 		printf("READ:%u\n", m_packet->READ_INTERVAL);
 	 		printf("LIVE:%i\n", m_packet->IS_LIVE);
+	 		printf("HI:%i\n", m_packet->MAX_HR);
+	 		printf("LOW:%i\n", m_packet->MIN_HR);
+	 		
+	 		
 			printfflush();
 
 			if(m_packet ->NODE_ID == TOS_NODE_ID){
