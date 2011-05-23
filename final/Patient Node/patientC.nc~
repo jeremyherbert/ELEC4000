@@ -1,4 +1,4 @@
-#include "ECGHeader.h"
+#include "../ECGHeader.h"
 #include <Timer.h>
 #include <UserButton.h>
 #include "printf.h"
@@ -9,13 +9,15 @@ module patientC {
 	interface Leds;
 	interface Timer<TMilli> as ReadTimer;
 	interface Timer<TMilli> as HeartBeatTimer;
+	interface GlobalTime<TMilli>;
 	  
 	interface Packet;
 	interface AMPacket;
-        interface Receive;
+    interface Receive;
 	interface AMSend as ECGMsgSend;
 	interface SplitControl as RadioControl;
-	interface GlobalTime<TMilli>;
+	
+	
 
 	interface LogRead;
    	interface LogWrite;
@@ -35,14 +37,13 @@ module patientC {
   bool m_busy = TRUE;
   ECG_DATA m_entry;
   // CHANGE THIS FOR REAL LIVE
-  bool LIVE = TRUE;
+  bool LIVE = FALSE;
 
 
   event void Boot.booted(){
     call RadioControl.start();
     ID = TOS_NODE_ID;
     call Notify.enable();
-    call ReadTimer.startPeriodic(READ_INTERVAL_MS);
     printf("started\n");
     printfflush();
 
@@ -58,10 +59,10 @@ module patientC {
   }
 
   event void LogRead.seekDone(error_t err) {
-    printf("wooo");
     if (call LogRead.read(&m_entry, sizeof(ECG_DATA)) != SUCCESS) {
-        printf("error");
-        printfflush();
+		
+
+
     };
   }
 
@@ -106,6 +107,10 @@ module patientC {
       if (call LogWrite.erase() != SUCCESS) {
 	// Handle error.
       }
+          
+      
+      
+      call Leds.led1Off();
       call Leds.led0On();
     }
   }
@@ -114,6 +119,12 @@ module patientC {
 
 
 event void LogWrite.eraseDone(error_t err) {
+    uint32_t currGlobTime = call GlobalTime.getLocalTime();
+        
+    REQUEST_DONE_MSG* recDoneMsg = (REQUEST_DONE_MSG*)(call Packet.getPayload(&msg, sizeof (REQUEST_DONE_MSG)));
+    
+    call GlobalTime.getGlobalTime(&currGlobTime);
+    
     if (err == SUCCESS) {
       m_busy = FALSE;
     }
@@ -121,6 +132,19 @@ event void LogWrite.eraseDone(error_t err) {
       // Handle error.
     }
     call Leds.led0Off();
+    
+    
+  	
+  	printf("Request Done \n");
+    printfflush();
+
+  	recDoneMsg->NODE_ID = ID;
+    recDoneMsg->TIME = currGlobTime;
+
+
+    call ECGMsgSend.send(AM_BROADCAST_ADDR, &msg, sizeof(REQUEST_DONE_MSG));
+    
+    
   }
 
 
@@ -140,8 +164,8 @@ event void LogWrite.eraseDone(error_t err) {
 
 
   event void RadioControl.startDone(error_t result){
-    call ReadTimer.startPeriodic(READ_INTERVAL_MS);
-    call HeartBeatTimer.startPeriodic(BEAT_INTERVAL_MS);
+    
+    call HeartBeatTimer.startOneShot(BEAT_INTERVAL_MS);
  }
 
   event void RadioControl.stopDone(error_t result){}
@@ -149,24 +173,31 @@ event void LogWrite.eraseDone(error_t err) {
   event void HeartBeatTimer.fired(){
     BEAT_MSG * beat_msg = (BEAT_MSG*)(call Packet.getPayload(&msg, sizeof (BEAT_MSG)));
   	
+  	printf("BEAT \n");
+    printfflush();
+  	
     beat_msg->NODE_ID = ID;
 
     call ECGMsgSend.send(AM_BROADCAST_ADDR, &msg, sizeof(BEAT_MSG));
-
+    call HeartBeatTimer.startOneShot(BEAT_INTERVAL_MS);
   }
 
 
-  ECG_DATA * readRawECGData(){
-	ECG_DATA* dummyData;
-			dummyData.D1 =1;
-	 		dummyData.D2 =1;
-	 		dummyData.D3 =1;
-	 		dummyData.D4 =1;
-	 		dummyData.D5 =1;
-	 		dummyData.D6 =1;
-	 		dummyData.D7 =1;
-	 		dummyData.TIME =currGlobTime;
-	return dummyData;
+  void readRawECGData(){
+  
+  	uint32_t currGlobTime = call GlobalTime.getLocalTime();
+    call GlobalTime.getGlobalTime(&currGlobTime);
+    
+
+			m_entry.D1 =1;
+	 		m_entry.D2 =1;
+	 		m_entry.D3 =1;
+	 		m_entry.D4 =1;
+	 		m_entry.D5 =1;
+	 		m_entry.D6 =1;
+	 		m_entry.D7 =1;
+	 		m_entry.TIME =currGlobTime;
+
 
 
   }
@@ -176,13 +207,12 @@ event void LogWrite.eraseDone(error_t err) {
   //Need to implement local checking to test for emrgency.
   event void ReadTimer.fired(){
 	
-	uint32_t currGlobTime = call GlobalTime.getLocalTime();
-        call GlobalTime.getGlobalTime(&currGlobTime);
+
 	
 	if(LIVE == TRUE){
 		if (!m_busy) {
 
-	 		m_entry = readRawECGData();
+	 		readRawECGData();
 		
 			m_busy = TRUE;
 			if (call LogWrite.append(&m_entry, sizeof(ECG_DATA)) != SUCCESS) {
@@ -191,7 +221,9 @@ event void LogWrite.eraseDone(error_t err) {
 			    printfflush();
 			}
 		}
+		call ReadTimer.startOneShot(READ_INTERVAL_MS);
 	}
+	
   }
 
 	// recieves a message 
@@ -202,24 +234,39 @@ event void LogWrite.eraseDone(error_t err) {
       at the basestation.*/
     event message_t* Receive.receive(message_t* msgPtr, void* payload, uint8_t len)
     {
-	UPDATE_PATIENT_PACKET * packet;
+	UPDATE_PATIENT_PACKET * m_packet;
+
+	printf("Message recieved  My ID %i", TOS_NODE_ID);
+			printfflush();
 
 	if(len == sizeof(UPDATE_PATIENT_PACKET)) {
-	packet = (UPDATE_PATIENT_PACKET*)call Packet.getPayload(msgPtr, 
-					sizeof(UPDATE_PATIENT_PACKET));
+		m_packet = (UPDATE_PATIENT_PACKET*)payload;
 
-		if(packet ->NODE_ID == ID){
-			READ_INTERVAL_MS = packet->READ_INTERVAL;
-                        BEAT_INTERVAL_MS = packet->BEAT_INTERVAL;
-			LIVE = packet->IS_LIVE;
-			
-			printf("UPDATE_PATIENT_PACKET recieved");
-			printfflush();
+		printf("Data %i  %i  %i  %i \n",m_packet->NODE_ID , m_packet->READ_INTERVAL, m_packet->BEAT_INTERVAL,
+							 m_packet->IS_LIVE );
+		printfflush();
+
+			if(m_packet ->NODE_ID == TOS_NODE_ID){
+				if(m_packet->READ_INTERVAL != 0) READ_INTERVAL_MS = m_packet->READ_INTERVAL;
+		        if(m_packet->BEAT_INTERVAL != 0) BEAT_INTERVAL_MS = m_packet->BEAT_INTERVAL;
+				if(m_packet->IS_LIVE  == 1){
+					LIVE = TRUE;
+					call ReadTimer.startOneShot(READ_INTERVAL_MS);
+			 	}else if(m_packet->IS_LIVE == 0 ) { 
+			 		LIVE = FALSE;
+				}
+				printf("UPDATE_PATIENT_PACKET recieved");
+				printfflush();
 			
 		
-		}
+			}
 
 	}
+	
+	if(len == sizeof(REQUEST_MSG)){
+		call LogRead.seek(0);
+	}
+	
 
 
         return msgPtr;

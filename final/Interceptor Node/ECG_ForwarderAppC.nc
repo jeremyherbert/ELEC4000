@@ -1,7 +1,7 @@
 #include <6lowpan.h>
 #include "message.h"
 #include <Timer.h>
-#include "ECGHeader.h"
+#include "../ECGHeader.h"
 
 configuration ECG_ForwarderAppC {
 
@@ -10,12 +10,12 @@ configuration ECG_ForwarderAppC {
   	components ECG_ForwarderC as App;
 
 
-	components new TimerMilliC() as Timer0;
+	//components new TimerMilliC() as Timer0;
 
 
 	App.Boot -> MainC;
 	App.Leds -> LedsC;
-	App.TimeKeeper -> Timer0;
+	//App.TimeKeeper -> Timer0;
 
 	components TimeSyncC;
 	TimeSyncC.Boot -> MainC;
@@ -39,22 +39,19 @@ configuration ECG_ForwarderAppC {
 
 
 
-////////////////////////////////////////////
+/////////////////TCP/////////////////////////
 
-
-
-/////////////////UDP/////////////////////////
   components IPDispatchC;
 
   App.RadioControl -> IPDispatchC;
-  components new UdpSocketC() as Status;
 
-  App.Status -> Status;
+  components new TcpSocketC() as TcpWeb;
+  App.Boot -> MainC;
+  App.Leds -> LedsC;
+  App.Tcp -> TcpWeb;
 
-  components UdpC;
 
 
-  components UDPShellC;
 ///////////////////////////////////////////
 
 

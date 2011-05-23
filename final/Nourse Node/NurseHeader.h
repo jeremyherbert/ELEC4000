@@ -12,7 +12,6 @@ enum {
 
 typedef nx_struct ALARM_DATA{
   nx_int8_t Type;
-
   
 } ALARM_DATA;
 

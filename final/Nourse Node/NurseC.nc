@@ -15,7 +15,7 @@ module NurseC {
 
 	interface Packet;
 	interface AMPacket;
-        interface Receive;
+    interface Receive;
 	interface AMSend as ECGMsgSend;
 	interface SplitControl as RadioControl;
 
@@ -24,13 +24,16 @@ module NurseC {
 
 } implementation {
 
- event void Boot.booted(){
+bool buzz = FALSE;
 
+
+ event void Boot.booted(){
+    	call RadioControl.start();
 		call io.selectIOFunc();
 		call io.makeOutput();
 		call io.clr();
 
-    call Notify.enable();
+    	call Notify.enable();
 
     printf("started\n");
     printfflush();
@@ -52,21 +55,28 @@ module NurseC {
 
     event message_t* Receive.receive(message_t* msgPtr, void* payload, uint8_t len)
     {
-	ALARM_DATA * packet;
+		ALARM_DATA * packet;
+	
+		printf("Received Message\n");
+		printfflush();
+	
+		if(len == sizeof(ALARM_DATA)) {
+		packet = (ALARM_DATA*)payload;
 
-	if(len == sizeof(ALARM_DATA)) {
-	packet = (ALARM_DATA*)call Packet.getPayload(msgPtr, 
-					sizeof(ALARM_DATA));
+			switch(packet->Type){
+			case 1: buzz = TRUE; 
+				call BuzzTimer.startOneShot(ALARM_INTERVAL);
+				break;
+			case 2: 
+				buzz = FALSE;
+				call io.set();
+				break;
+			case 3: 
+				buzz = FALSE;
+				call io.clr();
+			} 
 
-		switch(packet->Type){
-		case 1: call BuzzTimer.startOneShot(ALARM_INTERVAL);
-			break;
-		case 2: call io.set();
-			break;
-		default: call io.clr();
-		} 
-
-	}
+		}
 
 
         return msgPtr;
@@ -76,13 +86,14 @@ module NurseC {
 
   event void BuzzTimer.fired(){	
 		
-
-	if(call io.get()){
-		call io.clr();
-	} else {
-		call io.set();
-	} 
-	call BuzzTimer.startOneShot(ALARM_INTERVAL);
+	if(buzz == TRUE){
+		if(call io.get()){
+			call io.clr();
+		} else {
+			call io.set();
+		} 
+		call BuzzTimer.startOneShot(ALARM_INTERVAL);
+	}
 }
 
 
