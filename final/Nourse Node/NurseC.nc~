@@ -71,7 +71,7 @@ bool buzz = FALSE;
 			case 1: buzz = TRUE; 
 				call BuzzTimer.startOneShot(ALARM_INTERVAL);
 				break;
-			case 2: 
+			default: 
 				buzz = FALSE;
 				call io.set();
 				break;
