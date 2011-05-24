@@ -1,0 +1,18 @@
+ELEC4000 Project Proposal - Wireless Sensor Node ECG
+
+## Project description ##
+
+The project consists of 3 node types, all connected via a wireless sensor network. The patient node will be connected to a bioamplifier/instrumentation amplifier and will implement the Hamilton-Tompkins ECG detection algorithm (as specified in http://goo.gl/ENxHa). The bioamplifier will be built from scratch and attached to a mote.
+
+The staff nodes will have a speaker and a button. The speaker will give a basic alert by beeping the patient number and will be cancelled by pressing the button.
+
+The base station node will be connected to a computer for historical logging and processing.
+
+#### Node types summary ####
+-> patient node (ECG connected node)
+-> staff node (speaker connected)
+-> base station (computer connected, for logging/analysis)
+
+#### Notes ####
+-> The smaller encased nodes should be used as base stations because they have no external connectors
+-> arbitrary function generators can be used in place of people to provide critical signals

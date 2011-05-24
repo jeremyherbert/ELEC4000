@@ -16,5 +16,6 @@ urlpatterns = patterns('',
     url(r'^admin/', include(admin.site.urls)),
 	url(r'^get/(?P<node_pk>[0-9]+)', 'ecg.views.get_node'),
 	url(r'^get/$', 'ecg.views.index'),
+	url(r'^set/(?P<node_pk>[0-9]+)', 'ecg.views.set'),
 	url(r'^$', 'ecg.views.index'),
 )

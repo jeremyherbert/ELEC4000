@@ -85,11 +85,20 @@
 				<td>{{ node.beat_interval }}</td>
 				<td>{{ node.min_heart_rate }}</td>
 				<td>{{ node.max_heart_rate }}</td>
-				<td>{{ node.is_live }}</td>
+				<td>{{ node.is_live }} 
+					{% if node.is_live %}
+						(<a href="/set/{{node.id}}">stop</a>)
+					{% endif %}
+					{% if not node.is_live %}
+						(<a href="/set/{{node.id}}">start</a>)
+					{% endif %}
+				</td>
 			</tr>
 			{% endfor %}
 		</table>
 	</div><br />
+	<hr /><br />
+	{{ logfile }}
 	<hr /><br />
 	<div id="node_graphs">
 		<div id="chart_div" align="center"></div>
