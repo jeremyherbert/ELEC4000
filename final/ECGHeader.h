@@ -32,8 +32,8 @@ typedef nx_struct ECG_PACKET{
 
 typedef nx_struct UPDATE_PATIENT_PACKET{
   nx_int8_t NODE_ID;
-  nx_int16_t READ_INTERVAL;
-  nx_int16_t BEAT_INTERVAL;
+  nx_int32_t READ_INTERVAL;
+  nx_int32_t BEAT_INTERVAL;
   nx_int16_t MAX_HR;
   nx_int16_t MIN_HR;
   nx_int8_t IS_LIVE;

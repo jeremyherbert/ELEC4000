@@ -37,14 +37,6 @@ configuration ECG_ForwarderAppC {
 	App.Receive -> AMReceiverC;
 	
 	 	
-/////////////// STORAGE ////////////////////////	 	
-	 	
-	 	
-	 	components new LogStorageC(VOLUME_LOGTEST, TRUE);
-	  	App.LogRead -> LogStorageC;
-	  	App.LogWrite -> LogStorageC;
-
-
 
 
 

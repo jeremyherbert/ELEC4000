@@ -2,7 +2,6 @@
 #include "message.h"
 #include <Timer.h>
 #include "../ECGHeader.h"
-#include "StorageVolumes.h"
 
 configuration ECG_ForwarderAppC {
 

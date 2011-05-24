@@ -93,14 +93,15 @@ module patientC {
 		message_t msg;
 
 		uint16_t ID;
-		uint16_t BEAT_INTERVAL_MS = 15000;
-		uint16_t READ_INTERVAL_MS = 1500;
+		uint32_t BEAT_INTERVAL_MS = 15000;
+		uint32_t READ_INTERVAL_MS = 1500;
 
 		uint16_t seq = 0;
 		bool m_busy = TRUE;
 		ECG_DATA m_entry;
 
 		bool LIVE = FALSE;
+
 
 
 		event void Boot.booted(){
@@ -205,6 +206,7 @@ module patientC {
 		event void AlarmTimer.fired()
 		{
 			call Leds.led2On();
+			sendEmergency(3);
 		}
 		
 		event void HRTimer.fired() 
@@ -356,6 +358,9 @@ module patientC {
 		event void RadioControl.startDone(error_t result){
 
 			call HeartBeatTimer.startOneShot(BEAT_INTERVAL_MS);
+			sendEmergency(0);
+			
+			
 		}
 
 		event void RadioControl.stopDone(error_t result){}
@@ -378,8 +383,15 @@ module patientC {
 			uint32_t currGlobTime = call GlobalTime.getLocalTime();
 			call GlobalTime.getGlobalTime(&currGlobTime);
 
-
-			m_entry.D1 = ((uint16_t)60000)/beat_interval; // heart rate
+			printf("D1 : %u \n",60000/beat_interval );
+			
+			if( (60000/beat_interval) > max_hr ) sendEmergency(1);
+			
+			if( (60000/beat_interval) < min_hr ) sendEmergency(2);
+			
+			
+			printfflush();
+			m_entry.D1 = 60000/beat_interval; // heart rate
 			m_entry.D2 =1;
 			m_entry.D3 =1;
 			m_entry.D4 =1;
@@ -432,8 +444,10 @@ module patientC {
 		if(len == sizeof(UPDATE_PATIENT_PACKET)) {
 			m_packet = (UPDATE_PATIENT_PACKET*)payload;
 
-			printf("Data %i  %i  %i  %i \n",m_packet->NODE_ID , m_packet->READ_INTERVAL, m_packet->BEAT_INTERVAL,
-				m_packet->IS_LIVE );
+			printf("ID : %i\n", m_packet->NODE_ID);
+	 		printf("BEAT:%u\n", m_packet->BEAT_INTERVAL);
+	 		printf("READ:%u\n", m_packet->READ_INTERVAL);
+	 		printf("LIVE:%i\n", m_packet->IS_LIVE);
 			printfflush();
 
 			if(m_packet ->NODE_ID == TOS_NODE_ID){
@@ -448,6 +462,8 @@ module patientC {
 				}else if(m_packet->IS_LIVE == 0 ) { 
 					LIVE = FALSE;
 				}
+				printf("Beat interval : %u\n", m_packet->BEAT_INTERVAL);
+				
 				printf("UPDATE_PATIENT_PACKET recieved");
 				printfflush();
 

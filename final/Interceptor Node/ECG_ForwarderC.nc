@@ -51,8 +51,12 @@ module ECG_ForwarderC {
   	bool inProgress = FALSE;
   	//ECG_PACKET m_entry;
   	
-  	ECG_PACKET dataArray[100];
+  	ECG_PACKET dataArray[50];
   	int dataCount = 0;
+  	int position = 0;
+  	int readPosition = 0;
+  	EMER_MSG EmrMsg[1];
+  	
 	
   	static char *http_okay = "HTTP/1.0 200 OK\r\n\r\n";
   	static int http_okay_len = 19;
@@ -109,12 +113,38 @@ module ECG_ForwarderC {
 
 	//Check which nodes have sent an emergency and send to server
 	void sendEmer(){
-		char reply[10];
-		memcpy(reply, "Emergency\n", 10);
+		char reply[15];
+		char buf[20];
 		
 		call Tcp.send(http_okay, http_okay_len);
+		
+		printf("GETTING EMERGENCY\n");
+		printfflush();
+		
+		if(EmrMsg->TYPE != 4){
+			itoa(reply, EmrMsg->NODE_ID, 10);
+			strcpy(buf, reply);
+			strcat(buf, "/");
+			itoa(reply, EmrMsg->TYPE, 10);
+			strcat(buf, reply);
+			strcat(buf, "/");
+			ltoa(reply, EmrMsg->TIME, 10);
+			strcat(buf, reply);
+			strcat(buf, "/");
+			strcat(buf, "/");
+			strcat(buf, "\n");
+			
+			printf("EMRGENCY MESSAGE : %s\n", buf);
+			printfflush();
+			
+			call Tcp.send(buf, sizeof(buf) );
+			
+		}
+		
+		
+		
 
-		call Tcp.send(reply, 10);
+		
 		call Tcp.close();
 
 	}
@@ -133,10 +163,20 @@ module ECG_ForwarderC {
 		char D7[10] ;
 		char TIME[10] ;
 		int i = 0;
+		int pos = 0;
+
 		
-		for(i = 0; i < dataCount; i++){
+		printf("Count : %i \n",  dataCount);
+		printfflush();
+		
+		pos = readPosition;
+		
+		for(i = pos; i < pos +5; i++){
 				 
 			 ECG_PACKET ECGMsg = dataArray[i]; 
+			 
+			 //printf("BLAH BLAH BLAH\n\n\n");
+			 //printfflush();			 
 				 
 			 itoa(ECGMsg.NODE_ID, id, 10);
 			 itoa(ECGMsg.D1, D1, 10);
@@ -170,14 +210,32 @@ module ECG_ForwarderC {
 			 strcat(buf, "/");
 			 strcat(buf, "\n");
 			 
-
 		 
-			 printf("BUFFER : %s, size : %i \n", buf, strlen(buf));
+			  printf("BUFFER : %s, size : %i \n", buf, strlen(buf));
 			 printfflush();
 			 call Tcp.send(buf, strlen(buf));
+			
+			 buf[0] = '\0';
+			 
+			readPosition++;
+			if(readPosition >= dataCount) break;
+			 
+			 //printf("BLAH BLAH BLAH\n\n\n");
+			 //printfflush();
 		}
 		
-		dataCount = 0;
+		printf("Read Position : %i\n", readPosition);
+		
+		if(readPosition >= dataCount){
+			position = 0;
+			readPosition = 0;
+			dataCount = 0;
+			dataReady = FALSE;
+			inProgress = FALSE;
+			call Tcp.send("done\n", 5);
+		}
+		
+
 
 	
 		
@@ -188,6 +246,8 @@ module ECG_ForwarderC {
     
 		char id[4] ;
 		REQUEST_MSG *m_packet = (REQUEST_MSG*)(call Packet.getPayload(&r_msg, sizeof (REQUEST_MSG)));
+		
+		printf("Progress : %i   dataReady : %i \n", inProgress, dataReady);
 		
 		if( inProgress == FALSE) {
 			inProgress = TRUE;
@@ -200,7 +260,7 @@ module ECG_ForwarderC {
 			
 			
 			call Tcp.send(http_okay, http_okay_len);
-			call Tcp.send("started\n", 6);
+			call Tcp.send("started\n", 8);
 			call Tcp.close();
 			
 			
@@ -210,16 +270,22 @@ module ECG_ForwarderC {
 		} 
 		
 		if(dataReady == TRUE && inProgress == TRUE) {
+			printf("SHOULD NOW SEND DATA TO SERVER\n");
+			printfflush();
 			call Tcp.send(http_okay, http_okay_len);
 			send_TCP_ECG_Message();
 			call Tcp.close();
+
 			return;
 		}  
 		
 		if(dataReady == FALSE && inProgress == TRUE) {
+			printf("STILL GETTING DATA FORM MOTE\n");
+			printfflush();
 			call Tcp.send(http_okay, http_okay_len);
-			call Tcp.send("wait\n", 6);
+			call Tcp.send("wait\n", 5);
 			call Tcp.close();
+			
 			return;
 		}
 
@@ -241,7 +307,7 @@ module ECG_ForwarderC {
 	void setPatientNode(char *request){
 		char id[4] ;
 		char beats[6];
-		char read[7];
+		char read[6];
 		char live[2];
 	
 
@@ -251,19 +317,29 @@ module ECG_ForwarderC {
 		printf("UPDATE PATIENT : %s \n", request);
 		printfflush();	
 
-		strncpy(id, request+6, 3);
+		strncpy(id, request+5, 3);
+		id[3] = '\0';
 		strncpy(beats, request+9, 5);
+		beats[5] = '\0';
 		strncpy(read, request+15, 5);
+		read[5] = '\0';
 		strncpy(live, request+21, 1);
-		 
+		live[1] = '\0';
 
 		 
+		//printf("Data before sub ID:%s  BEAT:%s READ:%s LIVE%s \n",id , beats, read, live);
+		//printfflush();
+		 
 		m_packet->NODE_ID = atoi(id);
-		m_packet->READ_INTERVAL = atoi(beats);
-	 	m_packet->BEAT_INTERVAL =  atoi(read);
+		m_packet->BEAT_INTERVAL =  atol(beats);
+		m_packet->READ_INTERVAL = atol(read);
 	 	m_packet->IS_LIVE =  atoi(live);
 	 	
-	 	printf("Data %i  %i  %i  %i \n",m_packet->NODE_ID , m_packet->READ_INTERVAL, m_packet->BEAT_INTERVAL, m_packet->IS_LIVE );
+	 	//printf("ID : %i\n", m_packet->NODE_ID);
+	 	//printf("BEAT:%u\n", m_packet->BEAT_INTERVAL);
+	 	//printf("READ:%u\n", m_packet->READ_INTERVAL);
+	 	//printf("LIVE:%i\n", m_packet->IS_LIVE);
+	 	
 		printfflush();
 	 	
 	
@@ -275,15 +351,14 @@ module ECG_ForwarderC {
 
 
 	//Send an alarm to the nurse nodes
-	void alarm(char *request){
-		char id[1] ;
+	void alarm(uint8_t type){
 		ALARM *m_packet = (ALARM*)(call Packet.getPayload(&r_msg, sizeof (ALARM)));
 	
 		printf("SEND ALARM\n");
 		printfflush();
 	
-		strncpy(id, request+6, 1);
-		m_packet->TYPE = atoi(id);
+		
+		m_packet->TYPE = type;
 		call Tcp.send(http_okay, http_okay_len);
 		call Tcp.close();
 	
@@ -296,11 +371,11 @@ module ECG_ForwarderC {
 
 	//Process the incoming request from the tcp connection, and call the correct responce function
 	void process_request(int verb, char *request, int len) {
-
+		char id[2];
 
 	
-		printf("Process Request : %s \n", request);
-		printfflush();	
+		//printf("Process Request : %s \n", request);
+		//printfflush();	
 		
 		//Alarm
 		if (len >= 7 &&
@@ -312,7 +387,10 @@ module ECG_ForwarderC {
 			request[5] == '/'
 			) 
 		{
-			alarm(request);
+			strncpy(id, request+6, 1);
+			printf("ALARM TYPE %i \n", (atoi(id[0])) ); 
+			printfflush();
+			alarm(atoi(id[0]));
 		}
 		
 		
@@ -392,7 +470,7 @@ module ECG_ForwarderC {
   	int http_state;
   	int req_verb;
   	char request_buf[150], *request;
-  	char tcp_buf[100];
+  	char tcp_buf[500];
 
 
 
@@ -401,7 +479,7 @@ module ECG_ForwarderC {
     	if (http_state == S_IDLE) {
       		http_state = S_CONNECTED;
       		*tx_buf = tcp_buf;
-      		*tx_buf_len = 100;
+      		*tx_buf_len = 500;
       		return TRUE;
     	}
     	printfUART("rejecting connection\n");
@@ -505,7 +583,10 @@ module ECG_ForwarderC {
 
 	    http_state = S_IDLE;
 	    call Tcp.bind(80);
-
+		
+		printf("Booted\n");
+		printfflush();
+		EmrMsg[0].TYPE = 4;
 
 				
 	}
@@ -551,9 +632,9 @@ module ECG_ForwarderC {
 	//Handle incoming radio messages (from patient nodes)
 	event message_t* Receive.receive(message_t* msg, void* payload, uint8_t len) {
     	
-	BEAT_MSG *beatMsg; 
+		BEAT_MSG *beatMsg; 
         ECG_PACKET *ECGMsg;
-
+		EMER_MSG *AlarmMsg;
 		
 		if(len == sizeof(BEAT_MSG)){	    
 			beatMsg = (BEAT_MSG*) payload;
@@ -563,10 +644,14 @@ module ECG_ForwarderC {
 		
 		if(len == sizeof(ECG_PACKET)){
 			ECGMsg = (ECG_PACKET*) payload;
-			//printf("ECG DATA RECEIVED FROM : %i \n", beatMsg->NODE_ID);
-        		//printfflush();			
+	
 			
-			dataArray[dataCount++] = *ECGMsg;
+			dataArray[dataCount] = *ECGMsg;
+			position++;
+			position = ((position % 50) == 0)? 0 : position;
+			if(dataCount < 50) dataCount++;
+			printf("COUNT : %i \n", dataCount);
+        	printfflush();
 			//send_TCP_ECG_Message(ECGMsg);
 			
 
@@ -574,10 +659,28 @@ module ECG_ForwarderC {
 		
 		
 		if(len == sizeof(REQUEST_DONE_MSG)){
-			printf("FINSHED SENDING PATIENT DATA \n");
-        	printfflush();	
+			//printf("FINSHED SENDING PATIENT DATA \n");
+        	//printfflush();	
         	sendFinishedRequest();
 		}
+		
+		
+		if(len == sizeof(EMER_MSG)){
+			AlarmMsg = (EMER_MSG*) payload;
+			EmrMsg[0] = *AlarmMsg ;
+
+			
+			
+			if(AlarmMsg->TYPE == 0){
+				EmrMsg[0].TYPE = 4;
+				alarm(3);
+			}else {
+				alarm(2);
+			}
+
+		}
+		
+		
 		return msg;	
 	}
 
