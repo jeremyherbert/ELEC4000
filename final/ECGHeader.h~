@@ -43,8 +43,16 @@ typedef nx_struct REQUEST_MSG{
   nx_int16_t NODE_ID;
 
 
-
 } REQUEST_MSG;
+
+typedef nx_struct EMER_MSG{
+  nx_int16_t NODE_ID;
+  nx_int8_t TYPE;
+  nx_int32_t TIME;
+
+} EMER_MSG;
+
+
 
 typedef nx_struct REQUEST_DONE_MSG{
   nx_int8_t NODE_ID;

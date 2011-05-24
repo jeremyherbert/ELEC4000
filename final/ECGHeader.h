@@ -6,25 +6,25 @@ enum {
 };
 
 typedef nx_struct ECG_DATA{
-  nx_int8_t D1;
-  nx_int8_t D2;
-  nx_int8_t D3;
-  nx_int8_t D4;
-  nx_int8_t D5;
-  nx_int8_t D6;
+  nx_int16_t D1;
+  nx_int16_t D2;
+  nx_int16_t D3;
+  nx_int16_t D4;
+  nx_int16_t D5;
+  nx_int16_t D6;
   nx_int16_t D7;
   nx_int32_t TIME;
   
 } ECG_DATA;
 
 typedef nx_struct ECG_PACKET{
-  nx_int8_t NODE_ID;
-  nx_int8_t D1;
-  nx_int8_t D2;
-  nx_int8_t D3;
-  nx_int8_t D4;
-  nx_int8_t D5;
-  nx_int8_t D6;
+  nx_int16_t NODE_ID;
+  nx_int16_t D1;
+  nx_int16_t D2;
+  nx_int16_t D3;
+  nx_int16_t D4;
+  nx_int16_t D5;
+  nx_int16_t D6;
   nx_int16_t D7;
   nx_int32_t TIME;
   
@@ -43,8 +43,16 @@ typedef nx_struct REQUEST_MSG{
   nx_int16_t NODE_ID;
 
 
-
 } REQUEST_MSG;
+
+typedef nx_struct EMER_MSG{
+  nx_int16_t NODE_ID;
+  nx_int8_t TYPE;
+  nx_int32_t TIME;
+
+} EMER_MSG;
+
+
 
 typedef nx_struct REQUEST_DONE_MSG{
   nx_int8_t NODE_ID;
