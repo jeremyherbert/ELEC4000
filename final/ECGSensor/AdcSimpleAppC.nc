@@ -43,7 +43,7 @@
 configuration AdcSimpleAppC {
 }
 implementation {
-  components MainC, AdcSimpleC, new AdcReadClientC(), LedsC, new TimerMilliC() as Timer, new TimerMilliC() as Timer2, new TimerMilliC() as Timer3, new TimerMilliC() as Timer4;
+  components MainC, AdcSimpleC, new AdcReadClientC(), LedsC, new TimerMilliC() as Timer, new TimerMilliC() as Timer2, new TimerMilliC() as Timer3, new TimerMilliC() as Timer4, new TimerMilliC() as Timer5;
   //components new SensirionSht11C() as HumidityTempC;
 
   MainC.Boot <- AdcSimpleC;
@@ -56,4 +56,5 @@ implementation {
   AdcSimpleC.MovementDelayTimer -> Timer2;
   AdcSimpleC.AlarmTimer -> Timer3;
   AdcSimpleC.SampleTimer -> Timer4;
+	AdcSimpleC.HRTimer -> Timer5;
 }
