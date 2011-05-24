@@ -30,6 +30,7 @@ module ECG_ForwarderC {
 
 
 
+
 	}
 
 
@@ -44,7 +45,14 @@ module ECG_ForwarderC {
   	bool timerStarted;	
   	
   	message_t r_msg;							
-						
+
+
+  	bool dataReady = FALSE;
+  	bool inProgress = FALSE;
+  	//ECG_PACKET m_entry;
+  	
+  	ECG_PACKET dataArray[100];
+  	int dataCount = 0;
 	
   	static char *http_okay = "HTTP/1.0 200 OK\r\n\r\n";
   	static int http_okay_len = 19;
@@ -111,26 +119,9 @@ module ECG_ForwarderC {
 
 	}
 
-	//Send radio signal to specified node, requesting its stored data
-	void sendRequest(char *request){
-    
-		char id[4] ;
-		REQUEST_MSG *m_packet = (REQUEST_MSG*)(call Packet.getPayload(&r_msg, sizeof (REQUEST_MSG)));
-	
-		printf("SEND REQUEST\n");
-		printfflush();
-	
-	
-		strncpy(id, request+11, 3);
-		m_packet->NODE_ID = atoi(id);
-		call Tcp.send(http_okay, http_okay_len);
 
-		call ECGMsgSend.send(AM_BROADCAST_ADDR, &r_msg, sizeof(REQUEST_MSG)); 
-
-	}
-	
 	//Return request from patient node, with data to be returned to the server
-	void send_TCP_ECG_Message(ECG_PACKET* ECGMsg){
+	void send_TCP_ECG_Message(){
 		char buf[100];
 		char id[10] ;
 		char D1[10] ;
@@ -141,59 +132,107 @@ module ECG_ForwarderC {
 		char D6[10] ;
 		char D7[10] ;
 		char TIME[10] ;
-		char * reply = NULL;
+		int i = 0;
+		
+		for(i = 0; i < dataCount; i++){
+				 
+			 ECG_PACKET ECGMsg = dataArray[i]; 
+				 
+			 itoa(ECGMsg.NODE_ID, id, 10);
+			 itoa(ECGMsg.D1, D1, 10);
+			 itoa(ECGMsg.D2, D2, 10);
+			 itoa(ECGMsg.D3, D3, 10);
+			 itoa(ECGMsg.D4, D4, 10);
+			 itoa(ECGMsg.D5, D5, 10);
+			 itoa(ECGMsg.D6, D6, 10);
+			 itoa(ECGMsg.D7, D7, 10);
+			 ltoa(ECGMsg.TIME, TIME, 10);
 
-		     
-		     
-		 itoa(ECGMsg->NODE_ID, id, 10);
-		 itoa(ECGMsg->D1, D1, 10);
-		 itoa(ECGMsg->D2, D2, 10);
-		 itoa(ECGMsg->D3, D3, 10);
-		 itoa(ECGMsg->D4, D4, 10);
-		 itoa(ECGMsg->D5, D5, 10);
-		 itoa(ECGMsg->D6, D6, 10);
-		 itoa(ECGMsg->D7, D7, 10);
-		 ltoa(ECGMsg->TIME, TIME, 10);
 
+			 strcpy(buf, id);
+			 strcat(buf, "/");
+			 strcat(buf, D1);
+			 strcat(buf, "/");
+			 strcat(buf, D2);
+			 strcat(buf, "/");
+			 strcat(buf, D3);
+			 strcat(buf, "/");
+			 strcat(buf, D4);
+			 strcat(buf, "/");
+			 strcat(buf, D5);
+			 strcat(buf, "/");
+			 strcat(buf, D6);
+			 strcat(buf, "/");
+			 strcat(buf, D7);
+			 strcat(buf, "/");
+			 strcat(buf, TIME);
+			 strcat(buf, "/");
+			 strcat(buf, "/");
+			 strcat(buf, "\n");
+			 
 
-		 strcpy(buf, id);
-		 strcat(buf, "/");
-		 strcat(buf, D1);
-		 strcat(buf, "/");
-		 strcat(buf, D2);
-		 strcat(buf, "/");
-		 strcat(buf, D3);
-		 strcat(buf, "/");
-		 strcat(buf, D4);
-		 strcat(buf, "/");
-		 strcat(buf, D5);
-		 strcat(buf, "/");
-		 strcat(buf, D6);
-		 strcat(buf, "/");
-		 strcat(buf, D7);
-		 strcat(buf, "/");
-		 strcat(buf, TIME);
-		 strcat(buf, "/");
-		 strcat(buf, "/");
-		 strcat(buf, "\n");
 		 
+			 printf("BUFFER : %s, size : %i \n", buf, strlen(buf));
+			 printfflush();
+			 call Tcp.send(buf, strlen(buf));
+		}
+		
+		dataCount = 0;
 
-	 
-		 printf("BUFFER : %s, size : %i \n", buf, strlen(buf));
-		 printfflush();
-	
-		call Tcp.send(buf, 100);
-		free(reply);
 	
 		
 	}
+	
+		//Send radio signal to specified node, requesting its stored data
+	void sendRequest(char *request){
+    
+		char id[4] ;
+		REQUEST_MSG *m_packet = (REQUEST_MSG*)(call Packet.getPayload(&r_msg, sizeof (REQUEST_MSG)));
+		
+		if( inProgress == FALSE) {
+			inProgress = TRUE;
+			printf("SEND REQUEST\n");
+			printfflush();
+	
+	
+			strncpy(id, request+11, 3);
+			m_packet->NODE_ID = atoi(id);
+			
+			
+			call Tcp.send(http_okay, http_okay_len);
+			call Tcp.send("started\n", 6);
+			call Tcp.close();
+			
+			
+
+			call ECGMsgSend.send(AM_BROADCAST_ADDR, &r_msg, sizeof(REQUEST_MSG)); 
+			return;
+		} 
+		
+		if(dataReady == TRUE && inProgress == TRUE) {
+			call Tcp.send(http_okay, http_okay_len);
+			send_TCP_ECG_Message();
+			return;
+		}  
+		
+		if(dataReady == FALSE && inProgress == TRUE) {
+			call Tcp.send(http_okay, http_okay_len);
+			call Tcp.send("wait\n", 6);
+			call Tcp.close();
+			return;
+		}
+
+	}
+	
 
 
 	//At the end of the patient data request, close the connection
 	void sendFinishedRequest(){
 		printf("CLOSING CONNECTION\n");
 		printfflush();
-	 	call Tcp.close();
+		
+		dataReady = TRUE;
+
 	}
 
 	//Extract data from the reqest, and send radio signal to specified node 
@@ -505,6 +544,9 @@ module ECG_ForwarderC {
 ///////////////////// Radio /////////////////////////
 
 
+
+
+
 	//Handle incoming radio messages (from patient nodes)
 	event message_t* Receive.receive(message_t* msg, void* payload, uint8_t len) {
     	
@@ -523,7 +565,8 @@ module ECG_ForwarderC {
 			//printf("ECG DATA RECEIVED FROM : %i \n", beatMsg->NODE_ID);
         		//printfflush();			
 			
-			send_TCP_ECG_Message(ECGMsg);
+			dataArray[dataCount++] = *ECGMsg;
+			//send_TCP_ECG_Message(ECGMsg);
 			
 
 		}
@@ -559,6 +602,8 @@ module ECG_ForwarderC {
 	}
 
 	
+
+  	
 
 
 

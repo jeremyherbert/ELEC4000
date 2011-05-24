@@ -2,6 +2,7 @@
 #include "message.h"
 #include <Timer.h>
 #include "../ECGHeader.h"
+#include "StorageVolumes.h"
 
 configuration ECG_ForwarderAppC {
 
@@ -34,8 +35,8 @@ configuration ECG_ForwarderAppC {
   	App.ECGMsgSend  -> AMSenderC;
 	App.AMControl -> ActiveMessageC;
 	App.Receive -> AMReceiverC;
-
-
+	
+	 	
 
 
 

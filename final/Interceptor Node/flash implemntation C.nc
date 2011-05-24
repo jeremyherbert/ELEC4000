@@ -27,7 +27,9 @@ module ECG_ForwarderC {
 		interface AMSend  as ECGMsgSend;
 		interface SplitControl as AMControl;
 		interface Receive;
-
+		
+		interface LogRead;
+	   	interface LogWrite;
 
 
 
@@ -45,14 +47,11 @@ module ECG_ForwarderC {
   	bool timerStarted;	
   	
   	message_t r_msg;							
-
-
+						uint16_t seq = 0;
+  	bool m_busy = TRUE;
   	bool dataReady = FALSE;
   	bool inProgress = FALSE;
-  	//ECG_PACKET m_entry;
-  	
-  	ECG_PACKET dataArray[100];
-  	int dataCount = 0;
+  	ECG_PACKET m_entry;
 	
   	static char *http_okay = "HTTP/1.0 200 OK\r\n\r\n";
   	static int http_okay_len = 19;
@@ -119,71 +118,7 @@ module ECG_ForwarderC {
 
 	}
 
-
-	//Return request from patient node, with data to be returned to the server
-	void send_TCP_ECG_Message(){
-		char buf[100];
-		char id[10] ;
-		char D1[10] ;
-		char D2[10] ;
-		char D3[10] ;
-		char D4[10] ;
-		char D5[10] ;
-		char D6[10] ;
-		char D7[10] ;
-		char TIME[10] ;
-		int i = 0;
-		
-		for(i = 0; i < dataCount; i++){
-				 
-			 ECG_PACKET ECGMsg = dataArray[i]; 
-				 
-			 itoa(ECGMsg.NODE_ID, id, 10);
-			 itoa(ECGMsg.D1, D1, 10);
-			 itoa(ECGMsg.D2, D2, 10);
-			 itoa(ECGMsg.D3, D3, 10);
-			 itoa(ECGMsg.D4, D4, 10);
-			 itoa(ECGMsg.D5, D5, 10);
-			 itoa(ECGMsg.D6, D6, 10);
-			 itoa(ECGMsg.D7, D7, 10);
-			 ltoa(ECGMsg.TIME, TIME, 10);
-
-
-			 strcpy(buf, id);
-			 strcat(buf, "/");
-			 strcat(buf, D1);
-			 strcat(buf, "/");
-			 strcat(buf, D2);
-			 strcat(buf, "/");
-			 strcat(buf, D3);
-			 strcat(buf, "/");
-			 strcat(buf, D4);
-			 strcat(buf, "/");
-			 strcat(buf, D5);
-			 strcat(buf, "/");
-			 strcat(buf, D6);
-			 strcat(buf, "/");
-			 strcat(buf, D7);
-			 strcat(buf, "/");
-			 strcat(buf, TIME);
-			 strcat(buf, "/");
-			 strcat(buf, "/");
-			 strcat(buf, "\n");
-			 
-
-		 
-			 printf("BUFFER : %s, size : %i \n", buf, strlen(buf));
-			 printfflush();
-			 call Tcp.send(buf, strlen(buf));
-		}
-		
-		dataCount = 0;
-
-	
-		
-	}
-	
-		//Send radio signal to specified node, requesting its stored data
+	//Send radio signal to specified node, requesting its stored data
 	void sendRequest(char *request){
     
 		char id[4] ;
@@ -211,8 +146,7 @@ module ECG_ForwarderC {
 		
 		if(dataReady == TRUE && inProgress == TRUE) {
 			call Tcp.send(http_okay, http_okay_len);
-			send_TCP_ECG_Message();
-			call Tcp.close();
+			call LogRead.seek(0);
 			return;
 		}  
 		
@@ -225,6 +159,62 @@ module ECG_ForwarderC {
 
 	}
 	
+	//Return request from patient node, with data to be returned to the server
+	void send_TCP_ECG_Message(void* buffer){
+		char buf[100];
+		char id[10] ;
+		char D1[10] ;
+		char D2[10] ;
+		char D3[10] ;
+		char D4[10] ;
+		char D5[10] ;
+		char D6[10] ;
+		char D7[10] ;
+		char TIME[10] ;
+
+		ECG_PACKET *ECGMsg = (ECG_PACKET*) buffer;
+		     
+		 itoa(ECGMsg->NODE_ID, id, 10);
+		 itoa(ECGMsg->D1, D1, 10);
+		 itoa(ECGMsg->D2, D2, 10);
+		 itoa(ECGMsg->D3, D3, 10);
+		 itoa(ECGMsg->D4, D4, 10);
+		 itoa(ECGMsg->D5, D5, 10);
+		 itoa(ECGMsg->D6, D6, 10);
+		 itoa(ECGMsg->D7, D7, 10);
+		 ltoa(ECGMsg->TIME, TIME, 10);
+
+
+		 strcpy(buf, id);
+		 strcat(buf, "/");
+		 strcat(buf, D1);
+		 strcat(buf, "/");
+		 strcat(buf, D2);
+		 strcat(buf, "/");
+		 strcat(buf, D3);
+		 strcat(buf, "/");
+		 strcat(buf, D4);
+		 strcat(buf, "/");
+		 strcat(buf, D5);
+		 strcat(buf, "/");
+		 strcat(buf, D6);
+		 strcat(buf, "/");
+		 strcat(buf, D7);
+		 strcat(buf, "/");
+		 strcat(buf, TIME);
+		 strcat(buf, "/");
+		 strcat(buf, "/");
+		 strcat(buf, "\n");
+		 
+
+	 
+		 printf("BUFFER : %s, size : %i \n", buf, strlen(buf));
+		 printfflush();
+		 call Tcp.send(buf, strlen(buf));
+
+	
+		
+	}
 
 
 	//At the end of the patient data request, close the connection
@@ -545,9 +535,6 @@ module ECG_ForwarderC {
 ///////////////////// Radio /////////////////////////
 
 
-
-
-
 	//Handle incoming radio messages (from patient nodes)
 	event message_t* Receive.receive(message_t* msg, void* payload, uint8_t len) {
     	
@@ -565,8 +552,11 @@ module ECG_ForwarderC {
 			ECGMsg = (ECG_PACKET*) payload;
 			//printf("ECG DATA RECEIVED FROM : %i \n", beatMsg->NODE_ID);
         		//printfflush();			
-			
-			dataArray[dataCount++] = *ECGMsg;
+			if (call LogWrite.append(&ECGMsg, sizeof(ECG_PACKET)) != SUCCESS) {
+			   	 m_busy = FALSE;
+			    	printf("write error");
+			    	printfflush();
+			}
 			//send_TCP_ECG_Message(ECGMsg);
 			
 
@@ -604,8 +594,65 @@ module ECG_ForwarderC {
 
 	
 
-  	
 
+	event void LogRead.seekDone(error_t err) {
+		if (call LogRead.read(&m_entry, sizeof(ECG_PACKET)) != SUCCESS) {
+		
+
+
+		}
+    }
+
+//Event fired after each read from the flash, (ie, each full struct of ECG data is read 
+ 	event void LogRead.readDone(void* buf, storage_len_t len, error_t err) {
+    	printf("read done!\n");
+    	if ( (len == sizeof(ECG_PACKET)) && (buf == &m_entry) ) {
+		   //call Send.send(&m_entry.msg, m_entry.len);
+
+		  	send_TCP_ECG_Message(buf);
+		  	call LogRead.read(&m_entry, sizeof(ECG_PACKET));
+    	
+    	} else {
+		  	if (call LogWrite.erase() != SUCCESS) {
+			// Handle error.
+		  	}
+          call Tcp.close();
+      	  dataReady = FALSE;
+      	  inProgress = FALSE;
+      
+      		call Leds.led1Off();
+      		call Leds.led0On();
+    	}
+  	}
+  	
+  	event void LogWrite.eraseDone(error_t err) {
+    
+    	if (err == SUCCESS) {
+      		m_busy = FALSE;
+    	} else {
+      // Handle error.
+    	}
+    	
+    	printf("ERASE SUCCSESSFUL\n");
+    	printfflush();
+
+
+
+    
+    
+  	}
+  	
+  	
+  	event void LogWrite.appendDone(void* buf, storage_len_t len, 
+                                 bool recordsLost, error_t err) {
+    	m_busy = FALSE;
+    	call Leds.led2Off();
+  	}
+
+
+
+  	event void LogWrite.syncDone(error_t err) {
+  	}
 
 
 
