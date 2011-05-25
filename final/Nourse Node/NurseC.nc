@@ -64,16 +64,18 @@ bool buzz = FALSE;
 		packet = (ALARM_DATA*)payload;
 
 			switch(packet->Type){
+			case 0: 
+				buzz = FALSE;
+				call io.clr();
+				break;
 			case 1: buzz = TRUE; 
 				call BuzzTimer.startOneShot(ALARM_INTERVAL);
 				break;
-			case 2: 
+			default: 
 				buzz = FALSE;
 				call io.set();
 				break;
-			case 3: 
-				buzz = FALSE;
-				call io.clr();
+			
 			} 
 
 		}

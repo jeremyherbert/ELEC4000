@@ -275,7 +275,6 @@ module patientC {
 	//Currently, on button press, read flash and send to base
 //Change this to be either timed or when flash getting full
 		event void Notify.notify (button_state_t state) {
-			sendEmergency(1);
 			call LogWrite.erase();
 		}
 
@@ -358,7 +357,7 @@ module patientC {
 		event void RadioControl.startDone(error_t result){
 
 			call HeartBeatTimer.startOneShot(BEAT_INTERVAL_MS);
-			sendEmergency(0)
+			sendEmergency(0);
 			
 			
 		}
@@ -409,9 +408,11 @@ module patientC {
 	//Need to implement local checking to test for emrgency.
 		event void ReadTimer.fired(){
 
-
-
+			
 			if(LIVE == TRUE){
+			printf("READ RAW\n");
+			printfflush();
+			
 				if (!m_busy) {
 
 					readRawECGData();
@@ -421,8 +422,9 @@ module patientC {
 						m_busy = FALSE;
 						printf("write error");
 						printfflush();
-					}
+					} 
 				}
+				m_busy = FALSE;
 				call ReadTimer.startOneShot(READ_INTERVAL_MS);
 			}
 
