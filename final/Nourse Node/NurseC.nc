@@ -72,8 +72,10 @@ bool buzz = FALSE;
 				call BuzzTimer.startOneShot(ALARM_INTERVAL);
 				break;
 			default: 
-				buzz = FALSE;
-				call io.set();
+				if(packet->Type < 5){
+					buzz = FALSE;
+					call io.set();
+				}
 				break;
 			
 			} 

@@ -205,8 +205,10 @@ module patientC {
 
 		event void AlarmTimer.fired()
 		{
-			call Leds.led2On();
-			sendEmergency(3);
+			if(LIVE == TRUE){
+				call Leds.led2On();
+				sendEmergency(3);
+			}
 		}
 		
 		event void HRTimer.fired() 
@@ -450,6 +452,10 @@ module patientC {
 	 		printf("BEAT:%u\n", m_packet->BEAT_INTERVAL);
 	 		printf("READ:%u\n", m_packet->READ_INTERVAL);
 	 		printf("LIVE:%i\n", m_packet->IS_LIVE);
+	 		printf("HI:%i\n", m_packet->MAX_HR);
+	 		printf("LOW:%i\n", m_packet->MIN_HR);
+	 		
+	 		
 			printfflush();
 
 			if(m_packet ->NODE_ID == TOS_NODE_ID){

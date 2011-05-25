@@ -205,8 +205,10 @@ module patientC {
 
 		event void AlarmTimer.fired()
 		{
-			call Leds.led2On();
-			sendEmergency(3);
+			if(LIVE == TRUE){
+				call Leds.led2On();
+				sendEmergency(3);
+			}
 		}
 		
 		event void HRTimer.fired() 
