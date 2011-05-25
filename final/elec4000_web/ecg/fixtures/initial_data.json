@@ -1,0 +1,427 @@
+[
+
+	{
+		"model": "ecg.node",
+		"pk": 1,
+		"fields": {
+			"node_id": 15,
+			"read_interval": 10000,
+			"beat_interval": 1500,
+			"max_heart_rate": 180,
+			"min_heart_rate": 30,
+			"is_live": 0
+		}
+	},
+	{
+		"model": "ecg.noderecording",
+		"pk": 1,
+		"fields": {
+			"node": 1,
+			"heart_rate": 78,
+			"D2": 1,
+			"D3": 1,
+			"D4": 1,
+			"D5": 1,
+			"D6": 1,
+			"D7": 1,
+			"local_timestamp": "12345",
+			"timestamp": "2011-05-25 09:21:14"
+		}
+	},
+	{
+		"model": "ecg.noderecording",
+		"pk": 2,
+		"fields": {
+			"node": 1,
+			"heart_rate": 76,
+			"D2": 1,
+			"D3": 1,
+			"D4": 1,
+			"D5": 1,
+			"D6": 1,
+			"D7": 1,
+			"local_timestamp": "12552",
+			"timestamp": "2011-05-25 09:21:24"
+		}
+	},
+	{
+		"model": "ecg.noderecording",
+		"pk": 3,
+		"fields": {
+			"node": 1,
+			"heart_rate": 71,
+			"D2": 1,
+			"D3": 1,
+			"D4": 1,
+			"D5": 1,
+			"D6": 1,
+			"D7": 1,
+			"local_timestamp": "12545",
+			"timestamp": "2011-05-25 09:21:35"
+		}
+	},
+	{
+		"model": "ecg.noderecording",
+		"pk": 4,
+		"fields": {
+			"node": 1,
+			"heart_rate": 75,
+			"D2": 1,
+			"D3": 1,
+			"D4": 1,
+			"D5": 1,
+			"D6": 1,
+			"D7": 1,
+			"local_timestamp": "12545",
+			"timestamp": "2011-05-25 09:21:45"
+		}
+	},
+	{
+		"model": "ecg.noderecording",
+		"pk": 5,
+		"fields": {
+			"node": 1,
+			"heart_rate": 69,
+			"D2": 1,
+			"D3": 1,
+			"D4": 1,
+			"D5": 1,
+			"D6": 1,
+			"D7": 1,
+			"local_timestamp": "12545",
+			"timestamp": "2011-05-25 09:21:55"
+		}
+	},
+	{
+		"model": "ecg.noderecording",
+		"pk": 6,
+		"fields": {
+			"node": 1,
+			"heart_rate": 78,
+			"D2": 1,
+			"D3": 1,
+			"D4": 1,
+			"D5": 1,
+			"D6": 1,
+			"D7": 1,
+			"local_timestamp": "12545",
+			"timestamp": "2011-05-25 09:22:06"
+		}
+	},
+	{
+		"model": "ecg.noderecording",
+		"pk": 7,
+		"fields": {
+			"node": 1,
+			"heart_rate": 75,
+			"D2": 1,
+			"D3": 1,
+			"D4": 1,
+			"D5": 1,
+			"D6": 1,
+			"D7": 1,
+			"local_timestamp": "12545",
+			"timestamp": "2011-05-25 09:22:16"
+		}
+	},
+	{
+		"model": "ecg.noderecording",
+		"pk": 8,
+		"fields": {
+			"node": 1,
+			"heart_rate": 81,
+			"D2": 1,
+			"D3": 1,
+			"D4": 1,
+			"D5": 1,
+			"D6": 1,
+			"D7": 1,
+			"local_timestamp": "12545",
+			"timestamp": "2011-05-25 09:22:26"
+		}
+	},
+	
+	
+
+	{
+		"model": "ecg.node",
+		"pk": 2,
+		"fields": {
+			"node_id": 13,
+			"read_interval": 9000,
+			"beat_interval": 1500,
+			"max_heart_rate": 120,
+			"min_heart_rate": 40,
+			"is_live": 0
+		}
+	},
+	{
+		"model": "ecg.noderecording",
+		"pk": 9,
+		"fields": {
+			"node": 2,
+			"heart_rate": 80,
+			"D2": 1,
+			"D3": 1,
+			"D4": 1,
+			"D5": 1,
+			"D6": 1,
+			"D7": 1,
+			"local_timestamp": "12345",
+			"timestamp": "2011-05-25 09:21:14"
+		}
+	},
+	{
+		"model": "ecg.noderecording",
+		"pk": 10,
+		"fields": {
+			"node": 2,
+			"heart_rate": 85,
+			"D2": 1,
+			"D3": 1,
+			"D4": 1,
+			"D5": 1,
+			"D6": 1,
+			"D7": 1,
+			"local_timestamp": "12552",
+			"timestamp": "2011-05-25 09:21:24"
+		}
+	},
+	{
+		"model": "ecg.noderecording",
+		"pk": 11,
+		"fields": {
+			"node": 2,
+			"heart_rate": 93,
+			"D2": 1,
+			"D3": 1,
+			"D4": 1,
+			"D5": 1,
+			"D6": 1,
+			"D7": 1,
+			"local_timestamp": "12545",
+			"timestamp": "2011-05-25 09:21:35"
+		}
+	},
+	{
+		"model": "ecg.noderecording",
+		"pk": 12,
+		"fields": {
+			"node": 2,
+			"heart_rate": 135,
+			"D2": 1,
+			"D3": 1,
+			"D4": 1,
+			"D5": 1,
+			"D6": 1,
+			"D7": 1,
+			"local_timestamp": "12545",
+			"timestamp": "2011-05-25 09:21:45"
+		}
+	},
+	{
+		"model": "ecg.noderecording",
+		"pk": 13,
+		"fields": {
+			"node": 2,
+			"heart_rate": 138,
+			"D2": 1,
+			"D3": 1,
+			"D4": 1,
+			"D5": 1,
+			"D6": 1,
+			"D7": 1,
+			"local_timestamp": "12545",
+			"timestamp": "2011-05-25 09:21:55"
+		}
+	},
+	{
+		"model": "ecg.noderecording",
+		"pk": 14,
+		"fields": {
+			"node": 2,
+			"heart_rate": 134,
+			"D2": 1,
+			"D3": 1,
+			"D4": 1,
+			"D5": 1,
+			"D6": 1,
+			"D7": 1,
+			"local_timestamp": "12545",
+			"timestamp": "2011-05-25 09:22:06"
+		}
+	},
+	{
+		"model": "ecg.noderecording",
+		"pk": 15,
+		"fields": {
+			"node": 2,
+			"heart_rate": 145,
+			"D2": 1,
+			"D3": 1,
+			"D4": 1,
+			"D5": 1,
+			"D6": 1,
+			"D7": 1,
+			"local_timestamp": "12545",
+			"timestamp": "2011-05-25 09:22:16"
+		}
+	},
+	{
+		"model": "ecg.noderecording",
+		"pk": 16,
+		"fields": {
+			"node": 2,
+			"heart_rate": 180,
+			"D2": 1,
+			"D3": 1,
+			"D4": 1,
+			"D5": 1,
+			"D6": 1,
+			"D7": 1,
+			"local_timestamp": "12545",
+			"timestamp": "2011-05-25 09:22:26"
+		}
+	},
+	
+	{
+		"model": "ecg.node",
+		"pk": 3,
+		"fields": {
+			"node_id": 18,
+			"read_interval": 14000,
+			"beat_interval": 1500,
+			"max_heart_rate": 90,
+			"min_heart_rate": 40,
+			"is_live": 0
+		}
+	},
+	{
+		"model": "ecg.noderecording",
+		"pk": 17,
+		"fields": {
+			"node": 3,
+			"heart_rate": 52,
+			"D2": 1,
+			"D3": 1,
+			"D4": 1,
+			"D5": 1,
+			"D6": 1,
+			"D7": 1,
+			"local_timestamp": "12345",
+			"timestamp": "2011-05-25 09:21:14"
+		}
+	},
+	{
+		"model": "ecg.noderecording",
+		"pk": 18,
+		"fields": {
+			"node": 3,
+			"heart_rate": 45,
+			"D2": 1,
+			"D3": 1,
+			"D4": 1,
+			"D5": 1,
+			"D6": 1,
+			"D7": 1,
+			"local_timestamp": "12552",
+			"timestamp": "2011-05-25 09:21:24"
+		}
+	},
+	{
+		"model": "ecg.noderecording",
+		"pk": 19,
+		"fields": {
+			"node": 3,
+			"heart_rate": 49,
+			"D2": 1,
+			"D3": 1,
+			"D4": 1,
+			"D5": 1,
+			"D6": 1,
+			"D7": 1,
+			"local_timestamp": "12545",
+			"timestamp": "2011-05-25 09:21:35"
+		}
+	},
+	{
+		"model": "ecg.noderecording",
+		"pk": 20,
+		"fields": {
+			"node": 3,
+			"heart_rate": 43,
+			"D2": 1,
+			"D3": 1,
+			"D4": 1,
+			"D5": 1,
+			"D6": 1,
+			"D7": 1,
+			"local_timestamp": "12545",
+			"timestamp": "2011-05-25 09:21:45"
+		}
+	},
+	{
+		"model": "ecg.noderecording",
+		"pk": 21,
+		"fields": {
+			"node": 3,
+			"heart_rate": 48,
+			"D2": 1,
+			"D3": 1,
+			"D4": 1,
+			"D5": 1,
+			"D6": 1,
+			"D7": 1,
+			"local_timestamp": "12545",
+			"timestamp": "2011-05-25 09:21:55"
+		}
+	},
+	{
+		"model": "ecg.noderecording",
+		"pk": 22,
+		"fields": {
+			"node": 3,
+			"heart_rate": 45,
+			"D2": 1,
+			"D3": 1,
+			"D4": 1,
+			"D5": 1,
+			"D6": 1,
+			"D7": 1,
+			"local_timestamp": "12545",
+			"timestamp": "2011-05-25 09:22:06"
+		}
+	},
+	{
+		"model": "ecg.noderecording",
+		"pk": 23,
+		"fields": {
+			"node": 3,
+			"heart_rate": 29,
+			"D2": 1,
+			"D3": 1,
+			"D4": 1,
+			"D5": 1,
+			"D6": 1,
+			"D7": 1,
+			"local_timestamp": "12545",
+			"timestamp": "2011-05-25 09:22:16"
+		}
+	},
+	{
+		"model": "ecg.noderecording",
+		"pk": 24,
+		"fields": {
+			"node": 3,
+			"heart_rate": 21,
+			"D2": 1,
+			"D3": 1,
+			"D4": 1,
+			"D5": 1,
+			"D6": 1,
+			"D7": 1,
+			"local_timestamp": "12545",
+			"timestamp": "2011-05-25 09:22:26"
+		}
+	}
+]

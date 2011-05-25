@@ -1,0 +1,98 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.1//EN"
+	"http://www.w3.org/TR/xhtml11/DTD/xhtml11.dtd">
+<html>
+<head>
+	<title>ELEC4000 ECG Client</title>
+	{% if recs_count > 0 %}
+	<script type="text/javascript" src="https://www.google.com/jsapi"></script>
+	<script type="text/javascript">
+	      google.load("visualization", "1", {packages:["corechart"]});
+	      google.setOnLoadCallback(drawChart);
+	      function drawChart() {
+	        var data = new google.visualization.DataTable();
+	        data.addColumn('string', 'Year');
+	        data.addColumn('number', 'BPM');
+			data.addColumn('number', 'BPM');
+			data.addColumn('number', 'BPM');
+			data.addColumn('number', 'Minimum Threshold');
+			data.addColumn('number', 'Maximum Threshold');
+			data.addRows({{recs_count}});
+			
+			{% for rec in recs %}
+	        data.setValue({{ forloop.counter0 }}, 0, '{{ rec.timestamp|date:"H:m:s" }}');
+			{% if rec.heart_rate < selected_node.min_heart_rate %}
+				data.setValue({{ forloop.counter0 }}, 2, {{ rec.heart_rate }});
+			{% endif %}
+			
+			{% if rec.heart_rate > selected_node.max_heart_rate %}	
+				data.setValue({{ forloop.counter0 }}, 3, {{ rec.heart_rate }});
+			{% endif %}
+			
+			{% if rec.heart_rate < selected_node.max_heart_rate and rec.heart_rate > selected_node.min_heart_rate %}
+				data.setValue({{ forloop.counter0 }}, 1, {{ rec.heart_rate }});
+			{% endif %}
+			
+			data.setValue({{ forloop.counter0 }}, 4, {{ selected_node.min_heart_rate }});
+			data.setValue({{ forloop.counter0 }}, 5, {{ selected_node.max_heart_rate }});
+			{% endfor %}
+			
+	        var chart = new google.visualization.LineChart(document.getElementById('chart_div'));
+	        chart.draw(data, {
+				//curveType: "function",
+				width: 1200, 
+				height: 600, 
+				title: 'Heart rate over time for node {{ selected_node.node_id }} on {{ recs.0.timestamp|date:"M d, Y"}}',
+				legend: 'none',
+				hAxis: {title: 'Recording Time (24hr)', minValue: 0, slantedTextAngle: 45, slantedText: true},
+				vAxis: {title: 'BPM', minValue:{{selected_node.get_min_axis}}, maxValue:{{selected_node.get_max_axis}}}
+			});
+	      }
+	</script>
+	{% endif %}
+	<style>
+	table {
+		border: 1px solid black;
+	}
+	td,th {
+		padding: 5px;
+	}
+	.odd {
+		background: #ccc;
+	}
+	</style>
+</head>
+<body>
+	<h2>ECG Data Client</h2>
+	<div id="node_listing">
+		<table>
+			<tr>
+				<th>Node ID</th>
+				<th>ECG read interval</th>
+				<th>Network heartbeat interval</th>
+				<th>Bradycardia alarm threshold</th>
+				<th>Tachycardia alarm threshold</th>
+				<th>Node currently live?</th>
+			</tr>
+			{% for node in node_list %}
+			
+
+
+
+			<tr class="{% cycle 'even' 'odd' %}">
+
+				<td><a href="/get/{{ node.id }}">{{ node.node_id }}</a></td>
+				<td>{{ node.read_interval }}</td>
+				<td>{{ node.beat_interval }}</td>
+				<td>{{ node.min_heart_rate }}</td>
+				<td>{{ node.max_heart_rate }}</td>
+				<td>{{ node.is_live }}</td>
+			</tr>
+			{% endfor %}
+		</table>
+	</div><br />
+	<hr /><br />
+	<div id="node_graphs">
+		<div id="chart_div" align="center"></div>
+	</div>
+</body>
+</html>
